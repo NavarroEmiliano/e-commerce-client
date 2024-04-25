@@ -52,11 +52,12 @@ const SignUp = () => {
               <label>Name: </label>
               <div className='bg-slate-100 p-2'>
                 <input
-                  type='email'
+                  type='text'
                   name='name'
                   value={data.name}
                   onChange={handleOnChange}
                   placeholder='Enter name'
+                  required
                   className='w-full h-full outline-none bg-transparent'
                 />
               </div>
@@ -71,6 +72,7 @@ const SignUp = () => {
                   value={data.email}
                   onChange={handleOnChange}
                   placeholder='Enter email'
+                  required
                   className='w-full h-full outline-none bg-transparent'
                 />
               </div>
@@ -85,6 +87,7 @@ const SignUp = () => {
                   value={data.password}
                   onChange={handleOnChange}
                   placeholder='Enter password'
+                  required
                   className='w-full h-full outline-none bg-transparent'
                 />
                 <div
@@ -106,6 +109,7 @@ const SignUp = () => {
                   value={data.confirmPassword}
                   onChange={handleOnChange}
                   placeholder='Enter password'
+                  required
                   className='w-full h-full outline-none bg-transparent'
                 />
                 <div

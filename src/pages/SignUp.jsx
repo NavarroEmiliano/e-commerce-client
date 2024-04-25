@@ -13,7 +13,6 @@ const SignUp = () => {
     email: '',
     password: '',
     confirmPassword: '',
-    profilePicture: ''
   })
 
   const handleShowPassword = () => {
@@ -40,7 +39,7 @@ const SignUp = () => {
   }
 
   return (
-    <section id='sign-up'>
+    <section id='sign-up' className='flex items-center min-h-[calc(100vh-120px)]'>
       <div className='mx-auto container p-4'>
         <div className='bg-white p-5 max-w-md mx-auto '>
           <div className='flex justify-center text-8xl text-red-600 mx-auto '>

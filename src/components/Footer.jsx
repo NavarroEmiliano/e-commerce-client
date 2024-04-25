@@ -1,7 +1,11 @@
 /* eslint-disable react/prop-types */
 const Footer = () => {
   return (
-    <div>Footer</div>
+    <footer className='bg-slate-200'>
+      <div className='contain mx-auto p-4'>
+        <p className="text-center font-bold">Coding with Emiliano Navarro</p>
+      </div>
+    </footer>
   )
 }
 

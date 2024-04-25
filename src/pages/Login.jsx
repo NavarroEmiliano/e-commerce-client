@@ -27,6 +27,10 @@ const Login = () => {
     })
   }
 
+  const handleSubmit = e => {
+    e.preventDefault()
+  }
+  
 
   return (
     <section id='login'>
@@ -36,7 +40,7 @@ const Login = () => {
             <FaRegUserCircle />
           </div>
 
-          <form className='flex flex-col gap-3'>
+          <form onSubmit={handleSubmit} className='flex flex-col gap-3'>
             <div className='grid'>
               <label>Email: </label>
               <div className='bg-slate-100 p-2'>
@@ -62,7 +66,11 @@ const Login = () => {
                   placeholder='Enter password'
                   className='w-full h-full outline-none bg-transparent'
                 />
-                <div onClick={handleShowPassword}>
+                <div
+                  onMouseDown={handleShowPassword}
+                  onMouseUp={handleShowPassword}
+                  className='cursor-pointer'
+                >
                   <span>{showPassword ? <FaEyeSlash /> : <FaEye />}</span>
                 </div>
               </div>

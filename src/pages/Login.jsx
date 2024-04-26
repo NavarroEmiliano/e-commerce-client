@@ -3,7 +3,10 @@ import { useState } from 'react'
 import { FaRegUserCircle } from 'react-icons/fa'
 import { FaEye } from 'react-icons/fa'
 import { FaEyeSlash } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+
+import loginService from '../services/loginService'
+import { toast } from 'react-toastify'
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false)
@@ -11,6 +14,8 @@ const Login = () => {
     email: '',
     password: ''
   })
+
+  const navigate = useNavigate()
 
   const handleShowPassword = () => {
     setShowPassword(prev => !prev)
@@ -27,10 +32,23 @@ const Login = () => {
     })
   }
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault()
+
+    const userForLogin = {
+      email: data.email,
+      password: data.password
+    }
+
+    const response = await loginService.loginUser(userForLogin)
+
+    if (response.status === 'OK') {
+      navigate('/')
+      return toast.success('Login successfully')
+    } else {
+      return toast.error(response.data)
+    }
   }
-  
 
   return (
     <section id='login' className='flex items-center min-h-[calc(100vh-120px)]'>
@@ -50,6 +68,7 @@ const Login = () => {
                   value={data.email}
                   onChange={handleOnChange}
                   placeholder='Enter email'
+                  required
                   className='w-full h-full outline-none bg-transparent'
                 />
               </div>
@@ -64,6 +83,7 @@ const Login = () => {
                   value={data.password}
                   onChange={handleOnChange}
                   placeholder='Enter password'
+                  required
                   className='w-full h-full outline-none bg-transparent'
                 />
                 <div

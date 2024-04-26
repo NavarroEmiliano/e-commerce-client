@@ -1,9 +1,12 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { IoCreateOutline } from 'react-icons/io5'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
+
+import usersService from '../services/usersService'
+import { toast } from 'react-toastify'
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false)
@@ -12,8 +15,10 @@ const SignUp = () => {
     name: '',
     email: '',
     password: '',
-    confirmPassword: '',
+    confirmPassword: ''
   })
+
+  const navigate = useNavigate()
 
   const handleShowPassword = () => {
     setShowPassword(prev => !prev)
@@ -34,12 +39,33 @@ const SignUp = () => {
     })
   }
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault()
+
+    if (data.password !== data.confirmPassword) {
+      return toast.error('Please check password and confirm password')
+    }
+
+    const userForSignUp = {
+      name: data.name,
+      email: data.email,
+      password: data.password
+    }
+    const response = await usersService.signUpUser(userForSignUp)
+
+    if (response.status === 'OK') {
+      navigate('/login')
+      return toast.success('User created successfully')
+    } else {
+      return toast.error(response.data)
+    }
   }
 
   return (
-    <section id='sign-up' className='flex items-center min-h-[calc(100vh-120px)]'>
+    <section
+      id='sign-up'
+      className='flex items-center min-h-[calc(100vh-120px)]'
+    >
       <div className='mx-auto container p-4'>
         <div className='bg-white p-5 max-w-md mx-auto '>
           <div className='flex justify-center text-8xl text-red-600 mx-auto '>
@@ -124,7 +150,7 @@ const SignUp = () => {
             </div>
 
             <button className='bg-red-600 text-white px-6 py-2 w-full max-w-[150px] rounded-full hover:bg-red-700 active:scale-95 duration-100 mx-auto mt-4 block'>
-            Sign up
+              Sign up
             </button>
           </form>
           <p className='my-5'>

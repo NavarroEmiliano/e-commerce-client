@@ -15,7 +15,6 @@ const Header = () => {
   const user = useSelector(state => state.user)
   const dispatch = useDispatch()
 
-  const nameImg = user ? user?.name?.split('', 2).join('').toUpperCase() : ''
 
   const handleLogout = () => {
     dispatch(logoutUserAction())
@@ -53,7 +52,7 @@ const Header = () => {
               onClick={handleMenu}
               className='text-3xl cursor-pointer relative flex justify-center'
             >
-              {user ? <UserImg nameImg={nameImg} /> : <LuUserCircle2 />}
+              {user ? <UserImg  size={40} textSize='base'/> : <LuUserCircle2 />}
             </div>
 
             {user && showMenu && (

@@ -7,6 +7,8 @@ import { Link, useNavigate } from 'react-router-dom'
 
 import loginService from '../services/loginService'
 import { toast } from 'react-toastify'
+import { useDispatch } from 'react-redux'
+import { initializeUserDetails } from '../features/userSlice'
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false)
@@ -16,6 +18,7 @@ const Login = () => {
   })
 
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
 
 
@@ -46,6 +49,7 @@ const Login = () => {
 
     if (response.status === 'OK') {
       navigate('/')
+      dispatch(initializeUserDetails())
       return toast.success('Login successfully')
     } else {
       return toast.error(response.data)

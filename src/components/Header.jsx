@@ -2,13 +2,35 @@ import Logo from './Logo'
 import { FiSearch } from 'react-icons/fi'
 import { LuUserCircle2 } from 'react-icons/lu'
 import { LuShoppingCart } from 'react-icons/lu'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import UserImg from './UserImg'
+import { logoutUserAction } from '../features/userSlice'
+import { toast } from 'react-toastify'
+import { useState } from 'react'
 
 const Header = () => {
+  const [showMenu, setShowMenu] = useState(false)
+
+  const user = useSelector(state => state.user)
+  const dispatch = useDispatch()
+
+  const nameImg = user ? user?.name?.split('', 2).join('').toUpperCase() : ''
+
+  const handleLogout = () => {
+    dispatch(logoutUserAction())
+    toast.success('Logged out successfully')
+  }
+
+  const handleMenu = () => {
+    if (user) setShowMenu(prev => !prev)
+  }
+
+
   return (
     <header className='h-16 shadow-md bg-white'>
       <div className='h-full container mx-auto flex items-center px-4 justify-between   '>
-        <div >
+        <div>
           <Link to={'/'}>
             <Logo width={50} height={50} />
           </Link>
@@ -26,8 +48,26 @@ const Header = () => {
         </div>
 
         <div className='flex items-center gap-7'>
-          <div className='text-3xl cursor-pointer'>
-            <LuUserCircle2 />
+          <div className='relative group flex justify-center'>
+            <div
+              onClick={handleMenu}
+              className='text-3xl cursor-pointer relative flex justify-center'
+            >
+              {user ? <UserImg nameImg={nameImg} /> : <LuUserCircle2 />}
+            </div>
+
+            {user && showMenu && (
+              <div className='absolute bg-white group-hover:block  top-12 h-fit p-2 shadow-lg rounded-md'>
+                <nav>
+                  <Link
+                    to={'admin-panel'}
+                    className='whitespace-nowrap hover:bg-slate-100 '
+                  >
+                    Admin Panel
+                  </Link>
+                </nav>
+              </div>
+            )}
           </div>
 
           <div className='text-3xl cursor-pointer relative'>
@@ -40,9 +80,21 @@ const Header = () => {
           </div>
 
           <div>
-            <Link to={'login'} className='text-white bg-red-600 rounded-full px-3 py-1 hover:bg-red-700'>
-              Login
-            </Link>
+            {user?.name ? (
+              <button
+                onClick={handleLogout}
+                className='text-white bg-red-600 rounded-full px-3 py-1 hover:bg-red-700'
+              >
+                Logout
+              </button>
+            ) : (
+              <Link
+                to={'login'}
+                className='text-white bg-red-600 rounded-full px-3 py-1 hover:bg-red-700'
+              >
+                Login
+              </Link>
+            )}
           </div>
         </div>
       </div>

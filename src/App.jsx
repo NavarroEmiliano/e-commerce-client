@@ -6,16 +6,16 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useEffect } from 'react'
 
-import userDetailsService from './services/userDetailsService'
+import { useDispatch } from 'react-redux'
+import { initializeUserDetails } from './features/userSlice'
 
 const App = () => {
 
+  const dispatch = useDispatch()
+
   useEffect(() => {
-    const getUserDetails = async () => {
-      await userDetailsService.fetchUserDetail()
-    }
-    getUserDetails()
-  }, [])
+    dispatch(initializeUserDetails())
+  }, [dispatch])
 
 
   return (

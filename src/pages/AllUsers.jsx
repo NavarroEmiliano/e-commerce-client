@@ -14,7 +14,7 @@ const AllUsers = () => {
 
   const handleShowEdit = user => {
     setShowUpdateRole(prev => !prev)
-    setUpdateUserDetails(user.name ? { ...user } : {})
+    setUpdateUserDetails(user?.name ? { ...user } : {})
   }
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const AllUsers = () => {
   return (
     <div>
       <table className='w-full userTable'>
-        <thead>
+        <thead className='bg-gray-500 text-white'>
           <tr>
             <th>Sr.</th>
             <th>Name</th>

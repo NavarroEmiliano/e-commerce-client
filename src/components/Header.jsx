@@ -1,12 +1,12 @@
 import Logo from './Logo'
 import { FiSearch } from 'react-icons/fi'
-import { LuUserCircle2 } from 'react-icons/lu'
 import { LuShoppingCart } from 'react-icons/lu'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import UserImg from './UserImg'
 import { logoutUserAction } from '../features/userSlice'
 import { useState } from 'react'
+import ROLE from '../common/role'
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false)
@@ -15,13 +15,13 @@ const Header = () => {
   const dispatch = useDispatch()
 
   const handleLogout = () => {
+    setShowMenu(!showMenu)
     dispatch(logoutUserAction())
   }
 
   const handleMenu = () => {
     setShowMenu(!showMenu)
   }
-
 
   return (
     <header className='sticky h-16 shadow-md bg-white'>
@@ -44,21 +44,28 @@ const Header = () => {
         </div>
 
         <div className='flex items-center justify-center h-8 gap-7 '>
-          <div onClick={handleMenu} className=' cursor-pointer'>
-            <div className='flex text-4xl items-center justify-center h-8 w-8'>
-              {user ? <UserImg textSize='sm' /> : <LuUserCircle2 />}
-            </div>
+          <div
+            onClick={handleMenu}
+            className='relative flex justify-center cursor-pointer'
+          >
+            {user?.name && (
+              <div className='flex text-4xl items-center justify-center h-8 w-8'>
+                <UserImg textSize='sm' />
+              </div>
+            )}
 
-            {user && showMenu && (
-              <div className='absolute bg-white group-hover:block  top-12 h-fit p-2 shadow-lg rounded-md'>
+            {showMenu && (
+              <div className='absolute bg-white group-hover:block top-12 h-fit p-2 shadow-lg rounded-md'>
                 <nav>
-                  <Link
-                    to={'admin-panel'}
-                    onClick={handleMenu}
-                    className='whitespace-nowrap hover:bg-slate-100 '
-                  >
-                    Admin Panel
-                  </Link>
+                  {user?.role === ROLE.ADMIN && (
+                    <Link
+                      to={'admin-panel'}
+                      onClick={handleMenu}
+                      className='whitespace-nowrap hover:bg-slate-100 '
+                    >
+                      Admin Panel
+                    </Link>
+                  )}
                 </nav>
               </div>
             )}

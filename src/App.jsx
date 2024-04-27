@@ -10,13 +10,11 @@ import { useDispatch } from 'react-redux'
 import { initializeUserDetails } from './features/userSlice'
 
 const App = () => {
-
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(initializeUserDetails())
   }, [])
-
 
   return (
     <>

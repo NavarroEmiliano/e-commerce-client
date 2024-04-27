@@ -15,6 +15,7 @@ const ChangeUserRole = ({ onClose, user }) => {
 
   const handleUpdate = () => {
     const updatedUser = { ...user, role: userRole }
+    onClose()
     dispatch(updateUserAction(updatedUser))
   }
 

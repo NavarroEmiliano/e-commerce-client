@@ -1,10 +1,17 @@
 import { useSelector } from 'react-redux'
 import UserImg from '../components/UserImg'
 import { LuUserCircle2 } from 'react-icons/lu'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
+import ROLE from '../common/role'
 
 const AdminPanel = () => {
   const user = useSelector(state => state.user)
+  const navigate = useNavigate()
+
+  useEffect(()=>{
+    if(user?.role !== ROLE.ADMIN) navigate('/')
+  },[user])
 
   return (
     <div className='hidden  min-h-[calc(100vh-120px)] lg:flex  bg-white'>

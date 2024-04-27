@@ -1,18 +1,36 @@
 import { useSelector } from 'react-redux'
 import UserImg from '../components/UserImg'
 import { LuUserCircle2 } from 'react-icons/lu'
+import { Link, Outlet } from 'react-router-dom'
 
 const AdminPanel = () => {
   const user = useSelector(state => state.user)
 
   return (
-    <div className='flex min-h-[calc(100vh-120px)] bg-slate-600'>
-      <aside className='min-h-100vh w-full max-w-60 bg-white'>
-        <div className='h-20 cursor-pointer relative flex justify-center bg-black'>
-          {user ? <UserImg  size={50} textSize='2xl'/> : <LuUserCircle2 />}
+    <div className='hidden  min-h-[calc(100vh-120px)] lg:flex  bg-white'>
+      <aside className=' min-h-full w-full max-w-80 shadow-xl '>
+        <div className='flex flex-col h-40 items-center justify-center '>
+          <div className='h-20 w-20 text-3xl cursor-pointer'>
+            {user ? <UserImg /> : <LuUserCircle2 className='text-5xl' />}
+          </div>
+          <p className='font-semibold pt-2'>{user?.name}</p>
+          <p className='text-sm'>{user?.role}</p>
+        </div>
+
+        <div>
+          <nav className='grid p-4'>
+            <Link to={'all-users'} className='px-2 py-1 hover:bg-slate-200'>
+              All users
+            </Link>
+            <Link to={'all-products'} className='px-2 py-1 hover:bg-slate-200'>
+              All products
+            </Link>
+          </nav>
         </div>
       </aside>
-      <main className=''>main</main>
+      <main className='w-full h-full p-2'>
+        <Outlet />
+      </main>
     </div>
   )
 }

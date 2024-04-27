@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import UserImg from './UserImg'
 import { logoutUserAction } from '../features/userSlice'
-import { toast } from 'react-toastify'
 import { useState } from 'react'
 
 const Header = () => {
@@ -17,7 +16,6 @@ const Header = () => {
 
   const handleLogout = () => {
     dispatch(logoutUserAction())
-    toast.success('Logged out successfully')
   }
 
   const handleMenu = () => {

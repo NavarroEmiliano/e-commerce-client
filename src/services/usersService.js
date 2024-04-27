@@ -19,4 +19,15 @@ const signUpUser = async newUser => {
   }
 }
 
-export default { signUpUser, getAllUsers }
+const updateUser = async userData => {
+  try {
+    const { data } = await axios.put(`${baseUrl}/${userData.id}`, userData, {
+      withCredentials: true
+    })
+    return data
+  } catch (error) {
+    return error.response.data
+  }
+}
+
+export default { signUpUser, getAllUsers, updateUser }

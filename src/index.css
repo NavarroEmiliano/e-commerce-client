@@ -7,7 +7,7 @@ body {
 }
 
 .userTable {
-  @apply bg-white; 
+  @apply bg-white;
 }
 
 .userTable th {
@@ -15,5 +15,5 @@ body {
 }
 
 .userTable td {
-  @apply border text-base text-center py-1;
+  @apply border text-base text-center;
 }

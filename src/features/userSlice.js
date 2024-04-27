@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 import userDetailsService from '../services/userDetailsService'
 import logoutService from '../services/logoutService'
+import { toast } from 'react-toastify'
+import { cleanAllUsersAction } from './allUsersSlice'
 
 const initialState = null
 
@@ -25,7 +27,11 @@ export const initializeUserDetails = () => {
 export const logoutUserAction = () => {
   return async dispatch => {
     const response = await logoutService.logoutUser()
-    if (response.status === 'OK') dispatch(cleanUserDetails())
+    if (response.status === 'OK') {
+      dispatch(cleanUserDetails())
+      dispatch(cleanAllUsersAction())
+      toast.success('Logged out successfully')
+    }
   }
 }
 

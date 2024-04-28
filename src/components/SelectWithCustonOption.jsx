@@ -35,7 +35,7 @@ const SelectWithCustomOption = ({
     <div className='flex flex-col h-24'>
       <label>{label}</label>
       <select
-        className='p-1 rounded-lg'
+        className='p-1 rounded-lg shadow-md'
         name={name}
         onChange={handleSelectChange}
         value={value}

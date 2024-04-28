@@ -59,7 +59,7 @@ const Header = () => {
                 <nav>
                   {user?.role === ROLE.ADMIN && (
                     <Link
-                      to={'admin-panel'}
+                      to={'admin-panel/all-products'}
                       onClick={handleMenu}
                       className='whitespace-nowrap hover:bg-slate-100 '
                     >
@@ -73,7 +73,7 @@ const Header = () => {
 
           <div className='text-3xl cursor-pointer relative'>
             <span>
-              <LuShoppingCart />
+              <LuShoppingCart className='h-8 w-8'/>
             </span>
             <div className='bg-red-600 w-5 h-5 flex items-center justify-center rounded-full absolute -top-2 -right-2'>
               <p className='text-xs text-white'>0</p>

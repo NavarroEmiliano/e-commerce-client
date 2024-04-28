@@ -27,33 +27,47 @@ const SelectWithCustomOption = ({
 
   const handleAddCustomOption = () => {
     handleOnChange({ target: { name, value: customOption } })
-
     setShowCustomInput(false)
     setCustomOption('')
   }
 
   return (
-    <div>
+    <div className='flex flex-col h-24'>
       <label>{label}</label>
-      <select name={name} onChange={handleSelectChange} value={value}>
-        <option value=''>Seleccionar una opción</option>
+      <select
+        className='p-1 rounded-lg'
+        name={name}
+        onChange={handleSelectChange}
+        value={value}
+      >
+        <option value=''>Select {name}</option>
         {options.map((option, index) => (
           <option key={index} value={option}>
             {option}
           </option>
         ))}
-        <option value='custom'>Agregar nueva opción</option>
+        <option value='custom'>Add new option</option>
       </select>
-      {showCustomInput && (
-        <div>
-          <input
-            type='text'
-            value={customOption}
-            onChange={handleCustomInputChange}
-          />
-          <button onClick={handleAddCustomOption}>Agregar</button>
-        </div>
-      )}
+
+      <div className='flex items-center h-full '>
+        {showCustomInput && (
+          <div className='mt-2'>
+            <input
+              className='p-1 rounded-lg shadow-md'
+              type='text'
+              value={customOption}
+              onChange={handleCustomInputChange}
+              placeholder={' Type new option'}
+            />
+            <button
+              className='bg-blue-200 border border-blue-300 py-1 px-2 rounded-lg ml-2 shadow-md'
+              onClick={handleAddCustomOption}
+            >
+              Agregar
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   )
 }

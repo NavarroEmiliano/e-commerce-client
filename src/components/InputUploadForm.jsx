@@ -16,6 +16,7 @@ const InputUploadForm = ({
     <div className="flex flex-col" >
       <label className="block" htmlFor={htmlFor}>{label}</label>
       <input
+      className="p-1 rounded-lg shadow-md"
         type={type}
         name={name}
         placeholder={placeholder}

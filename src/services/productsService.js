@@ -12,16 +12,7 @@ const getAllProducts = async () => {
 
 const uploadProduct = async newProduct => {
   try {
-    const { data } = await axios.post(baseUrl, newProduct,{withCredentials:true})
-    return data
-  } catch (error) {
-    return error.response.data
-  }
-}
-
-const updateProduct = async productData => {
-  try {
-    const { data } = await axios.put(`${baseUrl}/${productData.id}`, productData, {
+    const { data } = await axios.post(baseUrl, newProduct, {
       withCredentials: true
     })
     return data
@@ -30,4 +21,33 @@ const updateProduct = async productData => {
   }
 }
 
-export default { getAllProducts, uploadProduct,updateProduct}
+const updateProduct = async productData => {
+  try {
+    const { data } = await axios.put(
+      `${baseUrl}/${productData.id}`,
+      productData,
+      {
+        withCredentials: true
+      }
+    )
+    return data
+  } catch (error) {
+    return error.response.data
+  }
+}
+
+const getProductsByCategory = async () => {
+  try {
+    const { data } = await axios.get(`${baseUrl}/by-category`)
+    return data
+  } catch (error) {
+    return error.response.data
+  }
+}
+
+export default {
+  getAllProducts,
+  uploadProduct,
+  updateProduct,
+  getProductsByCategory
+}

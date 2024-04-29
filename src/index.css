@@ -18,15 +18,24 @@ body {
   @apply border text-base text-center;
 }
 
-
 .productTable {
-  @apply bg-white ;
+  @apply bg-white;
 }
 
 .productTable th {
-  @apply border text-base font-medium  ;
+  @apply border text-base font-medium;
 }
 
 .productTable td {
-  @apply border text-base text-center ;
+  @apply border text-base text-center;
 }
+
+/* .scrollbar-hide::-webkit-scrollbar {
+  display: none;
+} */
+
+/* .scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+ */

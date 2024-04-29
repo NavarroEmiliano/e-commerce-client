@@ -1,5 +1,9 @@
+import ProductsByCategory from "../components/ProductsByCategory"
+
 const Home = () => {
-  return <div></div>
+  return <div>
+    <ProductsByCategory/>
+  </div>
 }
 
 export default Home

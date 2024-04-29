@@ -1,15 +1,26 @@
 import { useEffect, useState } from 'react'
-import UploadProduct from '../components/UploadProduct'
 import { useDispatch, useSelector } from 'react-redux'
 import { initializeAllProductsAction } from '../features/productsSlice'
+import { MdDelete, MdModeEdit } from 'react-icons/md'
+import AdminEditProduct from '../components/AdminEditProduct'
+import AdminUploadProduct from '../components/AdminUploadProduct'
+import displayUsdCurrency from '../helpers/displayCurrency'
 
 const AllProducts = () => {
   const products = useSelector(state => state.products)
   const [showUploadProduct, setShowUploadProduct] = useState(false)
+  const [showEditProduct, setShowEditProduct] = useState(false)
+  const [productId, setProductId] = useState('')
+
   const dispatch = useDispatch()
 
   const handleUploadProduct = () => {
     setShowUploadProduct(prev => !prev)
+  }
+
+  const handleEditProduct = (id = '') => {
+    setShowEditProduct(prev => !prev)
+    setProductId(id)
   }
 
   useEffect(() => {
@@ -18,7 +29,7 @@ const AllProducts = () => {
 
   return (
     <div className='border'>
-      <div className='flex justify-between items-center py-2 px-4 '>
+      <div className='flex justify-between items-center py-2 px-4 border-b'>
         <h2 className='font-bold text-lg'>All products</h2>
         <button
           onClick={handleUploadProduct}
@@ -27,13 +38,60 @@ const AllProducts = () => {
           Upload Product
         </button>
       </div>
-      {showUploadProduct && <UploadProduct closeUpload={handleUploadProduct} />}
-      <div>{
-        products.map((product) => (
-          <div key={product.id}>
-            <img src={product.images[0]} alt={product.description} width={100} height={100}/>
-          </div>
-        ))}</div> 
+
+      <div className='overflow-y-auto h-[calc(100vh-190px)]'>
+        <table className='w-full productTable'>
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Title</th>
+              <th>Price</th>
+              <th>Stock</th>
+              <th>Category</th>
+              <th>Brand</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {products?.map(product => {
+              return (
+                <tr key={product?.id}>
+                  <td>
+                    <img
+                      src={product?.images[0]}
+                      alt={product.description}
+                      width={70}
+                      height={70}
+                    />
+                  </td>
+                  <td>{product?.title}</td>
+                  <td>{displayUsdCurrency(product?.price)}</td>
+                  <td>{product?.stock}</td>
+                  <td>{product?.category}</td>
+                  <td>{product?.brand}</td>
+                  <td>
+                    <button
+                      onClick={() => handleEditProduct(product.id)}
+                      className='bg-green-200 p-2 rounded-full hover:bg-green-500'
+                    >
+                      <MdModeEdit />
+                    </button>
+                    <button className='bg-red-200 p-2 rounded-full hover:bg-red-500'>
+                      <MdDelete />
+                    </button>
+                  </td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      </div>
+      {showUploadProduct && (
+        <AdminUploadProduct closeUpload={handleUploadProduct} />
+      )}
+      {showEditProduct && (
+        <AdminEditProduct productId={productId} closeEdit={handleEditProduct} />
+      )}
     </div>
   )
 }

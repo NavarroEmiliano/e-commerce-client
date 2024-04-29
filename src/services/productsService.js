@@ -19,15 +19,15 @@ const uploadProduct = async newProduct => {
   }
 }
 
-/* const updateUser = async userData => {
+const updateProduct = async productData => {
   try {
-    const { data } = await axios.put(`${baseUrl}/${userData.id}`, userData, {
+    const { data } = await axios.put(`${baseUrl}/${productData.id}`, productData, {
       withCredentials: true
     })
     return data
   } catch (error) {
     return error.response.data
   }
-} */
+}
 
-export default { getAllProducts, uploadProduct}
+export default { getAllProducts, uploadProduct,updateProduct}

@@ -15,7 +15,7 @@ const AdminPanel = () => {
 
   return (
     <div className='hidden  min-h-[calc(100vh-120px)] lg:flex  bg-white'>
-      <aside className=' min-h-full w-full max-w-80 shadow-md '>
+      <aside className=' min-h-full w-full max-w-60 shadow-md '>
         <div className='flex flex-col h-40 items-center justify-center '>
           <div className='h-20 w-20 text-3xl'>
             {user ? <UserImg /> : <LuUserCircle2 className='text-5xl' />}

@@ -9,9 +9,9 @@ import uploadImageService from '../services/uploadImageService'
 import DisplayImage from './DisplayImage'
 import { MdDelete } from 'react-icons/md'
 import { useDispatch } from 'react-redux'
-import { updateProductAction } from '../features/productsSlice'
+import { uploadProductAction } from '../features/productsSlice'
 
-const UploadProduct = ({ closeUpload }) => {
+const AdminUploadProduct = ({ closeUpload }) => {
   const [product, setProduct] = useState({
     title: '',
     description: '',
@@ -61,14 +61,14 @@ const UploadProduct = ({ closeUpload }) => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    dispatch(updateProductAction(product,closeUpload))
+    dispatch(uploadProductAction(product,closeUpload))
   }
 
   const brandsOptions = ['Brand 1', 'Brand 2', 'Brand 3']
   const categoriesOptions = ['Category 1', 'Category 2', 'Category 3']
 
   return (
-    <div className='fixed w-full h-full top-0 left-0 bottom-0 right-0 flex items-center justify-center bg-black bg-opacity-45'>
+    <div className='fixed w-full h-full top-0 left-0 bottom-0 right-0 flex items-center justify-center bg-black/45'>
       <div className='bg-white p-2 rounded-lg w-full max-w-4xl h-full max-h-[95%] shadow-lg'>
         <div className='flex justify-between items-center '>
           <p className='text-1xl font-semibold'>Upload Product</p>
@@ -160,7 +160,7 @@ const UploadProduct = ({ closeUpload }) => {
                 {product?.images.length ? (
                   product.images.map(img => (
                     <div
-                      className='relative  bg-black mt-2  rounded-lg cursor-pointer group'
+                      className='relative   mt-2  rounded-lg cursor-pointer group'
                       key={img}
                     >
                       <img
@@ -198,4 +198,4 @@ const UploadProduct = ({ closeUpload }) => {
   )
 }
 
-export default UploadProduct
+export default AdminUploadProduct

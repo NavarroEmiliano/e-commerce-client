@@ -17,3 +17,16 @@ body {
 .userTable td {
   @apply border text-base text-center;
 }
+
+
+.productTable {
+  @apply bg-white ;
+}
+
+.productTable th {
+  @apply border text-base font-medium  ;
+}
+
+.productTable td {
+  @apply border text-base text-center ;
+}

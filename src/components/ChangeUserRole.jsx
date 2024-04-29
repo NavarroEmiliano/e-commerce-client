@@ -32,9 +32,10 @@ const ChangeUserRole = ({ onClose, user }) => {
           <p>Name: {user.name}</p>
           <p>Email: {user.email}</p>
           <div className='flex'>
-            <p>Role: </p>
+            <label htmlFor="role">Role: </label>
             <select
               className='text-sm border px-4 rounded-lg ml-2'
+              id='role'
               value={userRole}
               onChange={handleRole}
             >

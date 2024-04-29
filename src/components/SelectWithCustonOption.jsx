@@ -33,12 +33,14 @@ const SelectWithCustomOption = ({
 
   return (
     <div className='flex flex-col h-24'>
-      <label>{label}</label>
+      <label htmlFor={name}>{label}</label>
       <select
         className='p-1 rounded-lg shadow-md'
+        id={name}
         name={name}
         onChange={handleSelectChange}
         value={value}
+        required
       >
         <option value=''>Select {name}</option>
         {options.map((option, index) => (
@@ -57,7 +59,7 @@ const SelectWithCustomOption = ({
               type='text'
               value={customOption}
               onChange={handleCustomInputChange}
-              placeholder={' Type new option'}
+              placeholder={'Type new option'}
             />
             <button
               className='bg-blue-200 border border-blue-300 py-1 px-2 rounded-lg ml-2 shadow-md'

@@ -1,12 +1,20 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import UploadProduct from '../components/UploadProduct'
+import { useDispatch, useSelector } from 'react-redux'
+import { initializeAllProductsAction } from '../features/productsSlice'
 
 const AllProducts = () => {
+  const products = useSelector(state => state.products)
   const [showUploadProduct, setShowUploadProduct] = useState(false)
+  const dispatch = useDispatch()
 
   const handleUploadProduct = () => {
     setShowUploadProduct(prev => !prev)
   }
+
+  useEffect(() => {
+    if (!products.length) dispatch(initializeAllProductsAction())
+  }, [])
 
   return (
     <div className='border'>
@@ -20,6 +28,12 @@ const AllProducts = () => {
         </button>
       </div>
       {showUploadProduct && <UploadProduct closeUpload={handleUploadProduct} />}
+      <div>{
+        products.map((product,index) => (
+          <div key={product.id}>
+            <img src={product.images[0]} alt={product.description} width={100} height={100}/>
+          </div>
+        ))}</div> 
     </div>
   )
 }

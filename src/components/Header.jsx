@@ -35,6 +35,7 @@ const Header = () => {
         <div className='hidden  lg:flex items-center w-full h-9 justify-between max-w-sm border rounded-full focus-within:shadow pl-2'>
           <input
             type='text'
+            name='searchInput'
             placeholder='Search product here...'
             className='w-full h-full outline-none rounded-l-full pl-2'
           />
@@ -73,7 +74,7 @@ const Header = () => {
 
           <div className='text-3xl cursor-pointer relative'>
             <span>
-              <LuShoppingCart className='h-8 w-8'/>
+              <LuShoppingCart className='h-8 w-8' />
             </span>
             <div className='bg-red-600 w-5 h-5 flex items-center justify-center rounded-full absolute -top-2 -right-2'>
               <p className='text-xs text-white'>0</p>

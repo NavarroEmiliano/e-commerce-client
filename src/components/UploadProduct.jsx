@@ -3,19 +3,28 @@ import { useState } from 'react'
 import { IoCloseOutline } from 'react-icons/io5'
 import InputUploadForm from './InputUploadForm'
 import SelectWithCustomOption from './SelectWithCustonOption'
+import { FaCloudUploadAlt } from 'react-icons/fa'
+
+import uploadImageService from '../services/uploadImageService'
+import DisplayImage from './DisplayImage'
+import { MdDelete } from 'react-icons/md'
+import { useDispatch } from 'react-redux'
+import { updateProductAction } from '../features/productsSlice'
 
 const UploadProduct = ({ closeUpload }) => {
   const [product, setProduct] = useState({
     title: '',
     description: '',
     price: null,
-    discountPercentage: null,
-    rating: null,
     stock: null,
     brand: '',
     category: '',
     images: []
   })
+
+  const [showFullImg, setShowFullImg] = useState('')
+
+  const dispatch = useDispatch()
 
   const handleOnChange = e => {
     setProduct(prev => {
@@ -23,10 +32,40 @@ const UploadProduct = ({ closeUpload }) => {
     })
   }
 
+  const handleUploadProductImg = async e => {
+    const file = e.target.files[0]
+
+    if (product.images.length < 5) {
+      const { status, data } = await uploadImageService.uploadImage(file)
+      if (status === 'OK') {
+        setProduct(prev => {
+          return {
+            ...prev,
+            images: [...prev.images, data]
+          }
+        })
+      }
+    }
+  }
+
+  const handleDeleteProductImg = async img => {
+    setProduct(prev => {
+      return { ...prev, images: prev.images.filter(el => el !== img) }
+    })
+  }
+
+  const handleFullImg = img => {
+    if (img) return setShowFullImg(img)
+    setShowFullImg('')
+  }
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    dispatch(updateProductAction(product,closeUpload))
+  }
+
   const brandsOptions = ['Brand 1', 'Brand 2', 'Brand 3']
   const categoriesOptions = ['Category 1', 'Category 2', 'Category 3']
-
-  console.log(product)
 
   return (
     <div className='fixed w-full h-full top-0 left-0 bottom-0 right-0 flex items-center justify-center bg-black bg-opacity-45'>
@@ -37,7 +76,7 @@ const UploadProduct = ({ closeUpload }) => {
             <IoCloseOutline onClick={closeUpload} />
           </button>
         </div>
-        <form className='flex justify-between h-full'>
+        <form onSubmit={handleSubmit} className='flex justify-between h-full'>
           <div className='grid w-[60%] border shadow-lg p-2 bg-slate-100 h-[95%] rounded-lg'>
             <h3>General information</h3>
             <InputUploadForm
@@ -48,14 +87,21 @@ const UploadProduct = ({ closeUpload }) => {
               handleOnChange={handleOnChange}
               value={product.title}
             />
-            <InputUploadForm
-              label='Description'
-              type='text'
-              name='description'
-              placeholder='Enter description here...'
-              handleOnChange={handleOnChange}
-              value={product.description}
-            />
+            <div className='flex flex-col'>
+              <label htmlFor='description'>Description</label>
+              <textarea
+                onChange={handleOnChange}
+                value={product.description}
+                name='description'
+                id='description'
+                placeholder='Enter description...'
+                cols='20'
+                rows='2'
+                className='p-1 resize-none rounded-lg'
+                required
+              ></textarea>
+            </div>
+
             <InputUploadForm
               label='Price'
               type='number'
@@ -65,28 +111,7 @@ const UploadProduct = ({ closeUpload }) => {
               handleOnChange={handleOnChange}
               value={product.price}
             />
-            <InputUploadForm
-              label='Discount percentage'
-              type='number'
-              step={0.01}
-              min='0'
-              max='100'
-              name='discountPercentage'
-              placeholder='Enter discount here...'
-              handleOnChange={handleOnChange}
-              value={product.discountPercentage}
-            />
-            <InputUploadForm
-              label='Rating'
-              type='number'
-              step={0.01}
-              min='0'
-              max='5'
-              name='rating'
-              placeholder='Enter rating here...'
-              handleOnChange={handleOnChange}
-              value={product.rating}
-            />
+
             <InputUploadForm
               label='Stock'
               type='number'
@@ -111,9 +136,64 @@ const UploadProduct = ({ closeUpload }) => {
               value={product.category}
             />
           </div>
-          <div className='border shadow-lg p-2 bg-slate-100 w-[39%] h-[95%] rounded-lg'></div>
+          <div className='flex flex-col justify-between border shadow-lg p-2 bg-slate-100 w-[39%] h-[95%] rounded-lg'>
+            <div>
+              <label htmlFor='uploadImageInput' className='mt-3  p-2 rounded'>
+                <span>Product image</span>
+                <div className='bg-white border rounded h-32 flex justify-center items-center'>
+                  <div className='text-slate-500 flex justify-center items-center flex-col gap-2'>
+                    <span className='text-4xl'>
+                      <FaCloudUploadAlt />
+                    </span>
+                    <p className='text-sm'>Upload Product Image</p>
+                  </div>
+                  <input
+                    type='file'
+                    id='uploadImageInput'
+                    className='hidden'
+                    onChange={handleUploadProductImg}
+                  />
+                </div>
+              </label>
+
+              <div className='flex flex-wrap mt-6 justify-around'>
+                {product?.images.length ? (
+                  product.images.map(img => (
+                    <div
+                      className='relative  bg-black mt-2  rounded-lg cursor-pointer group'
+                      key={img}
+                    >
+                      <img
+                        src={img}
+                        alt={img}
+                        onClick={() => handleFullImg(img)}
+                        className=' h-36 w-36 object-cover object-center'
+                      />
+                      <div
+                        className='absolute bg-red-600 text-white rounded-full p-1 text-xl bottom-0 right-0 hidden group-hover:block'
+                        onClick={() => handleDeleteProductImg(img)}
+                      >
+                        <MdDelete />
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <p className='text-red-600 text-xs'>
+                    *Please upload product image
+                  </p>
+                )}
+              </div>
+            </div>
+
+            <button className='border py-2 rounded-lg bg-red-600'>
+              Upload Product
+            </button>
+          </div>
         </form>
       </div>
+      {showFullImg && (
+        <DisplayImage imgUrl={showFullImg} onClose={handleFullImg} />
+      )}
     </div>
   )
 }

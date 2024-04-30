@@ -1,9 +1,13 @@
-import ProductsByCategory from "../components/ProductsByCategory"
+import BannerProduct from '../components/BannerProduct'
+import ProductsByCategory from '../components/ProductsByCategory'
 
 const Home = () => {
-  return <div>
-    <ProductsByCategory/>
-  </div>
+  return (
+    <div className='w-[90%] mx-auto'>
+      <ProductsByCategory />
+      <BannerProduct />
+    </div>
+  )
 }
 
 export default Home

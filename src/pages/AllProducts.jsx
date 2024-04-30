@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { initializeAllProductsAction } from '../features/productsSlice'
+import {  useState } from 'react'
 import { MdDelete, MdModeEdit } from 'react-icons/md'
 import AdminEditProduct from '../components/AdminEditProduct'
 import AdminUploadProduct from '../components/AdminUploadProduct'
 import displayUsdCurrency from '../helpers/displayCurrency'
+import { useSelector } from 'react-redux'
 
 const AllProducts = () => {
   const products = useSelector(state => state.products)
@@ -12,7 +11,6 @@ const AllProducts = () => {
   const [showEditProduct, setShowEditProduct] = useState(false)
   const [productId, setProductId] = useState('')
 
-  const dispatch = useDispatch()
 
   const handleUploadProduct = () => {
     setShowUploadProduct(prev => !prev)
@@ -23,9 +21,6 @@ const AllProducts = () => {
     setProductId(id)
   }
 
-  useEffect(() => {
-    if (!products.length) dispatch(initializeAllProductsAction())
-  }, [])
 
   return (
     <div className='border'>

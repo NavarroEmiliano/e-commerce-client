@@ -1,33 +1,45 @@
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { initializeCategoriesAction } from '../features/categorySlice'
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+import oneProductByCategory from '../helpers/oneProductByCategory'
 
 const ProductsByCategory = () => {
-  const categories = useSelector(state => state.categories)
-  const dispatch = useDispatch()
+  const products = useSelector(state => state.products)
+  const [loading, setLoading] = useState(true)
+  const [productsByCategory, setProductsByCategory] = useState([])
 
   useEffect(() => {
-    if (!categories.length) dispatch(initializeCategoriesAction())
-  }, [])
+    const productsByCategory = oneProductByCategory(products)
+    setProductsByCategory(productsByCategory)
+    if (productsByCategory.length) setLoading(false)
+  }, [products])
 
   return (
-    <div className='container  mx-auto p-4'>
-      <div className='flex items-center gap-4 justify-between overflow-x-scroll scrollbar-hide '>
-        {categories.map((product, index) => {
-          return (
-            <div className='flex flex-col m-4 h-full ' key={product.id}>
-              <div className='w-24 h-24 rounded-full overflow-hidden '>
-                <img
-                  className='w-full h-full object-cover'
-                  src={product.images[0]}
-                  alt={product.category}
-                />
-              </div>
-              <p className='text-center'>{product?.category}</p>
-            </div>
-          )
-        })}
-      </div>
+    <div className='mx-auto py-4'>
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
+        <div className='flex justify-between gap-6 overflow-x-scroll scrollbar-hide'>
+          {productsByCategory.map(product => {
+            return (
+              <Link
+                to={`product-category/${product?.category}`}
+                className='flex flex-col  h-full cursor-pointer'
+                key={product.id}
+              >
+                <div className='w-20 h-20 rounded-full overflow-hidden '>
+                  <img
+                    className='w-full h-full object-cover'
+                    src={product.images[0]}
+                    alt={product.category}
+                  />
+                </div>
+                <p className='text-center capitalize'>{product?.category}</p>
+              </Link>
+            )
+          })}
+        </div>
+      )}
     </div>
   )
 }

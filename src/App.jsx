@@ -8,12 +8,14 @@ import { useEffect } from 'react'
 
 import { useDispatch } from 'react-redux'
 import { initializeUserDetails } from './features/userSlice'
+import { initializeAllProductsAction } from './features/productsSlice'
 
 const App = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(initializeUserDetails())
+    dispatch(initializeAllProductsAction())
   }, [])
 
   return (

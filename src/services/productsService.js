@@ -36,9 +36,9 @@ const updateProduct = async productData => {
   }
 }
 
-const getProductsByCategory = async () => {
+const getProductsByCategory = async (category) => {
   try {
-    const { data } = await axios.get(`${baseUrl}/by-category`)
+    const { data } = await axios.get(`${baseUrl}/category/${category}`)
     return data
   } catch (error) {
     return error.response.data

@@ -19,7 +19,8 @@ const router = createBrowserRouter([
       { path: 'forgot-password', element: <ForgotPassword /> },
       { path: 'sign-up', element: <SignUp /> },
       {
-        path:'product-category/:categoryName', element:<CategoryProduct/>
+        path: 'product-category/:categoryName',
+        element: <CategoryProduct />
       },
       {
         path: 'admin-panel',

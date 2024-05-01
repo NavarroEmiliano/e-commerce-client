@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FaAngleLeft } from 'react-icons/fa'
 import { FaAngleRight } from 'react-icons/fa'
 
@@ -41,6 +41,18 @@ const BannerProduct = () => {
     }
   }
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (currentImage < desktopImages.length - 1) {
+        nextImage()
+      } else {
+        setCurrentImage(0)
+      }
+    }, 5000)
+
+    return() => clearInterval(interval)
+  }, [currentImage])
+
   return (
     <div className='container mx-auto rounded'>
       <div className='h-72 w-full relative '>
@@ -60,9 +72,26 @@ const BannerProduct = () => {
             </button>
           </div>
         </div>
-
-        <div className='flex h-full w-full overflow-hidden'>
+        {/* Desktop  */}
+        <div className='hidden  md:flex h-full w-full overflow-hidden'>
           {desktopImages.map((img, index) => (
+            <div
+              key={index}
+              className='w-full h-full min-w-full min-h-full translate duration-300'
+              style={{ transform: `translateX(-${currentImage * 100}%)` }}
+            >
+              <img
+                src={img}
+                alt={`img${index}`}
+                className='w-full h-full object-cover'
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Mobile */}
+        <div className='flex h-full w-full overflow-hidden md:hidden'>
+          {mobileImages.map((img, index) => (
             <div
               key={index}
               className='w-full h-full min-w-full min-h-full translate duration-300'

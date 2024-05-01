@@ -15,11 +15,11 @@ const ProductsByCategory = () => {
   }, [products])
 
   return (
-    <div className='mx-auto py-4'>
+    <div className='container mx-auto py-4 '>
       {loading ? (
         <div>Loading...</div>
       ) : (
-        <div className='flex justify-between gap-6 overflow-x-scroll scrollbar-hide'>
+        <div className='flex justify-between gap-6 overflow-x-scroll'>
           {productsByCategory.map(product => {
             return (
               <Link

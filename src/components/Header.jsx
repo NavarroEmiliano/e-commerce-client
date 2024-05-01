@@ -5,23 +5,33 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import UserImg from './UserImg'
 import { logoutUserAction } from '../features/userSlice'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ROLE from '../common/role'
+import {
+  cleanUserCart,
+  initializeUserCartAction
+} from '../features/userCartSlice'
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false)
 
   const user = useSelector(state => state.user)
+  const countCart = useSelector(state => state.userCart.length)
   const dispatch = useDispatch()
 
   const handleLogout = () => {
     setShowMenu(!showMenu)
     dispatch(logoutUserAction())
+    dispatch(cleanUserCart())
   }
 
   const handleMenu = () => {
     setShowMenu(!showMenu)
   }
+
+  useEffect(() => {
+    if (!countCart && user) dispatch(initializeUserCartAction())
+  }, [countCart, user])
 
   return (
     <header className='sticky h-16 shadow-md bg-white'>
@@ -49,7 +59,7 @@ const Header = () => {
             onClick={handleMenu}
             className='relative flex justify-center cursor-pointer'
           >
-            {user?.name && (
+            {user && (
               <div className='flex text-4xl items-center justify-center h-8 w-8'>
                 <UserImg textSize='sm' />
               </div>
@@ -72,14 +82,16 @@ const Header = () => {
             )}
           </div>
 
-          <div className='text-3xl cursor-pointer relative'>
-            <span>
-              <LuShoppingCart className='h-8 w-8' />
-            </span>
-            <div className='bg-red-600 w-5 h-5 flex items-center justify-center rounded-full absolute -top-2 -right-2'>
-              <p className='text-xs text-white'>0</p>
+          {user && (
+            <div className='text-3xl cursor-pointer relative'>
+              <span>
+                <LuShoppingCart className='h-8 w-8' />
+              </span>
+              <div className='bg-red-600 w-5 h-5 flex items-center justify-center rounded-full absolute -top-2 -right-2'>
+                <p className='text-xs text-white'>{countCart}</p>
+              </div>
             </div>
-          </div>
+          )}
 
           <div className='flex h-full'>
             {user?.name ? (

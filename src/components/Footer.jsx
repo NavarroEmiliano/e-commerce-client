@@ -3,7 +3,7 @@ const Footer = () => {
   return (
     <footer className=' bg-slate-200'>
       <div className='contain mx-auto p-4'>
-        <p className="text-center font-bold">Coding with Emiliano Navarro</p>
+        <p className="text-center font-bold">E-commerce</p>
       </div>
     </footer>
   )

@@ -45,9 +45,20 @@ const getProductsByCategory = async (category) => {
   }
 }
 
+const getProductsById = async (id) => {
+  try {
+    const { data } = await axios.get(`${baseUrl}/${id}`)
+    return data
+  } catch (error) {
+    return error.response.data
+  }
+}
+
+
 export default {
   getAllProducts,
   uploadProduct,
   updateProduct,
-  getProductsByCategory
+  getProductsByCategory,
+  getProductsById
 }

@@ -2,9 +2,8 @@
 import { useEffect, useState } from 'react'
 import productsService from '../services/productsService'
 import displayUsdCurrency from '../helpers/displayCurrency'
-import { Link } from 'react-router-dom'
 
-const HorizontalCardProduct = ({ category, heading }) => {
+const VerticalCardProduct = ({ category, heading }) => {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(false)
 
@@ -18,36 +17,42 @@ const HorizontalCardProduct = ({ category, heading }) => {
     fetchProducts()
   }, [category])
 
-
   return (
-    <div className=' mx-auto py-4 overflow-x-scroll hidden md:block'>
+    <div className='max-h-56 mx-auto py-4 overflow-x-scroll'>
       <h2 className='text-2xl font-semibold pb-4'>{heading}</h2>
-      <div className='flex gap-4 '>
+      <div className='flex justify-between h-full items-center gap-4'>
         {products?.map(product => {
           return (
-            <Link to={`/product/${product.id}`} key={product.id}>
             <div
-              
-              className='w-full max-w-[280px] md:min-w-[320px] h-36 bg-white rounded-sm shadow flex'
+              key={product.id}
+              className='w-full max-w-[150px] h-full bg-white rounded-sm shadow flex flex-col'
             >
-              <div className='bg-slate-700 h-full p-2 min-w-[120px] md:min-w-[145px]'>
+              <div className='bg-slate-700 h-full p-2 '>
                 <img
                   src={product.images[0]}
                   alt={product.title}
-                  className='object-scale-down h-full'
+                  className=' h-full'
                 />
               </div>
               <div>
                 <h2>{product?.title}</h2>
                 <div>
-                  <p className='text-gray-500 line-through'>{displayUsdCurrency(product.price) }</p>
-                  <p >{displayUsdCurrency(product.price * (1 - Math.ceil(product.discountPercentage) /100))}</p>
-                  <p className='text-gray-500' >{Math.ceil(product.discountPercentage)}% OFF</p>
+                  <p className='text-gray-500 line-through'>
+                    {displayUsdCurrency(product.price)}
+                  </p>
+                  <p>
+                    {displayUsdCurrency(
+                      product.price *
+                        (1 - Math.ceil(product.discountPercentage) / 100)
+                    )}
+                  </p>
+                  <p className='text-gray-500'>
+                    {Math.ceil(product.discountPercentage)}% OFF
+                  </p>
                 </div>
                 <button className='bg-red-600 '>Add to Cart</button>
               </div>
             </div>
-            </Link>
           )
         })}
       </div>
@@ -55,4 +60,4 @@ const HorizontalCardProduct = ({ category, heading }) => {
   )
 }
 
-export default HorizontalCardProduct
+export default VerticalCardProduct

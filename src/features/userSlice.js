@@ -11,21 +11,21 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setUserDetails: (state, action) => action.payload,
-    cleanUserDetails: () => null
-  }
+    cleanUserDetails: () => null,
+  },
 })
 
 export const { setUserDetails, cleanUserDetails } = userSlice.actions
 
 export const initializeUserDetails = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     const response = await userDetailsService.fetchUserDetail()
     if (response.status === 'OK') dispatch(setUserDetails(response.data))
   }
 }
 
 export const logoutUserAction = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     const response = await logoutService.logoutUser()
     if (response.status === 'OK') {
       dispatch(cleanUserDetails())

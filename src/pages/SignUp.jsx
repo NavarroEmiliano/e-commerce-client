@@ -15,31 +15,31 @@ const SignUp = () => {
     name: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
   })
 
   const navigate = useNavigate()
 
   const handleShowPassword = () => {
-    setShowPassword(prev => !prev)
+    setShowPassword((prev) => !prev)
   }
 
   const handleShowConfirmPassword = () => {
-    setShowConfirmPassword(prev => !prev)
+    setShowConfirmPassword((prev) => !prev)
   }
 
-  const handleOnChange = e => {
+  const handleOnChange = (e) => {
     const { name, value } = e.target
 
-    setData(prev => {
+    setData((prev) => {
       return {
         ...prev,
-        [name]: value
+        [name]: value,
       }
     })
   }
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     if (data.password !== data.confirmPassword) {
@@ -49,7 +49,7 @@ const SignUp = () => {
     const userForSignUp = {
       name: data.name,
       email: data.email,
-      password: data.password
+      password: data.password,
     }
     const response = await usersService.signUpUser(userForSignUp)
 
@@ -63,62 +63,62 @@ const SignUp = () => {
 
   return (
     <section
-      id='sign-up'
-      className='flex items-center min-h-[calc(100vh-120px)]'
+      id="sign-up"
+      className="flex items-center min-h-[calc(100vh-120px)]"
     >
-      <div className='mx-auto container p-4'>
-        <div className='bg-white p-5 max-w-md mx-auto '>
-          <div className='flex justify-center text-8xl text-red-600 mx-auto '>
+      <div className="mx-auto container p-4">
+        <div className="bg-white p-5 max-w-md mx-auto ">
+          <div className="flex justify-center text-8xl text-red-600 mx-auto ">
             <IoCreateOutline />
           </div>
 
-          <form onSubmit={handleSubmit} className='flex flex-col gap-3'>
+          <form onSubmit={handleSubmit} className="flex flex-col gap-3">
             <div>
               <label>Name: </label>
-              <div className='bg-slate-100 p-2'>
+              <div className="bg-slate-100 p-2">
                 <input
-                  type='text'
-                  name='name'
+                  type="text"
+                  name="name"
                   value={data.name}
                   onChange={handleOnChange}
-                  placeholder='Enter name'
+                  placeholder="Enter name"
                   required
-                  className='w-full h-full outline-none bg-transparent'
+                  className="w-full h-full outline-none bg-transparent"
                 />
               </div>
             </div>
 
             <div>
               <label>Email: </label>
-              <div className='bg-slate-100 p-2'>
+              <div className="bg-slate-100 p-2">
                 <input
-                  type='email'
-                  name='email'
+                  type="email"
+                  name="email"
                   value={data.email}
                   onChange={handleOnChange}
-                  placeholder='Enter email'
+                  placeholder="Enter email"
                   required
-                  className='w-full h-full outline-none bg-transparent'
+                  className="w-full h-full outline-none bg-transparent"
                 />
               </div>
             </div>
 
             <div>
               <label>Password: </label>
-              <div className='flex items-center bg-slate-100 p-2'>
+              <div className="flex items-center bg-slate-100 p-2">
                 <input
                   type={showPassword ? 'text' : 'password'}
-                  name='password'
+                  name="password"
                   value={data.password}
                   onChange={handleOnChange}
-                  placeholder='Enter password'
+                  placeholder="Enter password"
                   required
-                  className='w-full h-full outline-none bg-transparent'
+                  className="w-full h-full outline-none bg-transparent"
                 />
                 <div
                   onMouseDown={handleShowPassword}
                   onMouseUp={handleShowPassword}
-                  className='cursor-pointer'
+                  className="cursor-pointer"
                 >
                   <span>{showPassword ? <FaEyeSlash /> : <FaEye />}</span>
                 </div>
@@ -127,20 +127,20 @@ const SignUp = () => {
 
             <div>
               <label>Confirm password: </label>
-              <div className='flex items-center bg-slate-100 p-2'>
+              <div className="flex items-center bg-slate-100 p-2">
                 <input
                   type={showConfirmPassword ? 'text' : 'password'}
-                  name='confirmPassword'
+                  name="confirmPassword"
                   value={data.confirmPassword}
                   onChange={handleOnChange}
-                  placeholder='Enter password'
+                  placeholder="Enter password"
                   required
-                  className='w-full h-full outline-none bg-transparent'
+                  className="w-full h-full outline-none bg-transparent"
                 />
                 <div
                   onMouseDown={handleShowConfirmPassword}
                   onMouseUp={handleShowConfirmPassword}
-                  className='cursor-pointer'
+                  className="cursor-pointer"
                 >
                   <span>
                     {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
@@ -149,18 +149,18 @@ const SignUp = () => {
               </div>
             </div>
 
-            <button className='bg-red-600 text-white px-6 py-2 w-full max-w-[150px] rounded-full hover:bg-red-700 active:scale-95 duration-100 mx-auto mt-4 block'>
+            <button className="bg-red-600 text-white px-6 py-2 w-full max-w-[150px] rounded-full hover:bg-red-700 active:scale-95 duration-100 mx-auto mt-4 block">
               Sign up
             </button>
           </form>
-          <p className='my-5'>
+          <p className="my-5">
             Already have account?{' '}
             <Link
               to={'/login'}
-              className='font-medium 
+              className="font-medium 
           text-red-600
           hover:text-red-700
-          hover:underline'
+          hover:underline"
             >
               Login
             </Link>

@@ -22,27 +22,26 @@ const router = createBrowserRouter([
       { path: 'sign-up', element: <SignUp /> },
       {
         path: 'product-category/:categoryName',
-        element: <CategoryProduct />
+        element: <CategoryProduct />,
       },
       {
         path: 'product/:productId',
-        element: <ProductDetails />
+        element: <ProductDetails />,
       },
-      { 
-        path:'cart',
-        element: <Cart/>
+      {
+        path: 'cart',
+        element: <Cart />,
       },
       {
         path: 'admin-panel',
         element: <AdminPanel />,
         children: [
           { path: 'all-users', element: <AllUsers /> },
-          { path: 'all-products', element: <AllProducts /> }
-        ]
-      }
-    ]
-  }
+          { path: 'all-products', element: <AllProducts /> },
+        ],
+      },
+    ],
+  },
 ])
-
 
 export default router

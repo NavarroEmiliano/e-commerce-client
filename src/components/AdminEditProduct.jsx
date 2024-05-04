@@ -1,14 +1,14 @@
 /* eslint-disable react/prop-types */
-import { IoCloseOutline } from "react-icons/io5"
-import InputUploadForm from "./InputUploadForm"
-import { useDispatch, useSelector } from "react-redux"
-import { useState } from "react"
-import SelectWithCustomOption from "./SelectWithCustonOption"
-import { FaCloudUploadAlt } from "react-icons/fa"
-import { MdDelete } from "react-icons/md"
-import DisplayImage from "./DisplayImage"
-import uploadImageService from "../services/uploadImageService"
-import { updateProductAction } from "../features/productsSlice"
+import { IoCloseOutline } from 'react-icons/io5'
+import InputUploadForm from './InputUploadForm'
+import { useDispatch, useSelector } from 'react-redux'
+import { useState } from 'react'
+import SelectWithCustomOption from './SelectWithCustonOption'
+import { FaCloudUploadAlt } from 'react-icons/fa'
+import { MdDelete } from 'react-icons/md'
+import DisplayImage from './DisplayImage'
+import uploadImageService from '../services/uploadImageService'
+import { updateProductAction } from '../features/productsSlice'
 
 const AdminEditProduct = ({ closeEdit, productId }) => {
   const product = useSelector((store) =>
@@ -26,7 +26,7 @@ const AdminEditProduct = ({ closeEdit, productId }) => {
     images: product?.images,
   })
 
-  const [showFullImg, setShowFullImg] = useState("")
+  const [showFullImg, setShowFullImg] = useState('')
 
   const dispatch = useDispatch()
 
@@ -41,7 +41,7 @@ const AdminEditProduct = ({ closeEdit, productId }) => {
 
     if (product.images.length < 5) {
       const { status, data } = await uploadImageService.uploadImage(file)
-      if (status === "OK") {
+      if (status === 'OK') {
         setProductToUpdate((prev) => {
           return {
             ...prev,
@@ -60,7 +60,7 @@ const AdminEditProduct = ({ closeEdit, productId }) => {
 
   const handleFullImg = (img) => {
     if (img) return setShowFullImg(img)
-    setShowFullImg("")
+    setShowFullImg('')
   }
 
   const handleSubmit = (e) => {
@@ -68,8 +68,8 @@ const AdminEditProduct = ({ closeEdit, productId }) => {
     dispatch(updateProductAction(productToUpdate, closeEdit))
   }
 
-  const brandsOptions = ["Brand 1", "Brand 2", "Brand 3"]
-  const categoriesOptions = ["Category 1", "Category 2", "Category 3"]
+  const brandsOptions = ['Brand 1', 'Brand 2', 'Brand 3']
+  const categoriesOptions = ['Category 1', 'Category 2', 'Category 3']
 
   return (
     <div className="fixed w-full h-full top-0 left-0 bottom-0 right-0 flex items-center justify-center bg-black/45">

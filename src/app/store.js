@@ -11,6 +11,6 @@ export const store = configureStore({
     allUsers: allUsersReducer,
     products: productsReducer,
     categories: categoriesReducer,
-    userCart: userCartReducer
-  }
+    userCart: userCartReducer,
+  },
 })

@@ -1,9 +1,13 @@
 import axios from 'axios'
 const baseUrl = `${import.meta.env.VITE_BASE_URL}/cart`
 
-const addToCart = async productId => {
+const addToCart = async (productId) => {
   try {
-    const { data } = await axios.post(baseUrl, { productId }, { withCredentials: true })
+    const { data } = await axios.post(
+      baseUrl,
+      { productId },
+      { withCredentials: true },
+    )
     return data
   } catch (error) {
     return error.response.data

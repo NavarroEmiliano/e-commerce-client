@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom'
 
 const CategoryProduct = () => {
-  const {categoryName} = useParams()
+  const { categoryName } = useParams()
 
   return <div>{categoryName}</div>
 }

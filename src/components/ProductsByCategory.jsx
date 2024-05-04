@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
-import { Link } from "react-router-dom"
-import oneProductByCategory from "../helpers/oneProductByCategory"
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+import oneProductByCategory from '../helpers/oneProductByCategory'
 
 const ProductsByCategory = () => {
   const products = useSelector((state) => state.products)

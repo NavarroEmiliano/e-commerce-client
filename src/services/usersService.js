@@ -10,7 +10,7 @@ const getAllUsers = async () => {
   }
 }
 
-const signUpUser = async newUser => {
+const signUpUser = async (newUser) => {
   try {
     const { data } = await axios.post(baseUrl, newUser)
     return data
@@ -19,10 +19,10 @@ const signUpUser = async newUser => {
   }
 }
 
-const updateUser = async userData => {
+const updateUser = async (userData) => {
   try {
     const { data } = await axios.put(`${baseUrl}/${userData.id}`, userData, {
-      withCredentials: true
+      withCredentials: true,
     })
     return data
   } catch (error) {

@@ -20,9 +20,9 @@ const App = () => {
 
   return (
     <>
-      <ToastContainer position='top-center' theme='colored' autoClose={3000} />
+      <ToastContainer position="top-center" theme="colored" autoClose={3000} />
       <Header />
-      <main className='min-h-[calc(100vh-120px)] w-full'>
+      <main className="min-h-[calc(100vh-120px)] w-full">
         <Outlet />
       </main>
       <Footer />

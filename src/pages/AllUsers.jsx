@@ -6,26 +6,25 @@ import { MdModeEdit } from 'react-icons/md'
 import ChangeUserRole from '../components/ChangeUserRole'
 
 const AllUsers = () => {
-  const allUsers = useSelector(state => state.allUsers)
+  const allUsers = useSelector((state) => state.allUsers)
   const [showUpdateRole, setShowUpdateRole] = useState(false)
   const [updateUserDetails, setUpdateUserDetails] = useState({})
 
   const dispatch = useDispatch()
 
-  const handleShowEdit = user => {
-    setShowUpdateRole(prev => !prev)
+  const handleShowEdit = (user) => {
+    setShowUpdateRole((prev) => !prev)
     setUpdateUserDetails(user?.name ? { ...user } : {})
   }
 
   useEffect(() => {
-    if(!allUsers.length) dispatch(initializeAllUsersAction())
+    if (!allUsers.length) dispatch(initializeAllUsersAction())
   }, [])
-
 
   return (
     <div>
-      <table className='w-full userTable'>
-        <thead className='bg-gray-500 text-white'>
+      <table className="w-full userTable">
+        <thead className="bg-gray-500 text-white">
           <tr>
             <th>Sr.</th>
             <th>Name</th>
@@ -47,7 +46,7 @@ const AllUsers = () => {
                 <td>
                   <button
                     onClick={() => handleShowEdit(user)}
-                    className='bg-green-200 p-2 rounded-full hover:bg-green-500'
+                    className="bg-green-200 p-2 rounded-full hover:bg-green-500"
                   >
                     <MdModeEdit />
                   </button>

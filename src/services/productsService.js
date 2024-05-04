@@ -10,10 +10,10 @@ const getAllProducts = async () => {
   }
 }
 
-const uploadProduct = async newProduct => {
+const uploadProduct = async (newProduct) => {
   try {
     const { data } = await axios.post(baseUrl, newProduct, {
-      withCredentials: true
+      withCredentials: true,
     })
     return data
   } catch (error) {
@@ -21,14 +21,14 @@ const uploadProduct = async newProduct => {
   }
 }
 
-const updateProduct = async productData => {
+const updateProduct = async (productData) => {
   try {
     const { data } = await axios.put(
       `${baseUrl}/${productData.id}`,
       productData,
       {
-        withCredentials: true
-      }
+        withCredentials: true,
+      },
     )
     return data
   } catch (error) {
@@ -59,5 +59,5 @@ export default {
   uploadProduct,
   updateProduct,
   getProductsByCategory,
-  getProductsById
+  getProductsById,
 }

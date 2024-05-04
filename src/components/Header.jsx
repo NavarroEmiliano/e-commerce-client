@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react'
 import ROLE from '../common/role'
 import {
   cleanUserCart,
-  initializeUserCartAction
+  initializeUserCartAction,
 } from '../features/userCartSlice'
 
 const Header = () => {
@@ -34,45 +34,45 @@ const Header = () => {
   }, [countCart, user])
 
   return (
-    <header className='sticky h-16 shadow-md bg-white'>
-      <div className='h-full container mx-auto flex items-center px-4 justify-between'>
+    <header className="sticky h-16 shadow-md bg-white">
+      <div className="h-full container mx-auto flex items-center px-4 justify-between">
         <div>
-          <Link to='/'>
+          <Link to="/">
             <Logo width={50} height={50} />
           </Link>
         </div>
 
-        <div className='hidden  lg:flex items-center w-full h-9 justify-between max-w-sm border rounded-full focus-within:shadow pl-2'>
+        <div className="hidden  lg:flex items-center w-full h-9 justify-between max-w-sm border rounded-full focus-within:shadow pl-2">
           <input
-            type='text'
-            name='searchInput'
-            placeholder='Search product here...'
-            className='w-full h-full outline-none rounded-l-full pl-2'
+            type="text"
+            name="searchInput"
+            placeholder="Search product here..."
+            className="w-full h-full outline-none rounded-l-full pl-2"
           />
-          <div className='text-lg min-w-[50px] h-9 bg-red-600 flex items-center justify-center rounded-r-full'>
+          <div className="text-lg min-w-[50px] h-9 bg-red-600 flex items-center justify-center rounded-r-full">
             <FiSearch />
           </div>
         </div>
 
-        <div className='flex items-center justify-center h-8 gap-7 '>
+        <div className="flex items-center justify-center h-8 gap-7 ">
           <div
             onClick={handleMenu}
-            className='relative flex justify-center cursor-pointer'
+            className="relative flex justify-center cursor-pointer"
           >
             {user && (
-              <div className='flex text-4xl items-center justify-center h-8 w-8'>
-                <UserImg textSize='sm' />
+              <div className="flex text-4xl items-center justify-center h-8 w-8">
+                <UserImg textSize="sm" />
               </div>
             )}
 
             {showMenu && (
-              <div className='absolute bg-white group-hover:block top-12 h-fit p-2 shadow-lg rounded-md'>
+              <div className="absolute bg-white group-hover:block top-12 h-fit p-2 shadow-lg rounded-md">
                 <nav>
                   {user?.role === ROLE.ADMIN && (
                     <Link
-                      to='admin-panel/all-products'
+                      to="admin-panel/all-products"
                       onClick={handleMenu}
-                      className='whitespace-nowrap hover:bg-slate-100 '
+                      className="whitespace-nowrap hover:bg-slate-100 "
                     >
                       Admin Panel
                     </Link>
@@ -83,34 +83,32 @@ const Header = () => {
           </div>
 
           {user && (
-            <div className='text-3xl cursor-pointer relative'>
+            <div className="text-3xl cursor-pointer relative">
               <span>
-                <LuShoppingCart className='h-8 w-8' />
+                <LuShoppingCart className="h-8 w-8" />
               </span>
-              <div className='bg-red-600 w-5 h-5 flex items-center justify-center rounded-full absolute -top-2 -right-2'>
-                <p className='text-xs text-white'>{countCart}</p>
+              <div className="bg-red-600 w-5 h-5 flex items-center justify-center rounded-full absolute -top-2 -right-2">
+                <p className="text-xs text-white">{countCart}</p>
               </div>
             </div>
           )}
 
-          <div className='flex h-full'>
-            {user?.name
-              ? (
+          <div className="flex h-full">
+            {user?.name ? (
               <button
                 onClick={handleLogout}
-                className='flex  items-center justify-center px-2 text-white bg-red-600 rounded-full  hover:bg-red-700'
+                className="flex  items-center justify-center px-2 text-white bg-red-600 rounded-full  hover:bg-red-700"
               >
                 Logout
               </button>
-                )
-              : (
+            ) : (
               <Link
                 to={'login'}
-                className='text-white h-full bg-red-600 rounded-full px-3 py-1 hover:bg-red-700'
+                className="text-white h-full bg-red-600 rounded-full px-3 py-1 hover:bg-red-700"
               >
                 Login
               </Link>
-                )}
+            )}
           </div>
         </div>
       </div>

@@ -11,22 +11,24 @@ export const allUsersSlice = createSlice({
     setAllUsers: (state, action) => action.payload,
     cleanAllUsersAction: () => [],
     updateUser: (state, action) =>
-      state.map(user => (user.id !== action.payload.id ? user : action.payload))
-  }
+      state.map((user) =>
+        user.id !== action.payload.id ? user : action.payload,
+      ),
+  },
 })
 
 export const { setAllUsers, cleanAllUsersAction, updateUser } =
   allUsersSlice.actions
 
 export const initializeAllUsersAction = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     const response = await usersService.getAllUsers()
     if (response.status === 'OK') dispatch(setAllUsers(response.data))
   }
 }
 
-export const updateUserAction = user => {
-  return async dispatch => {
+export const updateUserAction = (user) => {
+  return async (dispatch) => {
     const response = await usersService.updateUser(user)
     if (response.status === 'OK') {
       dispatch(updateUser(response.data))

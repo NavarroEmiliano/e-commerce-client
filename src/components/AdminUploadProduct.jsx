@@ -1,28 +1,28 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react"
-import { IoCloseOutline } from "react-icons/io5"
-import InputUploadForm from "./InputUploadForm"
-import SelectWithCustomOption from "./SelectWithCustonOption"
-import { FaCloudUploadAlt } from "react-icons/fa"
+import { useState } from 'react'
+import { IoCloseOutline } from 'react-icons/io5'
+import InputUploadForm from './InputUploadForm'
+import SelectWithCustomOption from './SelectWithCustonOption'
+import { FaCloudUploadAlt } from 'react-icons/fa'
 
-import uploadImageService from "../services/uploadImageService"
-import DisplayImage from "./DisplayImage"
-import { MdDelete } from "react-icons/md"
-import { useDispatch } from "react-redux"
-import { uploadProductAction } from "../features/productsSlice"
+import uploadImageService from '../services/uploadImageService'
+import DisplayImage from './DisplayImage'
+import { MdDelete } from 'react-icons/md'
+import { useDispatch } from 'react-redux'
+import { uploadProductAction } from '../features/productsSlice'
 
 const AdminUploadProduct = ({ closeUpload }) => {
   const [product, setProduct] = useState({
-    title: "",
-    description: "",
+    title: '',
+    description: '',
     price: null,
     stock: null,
-    brand: "",
-    category: "",
+    brand: '',
+    category: '',
     images: [],
   })
 
-  const [showFullImg, setShowFullImg] = useState("")
+  const [showFullImg, setShowFullImg] = useState('')
 
   const dispatch = useDispatch()
 
@@ -37,7 +37,7 @@ const AdminUploadProduct = ({ closeUpload }) => {
 
     if (product.images.length < 5) {
       const { status, data } = await uploadImageService.uploadImage(file)
-      if (status === "OK") {
+      if (status === 'OK') {
         setProduct((prev) => {
           return {
             ...prev,
@@ -56,7 +56,7 @@ const AdminUploadProduct = ({ closeUpload }) => {
 
   const handleFullImg = (img) => {
     if (img) return setShowFullImg(img)
-    setShowFullImg("")
+    setShowFullImg('')
   }
 
   const handleSubmit = (e) => {
@@ -64,8 +64,8 @@ const AdminUploadProduct = ({ closeUpload }) => {
     dispatch(uploadProductAction(product, closeUpload))
   }
 
-  const brandsOptions = ["Brand 1", "Brand 2", "Brand 3"]
-  const categoriesOptions = ["Category 1", "Category 2", "Category 3"]
+  const brandsOptions = ['Brand 1', 'Brand 2', 'Brand 3']
+  const categoriesOptions = ['Category 1', 'Category 2', 'Category 3']
 
   return (
     <div className="fixed w-full h-full top-0 left-0 bottom-0 right-0 flex items-center justify-center bg-black/45">

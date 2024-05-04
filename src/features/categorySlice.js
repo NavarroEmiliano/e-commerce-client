@@ -7,15 +7,14 @@ export const categorySlice = createSlice({
   name: 'categories',
   initialState,
   reducers: {
-    setCategories: (state, action) => action.payload
-  }
+    setCategories: (state, action) => action.payload,
+  },
 })
 
-export const { setCategories } =
-categorySlice.actions
+export const { setCategories } = categorySlice.actions
 
 export const initializeCategoriesAction = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     const response = await productsService.getProductsByCategory()
     if (response.status === 'OK') dispatch(setCategories(response.data))
   }

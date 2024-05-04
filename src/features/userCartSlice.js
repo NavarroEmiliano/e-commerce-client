@@ -10,21 +10,21 @@ export const userCartSlice = createSlice({
   reducers: {
     setUserCart: (_state, action) => action.payload,
     addToCart: (state, action) => [...state, action.payload],
-    cleanUserCart: () => []
-  }
+    cleanUserCart: () => [],
+  },
 })
 
 export const { setUserCart, addToCart, cleanUserCart } = userCartSlice.actions
 
 export const initializeUserCartAction = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     const response = await cartService.getUserCart()
     if (response.status === 'OK') dispatch(setUserCart(response.data))
   }
 }
 
-export const addToCartAction = productId => {
-  return async dispatch => {
+export const addToCartAction = (productId) => {
+  return async (dispatch) => {
     const response = await cartService.addToCart(productId)
 
     if (response.status === 'OK') {

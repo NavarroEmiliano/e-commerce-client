@@ -12,22 +12,28 @@ export const productsSlice = createSlice({
     cleanAllProdutsAction: () => [],
     addProduct: (state, action) => [...state, action.payload],
     updateProduct: (state, action) =>
-      state.map(product => (product.id !== action.payload.id ? product : action.payload))
-  }
+      state.map((product) =>
+        product.id !== action.payload.id ? product : action.payload,
+      ),
+  },
 })
 
-export const { setAllProducts, cleanAllProdutsAction, addProduct, updateProduct } =
-  productsSlice.actions
+export const {
+  setAllProducts,
+  cleanAllProdutsAction,
+  addProduct,
+  updateProduct,
+} = productsSlice.actions
 
 export const initializeAllProductsAction = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     const response = await productsService.getAllProducts()
     if (response.status === 'OK') dispatch(setAllProducts(response.data))
   }
 }
 
 export const uploadProductAction = (product, closeModal) => {
-  return async dispatch => {
+  return async (dispatch) => {
     const response = await productsService.uploadProduct(product)
     if (response.status === 'OK') {
       dispatch(addProduct(response.data))
@@ -39,7 +45,7 @@ export const uploadProductAction = (product, closeModal) => {
 }
 
 export const updateProductAction = (product, closeModal) => {
-  return async dispatch => {
+  return async (dispatch) => {
     const response = await productsService.updateProduct(product)
     if (response.status === 'OK') {
       dispatch(updateProduct(response.data))

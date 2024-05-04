@@ -64,8 +64,8 @@ const AdminEditProduct = ({ closeEdit, productId }) => {
   }
 
   const handleSubmit = e => {
-    e.preventDefault() /
-      dispatch(updateProductAction(productToUpdate, closeEdit))
+    e.preventDefault()
+    dispatch(updateProductAction(productToUpdate, closeEdit))
   }
 
   const brandsOptions = ['Brand 1', 'Brand 2', 'Brand 3']

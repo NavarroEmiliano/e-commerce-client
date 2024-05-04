@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react'
-import { FaAngleLeft } from 'react-icons/fa'
-import { FaAngleRight } from 'react-icons/fa'
+import { FaAngleLeft , FaAngleRight } from 'react-icons/fa'
 
-//Desktop banners
+
+// Desktop banners
 import watchBanner from '../assets/watch-banner.jpg'
 import sunglassesBanner from '../assets/sunglasses-banner.jpeg'
 import shoesBanner from '../assets/shoes-banner.jpg'
 import fashionBagBanner from '../assets/fashion-bag-banner.jpg'
 
-//Mobile banners
+// Mobile banners
 import womenShoesMobile from '../assets/smartwatch-mobile-banner.webp'
 import smartWatchMobile from '../assets/women-shoes-mobile.jpg'
 import lightingMobileBanner from '../assets/lighting-mobile-banner.jpg'

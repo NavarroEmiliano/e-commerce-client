@@ -15,8 +15,8 @@ import {
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false)
 
-  const user = useSelector(state => state.user)
-  const countCart = useSelector(state => state.userCart.length)
+  const user = useSelector((state) => state.user)
+  const countCart = useSelector((state) => state.userCart.length)
   const dispatch = useDispatch()
 
   const handleLogout = () => {
@@ -37,7 +37,7 @@ const Header = () => {
     <header className='sticky h-16 shadow-md bg-white'>
       <div className='h-full container mx-auto flex items-center px-4 justify-between'>
         <div>
-          <Link to={'/'}>
+          <Link to='/'>
             <Logo width={50} height={50} />
           </Link>
         </div>
@@ -70,7 +70,7 @@ const Header = () => {
                 <nav>
                   {user?.role === ROLE.ADMIN && (
                     <Link
-                      to={'admin-panel/all-products'}
+                      to='admin-panel/all-products'
                       onClick={handleMenu}
                       className='whitespace-nowrap hover:bg-slate-100 '
                     >
@@ -94,21 +94,23 @@ const Header = () => {
           )}
 
           <div className='flex h-full'>
-            {user?.name ? (
+            {user?.name
+              ? (
               <button
                 onClick={handleLogout}
                 className='flex  items-center justify-center px-2 text-white bg-red-600 rounded-full  hover:bg-red-700'
               >
                 Logout
               </button>
-            ) : (
+                )
+              : (
               <Link
                 to={'login'}
                 className='text-white h-full bg-red-600 rounded-full px-3 py-1 hover:bg-red-700'
               >
                 Login
               </Link>
-            )}
+                )}
           </div>
         </div>
       </div>

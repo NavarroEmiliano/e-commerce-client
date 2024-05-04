@@ -1,10 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import {  useState } from 'react'
-import { FaRegUserCircle } from 'react-icons/fa'
-import { FaEye } from 'react-icons/fa'
-import { FaEyeSlash } from 'react-icons/fa'
+import { FaRegUserCircle , FaEye ,FaEyeSlash  } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
-
 import loginService from '../services/loginService'
 import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'

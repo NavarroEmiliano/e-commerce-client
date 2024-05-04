@@ -34,4 +34,20 @@ const updateItemUserCart = async (obj) => {
   }
 }
 
-export default { addToCart, getUserCart, updateItemUserCart }
+const deleteUserCartItem = async (id) => {
+  try {
+    const { data } = await axios.delete(`${baseUrl}/${id}`, {
+      withCredentials: true,
+    })
+    return data
+  } catch (error) {
+    return error.response.data
+  }
+}
+
+export default {
+  addToCart,
+  getUserCart,
+  updateItemUserCart,
+  deleteUserCartItem,
+}

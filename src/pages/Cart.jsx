@@ -1,6 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux'
 import displayUsdCurrency from '../helpers/displayCurrency'
-import { updateQuantityCartItemAction } from '../features/userCartSlice'
+import {
+  deleteCartItemAction,
+  updateQuantityCartItemAction,
+} from '../features/userCartSlice'
+import { MdDelete } from 'react-icons/md'
 
 const Cart = () => {
   const userCart = useSelector((state) => state.userCart)
@@ -24,6 +28,10 @@ const Cart = () => {
     dispatch(updateQuantityCartItemAction(obj))
   }
 
+  const deleteCartProduct = (id) => {
+    dispatch(deleteCartItemAction(id))
+  }
+
   return (
     <div className='container mx-auto'>
       <div className='text-center text-lg my-3 w-full'>
@@ -42,7 +50,7 @@ const Cart = () => {
                   Holis
                 </div>
               ))
-            : userCart.map((el) => (
+            : userCart?.map((el) => (
                 <div
                   key={el.id}
                   className='w-full bg-slate-200 h-32 my-2 border border-slate-300 rounded-lg grid grid-cols-[128px,1fr] overflow-hidden'
@@ -50,16 +58,22 @@ const Cart = () => {
                   <div className='h-32 w-32'>
                     <img
                       className='w-full h-full object-cover'
-                      src={el.productId?.images[0]}
-                      alt={el.productId?.title}
+                      src={el?.productId?.images[0]}
+                      alt={el?.productId?.title}
                     />
                   </div>
-                  <div className='p-2 bg-blue-400'>
+                  <div className='p-2 relative'>
+                    <div
+                      onClick={() => deleteCartProduct(el.id)}
+                      className='hover:bg-black cursor-pointer text-3xl absolute right-0 text-red-600 rounded-full p-2'
+                    >
+                      <MdDelete />
+                    </div>
                     <h2 className='text-lg lg:text-2xl text-ellipsis line-clamp-1 '>
-                      {el.productId?.title}
+                      {el?.productId?.title}
                     </h2>
-                    <p className='capitalize'>{el.productId?.category}</p>
-                    <p>{displayUsdCurrency(el.productId?.price)}</p>
+                    <p className='capitalize'>{el?.productId?.category}</p>
+                    <p>{displayUsdCurrency(el?.productId?.price)}</p>
                     <div className='flex items-center gap-1'>
                       <button
                         onClick={() => decreaseQuantity(el.id, el.quantity)}
@@ -82,7 +96,7 @@ const Cart = () => {
 
         {/* Total product */}
         <div className='mt-5 lg:mt-0 w-full max-w-sm'>
-          {userCart.length === 0 ? (
+          {userCart?.length === 0 ? (
             <div className='h-36 bg-slate-200'>Total</div>
           ) : (
             <div className='h-36 bg-slate-200'>Total</div>

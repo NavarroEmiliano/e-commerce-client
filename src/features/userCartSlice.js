@@ -16,7 +16,7 @@ export const userCartSlice = createSlice({
         item.id === action.payload.id ? action.payload : item,
       ),
 
-    deleteUserCartItem: (state, action) =>
+    removeCartItem: (state, action) =>
       state.filter((item) => item.id !== action.payload),
   },
 })
@@ -26,7 +26,7 @@ export const {
   addToCart,
   cleanUserCart,
   updateUserCartItem,
-  deleteUserCartItem,
+  removeCartItem,
 } = userCartSlice.actions
 
 export const initializeUserCartAction = () => {
@@ -52,11 +52,22 @@ export const addToCartAction = (productId) => {
 export const updateQuantityCartItemAction = (obj) => {
   return async (dispatch) => {
     const response = await cartService.updateItemUserCart(obj)
-    if (obj.quantity === 0) return dispatch(deleteUserCartItem(obj.id))
+    if (obj.quantity === 0) return dispatch(removeCartItem(obj.id))
 
     if (response.status === 'OK') {
       dispatch(updateUserCartItem(response.data))
-      toast.success('Product updated')
+    } else {
+      toast.error(response.data)
+    }
+  }
+}
+
+export const deleteCartItemAction = (id) => {
+  return async (dispatch) => {
+    const response = await cartService.deleteUserCartItem(id)
+
+    if (response.status === 'OK') {
+      return dispatch(removeCartItem(id))
     } else {
       toast.error(response.data)
     }

@@ -21,19 +21,19 @@ const AllProducts = () => {
   }
 
   return (
-    <div className="border">
-      <div className="flex justify-between items-center py-2 px-4 border-b">
-        <h2 className="font-bold text-lg">All products</h2>
+    <div className='border'>
+      <div className='flex justify-between items-center py-2 px-4 border-b'>
+        <h2 className='font-bold text-lg'>All products</h2>
         <button
           onClick={handleUploadProduct}
-          className="border-2 border-red-600 rounded-full px-2 py-1 hover:bg-red-600 hover:text-white"
+          className='border-2 border-red-600 rounded-full px-2 py-1 hover:bg-red-600 hover:text-white'
         >
           Upload Product
         </button>
       </div>
 
-      <div className="overflow-y-auto h-[calc(100vh-190px)]">
-        <table className="w-full productTable">
+      <div className='overflow-y-auto h-[calc(100vh-190px)]'>
+        <table className='w-full productTable'>
           <thead>
             <tr>
               <th>Image</th>
@@ -65,11 +65,11 @@ const AllProducts = () => {
                   <td>
                     <button
                       onClick={() => handleEditProduct(product.id)}
-                      className="bg-green-200 p-2 rounded-full hover:bg-green-500"
+                      className='bg-green-200 p-2 rounded-full hover:bg-green-500'
                     >
                       <MdModeEdit />
                     </button>
-                    <button className="bg-red-200 p-2 rounded-full hover:bg-red-500">
+                    <button className='bg-red-200 p-2 rounded-full hover:bg-red-500'>
                       <MdDelete />
                     </button>
                   </td>

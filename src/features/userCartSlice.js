@@ -11,10 +11,23 @@ export const userCartSlice = createSlice({
     setUserCart: (_state, action) => action.payload,
     addToCart: (state, action) => [...state, action.payload],
     cleanUserCart: () => [],
+    updateUserCartItem: (state, action) =>
+      state.map((item) =>
+        item.id === action.payload.id ? action.payload : item,
+      ),
+
+    deleteUserCartItem: (state, action) =>
+      state.filter((item) => item.id !== action.payload),
   },
 })
 
-export const { setUserCart, addToCart, cleanUserCart } = userCartSlice.actions
+export const {
+  setUserCart,
+  addToCart,
+  cleanUserCart,
+  updateUserCartItem,
+  deleteUserCartItem,
+} = userCartSlice.actions
 
 export const initializeUserCartAction = () => {
   return async (dispatch) => {
@@ -30,6 +43,20 @@ export const addToCartAction = (productId) => {
     if (response.status === 'OK') {
       dispatch(addToCart(response.data))
       toast.success('Product added to cart')
+    } else {
+      toast.error(response.data)
+    }
+  }
+}
+
+export const updateQuantityCartItemAction = (obj) => {
+  return async (dispatch) => {
+    const response = await cartService.updateItemUserCart(obj)
+    if (obj.quantity === 0) return dispatch(deleteUserCartItem(obj.id))
+
+    if (response.status === 'OK') {
+      dispatch(updateUserCartItem(response.data))
+      toast.success('Product updated')
     } else {
       toast.error(response.data)
     }

@@ -15,7 +15,7 @@ const StarRating = ({ rating }) => {
       starsArray.push(<FaStar key={i} />)
     }
     if (halfStar) {
-      starsArray.push(<FaStarHalfAlt key="half" />)
+      starsArray.push(<FaStarHalfAlt key='half' />)
     }
     const emptyStars = 5 - fullStars - (halfStar ? 1 : 0) // Número de estrellas vacías
     for (let i = 0; i < emptyStars; i++) {
@@ -30,7 +30,7 @@ const StarRating = ({ rating }) => {
     generateStars()
   }, [rating])
 
-  return <div className="flex text-red-600 gap-1">{stars}</div>
+  return <div className='flex text-red-600 gap-1'>{stars}</div>
 }
 
 export default StarRating

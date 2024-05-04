@@ -23,4 +23,15 @@ const getUserCart = async () => {
   }
 }
 
-export default { addToCart, getUserCart }
+const updateItemUserCart = async (obj) => {
+  try {
+    const { data } = await axios.post(`${baseUrl}/update`, obj, {
+      withCredentials: true,
+    })
+    return data
+  } catch (error) {
+    return error.response.data
+  }
+}
+
+export default { addToCart, getUserCart, updateItemUserCart }

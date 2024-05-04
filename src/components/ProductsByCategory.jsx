@@ -15,26 +15,26 @@ const ProductsByCategory = () => {
   }, [products])
 
   return (
-    <div className="container mx-auto py-4 ">
+    <div className='container mx-auto py-4 '>
       {loading ? (
         <div>Loading...</div>
       ) : (
-        <div className="flex justify-between gap-6 overflow-x-scroll">
+        <div className='flex justify-between gap-6 overflow-x-scroll'>
           {productsByCategory.map((product) => {
             return (
               <Link
                 to={`product-category/${product?.category}`}
-                className="flex flex-col  h-full cursor-pointer"
+                className='flex flex-col  h-full cursor-pointer'
                 key={product.id}
               >
-                <div className="w-20 h-20 rounded-full overflow-hidden ">
+                <div className='w-20 h-20 rounded-full overflow-hidden '>
                   <img
-                    className="w-full h-full object-cover"
+                    className='w-full h-full object-cover'
                     src={product.images[0]}
                     alt={product.category}
                   />
                 </div>
-                <p className="text-center capitalize">{product?.category}</p>
+                <p className='text-center capitalize'>{product?.category}</p>
               </Link>
             )
           })}

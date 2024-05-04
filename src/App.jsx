@@ -6,7 +6,7 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useEffect } from 'react'
 
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { initializeUserDetails } from './features/userSlice'
 import { initializeAllProductsAction } from './features/productsSlice'
 
@@ -20,9 +20,9 @@ const App = () => {
 
   return (
     <>
-      <ToastContainer position="top-center" theme="colored" autoClose={3000} />
+      <ToastContainer position='top-center' theme='colored' autoClose={3000} />
       <Header />
-      <main className="min-h-[calc(100vh-120px)] w-full">
+      <main className='min-h-[calc(100vh-120px)] w-full'>
         <Outlet />
       </main>
       <Footer />

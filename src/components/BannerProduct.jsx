@@ -53,53 +53,53 @@ const BannerProduct = () => {
   }, [currentImage])
 
   return (
-    <div className="container mx-auto rounded">
-      <div className="h-72 w-full relative ">
-        <div className="absolute  z-10  h-full w-full md:flex items-center hidden">
-          <div className="flex justify-between w-full text-2xl">
+    <div className='container mx-auto rounded'>
+      <div className='h-72 w-full relative '>
+        <div className='absolute  z-10  h-full w-full md:flex items-center hidden'>
+          <div className='flex justify-between w-full text-2xl'>
             <button
               onClick={prevImage}
-              className="bg-white shadow-md rounded-full p-1 "
+              className='bg-white shadow-md rounded-full p-1 '
             >
               <FaAngleLeft />
             </button>
             <button
               onClick={nextImage}
-              className="bg-white shadow-md rounded-full p-1"
+              className='bg-white shadow-md rounded-full p-1'
             >
               <FaAngleRight />
             </button>
           </div>
         </div>
         {/* Desktop  */}
-        <div className="hidden  md:flex h-full w-full overflow-hidden">
+        <div className='hidden  md:flex h-full w-full overflow-hidden'>
           {desktopImages.map((img, index) => (
             <div
               key={index}
-              className="w-full h-full min-w-full min-h-full translate duration-300"
+              className='w-full h-full min-w-full min-h-full translate duration-300'
               style={{ transform: `translateX(-${currentImage * 100}%)` }}
             >
               <img
                 src={img}
                 alt={`img${index}`}
-                className="w-full h-full object-cover"
+                className='w-full h-full object-cover'
               />
             </div>
           ))}
         </div>
 
         {/* Mobile */}
-        <div className="flex h-full w-full overflow-hidden md:hidden">
+        <div className='flex h-full w-full overflow-hidden md:hidden'>
           {mobileImages.map((img, index) => (
             <div
               key={index}
-              className="w-full h-full min-w-full min-h-full translate duration-300"
+              className='w-full h-full min-w-full min-h-full translate duration-300'
               style={{ transform: `translateX(-${currentImage * 100}%)` }}
             >
               <img
                 src={img}
                 alt={`img${index}`}
-                className="w-full h-full object-cover"
+                className='w-full h-full object-cover'
               />
             </div>
           ))}

@@ -17,26 +17,26 @@ const VerticalCardProduct = ({ category, heading }) => {
   }, [category])
 
   return (
-    <div className="max-h-56 mx-auto py-4 overflow-x-scroll">
-      <h2 className="text-2xl font-semibold pb-4">{heading}</h2>
-      <div className="flex justify-between h-full items-center gap-4">
+    <div className='max-h-56 mx-auto py-4 overflow-x-scroll'>
+      <h2 className='text-2xl font-semibold pb-4'>{heading}</h2>
+      <div className='flex justify-between h-full items-center gap-4'>
         {products?.map((product) => {
           return (
             <div
               key={product.id}
-              className="w-full max-w-[150px] h-full bg-white rounded-sm shadow flex flex-col"
+              className='w-full max-w-[150px] h-full bg-white rounded-sm shadow flex flex-col'
             >
-              <div className="bg-slate-700 h-full p-2 ">
+              <div className='bg-slate-700 h-full p-2 '>
                 <img
                   src={product.images[0]}
                   alt={product.title}
-                  className=" h-full"
+                  className=' h-full'
                 />
               </div>
               <div>
                 <h2>{product?.title}</h2>
                 <div>
-                  <p className="text-gray-500 line-through">
+                  <p className='text-gray-500 line-through'>
                     {displayUsdCurrency(product.price)}
                   </p>
                   <p>
@@ -45,11 +45,11 @@ const VerticalCardProduct = ({ category, heading }) => {
                         (1 - Math.ceil(product.discountPercentage) / 100),
                     )}
                   </p>
-                  <p className="text-gray-500">
+                  <p className='text-gray-500'>
                     {Math.ceil(product.discountPercentage)}% OFF
                   </p>
                 </div>
-                <button className="bg-red-600 ">Add to Cart</button>
+                <button className='bg-red-600 '>Add to Cart</button>
               </div>
             </div>
           )

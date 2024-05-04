@@ -21,7 +21,4 @@ export const initializeCategoriesAction = () => {
   }
 }
 
-
-
-
 export default categorySlice.reducer

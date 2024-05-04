@@ -12,11 +12,11 @@ export const productsSlice = createSlice({
     cleanAllProdutsAction: () => [],
     addProduct: (state, action) => [...state, action.payload],
     updateProduct: (state, action) =>
-    state.map(product => (product.id !== action.payload.id ? product : action.payload))
+      state.map(product => (product.id !== action.payload.id ? product : action.payload))
   }
 })
 
-export const { setAllProducts, cleanAllProdutsAction, addProduct,updateProduct } =
+export const { setAllProducts, cleanAllProdutsAction, addProduct, updateProduct } =
   productsSlice.actions
 
 export const initializeAllProductsAction = () => {
@@ -38,7 +38,7 @@ export const uploadProductAction = (product, closeModal) => {
   }
 }
 
-export const updateProductAction = (product , closeModal) => {
+export const updateProductAction = (product, closeModal) => {
   return async dispatch => {
     const response = await productsService.updateProduct(product)
     if (response.status === 'OK') {
@@ -49,6 +49,5 @@ export const updateProductAction = (product , closeModal) => {
     toast.error(response.data)
   }
 }
-
 
 export default productsSlice.reducer

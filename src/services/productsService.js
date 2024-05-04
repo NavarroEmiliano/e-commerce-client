@@ -54,7 +54,6 @@ const getProductsById = async (id) => {
   }
 }
 
-
 export default {
   getAllProducts,
   uploadProduct,

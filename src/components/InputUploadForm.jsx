@@ -23,10 +23,10 @@ const InputUploadForm = ({
         name={name}
         placeholder={placeholder}
         onChange={handleOnChange}
-        value={value ? value : ''}
-        min={min ? min : ''}
-        max={max ? max : ''}
-        step={step ? step : ''}
+        value={value || ''}
+        min={min || ''}
+        max={max || ''}
+        step={step || ''}
         required
       />
     </div>

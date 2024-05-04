@@ -19,7 +19,6 @@ const ChangeUserRole = ({ onClose, user }) => {
     dispatch(updateUserAction(updatedUser))
   }
 
-
   return (
     <div className='fixed top-0 bottom-0 left-0 right-0 w-full h-full z-10 flex justify-between items-center bg-black bg-opacity-45'>
       <div className='mx-auto bg-white shadow-md p-4 w-full max-w-sm rounded-lg'>
@@ -32,7 +31,7 @@ const ChangeUserRole = ({ onClose, user }) => {
           <p>Name: {user.name}</p>
           <p>Email: {user.email}</p>
           <div className='flex'>
-            <label htmlFor="role">Role: </label>
+            <label htmlFor='role'>Role: </label>
             <select
               className='text-sm border px-4 rounded-lg ml-2'
               id='role'

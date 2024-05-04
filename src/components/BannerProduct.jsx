@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
-import { FaAngleLeft , FaAngleRight } from 'react-icons/fa'
-
+import { FaAngleLeft, FaAngleRight } from 'react-icons/fa'
 
 // Desktop banners
 import watchBanner from '../assets/watch-banner.jpg'
@@ -50,7 +49,7 @@ const BannerProduct = () => {
       }
     }, 5000)
 
-    return() => clearInterval(interval)
+    return () => clearInterval(interval)
   }, [currentImage])
 
   return (

@@ -1,10 +1,11 @@
-import { useSelector } from 'react-redux'
+import { useSelector } from "react-redux"
 
 /* eslint-disable react/prop-types */
 const UserImg = ({ textSize }) => {
-  const nameImg = useSelector(state =>
-    state.user?.name?.split('', 2).join('').toUpperCase()
+  const nameImg = useSelector((state) =>
+    state.user?.name?.split("", 2).join("").toUpperCase(),
   )
+
   return (
     <div className={`text-${textSize} w-full h-full`}>
       <div

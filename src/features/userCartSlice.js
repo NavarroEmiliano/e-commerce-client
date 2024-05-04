@@ -14,7 +14,7 @@ export const userCartSlice = createSlice({
   }
 })
 
-export const { setUserCart, addToCart,cleanUserCart } = userCartSlice.actions
+export const { setUserCart, addToCart, cleanUserCart } = userCartSlice.actions
 
 export const initializeUserCartAction = () => {
   return async dispatch => {

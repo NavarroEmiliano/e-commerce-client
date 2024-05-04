@@ -1,4 +1,4 @@
-const oneProductByCategory = (products) => {
+const oneProductByCategory = products => {
   const categoriesArr = products.map(product => product.category)
   const categoriesSet = [...new Set(categoriesArr)]
 
@@ -7,6 +7,7 @@ const oneProductByCategory = (products) => {
   categoriesSet.forEach(element => {
     const productFound = products.find(product => {
       if (product.category === element) return product
+      return undefined
     })
 
     finalArr.push(productFound)

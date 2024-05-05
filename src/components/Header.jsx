@@ -1,8 +1,7 @@
-import Logo from './Logo'
 import { FiSearch } from 'react-icons/fi'
 import { LuShoppingCart } from 'react-icons/lu'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import UserImg from './UserImg'
 import { logoutUserAction } from '../features/userSlice'
 import { useEffect, useState } from 'react'
@@ -14,10 +13,14 @@ import {
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false)
+  const { search } = useLocation()
+
+  const [searchInput, setSearchInput] = useState(search.split('=')[1])
 
   const user = useSelector((state) => state.user)
   const countCart = useSelector((state) => state.userCart.length)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const handleLogout = () => {
     setShowMenu(!showMenu)
@@ -33,15 +36,29 @@ const Header = () => {
     if (!countCart && user) dispatch(initializeUserCartAction())
   }, [countCart, user])
 
+  const handleSearch = (e) => {
+    const { value } = e.target
+    setSearchInput(value)
+    if (value) {
+      navigate(`/search?q=${value}`)
+    } else {
+      navigate('/')
+    }
+  }
+
   return (
     <header className='sticky h-16 shadow-md bg-white'>
       <div className='h-full container mx-auto flex items-center px-4 justify-between'>
-        <div>E-commerce</div>
+        <Link to='/'>
+          <div className='text-2xl'>E-commerce</div>
+        </Link>
 
         <div className='hidden  lg:flex items-center w-full h-9 justify-between max-w-sm border rounded-full focus-within:shadow pl-2'>
           <input
+            onChange={handleSearch}
             type='text'
             name='searchInput'
+            value={searchInput}
             placeholder='Search product here...'
             className='w-full h-full outline-none rounded-l-full pl-2'
           />

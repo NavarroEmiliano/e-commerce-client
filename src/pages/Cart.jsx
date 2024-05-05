@@ -32,6 +32,13 @@ const Cart = () => {
     dispatch(deleteCartItemAction(id))
   }
 
+  const totalQuantity = userCart.reduce((prev, curr) => prev + curr.quantity, 0)
+
+  const totalPrice = userCart.reduce(
+    (prev, curr) => prev + curr?.productId?.price * curr.quantity,
+    0,
+  )
+
   return (
     <div className='container mx-auto'>
       <div className='text-center text-lg my-3 w-full'>
@@ -73,7 +80,14 @@ const Cart = () => {
                       {el?.productId?.title}
                     </h2>
                     <p className='capitalize'>{el?.productId?.category}</p>
-                    <p>{displayUsdCurrency(el?.productId?.price)}</p>
+                    <div className='flex items-center justify-between '>
+                      <p>{displayUsdCurrency(el?.productId?.price)}</p>
+                      <p>
+                        {displayUsdCurrency(
+                          el?.productId?.price * el?.quantity,
+                        )}
+                      </p>
+                    </div>
                     <div className='flex items-center gap-1'>
                       <button
                         onClick={() => decreaseQuantity(el.id, el.quantity)}
@@ -99,7 +113,21 @@ const Cart = () => {
           {userCart?.length === 0 ? (
             <div className='h-36 bg-slate-200'>Total</div>
           ) : (
-            <div className='h-36 bg-slate-200'>Total</div>
+            <div className='h-36 bg-slate-200'>
+              <h2 className='text-white bg-red-600 px-4 py-1'>Summary</h2>
+              <div className='flex items-center justify-between px-4 gap-2 font-medium text-lg '>
+                <p>Quantity</p>
+                <p>{totalQuantity}</p>
+              </div>
+              <div className='flex items-center justify-between px-4 gap-2 font-medium text-lg '>
+                <p>Total Price</p>
+                <p>{displayUsdCurrency(totalPrice)}</p>
+              </div>
+
+              <button className='border-2 border-blue-600 p-2 w-full rounded'>
+                Payment
+              </button>
+            </div>
           )}
         </div>
       </div>

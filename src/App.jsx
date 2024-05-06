@@ -10,6 +10,9 @@ import { useDispatch } from 'react-redux'
 import { initializeUserDetails } from './features/userSlice'
 import { initializeAllProductsAction } from './features/productsSlice'
 
+import 'react-loading-skeleton/dist/skeleton.css'
+import 'react-multi-carousel/lib/styles.css'
+
 const App = () => {
   const dispatch = useDispatch()
 

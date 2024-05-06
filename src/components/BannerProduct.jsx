@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react'
-import { FaAngleLeft, FaAngleRight } from 'react-icons/fa'
+import Carousel from 'react-multi-carousel'
 
 // Desktop banners
 import watchBanner from '../assets/watch-banner.jpg'
@@ -13,8 +12,6 @@ import smartWatchMobile from '../assets/women-shoes-mobile.jpg'
 import lightingMobileBanner from '../assets/lighting-mobile-banner.jpg'
 
 const BannerProduct = () => {
-  const [currentImage, setCurrentImage] = useState(0)
-
   const desktopImages = [
     watchBanner,
     sunglassesBanner,
@@ -28,57 +25,40 @@ const BannerProduct = () => {
     lightingMobileBanner,
   ]
 
-  const nextImage = () => {
-    if (currentImage < desktopImages.length - 1) {
-      setCurrentImage((prev) => prev + 1)
-    }
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 1,
+      slidesToSlide: 1, // optional, default to 1.
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 1,
+      slidesToSlide: 1, // optional, default to 1.
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+      slidesToSlide: 1, // optional, default to 1.
+    },
   }
-
-  const prevImage = () => {
-    if (currentImage > 0) {
-      setCurrentImage((prev) => prev - 1)
-    }
-  }
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (currentImage < desktopImages.length - 1) {
-        nextImage()
-      } else {
-        setCurrentImage(0)
-      }
-    }, 5000)
-
-    return () => clearInterval(interval)
-  }, [currentImage])
 
   return (
     <div className='container mx-auto rounded'>
-      <div className='h-72 w-full relative '>
-        <div className='absolute  z-10  h-full w-full md:flex items-center hidden'>
-          <div className='flex justify-between w-full text-2xl'>
-            <button
-              onClick={prevImage}
-              className='bg-white shadow-md rounded-full p-1 '
-            >
-              <FaAngleLeft />
-            </button>
-            <button
-              onClick={nextImage}
-              className='bg-white shadow-md rounded-full p-1'
-            >
-              <FaAngleRight />
-            </button>
-          </div>
-        </div>
+      <div className='h-72 w-full '>
         {/* Desktop  */}
-        <div className='hidden  md:flex h-full w-full overflow-hidden'>
+        <Carousel
+          swipeable={false}
+          draggable={false}
+          showDots={true}
+          responsive={responsive}
+          infinite={true}
+          autoPlay={true}
+          keyBoardControl={true}
+          removeArrowOnDeviceType={['tablet', 'mobile']}
+        >
           {desktopImages.map((img, index) => (
-            <div
-              key={index}
-              className='w-full h-full min-w-full min-h-full translate duration-300'
-              style={{ transform: `translateX(-${currentImage * 100}%)` }}
-            >
+            <div key={index} className='w-full h-72 min-w-full min-h-full'>
               <img
                 src={img}
                 alt={`img${index}`}
@@ -86,7 +66,7 @@ const BannerProduct = () => {
               />
             </div>
           ))}
-        </div>
+        </Carousel>
 
         {/* Mobile */}
         <div className='flex h-full w-full overflow-hidden md:hidden'>
@@ -94,7 +74,6 @@ const BannerProduct = () => {
             <div
               key={index}
               className='w-full h-full min-w-full min-h-full translate duration-300'
-              style={{ transform: `translateX(-${currentImage * 100}%)` }}
             >
               <img
                 src={img}

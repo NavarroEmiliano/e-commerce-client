@@ -47,7 +47,7 @@ const Header = () => {
   }
 
   return (
-    <header className='sticky h-16 shadow-md bg-white'>
+    <header className='h-16 shadow-sm bg-white'>
       <div className='h-full w-[80%] mx-auto flex items-center justify-between'>
         <Link to='/'>
           <div className='text-xl'>E-commerce</div>

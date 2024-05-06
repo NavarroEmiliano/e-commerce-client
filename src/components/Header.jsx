@@ -48,7 +48,7 @@ const Header = () => {
 
   return (
     <header className='sticky h-16 shadow-md bg-white'>
-      <div className='h-full  w-[80%] mx-auto flex items-center justify-between'>
+      <div className='h-full w-[80%] mx-auto flex items-center justify-between'>
         <Link to='/'>
           <div className='text-xl'>E-commerce</div>
         </Link>
@@ -62,7 +62,7 @@ const Header = () => {
             placeholder='Search product here...'
             className='w-full h-full outline-none rounded-l-full pl-4'
           />
-          <div className='text-lg min-w-[50px] h-9 bg-red-600 flex items-center justify-center rounded-r-full'>
+          <div className='text-white text-lg min-w-[50px] h-9 bg-red-600 flex items-center justify-center rounded-r-full'>
             <FiSearch />
           </div>
         </div>

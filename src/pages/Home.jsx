@@ -5,7 +5,7 @@ import VerticalCardProduct from '../components/VerticalCardProduct'
 
 const Home = () => {
   return (
-    <div className='px-10'>
+    <div className=''>
       <ProductsByCategory />
       <BannerProduct />
       <HorizontalCardProduct

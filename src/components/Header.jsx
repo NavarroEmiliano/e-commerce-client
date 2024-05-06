@@ -48,19 +48,19 @@ const Header = () => {
 
   return (
     <header className='sticky h-16 shadow-md bg-white'>
-      <div className='h-full container mx-auto flex items-center px-4 justify-between'>
+      <div className='h-full  w-[80%] mx-auto flex items-center justify-between'>
         <Link to='/'>
-          <div className='text-2xl'>E-commerce</div>
+          <div className='text-xl'>E-commerce</div>
         </Link>
 
-        <div className='hidden  lg:flex items-center w-full h-9 justify-between max-w-sm border rounded-full focus-within:shadow pl-2'>
+        <div className='hidden lg:flex items-center w-full border h-9 justify-between max-w-sm rounded-full focus-within:shadow '>
           <input
             onChange={handleSearch}
             type='text'
             name='searchInput'
             value={searchInput}
             placeholder='Search product here...'
-            className='w-full h-full outline-none rounded-l-full pl-2'
+            className='w-full h-full outline-none rounded-l-full pl-4'
           />
           <div className='text-lg min-w-[50px] h-9 bg-red-600 flex items-center justify-center rounded-r-full'>
             <FiSearch />

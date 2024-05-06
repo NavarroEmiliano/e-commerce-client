@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import ProductCard from '../components/ProductCard'
 
 const CategoryProduct = () => {
   const products = useSelector((state) => state.products)
@@ -11,6 +12,10 @@ const CategoryProduct = () => {
   })
 
   const [sortByPrice, setSortByPrice] = useState('')
+  const [showFilterMenu, setShowFilterMenu] = useState(false)
+  const [showFilterButton, setShowFilterButton] = useState(false)
+
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
   const categoriesArr = products.map((product) => product.category)
   const categoriesSet = [...new Set(categoriesArr)]
@@ -40,14 +45,42 @@ const CategoryProduct = () => {
     setSortByPrice(e.target.value)
   }
 
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth)
+    }
+    window.addEventListener('resize', handleResize)
+  }, [])
+
+  useEffect(() => {
+    if (windowWidth > 640) {
+      setShowFilterMenu(true)
+      setShowFilterButton(false)
+    } else {
+      setShowFilterMenu(false)
+      setShowFilterButton(true)
+    }
+  }, [windowWidth])
+
   return (
-    <div className='container mx-auto px-4'>
+    <div className='flex mx-auto my-8 px-4 relative '>
       {/* Desktop version */}
-      <div className='hidden lg:grid grid-cols-[200px,1fr]'>
+      {showFilterButton && (
+        <button
+          className='md:hidden absolute -top-8 left-0 font-medium text-red-600'
+          onClick={() => setShowFilterMenu(!showFilterMenu)}
+        >
+          Filter
+        </button>
+      )}
+
+      <div className='flex w-full '>
         {/* Left side */}
-        <div className='bg-white p-2 min-h-[calc(100vh-120px)] overflow-y-scroll'>
+        <div
+          className={`${showFilterMenu && showFilterButton ? 'md:block absolute left-0 top-8' : showFilterMenu ? 'block' : 'hidden'} min-w-48  p-2 min-h-[calc(100vh-120px)] shadow rounded overflow-y-hidden`}
+        >
           {/* Sort by */}
-          <div className=''>
+          <div className='w-full md:block'>
             <h3 className='text-base uppercase font-medium text-slate-500 border border-slate-300'>
               Sort by
             </h3>
@@ -99,12 +132,9 @@ const CategoryProduct = () => {
             </form>
           </div>
         </div>
-        <div>
+        <div className='flex flex-wrap justify-around gap-6'>
           {filteredProducts.map((product) => (
-            <div className='capitalize border mb-2' key={product.title}>
-              <p>{product.title}</p>
-              <p>{product.price}</p>
-            </div>
+            <ProductCard key={product.id} product={product} />
           ))}
         </div>
       </div>

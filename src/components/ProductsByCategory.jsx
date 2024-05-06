@@ -5,7 +5,6 @@ import oneProductByCategory from '../helpers/oneProductByCategory'
 import Skeleton from 'react-loading-skeleton'
 
 import Carousel from 'react-multi-carousel'
-import responsiveCarrouselConfig from '../helpers/responsiveCarouselConfig'
 
 const ProductsByCategory = () => {
   const products = useSelector((state) => state.products)
@@ -20,10 +19,26 @@ const ProductsByCategory = () => {
     if (productsByCategory.length) setLoading(false)
   }, [products])
 
-  const responsive = responsiveCarrouselConfig()
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 7,
+      slidesToSlide: 7,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 640 },
+      items: 4,
+      slidesToSlide: 4,
+    },
+    mobile: {
+      breakpoint: { max: 640, min: 0 },
+      items: 3,
+      slidesToSlide: 3,
+    },
+  }
 
   return (
-    <div className='container mx-auto  my-6'>
+    <div className='container mx-auto my-6'>
       {loading ? (
         <div className='flex justify-between gap-6 '>
           {skeletonArray.map((_, index) => {
@@ -46,8 +61,6 @@ const ProductsByCategory = () => {
           showDots={true}
           responsive={responsive}
           infinite={true}
-          customTransition='all .5'
-          transitionDuration={500}
           removeArrowOnDeviceType={['tablet', 'mobile']}
         >
           {productsByCategory.map((product) => {

@@ -50,10 +50,10 @@ const Header = () => {
     <header className='h-16 shadow-sm bg-white'>
       <div className='h-full w-[80%] mx-auto flex items-center justify-between'>
         <Link to='/'>
-          <div className='text-xl'>E-commerce</div>
+          <div className='text-sm md:text-xl mr-2 text-center'>E-commerce</div>
         </Link>
 
-        <div className='hidden lg:flex items-center w-full border h-9 justify-between max-w-sm rounded-full focus-within:shadow '>
+        <div className='flex items-center w-full border h-9 justify-between max-w-sm rounded-full focus-within:shadow '>
           <input
             onChange={handleSearch}
             type='text'

@@ -35,7 +35,7 @@ const ProductDetails = () => {
       }
     }
     getProduct()
-  }, [])
+  }, [productId])
 
   const handleMouseEnterProduct = (imageUrl) => {
     setActiveImage(imageUrl)

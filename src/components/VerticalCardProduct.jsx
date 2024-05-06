@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react'
 import productsService from '../services/productsService'
-import displayUsdCurrency from '../helpers/displayCurrency'
+import Carousel from 'react-multi-carousel'
+import ProductCard from './ProductCard'
 
 const VerticalCardProduct = ({ category, heading }) => {
   const [products, setProducts] = useState([])
-  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -16,44 +16,37 @@ const VerticalCardProduct = ({ category, heading }) => {
     fetchProducts()
   }, [category])
 
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 4,
+      slidesToSlide: 1,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 640 },
+      items: 2,
+      slidesToSlide: 2,
+    },
+    mobile: {
+      breakpoint: { max: 640, min: 0 },
+      items: 1,
+      slidesToSlide: 1,
+    },
+  }
+
   return (
-    <div className='max-h-56 mx-auto py-4 overflow-x-scroll'>
+    <div className='mx-auto py-4 '>
       <h2 className='text-2xl font-semibold pb-4'>{heading}</h2>
-      <div className='flex justify-between h-full items-center gap-4'>
-        {products?.map((product) => {
-          return (
-            <div
-              key={product.id}
-              className='w-full max-w-[150px] h-full bg-white rounded-sm shadow flex flex-col'
-            >
-              <div className='bg-slate-700 h-full p-2 '>
-                <img
-                  src={product.images[0]}
-                  alt={product.title}
-                  className=' h-full'
-                />
-              </div>
-              <div>
-                <h2>{product?.title}</h2>
-                <div>
-                  <p className='text-gray-500 line-through'>
-                    {displayUsdCurrency(product.price)}
-                  </p>
-                  <p>
-                    {displayUsdCurrency(
-                      product.price *
-                        (1 - Math.ceil(product.discountPercentage) / 100),
-                    )}
-                  </p>
-                  <p className='text-gray-500'>
-                    {Math.ceil(product.discountPercentage)}% OFF
-                  </p>
-                </div>
-                <button className='bg-red-600 '>Add to Cart</button>
-              </div>
-            </div>
-          )
-        })}
+      <div>
+        <Carousel
+          showDots={true}
+          responsive={responsive}
+          removeArrowOnDeviceType={['tablet', 'mobile']}
+        >
+          {products?.map((product) => {
+            return <ProductCard key={product.id} product={product} />
+          })}
+        </Carousel>
       </div>
     </div>
   )

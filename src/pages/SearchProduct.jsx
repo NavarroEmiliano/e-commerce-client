@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
+import ProductCard from '../components/ProductCard'
 
 const SearchProduct = () => {
   const products = useSelector((state) => state.products)
@@ -14,7 +15,15 @@ const SearchProduct = () => {
       product.category.toLowerCase().includes(searchValue.toLowerCase()),
   )
 
-  return <div>{<p>Search Results: {filteredProducts?.length}</p>}</div>
+  return (
+    <div className='container mx-auto'>
+      <div className='flex flex-wrap gap-4  justify-center md:justify-between items-center my-4'>
+        {filteredProducts.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
+    </div>
+  )
 }
 
 export default SearchProduct

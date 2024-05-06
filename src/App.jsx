@@ -25,7 +25,7 @@ const App = () => {
     <>
       <ToastContainer position='top-center' theme='colored' autoClose={3000} />
       <Header />
-      <main className='mx-auto min-h-[calc(100vh-120px)] w-[80%]'>
+      <main className='mx-auto min-h-[calc(100vh-120px)] md:w-[90%] w-[95%]'>
         <Outlet />
       </main>
       <Footer />

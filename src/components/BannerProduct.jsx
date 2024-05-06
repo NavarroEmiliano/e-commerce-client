@@ -29,32 +29,29 @@ const BannerProduct = () => {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
       items: 1,
-      slidesToSlide: 1, // optional, default to 1.
+      slidesToSlide: 1,
     },
     tablet: {
-      breakpoint: { max: 1024, min: 464 },
+      breakpoint: { max: 1024, min: 640 },
       items: 1,
-      slidesToSlide: 1, // optional, default to 1.
+      slidesToSlide: 1,
     },
     mobile: {
-      breakpoint: { max: 464, min: 0 },
+      breakpoint: { max: 640, min: 0 },
       items: 1,
-      slidesToSlide: 1, // optional, default to 1.
+      slidesToSlide: 1,
     },
   }
 
   return (
     <div className='container mx-auto rounded'>
-      <div className='h-72 w-full '>
+      <div className='h-72 w-full hidden md:block'>
         {/* Desktop  */}
         <Carousel
-          swipeable={false}
-          draggable={false}
           showDots={true}
           responsive={responsive}
           infinite={true}
           autoPlay={true}
-          keyBoardControl={true}
           removeArrowOnDeviceType={['tablet', 'mobile']}
         >
           {desktopImages.map((img, index) => (
@@ -67,22 +64,29 @@ const BannerProduct = () => {
             </div>
           ))}
         </Carousel>
+      </div>
 
-        {/* Mobile */}
-        <div className='flex h-full w-full overflow-hidden md:hidden'>
+      {/* Mobile */}
+
+      <div className='h-72 w-full md:hidden'>
+        {/* Desktop  */}
+        <Carousel
+          showDots={true}
+          responsive={responsive}
+          infinite={true}
+          autoPlay={true}
+          removeArrowOnDeviceType={['tablet', 'mobile']}
+        >
           {mobileImages.map((img, index) => (
-            <div
-              key={index}
-              className='w-full h-full min-w-full min-h-full translate duration-300'
-            >
+            <div key={index} className='w-full h-72 min-w-full min-h-full'>
               <img
                 src={img}
                 alt={`img${index}`}
-                className='w-full h-full object-cover'
+                className='w-full h-full object-scale-down'
               />
             </div>
           ))}
-        </div>
+        </Carousel>
       </div>
     </div>
   )

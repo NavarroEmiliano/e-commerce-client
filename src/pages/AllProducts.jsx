@@ -21,7 +21,7 @@ const AllProducts = () => {
   }
 
   return (
-    <div className='border'>
+    <div className='border rounded-md'>
       <div className='flex justify-between items-center py-2 px-4 border-b'>
         <h2 className='font-bold text-lg'>All products</h2>
         <button
@@ -49,7 +49,7 @@ const AllProducts = () => {
             {products?.map((product) => {
               return (
                 <tr key={product?.id}>
-                  <td>
+                  <td className='flex items-center justify-center'>
                     <img
                       src={product?.images[0]}
                       alt={product.description}
@@ -63,15 +63,17 @@ const AllProducts = () => {
                   <td>{product?.category}</td>
                   <td>{product?.brand}</td>
                   <td>
-                    <button
-                      onClick={() => handleEditProduct(product.id)}
-                      className='bg-green-200 p-2 rounded-full hover:bg-green-500'
-                    >
-                      <MdModeEdit />
-                    </button>
-                    <button className='bg-red-200 p-2 rounded-full hover:bg-red-500'>
-                      <MdDelete />
-                    </button>
+                    <div className='flex items-center justify-center gap-1 p-1'>
+                      <button
+                        onClick={() => handleEditProduct(product.id)}
+                        className='bg-green-200 p-2 text-sm rounded-full hover:bg-green-500'
+                      >
+                        <MdModeEdit />
+                      </button>
+                      <button className='bg-red-200 p-2 text-sm rounded-full hover:bg-red-500'>
+                        <MdDelete />
+                      </button>
+                    </div>
                   </td>
                 </tr>
               )

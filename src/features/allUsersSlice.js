@@ -33,8 +33,9 @@ export const updateUserAction = (user) => {
     if (response.status === 'OK') {
       dispatch(updateUser(response.data))
       toast.success('User updated')
+    } else {
+      toast.error(response.data)
     }
-    toast.error(response.data.data)
   }
 }
 

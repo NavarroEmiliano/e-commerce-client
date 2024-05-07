@@ -26,6 +26,8 @@ const Header = () => {
     setShowMenu(!showMenu)
     dispatch(logoutUserAction())
     dispatch(cleanUserCart())
+    navigate('/')
+    setShowMenu(false)
   }
 
   const handleMenu = () => {

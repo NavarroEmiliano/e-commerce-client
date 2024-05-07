@@ -6,9 +6,13 @@ import {
 } from '../features/userCartSlice'
 import { MdDelete } from 'react-icons/md'
 
+import { CiSquarePlus, CiSquareMinus } from 'react-icons/ci'
+import { useEffect, useState } from 'react'
+
 const Cart = () => {
   const userCart = useSelector((state) => state.userCart)
   const dispatch = useDispatch()
+  const [loading, setLoading] = useState(true)
 
   const loadingCart = new Array(5).fill(null)
 
@@ -39,28 +43,30 @@ const Cart = () => {
     0,
   )
 
+  useEffect(() => {
+    if (userCart) setLoading(false)
+  }, [userCart])
+
   return (
-    <div className='container mx-auto'>
+    <div className='container mx-auto '>
       <div className='text-center text-lg my-3 w-full'>
-        {userCart.length === 0 && <p className='bg-white py-5'>Loading...</p>}
+        {loading && <p className='bg-white py-5'>Loading...</p>}
       </div>
 
       <div className='flex w-full gap-10'>
         {/* View Product */}
         <div className='w-full'>
-          {userCart.length === 0
+          {loading
             ? loadingCart.map((el) => (
                 <div
                   key={el + 'Add To Cart Loading'}
                   className='w-full bg-slate-200 h-32 my-2 border border-slate-300 animate-pulse rounded-lg'
-                >
-                  Holis
-                </div>
+                ></div>
               ))
             : userCart?.map((el) => (
                 <div
                   key={el.id}
-                  className='w-full bg-slate-200 h-32 my-2 border border-slate-300 rounded-lg grid grid-cols-[128px,1fr] overflow-hidden'
+                  className='w-full bg-slate-200 h-32 mb-2 border border-slate-300 rounded-lg grid grid-cols-[128px,1fr] overflow-hidden'
                 >
                   <div className='h-32 w-32'>
                     <img
@@ -72,7 +78,7 @@ const Cart = () => {
                   <div className='p-2 relative'>
                     <div
                       onClick={() => deleteCartProduct(el.id)}
-                      className='hover:bg-black cursor-pointer text-3xl absolute right-0 text-red-600 rounded-full p-2'
+                      className='hover:scale-125 duration-150 cursor-pointer text-3xl absolute right-0 text-red-600 rounded-full p-2'
                     >
                       <MdDelete />
                     </div>
@@ -88,19 +94,19 @@ const Cart = () => {
                         )}
                       </p>
                     </div>
-                    <div className='flex items-center gap-1'>
+                    <div className=' flex items-center gap-1'>
                       <button
                         onClick={() => decreaseQuantity(el.id, el.quantity)}
-                        className='mx-2 border border-red-600 rounded w-6 h-6 flex items-center justify-center '
+                        className='mx-2 w-6 h-6 text-red-600 hover:scale-110 duration-150'
                       >
-                        -
+                        <CiSquareMinus className='w-full h-full' />
                       </button>
                       <span>{el.quantity}</span>
                       <button
                         onClick={() => increaseQuantity(el.id, el.quantity)}
-                        className='mx-2 border border-red-600 rounded w-6 h-6 flex items-center justify-center'
+                        className='mx-2 w-6 h-6 flex text-red-600 hover:scale-110 duration-150'
                       >
-                        +
+                        <CiSquarePlus className='w-full h-full ' />
                       </button>
                     </div>
                   </div>
@@ -109,22 +115,24 @@ const Cart = () => {
         </div>
 
         {/* Total product */}
-        <div className='mt-5 lg:mt-0 w-full max-w-sm'>
-          {userCart?.length === 0 ? (
+        <div className='mt-5 lg:mt-0 w-full max-w-sm '>
+          {loading ? (
             <div className='h-36 bg-slate-200'>Total</div>
           ) : (
-            <div className='h-36 bg-slate-200'>
-              <h2 className='text-white bg-red-600 px-4 py-1'>Summary</h2>
-              <div className='flex items-center justify-between px-4 gap-2 font-medium text-lg '>
+            <div className=' bg-slate-200 rounded-md flex flex-col justify-center items-center gap-2 pb-2'>
+              <h2 className='text-white w-full bg-red-600 px-4 py-1 rounded-t-lg'>
+                Summary
+              </h2>
+              <div className='flex w-full items-center justify-between px-4 gap-2 font-medium text-lg '>
                 <p>Quantity</p>
                 <p>{totalQuantity}</p>
               </div>
-              <div className='flex items-center justify-between px-4 gap-2 font-medium text-lg '>
+              <div className='flex w-full items-center justify-between px-4 gap-2 font-medium text-lg '>
                 <p>Total Price</p>
                 <p>{displayUsdCurrency(totalPrice)}</p>
               </div>
 
-              <button className='border-2 border-blue-600 p-2 w-full rounded'>
+              <button className='border-2 border-blue-600 py-2 w-[95%] rounded'>
                 Payment
               </button>
             </div>

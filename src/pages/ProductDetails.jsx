@@ -66,7 +66,7 @@ const ProductDetails = () => {
     <div className='container mx-auto p-4 '>
       <div className=' min-h-[200px] flex flex-col lg:flex-row gap-4'>
         {/* Product Image */}
-        <div className='flex flex-col h-96  lg:flex-row-reverse gap-4'>
+        <div className='flex flex-col items-center h-96  lg:flex-row-reverse gap-4'>
           {loading ? (
             <div className='h-[300px] rounded-lg w-[300px] lg:h-[400px] lg:w-[400px] bg-slate-200 animate-pulse'></div>
           ) : (

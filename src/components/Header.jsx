@@ -48,7 +48,7 @@ const Header = () => {
 
   return (
     <header className='h-16 shadow-sm bg-white'>
-      <div className='h-full w-[80%] mx-auto flex items-center justify-between'>
+      <div className='h-full w-[95%] sm:w-[80%] mx-auto flex items-center justify-between'>
         <Link to='/'>
           <div className='text-sm md:text-xl mr-2 text-center'>E-commerce</div>
         </Link>
@@ -60,14 +60,14 @@ const Header = () => {
             name='searchInput'
             value={searchInput}
             placeholder='Search product here...'
-            className='w-full h-full outline-none rounded-l-full pl-4'
+            className='w-full h-full outline-none rounded-l-full pl-4 text-ellipsis'
           />
           <div className='text-white text-lg min-w-[50px] h-9 bg-red-600 flex items-center justify-center rounded-r-full'>
             <FiSearch />
           </div>
         </div>
 
-        <div className='flex items-center justify-center h-8 gap-7'>
+        <div className='flex items-center justify-between ml-2 gap-2 sm:gap-6 md:gap-8'>
           <div
             onClick={handleMenu}
             className='relative flex justify-center cursor-pointer'
@@ -108,18 +108,18 @@ const Header = () => {
             </Link>
           )}
 
-          <div className='flex h-full'>
+          <div>
             {user?.name ? (
               <button
                 onClick={handleLogout}
-                className='flex  items-center justify-center px-2 text-white bg-red-600 rounded-full  hover:bg-red-700'
+                className='flex items-center justify-center px-2 py-1 text-white bg-red-600 rounded-full  hover:bg-red-700'
               >
                 Logout
               </button>
             ) : (
               <Link
                 to={'login'}
-                className='text-white h-full bg-red-600 rounded-full px-3 py-1 hover:bg-red-700'
+                className='flex items-center justify-center px-2 py-1 text-white bg-red-600 rounded-full  hover:bg-red-700'
               >
                 Login
               </Link>

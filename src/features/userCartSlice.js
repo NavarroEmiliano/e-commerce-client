@@ -67,6 +67,7 @@ export const deleteCartItemAction = (id) => {
     const response = await cartService.deleteUserCartItem(id)
 
     if (response.status === 'OK') {
+      toast.success('Product removed from cart.')
       return dispatch(removeCartItem(id))
     } else {
       toast.error(response.data)

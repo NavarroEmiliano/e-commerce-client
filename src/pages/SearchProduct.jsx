@@ -17,7 +17,7 @@ const SearchProduct = () => {
 
   return (
     <div className='container mx-auto'>
-      <div className='flex flex-wrap gap-4  justify-center md:justify-between items-center my-4'>
+      <div className='flex flex-wrap gap-8  justify-center md:justify-start items-center my-4'>
         {filteredProducts.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}

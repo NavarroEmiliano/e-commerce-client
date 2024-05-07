@@ -67,7 +67,7 @@ const CategoryProduct = () => {
       {/* Desktop version */}
       {showFilterButton && (
         <button
-          className='md:hidden absolute -top-8 left-0 font-medium text-red-600'
+          className='md:hidden absolute -top-8 left-0 font-medium text-red-600 border-2 border-red-600 mt-[2px] px-2 rounded-full'
           onClick={() => setShowFilterMenu(!showFilterMenu)}
         >
           Filter
@@ -77,7 +77,7 @@ const CategoryProduct = () => {
       <div className='flex w-full '>
         {/* Left side */}
         <div
-          className={`${showFilterMenu && showFilterButton ? 'md:block absolute left-0 top-8' : showFilterMenu ? 'block' : 'hidden'} min-w-48  p-2 min-h-[calc(100vh-120px)] shadow rounded overflow-y-hidden`}
+          className={`${showFilterMenu && showFilterButton ? 'md:block absolute left-0 top-0' : showFilterMenu ? 'block' : 'hidden'} min-w-48 bg-white  p-2 min-h-[calc(100vh-120px)] shadow rounded overflow-y-hidden`}
         >
           {/* Sort by */}
           <div className='w-full md:block'>

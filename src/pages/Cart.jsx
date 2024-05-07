@@ -5,6 +5,7 @@ import {
   updateQuantityCartItemAction,
 } from '../features/userCartSlice'
 import { MdDelete } from 'react-icons/md'
+import Skeleton from 'react-loading-skeleton'
 
 import { CiSquarePlus, CiSquareMinus } from 'react-icons/ci'
 import { useEffect, useState } from 'react'
@@ -44,24 +45,23 @@ const Cart = () => {
   )
 
   useEffect(() => {
-    if (userCart) setLoading(false)
-  }, [userCart])
+    const timer = setTimeout(() => {
+      setLoading(false)
+    }, 1500)
+
+    return () => clearTimeout(timer)
+  }, [])
 
   return (
-    <div className='container mx-auto '>
-      <div className='text-center text-lg my-3 w-full'>
-        {loading && <p className='bg-white py-5'>Loading...</p>}
-      </div>
-
+    <div className='container mx-auto my-4'>
       <div className='flex w-full gap-10'>
         {/* View Product */}
         <div className='w-full'>
           {loading
-            ? loadingCart.map((el) => (
-                <div
-                  key={el + 'Add To Cart Loading'}
-                  className='w-full bg-slate-200 h-32 my-2 border border-slate-300 animate-pulse rounded-lg'
-                ></div>
+            ? loadingCart.map((el, index) => (
+                <div key={index} className='h-32 mb-2'>
+                  <Skeleton className='h-full' />
+                </div>
               ))
             : userCart?.map((el) => (
                 <div
@@ -117,7 +117,9 @@ const Cart = () => {
         {/* Total product */}
         <div className='mt-5 lg:mt-0 w-full max-w-sm '>
           {loading ? (
-            <div className='h-36 bg-slate-200'>Total</div>
+            <div className='h-36 mb-2'>
+              <Skeleton className='h-full' />
+            </div>
           ) : (
             <div className=' bg-slate-200 rounded-md flex flex-col justify-center items-center gap-2 pb-2'>
               <h2 className='text-white w-full bg-red-600 px-4 py-1 rounded-t-lg'>

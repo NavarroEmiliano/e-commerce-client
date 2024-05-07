@@ -6,7 +6,7 @@ import Skeleton from 'react-loading-skeleton'
 
 import Carousel from 'react-multi-carousel'
 
-const ProductsByCategory = () => {
+const CategoryCarousel = () => {
   const products = useSelector((state) => state.products)
   const [loading, setLoading] = useState(false)
   const [productsByCategory, setProductsByCategory] = useState([])
@@ -67,12 +67,12 @@ const ProductsByCategory = () => {
             return (
               <Link
                 to={`product-category/${product?.category}`}
-                className='flex flex-col my-6 h-full cursor-pointer'
+                className='flex flex-col my-6 h-full cursor-pointer hover:scale-110 duration-150'
                 key={product.id}
               >
                 <div className='w-20 h-20 mx-auto border rounded-full overflow-hidden '>
                   <img
-                    className='w-full h-full object-cover'
+                    className='w-full h-full object-cover '
                     src={product.images[0]}
                     alt={product.category}
                   />
@@ -87,4 +87,4 @@ const ProductsByCategory = () => {
   )
 }
 
-export default ProductsByCategory
+export default CategoryCarousel

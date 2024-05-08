@@ -5,11 +5,9 @@ import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa'
 const StarRating = ({ rating }) => {
   const [stars, setStars] = useState([])
 
-  // Función para generar las estrellas según la puntuación
   const generateStars = () => {
-    const fullStars = Math.floor(rating) // Número de estrellas completas
-    const halfStar = rating - fullStars >= 0.5 // Determinar si hay una media estrella
-
+    const fullStars = Math.floor(rating)
+    const halfStar = rating - fullStars >= 0.5
     const starsArray = []
     for (let i = 0; i < fullStars; i++) {
       starsArray.push(<FaStar key={i} />)
@@ -17,7 +15,7 @@ const StarRating = ({ rating }) => {
     if (halfStar) {
       starsArray.push(<FaStarHalfAlt key='half' />)
     }
-    const emptyStars = 5 - fullStars - (halfStar ? 1 : 0) // Número de estrellas vacías
+    const emptyStars = 5 - fullStars - (halfStar ? 1 : 0)
     for (let i = 0; i < emptyStars; i++) {
       starsArray.push(<FaRegStar key={i + fullStars + 1} />)
     }

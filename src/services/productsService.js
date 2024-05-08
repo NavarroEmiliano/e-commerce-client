@@ -1,6 +1,7 @@
 import axios from 'axios'
 const baseUrl = `${import.meta.env.VITE_BASE_URL}/products`
 
+
 console.log('BaseUrl:',import.meta.env.VITE_BASE_URL)
 
 const getAllProducts = async () => {

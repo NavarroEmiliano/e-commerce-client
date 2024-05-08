@@ -3,12 +3,12 @@ import { IoCloseOutline } from 'react-icons/io5'
 import InputUploadForm from './InputUploadForm'
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
-import SelectWithCustomOption from './SelectWithCustonOption'
 import { FaCloudUploadAlt } from 'react-icons/fa'
 import { MdDelete } from 'react-icons/md'
 import DisplayImage from './DisplayImage'
 import uploadImageService from '../services/uploadImageService'
 import { updateProductAction } from '../features/productsSlice'
+import CustomSelect from './CustomSelect'
 
 const AdminEditProduct = ({ closeEdit, productId }) => {
   const product = useSelector((store) =>
@@ -125,14 +125,14 @@ const AdminEditProduct = ({ closeEdit, productId }) => {
               handleOnChange={handleOnChange}
               value={productToUpdate.stock}
             />
-            <SelectWithCustomOption
+            <CustomSelect
               label='Brand'
               name='brand'
               options={brandsOptions}
               handleOnChange={handleOnChange}
               value={productToUpdate.brand}
             />
-            <SelectWithCustomOption
+            <CustomSelect
               label='Category'
               name='category'
               options={categoriesOptions}

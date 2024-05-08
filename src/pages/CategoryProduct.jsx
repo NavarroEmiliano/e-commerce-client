@@ -63,7 +63,7 @@ const CategoryProduct = () => {
   }, [windowWidth])
 
   return (
-    <div className='flex mx-auto my-8 px-4 relative '>
+    <div className='flex mx-auto my-8 px-4 relative'>
       {/* Desktop version */}
       {showFilterButton && (
         <button

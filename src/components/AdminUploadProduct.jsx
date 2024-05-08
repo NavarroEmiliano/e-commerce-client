@@ -2,14 +2,14 @@
 import { useState } from 'react'
 import { IoCloseOutline } from 'react-icons/io5'
 import InputUploadForm from './InputUploadForm'
-import SelectWithCustomOption from './SelectWithCustonOption'
 import { FaCloudUploadAlt } from 'react-icons/fa'
 
 import uploadImageService from '../services/uploadImageService'
 import DisplayImage from './DisplayImage'
 import { MdDelete } from 'react-icons/md'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { uploadProductAction } from '../features/productsSlice'
+import CustomSelect from './CustomSelect'
 
 const AdminUploadProduct = ({ closeUpload }) => {
   const [product, setProduct] = useState({
@@ -23,6 +23,14 @@ const AdminUploadProduct = ({ closeUpload }) => {
   })
 
   const [showFullImg, setShowFullImg] = useState('')
+
+  const products = useSelector((state) => state.products)
+
+  const brandOptions = [...new Set(products.map((product) => product.brand))]
+
+  const categoryOptions = [
+    ...new Set(products.map((product) => product.category)),
+  ]
 
   const dispatch = useDispatch()
 
@@ -64,12 +72,9 @@ const AdminUploadProduct = ({ closeUpload }) => {
     dispatch(uploadProductAction(product, closeUpload))
   }
 
-  const brandsOptions = ['Brand 1', 'Brand 2', 'Brand 3']
-  const categoriesOptions = ['Category 1', 'Category 2', 'Category 3']
-
   return (
     <div className='fixed w-full h-full top-0 left-0 bottom-0 right-0 flex items-center justify-center bg-black/45'>
-      <div className='bg-white p-2 rounded-lg w-full max-w-4xl h-full max-h-[95%] shadow-lg'>
+      <div className='bg-white p-2 rounded-lg w-full max-w-4xl h-full max-h-[80%] shadow-lg'>
         <div className='flex justify-between items-center '>
           <p className='text-1xl font-semibold'>Upload Product</p>
           <button className='text-2xl'>
@@ -121,17 +126,17 @@ const AdminUploadProduct = ({ closeUpload }) => {
               handleOnChange={handleOnChange}
               value={product.stock}
             />
-            <SelectWithCustomOption
+            <CustomSelect
               label='Brand'
               name='brand'
-              options={brandsOptions}
+              options={brandOptions}
               handleOnChange={handleOnChange}
               value={product.brand}
             />
-            <SelectWithCustomOption
+            <CustomSelect
               label='Category'
               name='category'
-              options={categoriesOptions}
+              options={categoryOptions}
               handleOnChange={handleOnChange}
               value={product.category}
             />
@@ -160,14 +165,14 @@ const AdminUploadProduct = ({ closeUpload }) => {
                 {product?.images.length ? (
                   product.images.map((img) => (
                     <div
-                      className='relative   mt-2  rounded-lg cursor-pointer group'
+                      className='relative mt-2 rounded-lg cursor-pointer group'
                       key={img}
                     >
                       <img
                         src={img}
                         alt={img}
                         onClick={() => handleFullImg(img)}
-                        className=' h-36 w-36 object-cover object-center'
+                        className='h-24 w-24 object-cover object-center'
                       />
                       <div
                         className='absolute bg-red-600 text-white rounded-full p-1 text-xl bottom-0 right-0 hidden group-hover:block'

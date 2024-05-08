@@ -115,11 +115,7 @@ const SignUp = () => {
                   required
                   className='w-full h-full outline-none bg-transparent'
                 />
-                <div
-                  onMouseDown={handleShowPassword}
-                  onMouseUp={handleShowPassword}
-                  className='cursor-pointer'
-                >
+                <div onClick={handleShowPassword} className='cursor-pointer'>
                   <span>{showPassword ? <FaEyeSlash /> : <FaEye />}</span>
                 </div>
               </div>
@@ -138,8 +134,7 @@ const SignUp = () => {
                   className='w-full h-full outline-none bg-transparent'
                 />
                 <div
-                  onMouseDown={handleShowConfirmPassword}
-                  onMouseUp={handleShowConfirmPassword}
+                  onClick={handleShowConfirmPassword}
                   className='cursor-pointer'
                 >
                   <span>
@@ -158,9 +153,9 @@ const SignUp = () => {
             <Link
               to={'/login'}
               className='font-medium 
-          text-red-600
-          hover:text-red-700
-          hover:underline'
+                        text-red-600
+                        hover:text-red-700
+                          hover:underline'
             >
               Login
             </Link>

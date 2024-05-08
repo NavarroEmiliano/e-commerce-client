@@ -21,6 +21,7 @@ const Header = () => {
   const countCart = useSelector((state) => state.userCart.length)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const { pathname } = useLocation()
 
   const handleLogout = () => {
     setShowMenu(!showMenu)
@@ -52,22 +53,24 @@ const Header = () => {
     <header className='h-16 shadow-sm bg-white'>
       <div className='h-full w-[95%] sm:w-[80%] mx-auto flex items-center justify-between'>
         <Link to='/'>
-          <div className='text-sm md:text-xl mr-2 text-center'>E-commerce</div>
+          <div className='text-sm md:text-xl mr-2 text-center'>Pulse-Tech</div>
         </Link>
 
-        <div className='flex items-center w-full border h-9 justify-between max-w-sm rounded-full focus-within:shadow '>
-          <input
-            onChange={handleSearch}
-            type='text'
-            name='searchInput'
-            value={searchInput}
-            placeholder='Search product here...'
-            className='w-full h-full outline-none rounded-l-full pl-4 text-ellipsis'
-          />
-          <div className='text-white text-lg min-w-[50px] h-9 bg-red-600 flex items-center justify-center rounded-r-full'>
-            <FiSearch />
+        {pathname !== '/admin-panel/all-products' && (
+          <div className='flex items-center w-full border h-9 justify-between max-w-sm rounded-full focus-within:shadow '>
+            <input
+              onChange={handleSearch}
+              type='text'
+              name='searchInput'
+              value={searchInput}
+              placeholder='Search product here...'
+              className='w-full h-full outline-none rounded-l-full pl-4 text-ellipsis'
+            />
+            <div className='text-white text-lg min-w-[50px] h-9 bg-red-600 flex items-center justify-center rounded-r-full'>
+              <FiSearch />
+            </div>
           </div>
-        </div>
+        )}
 
         <div className='flex items-center justify-between ml-2 gap-2 sm:gap-6 md:gap-8'>
           <div

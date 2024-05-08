@@ -74,7 +74,7 @@ const AdminUploadProduct = ({ closeUpload }) => {
 
   return (
     <div className='fixed w-full h-full top-0 left-0 bottom-0 right-0 flex items-center justify-center bg-black/45'>
-      <div className='bg-white p-2 rounded-lg w-full max-w-4xl h-full max-h-[80%] shadow-lg'>
+      <div className='bg-slate-100 p-2 rounded-lg w-full max-w-4xl h-full max-h-[80%] shadow-lg'>
         <div className='flex justify-between items-center '>
           <p className='text-1xl font-semibold'>Upload Product</p>
           <button className='text-2xl'>
@@ -82,7 +82,7 @@ const AdminUploadProduct = ({ closeUpload }) => {
           </button>
         </div>
         <form onSubmit={handleSubmit} className='flex justify-between h-full'>
-          <div className='grid w-[60%] border shadow-lg p-2 bg-slate-100 h-[95%] rounded-lg'>
+          <div className='grid w-[60%] border shadow-lg p-2 bg-white h-[95%] rounded-lg'>
             <h3>General information</h3>
             <InputUploadForm
               label='Title'
@@ -102,7 +102,7 @@ const AdminUploadProduct = ({ closeUpload }) => {
                 placeholder='Enter description...'
                 cols='20'
                 rows='2'
-                className='p-1 resize-none rounded-lg'
+                className='p-1 resize-none rounded-lg border-2'
                 required
               ></textarea>
             </div>
@@ -141,7 +141,9 @@ const AdminUploadProduct = ({ closeUpload }) => {
               value={product.category}
             />
           </div>
-          <div className='flex flex-col justify-between border shadow-lg p-2 bg-slate-100 w-[39%] h-[95%] rounded-lg'>
+
+          {/* Product image */}
+          <div className='flex flex-col justify-between border shadow-lg p-2 bg-white w-[39%] h-[95%] rounded-lg'>
             <div>
               <label htmlFor='uploadImageInput' className='mt-3  p-2 rounded'>
                 <span>Product image</span>
@@ -160,6 +162,7 @@ const AdminUploadProduct = ({ closeUpload }) => {
                   />
                 </div>
               </label>
+              <p className='text-center'>Limit: 5</p>
 
               <div className='flex flex-wrap mt-6 justify-around'>
                 {product?.images.length ? (
@@ -172,7 +175,7 @@ const AdminUploadProduct = ({ closeUpload }) => {
                         src={img}
                         alt={img}
                         onClick={() => handleFullImg(img)}
-                        className='h-24 w-24 object-cover object-center'
+                        className='h-24 w-24 object-cover object-center rounded border-2 border-slate-200'
                       />
                       <div
                         className='absolute bg-red-600 text-white rounded-full p-1 text-xl bottom-0 right-0 hidden group-hover:block'
@@ -190,7 +193,7 @@ const AdminUploadProduct = ({ closeUpload }) => {
               </div>
             </div>
 
-            <button className='border py-2 rounded-lg bg-red-600'>
+            <button className='border-2 border-red-600 py-2 rounded-lg hover:text-white  hover:bg-red-600'>
               Upload Product
             </button>
           </div>

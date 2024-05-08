@@ -85,7 +85,7 @@ const Cart = () => {
             : userCart?.map((el) => (
                 <div
                   key={el.id}
-                  className='w-full bg-slate-100 h-40 sm:h-32 shadow mb-2 border border-slate-300 rounded-lg grid grid-cols-[128px,1fr] overflow-hidden'
+                  className='w-full bg-white h-40 sm:h-32 shadow mb-2 border border-slate-300 rounded-lg grid grid-cols-[128px,1fr] overflow-hidden'
                 >
                   <Link
                     to={`/product/${el.productId.id}`}
@@ -167,7 +167,7 @@ const Cart = () => {
               <Skeleton className='h-full' />
             </div>
           ) : (
-            <div className='bg-slate-100  shadow rounded-md border-slate-300 flex flex-col justify-center items-center gap-2 pb-2'>
+            <div className='bg-white shadow rounded-md border-slate-300 flex flex-col justify-center items-center gap-2 pb-2'>
               <h2 className='text-white w-full bg-red-600 px-4 py-1 rounded-t-lg'>
                 Summary
               </h2>

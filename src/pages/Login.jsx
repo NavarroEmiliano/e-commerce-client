@@ -87,11 +87,7 @@ const Login = () => {
                   required
                   className='w-full h-full outline-none bg-transparent'
                 />
-                <div
-                  onMouseDown={handleShowPassword}
-                  onMouseUp={handleShowPassword}
-                  className='cursor-pointer'
-                >
+                <div onClick={handleShowPassword} className='cursor-pointer'>
                   <span>{showPassword ? <FaEyeSlash /> : <FaEye />}</span>
                 </div>
               </div>

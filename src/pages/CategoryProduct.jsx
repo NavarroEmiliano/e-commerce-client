@@ -132,7 +132,7 @@ const CategoryProduct = () => {
             </form>
           </div>
         </div>
-        <div className='flex flex-wrap justify-around gap-6'>
+        <div className='flex w-full flex-wrap justify-around gap-6'>
           {filteredProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}

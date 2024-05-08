@@ -10,6 +10,7 @@ const AllProducts = () => {
   const [showUploadProduct, setShowUploadProduct] = useState(false)
   const [showEditProduct, setShowEditProduct] = useState(false)
   const [productId, setProductId] = useState('')
+  const [searchInput, setSearchInput] = useState('')
 
   const handleUploadProduct = () => {
     setShowUploadProduct((prev) => !prev)
@@ -20,10 +21,30 @@ const AllProducts = () => {
     setProductId(id)
   }
 
+  const filteredProducts = products.filter(
+    (product) =>
+      product.title.toLowerCase().includes(searchInput.toLowerCase()) ||
+      product.brand.toLowerCase().includes(searchInput.toLowerCase()) ||
+      product.category.toLowerCase().includes(searchInput.toLowerCase()),
+  )
+
+  const handleSearch = (e) => {
+    const { value } = e.target
+    setSearchInput(value)
+  }
+
   return (
     <div className='border rounded-md'>
       <div className='flex justify-between items-center py-2 px-4 border-b'>
         <h2 className='font-bold text-lg'>All products</h2>
+        <input
+          onChange={handleSearch}
+          type='text'
+          name='searchInput'
+          value={searchInput}
+          placeholder='Search product here...'
+          className='outline-none rounded-full pl-2 p-1 text-ellipsis border'
+        />
         <button
           onClick={handleUploadProduct}
           className='border-2 border-red-600 rounded-full px-2 py-1 hover:bg-red-600 hover:text-white'
@@ -46,7 +67,7 @@ const AllProducts = () => {
             </tr>
           </thead>
           <tbody>
-            {products?.map((product) => {
+            {filteredProducts?.map((product) => {
               return (
                 <tr key={product?.id}>
                   <td className='flex items-center justify-center'>

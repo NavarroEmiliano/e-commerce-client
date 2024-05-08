@@ -16,11 +16,16 @@ const SearchProduct = () => {
   )
 
   return (
-    <div className='container mx-auto'>
-      <div className='flex flex-wrap gap-8  justify-center md:justify-start items-center my-4'>
-        {filteredProducts.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
+    <div className='container fl mx-auto'>
+      <div className='flex flex-col justify-center items-center'>
+        <div className='w-full text-center my-2'>
+          <p className='text-lg'>Products found: {filteredProducts.length}</p>
+        </div>
+        <div className='flex w-full flex-wrap gap-8 justify-center md:justify-start items-center'>
+          {filteredProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
       </div>
     </div>
   )

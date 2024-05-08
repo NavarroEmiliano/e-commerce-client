@@ -30,8 +30,6 @@ const App = () => {
     window.addEventListener('resize', handleResize)
   }, [])
 
-  console.log(import.meta.env.VITE_BASE_URL)
-
   return (
     <>
       <ToastContainer

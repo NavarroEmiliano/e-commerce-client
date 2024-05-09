@@ -4,9 +4,9 @@ import productsService from '../services/productsService'
 import StarRating from '../components/StarRating'
 import displayUsdCurrency from '../helpers/displayCurrency'
 import calculateDiscountedPrice from '../helpers/calculateDiscountedPrice'
-import VerticalCardProduct from '../components/VerticalCardProduct'
 import { useDispatch } from 'react-redux'
 import { addToCartAction } from '../features/userCartSlice'
+import RecommendedProductCarrousel from '../components/RecommendedProductCarrousel'
 
 const ProductDetails = () => {
   const [product, setProduct] = useState({})
@@ -196,7 +196,7 @@ const ProductDetails = () => {
           </div>
         )}
       </div>
-      <VerticalCardProduct
+      <RecommendedProductCarrousel
         category={product?.category}
         heading={'Recommended Product'}
       />

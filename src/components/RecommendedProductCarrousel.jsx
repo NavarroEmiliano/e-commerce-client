@@ -1,20 +1,14 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from 'react'
 import productsService from '../services/productsService'
 import Carousel from 'react-multi-carousel'
 import ProductCard from './ProductCard'
+import { useQuery } from '@tanstack/react-query'
 
-const VerticalCardProduct = ({ category, heading }) => {
-  const [products, setProducts] = useState([])
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const response = await productsService.getProductsByCategory(category)
-      if (response.status === 'OK') setProducts(response.data)
-    }
-
-    fetchProducts()
-  }, [category])
+const RecommendedProductCarrousel = ({ category, heading }) => {
+  const { isPending, data } = useQuery({
+    queryKey: [category],
+    queryFn: () => productsService.getProductsByCategory(category),
+  })
 
   const responsive = {
     desktop: {
@@ -34,6 +28,10 @@ const VerticalCardProduct = ({ category, heading }) => {
     },
   }
 
+  if (isPending) {
+    return <span>Loading...</span>
+  }
+
   return (
     <div className='mx-auto py-4 '>
       <h2 className='text-2xl font-semibold pb-4'>{heading}</h2>
@@ -43,7 +41,7 @@ const VerticalCardProduct = ({ category, heading }) => {
           responsive={responsive}
           removeArrowOnDeviceType={['tablet', 'mobile']}
         >
-          {products?.map((product) => {
+          {data?.data?.map((product) => {
             return <ProductCard key={product.id} product={product} />
           })}
         </Carousel>
@@ -52,4 +50,4 @@ const VerticalCardProduct = ({ category, heading }) => {
   )
 }
 
-export default VerticalCardProduct
+export default RecommendedProductCarrousel

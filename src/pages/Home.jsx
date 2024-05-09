@@ -1,17 +1,17 @@
 import BannerProduct from '../components/BannerProduct'
 import CategoryCarousel from '../components/CategoryCarousel'
-import VerticalCardProduct from '../components/VerticalCardProduct'
+import RecommendedProductCarrousel from '../components/RecommendedProductCarrousel'
 
 const Home = () => {
   return (
     <div>
       <CategoryCarousel />
       <BannerProduct />
-      <VerticalCardProduct
+      <RecommendedProductCarrousel
         category={'smartphones'}
         heading={`Top's Smartphones`}
       />
-      <VerticalCardProduct
+      <RecommendedProductCarrousel
         category={'motorcycle'}
         heading={`Top's motorcycles`}
       />

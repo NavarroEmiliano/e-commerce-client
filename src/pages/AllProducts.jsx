@@ -3,10 +3,18 @@ import { MdDelete, MdModeEdit } from 'react-icons/md'
 import AdminEditProduct from '../components/AdminEditProduct'
 import AdminUploadProduct from '../components/AdminUploadProduct'
 import displayUsdCurrency from '../helpers/displayCurrency'
-import { useSelector } from 'react-redux'
+import { useQuery } from '@tanstack/react-query'
+import productsService from '../services/productsService'
+import Loading from '../components/Loading'
 
 const AllProducts = () => {
-  const products = useSelector((state) => state.products)
+  const { isPending, data } = useQuery({
+    queryKey: ['allProducts'],
+    queryFn: productsService.getAllProducts,
+    staleTime: Infinity,
+  })
+  console.log(data)
+
   const [showUploadProduct, setShowUploadProduct] = useState(false)
   const [showEditProduct, setShowEditProduct] = useState(false)
   const [productId, setProductId] = useState('')
@@ -21,16 +29,26 @@ const AllProducts = () => {
     setProductId(id)
   }
 
-  const filteredProducts = products.filter(
-    (product) =>
-      product.title.toLowerCase().includes(searchInput.toLowerCase()) ||
-      product.brand.toLowerCase().includes(searchInput.toLowerCase()) ||
-      product.category.toLowerCase().includes(searchInput.toLowerCase()),
-  )
+  const filteredProducts =
+    !isPending &&
+    data.data.filter(
+      (product) =>
+        product.title.toLowerCase().includes(searchInput.toLowerCase()) ||
+        product.brand.toLowerCase().includes(searchInput.toLowerCase()) ||
+        product.category.toLowerCase().includes(searchInput.toLowerCase()),
+    )
 
   const handleSearch = (e) => {
     const { value } = e.target
     setSearchInput(value)
+  }
+
+  if (isPending) {
+    return (
+      <div className='flex items-center justify-center min-h-[calc(100vh-140px)]'>
+        <Loading />
+      </div>
+    )
   }
 
   return (

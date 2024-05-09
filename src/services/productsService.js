@@ -2,12 +2,8 @@ import axios from 'axios'
 const baseUrl = `${import.meta.env.VITE_BASE_URL}/products`
 
 const getAllProducts = async () => {
-  try {
     const { data } = await axios.get(baseUrl)
     return data
-  } catch (error) {
-    return error.response.data
-  }
 }
 
 const uploadProduct = async (newProduct) => {
@@ -37,12 +33,8 @@ const updateProduct = async (productData) => {
 }
 
 const getProductsByCategory = async (category) => {
-  try {
-    const { data } = await axios.get(`${baseUrl}/category/${category}`)
-    return data
-  } catch (error) {
-    return error.response.data
-  }
+  const { data } = await axios.get(`${baseUrl}/category/${category}`)
+  return data
 }
 
 const getProductsById = async (id) => {
@@ -55,8 +47,8 @@ const getProductsById = async (id) => {
 }
 
 const getOneProductPerCategory = async () => {
-    const { data } = await axios.get(`${baseUrl}/one-per-category`)
-    return data
+  const { data } = await axios.get(`${baseUrl}/one-per-category`)
+  return data
 }
 
 export default {
@@ -65,5 +57,5 @@ export default {
   updateProduct,
   getProductsByCategory,
   getProductsById,
-  getOneProductPerCategory
+  getOneProductPerCategory,
 }

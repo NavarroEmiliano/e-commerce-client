@@ -6,20 +6,11 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useEffect, useState } from 'react'
 
-import { useDispatch } from 'react-redux'
-import { initializeAllProductsAction } from './features/productsSlice'
-
 import 'react-loading-skeleton/dist/skeleton.css'
 import 'react-multi-carousel/lib/styles.css'
 
 const App = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
-
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(initializeAllProductsAction())
-  }, [])
 
   useEffect(() => {
     const handleResize = () => {

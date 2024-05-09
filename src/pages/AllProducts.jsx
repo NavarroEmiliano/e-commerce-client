@@ -13,7 +13,6 @@ const AllProducts = () => {
     queryFn: productsService.getAllProducts,
     staleTime: Infinity,
   })
-  console.log(data)
 
   const [showUploadProduct, setShowUploadProduct] = useState(false)
   const [showEditProduct, setShowEditProduct] = useState(false)

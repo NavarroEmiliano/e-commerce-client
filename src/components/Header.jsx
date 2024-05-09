@@ -1,43 +1,40 @@
 import { FiSearch } from 'react-icons/fi'
 import { LuShoppingCart } from 'react-icons/lu'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import UserImg from './UserImg'
-import { logoutUserAction } from '../features/userSlice'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import ROLE from '../common/role'
-import {
-  cleanUserCart,
-  initializeUserCartAction,
-} from '../features/userCartSlice'
+
+import { useUser } from '../hooks/useUser'
+import logoutService from '../services/logoutService'
+import { toast } from 'react-toastify'
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false)
+  const { userLoggedIn, setUserLoggedIn } = useUser()
   const { search } = useLocation()
-
   const [searchInput, setSearchInput] = useState(search.split('=')[1])
-
-  const user = useSelector((state) => state.user)
-  const countCart = useSelector((state) => state.userCart.length)
-  const dispatch = useDispatch()
   const navigate = useNavigate()
   const { pathname } = useLocation()
 
-  const handleLogout = () => {
-    setShowMenu(!showMenu)
-    dispatch(logoutUserAction())
-    dispatch(cleanUserCart())
-    navigate('/')
-    setShowMenu(false)
+  const countCart = useSelector((state) => state.userCart.length)
+
+  const handleLogout = async () => {
+    try {
+      await logoutService.logoutUser()
+      setUserLoggedIn(null)
+      navigate('/')
+      setShowMenu(false)
+      toast.success('Logged out successfully')
+    } catch (error) {
+      toast.error(error)
+    }
   }
 
   const handleMenu = () => {
     setShowMenu(!showMenu)
   }
-
-  useEffect(() => {
-    if (!countCart && user) dispatch(initializeUserCartAction())
-  }, [countCart, user])
 
   const handleSearch = (e) => {
     const { value } = e.target
@@ -77,16 +74,16 @@ const Header = () => {
             onClick={handleMenu}
             className='relative flex justify-center cursor-pointer'
           >
-            {user && (
+            {userLoggedIn && (
               <div className='flex text-4xl items-center justify-center h-8 w-8'>
-                <UserImg textSize='sm' />
+                <UserImg textSize='sm' userName={userLoggedIn.name} />
               </div>
             )}
 
             {showMenu && (
               <div className='absolute bg-white group-hover:block top-12 h-fit p-2 shadow-lg rounded-md'>
                 <nav>
-                  {user?.role === ROLE.ADMIN && (
+                  {userLoggedIn?.role === ROLE.ADMIN && (
                     <Link
                       to='admin-panel/all-products'
                       onClick={handleMenu}
@@ -100,7 +97,7 @@ const Header = () => {
             )}
           </div>
 
-          {user && (
+          {userLoggedIn && (
             <Link to='cart'>
               <div className='text-3xl cursor-pointer relative'>
                 <span>
@@ -114,7 +111,7 @@ const Header = () => {
           )}
 
           <div>
-            {user?.name ? (
+            {userLoggedIn?.name ? (
               <button
                 onClick={handleLogout}
                 className='flex items-center justify-center px-2 py-1 text-white bg-red-600 rounded-full  hover:bg-red-700'

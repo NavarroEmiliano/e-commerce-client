@@ -7,19 +7,17 @@ import 'react-toastify/dist/ReactToastify.css'
 import { useEffect, useState } from 'react'
 
 import { useDispatch } from 'react-redux'
-import { initializeUserDetails } from './features/userSlice'
 import { initializeAllProductsAction } from './features/productsSlice'
 
 import 'react-loading-skeleton/dist/skeleton.css'
 import 'react-multi-carousel/lib/styles.css'
 
 const App = () => {
-  const dispatch = useDispatch()
-
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
+  const dispatch = useDispatch()
+
   useEffect(() => {
-    dispatch(initializeUserDetails())
     dispatch(initializeAllProductsAction())
   }, [])
 

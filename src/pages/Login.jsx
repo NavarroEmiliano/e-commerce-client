@@ -4,8 +4,6 @@ import { FaRegUserCircle, FaEye, FaEyeSlash } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
 import loginService from '../services/loginService'
 import { toast } from 'react-toastify'
-import { useDispatch } from 'react-redux'
-import { initializeUserDetails } from '../features/userSlice'
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false)
@@ -15,7 +13,6 @@ const Login = () => {
   })
 
   const navigate = useNavigate()
-  const dispatch = useDispatch()
 
   const handleShowPassword = () => {
     setShowPassword((prev) => !prev)
@@ -35,26 +32,25 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const userForLogin = {
-      email: data.email,
-      password: data.password,
-    }
+    try {
+      const userForLogin = {
+        email: data.email,
+        password: data.password,
+      }
 
-    const response = await loginService.loginUser(userForLogin)
+      await loginService.loginUser(userForLogin)
 
-    if (response.status === 'OK') {
       navigate('/')
-      dispatch(initializeUserDetails())
       return toast.success('Login successfully')
-    } else {
-      return toast.error(response.data)
+    } catch (error) {
+      return toast.error(error)
     }
   }
 
   return (
     <section id='login' className='flex items-center min-h-[calc(100vh-120px)]'>
       <div className='mx-auto container p-4'>
-        <div className='bg-white p-5 max-w-md mx-auto '>
+        <div className='bg-white p-5 max-w-md mx-auto'>
           <div className='flex justify-center text-8xl text-red-600 mx-auto '>
             <FaRegUserCircle />
           </div>

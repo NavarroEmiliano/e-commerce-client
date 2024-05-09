@@ -8,6 +8,7 @@ const RecommendedProductCarrousel = ({ category, heading }) => {
   const { isPending, data } = useQuery({
     queryKey: [category],
     queryFn: () => productsService.getProductsByCategory(category),
+    staleTime: Infinity,
   })
 
   const responsive = {

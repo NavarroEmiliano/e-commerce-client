@@ -8,15 +8,21 @@ import { useEffect, useState } from 'react'
 
 import 'react-loading-skeleton/dist/skeleton.css'
 import 'react-multi-carousel/lib/styles.css'
+import { useAuth } from './context/AuthContext'
 
 const App = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+  const { setUserDetails } = useAuth()
 
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth)
     }
     window.addEventListener('resize', handleResize)
+  }, [])
+
+  useEffect(() => {
+    setUserDetails()
   }, [])
 
   return (

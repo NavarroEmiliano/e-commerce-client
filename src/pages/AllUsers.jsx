@@ -1,25 +1,33 @@
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { initializeAllUsersAction } from '../features/allUsersSlice'
+import { useState } from 'react'
 import moment from 'moment'
 import { MdModeEdit } from 'react-icons/md'
 import ChangeUserRole from '../components/ChangeUserRole'
+import Loading from '../components/Loading'
+import { useQuery } from '@tanstack/react-query'
+import usersService from '../services/usersService'
 
 const AllUsers = () => {
-  const allUsers = useSelector((state) => state.allUsers)
+  const { isPending, data } = useQuery({
+    queryKey: ['allUsers'],
+    queryFn: usersService.getAllUsers,
+    staleTime: Infinity,
+  })
+
   const [showUpdateRole, setShowUpdateRole] = useState(false)
   const [updateUserDetails, setUpdateUserDetails] = useState({})
-
-  const dispatch = useDispatch()
 
   const handleShowEdit = (user) => {
     setShowUpdateRole((prev) => !prev)
     setUpdateUserDetails(user?.name ? { ...user } : {})
   }
 
-  useEffect(() => {
-    if (!allUsers.length) dispatch(initializeAllUsersAction())
-  }, [])
+  if (isPending) {
+    return (
+      <div className='flex items-center justify-center min-h-[calc(100vh-140px)]'>
+        <Loading />
+      </div>
+    )
+  }
 
   return (
     <div>
@@ -35,7 +43,7 @@ const AllUsers = () => {
           </tr>
         </thead>
         <tbody>
-          {allUsers?.map((user, index) => {
+          {data?.data?.map((user, index) => {
             return (
               <tr key={user?.id}>
                 <td>{index}</td>

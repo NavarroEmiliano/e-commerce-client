@@ -1,23 +1,18 @@
-import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import oneProductByCategory from '../helpers/oneProductByCategory'
 import Skeleton from 'react-loading-skeleton'
 
 import Carousel from 'react-multi-carousel'
+import { useQuery } from '@tanstack/react-query'
+import productsService from '../services/productsService'
 
 const CategoryCarousel = () => {
-  const products = useSelector((state) => state.products)
-  const [loading, setLoading] = useState(false)
-  const [productsByCategory, setProductsByCategory] = useState([])
+  const { isPending, data } = useQuery({
+    queryKey: ['oneProductPerCategory'],
+    queryFn: productsService.getOneProductPerCategory,
+    staleTime: Infinity,
+  })
 
   const skeletonArray = new Array(7).fill(null)
-
-  useEffect(() => {
-    const productsByCategory = oneProductByCategory(products)
-    setProductsByCategory(productsByCategory)
-    if (productsByCategory.length) setLoading(false)
-  }, [products])
 
   const responsive = {
     desktop: {
@@ -39,7 +34,7 @@ const CategoryCarousel = () => {
 
   return (
     <div className='container mx-auto my-6'>
-      {loading ? (
+      {isPending ? (
         <div className='flex justify-between gap-6 '>
           {skeletonArray.map((_, index) => {
             return (
@@ -63,7 +58,7 @@ const CategoryCarousel = () => {
           infinite={true}
           removeArrowOnDeviceType={['tablet', 'mobile']}
         >
-          {productsByCategory.map((product) => {
+          {data?.data.map((product) => {
             return (
               <Link
                 to={`product-category/${product?.category}`}

@@ -3,14 +3,12 @@ import { LuUserCircle2 } from 'react-icons/lu'
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import ROLE from '../common/role'
-import { useUser } from '../context/AuthContext'
 
 const AdminPanel = () => {
-  const { user } = useUser()
   const navigate = useNavigate()
   const { pathname } = useLocation()
 
-  useEffect(() => {
+  /*   useEffect(() => {
     if (user) {
       if (user.role !== ROLE.ADMIN) {
         navigate('/')
@@ -19,7 +17,7 @@ const AdminPanel = () => {
       }
     }
   }, [user, navigate])
-
+ */
   return (
     <div className='flex items-center lg:shadow justify-center min-h-[calc(100vh-120px)]'>
       <div className='text-lg text-red-600 w-60 lg:hidden'>

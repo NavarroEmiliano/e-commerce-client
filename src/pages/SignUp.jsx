@@ -1,12 +1,12 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { IoCreateOutline } from 'react-icons/io5'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 
-import usersService from '../services/usersService'
 import { toast } from 'react-toastify'
+import { useSignup } from '../hooks/useSignup'
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false)
@@ -18,7 +18,7 @@ const SignUp = () => {
     confirmPassword: '',
   })
 
-  const navigate = useNavigate()
+  const { signup } = useSignup()
 
   const handleShowPassword = () => {
     setShowPassword((prev) => !prev)
@@ -41,22 +41,17 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    try {
-      if (data.password !== data.confirmPassword) {
-        return toast.error('Please check password and confirm password')
-      }
-
-      const userForSignUp = {
-        name: data.name,
-        email: data.email,
-        password: data.password,
-      }
-      await usersService.signUpUser(userForSignUp)
-      navigate('/login')
-      return toast.success('User created successfully')
-    } catch (error) {
-      return toast.error(error.response.data.data)
+    if (data.password !== data.confirmPassword) {
+      return toast.error('Please check password and confirm password')
     }
+
+    const userForSignUp = {
+      name: data.name,
+      email: data.email,
+      password: data.password,
+    }
+
+    await signup(userForSignUp)
   }
 
   return (

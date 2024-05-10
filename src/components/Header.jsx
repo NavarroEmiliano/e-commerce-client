@@ -5,10 +5,10 @@ import UserImg from './UserImg'
 import { useState } from 'react'
 import ROLE from '../common/role'
 
-import { toast } from 'react-toastify'
-import { useUser } from '../context/AuthContext'
 import { useQuery } from '@tanstack/react-query'
 import cartService from '../services/cartService'
+import { useLogout } from '../hooks/useLogout'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false)
@@ -16,23 +16,18 @@ const Header = () => {
   const [searchInput, setSearchInput] = useState(search.split('=')[1])
   const navigate = useNavigate()
   const { pathname } = useLocation()
-  const { user } = useUser()
+  const { logout } = useLogout()
+  const { user } = useAuthContext()
 
   const { data } = useQuery({
     queryKey: ['countCart'],
     queryFn: cartService.countCart,
-    staleTime: Infinity,
+    retry: false,
+    refetchOnWindowFocus: false,
   })
 
-  const handleLogout = async () => {
-    try {
-      await logout()
-      navigate('/')
-      setShowMenu(false)
-      toast.success('Logged out successfully')
-    } catch (error) {
-      toast.error(error)
-    }
+  const handleLogout = () => {
+    logout()
   }
 
   const handleMenu = () => {

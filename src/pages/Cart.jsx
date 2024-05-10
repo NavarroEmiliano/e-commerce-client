@@ -14,16 +14,12 @@ import calculateDiscountedPrice from '../helpers/calculateDiscountedPrice'
 import { toast } from 'react-toastify'
 import { useQuery } from '@tanstack/react-query'
 import cartService from '../services/cartService'
-import { useUser } from '../context/AuthContext'
 
 const Cart = () => {
-  const { user } = useUser()
   /*   const { isPending, data } = useQuery({
     queryKey: ['userCart'],
     queryFn: () => cartService.getUserCart(user.id),
   }) */
-
-  console.log(user)
 
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(true)

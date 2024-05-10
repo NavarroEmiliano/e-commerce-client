@@ -1,8 +1,8 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useState } from 'react'
 import { FaRegUserCircle, FaEye, FaEyeSlash } from 'react-icons/fa'
-import { Link, useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify'
+import { Link } from 'react-router-dom'
+import { useLogin } from '../hooks/useLogin'
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false)
@@ -11,9 +11,7 @@ const Login = () => {
     password: '',
   })
 
-  /*   const { login } = useAuth() */
-
-  const navigate = useNavigate()
+  const { login } = useLogin()
 
   const handleShowPassword = () => {
     setShowPassword((prev) => !prev)
@@ -31,18 +29,12 @@ const Login = () => {
   }
 
   const handleSubmit = async (e) => {
-    try {
-      e.preventDefault()
-      const userForLogin = {
-        email: data.email,
-        password: data.password,
-      }
-      await login(userForLogin)
-      navigate('/')
-      toast.success('Login successfully')
-    } catch (error) {
-      toast.error(error.response?.data?.data || 'An error occurred')
+    e.preventDefault()
+    const credentials = {
+      email: data.email,
+      password: data.password,
     }
+    await login(credentials)
   }
 
   return (

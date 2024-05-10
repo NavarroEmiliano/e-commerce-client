@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
-import { createContext, useReducer } from 'react'
+import { createContext, useReducer, useEffect } from 'react'
+import userDetailsService from '../services/userDetailsService'
 
 export const AuthContext = createContext()
 
@@ -18,6 +19,19 @@ export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, { user: null })
 
   console.log('AuthContext state:', state)
+
+  useEffect(() => {
+    const setUserLogged = async () => {
+      try {
+        const { data } = await userDetailsService.fetchUserDetail()
+        dispatch({ type: 'LOGIN', payload: data })
+      } catch (error) {
+        return error
+      }
+    }
+
+    setUserLogged()
+  }, [])
 
   return (
     <AuthContext.Provider value={{ ...state, dispatch }}>

@@ -3,10 +3,10 @@ import { LuUserCircle2 } from 'react-icons/lu'
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import ROLE from '../common/role'
-import { useAuth } from '../context/AuthContext'
+import { useUser } from '../context/AuthContext'
 
 const AdminPanel = () => {
-  const { user } = useAuth()
+  const { user } = useUser()
   const navigate = useNavigate()
   const { pathname } = useLocation()
 

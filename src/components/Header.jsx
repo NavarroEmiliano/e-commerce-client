@@ -6,7 +6,7 @@ import { useState } from 'react'
 import ROLE from '../common/role'
 
 import { toast } from 'react-toastify'
-import { useAuth } from '../context/AuthContext'
+import { useUser } from '../context/AuthContext'
 import { useQuery } from '@tanstack/react-query'
 import cartService from '../services/cartService'
 
@@ -16,7 +16,7 @@ const Header = () => {
   const [searchInput, setSearchInput] = useState(search.split('=')[1])
   const navigate = useNavigate()
   const { pathname } = useLocation()
-  const { user, logout } = useAuth()
+  const { user } = useUser()
 
   const { data } = useQuery({
     queryKey: ['countCart'],

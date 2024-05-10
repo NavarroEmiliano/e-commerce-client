@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { FaRegUserCircle, FaEye, FaEyeSlash } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { useAuth } from '../context/AuthContext'
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false)
@@ -12,7 +11,7 @@ const Login = () => {
     password: '',
   })
 
-  const { login } = useAuth()
+  /*   const { login } = useAuth() */
 
   const navigate = useNavigate()
 

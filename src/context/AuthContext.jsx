@@ -1,43 +1,27 @@
 /* eslint-disable react/prop-types */
-import { createContext, useContext, useState } from 'react'
-import userDetailsService from '../services/userDetailsService'
-import logoutService from '../services/logoutService'
-import loginService from '../services/loginService'
+import { createContext, useReducer } from 'react'
 
 export const AuthContext = createContext()
 
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null)
-
-  const setUserDetails = async () => {
-    try {
-      const response = await userDetailsService.fetchUserDetail()
-      setUser(response?.data)
-    } catch (error) {
-      setUser(null)
-      return error
-    }
+export const authReducer = (state, action) => {
+  switch (action.type) {
+    case 'LOGIN':
+      return { user: action.payload }
+    case 'LOGOUT':
+      return { user: null }
+    default:
+      return state
   }
+}
 
-  const login = async (credentials) => {
-    await loginService.loginUser(credentials)
-    await setUserDetails()
-  }
+export const AuthContextProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(authReducer, { user: null })
 
-  const logout = async () => {
-    try {
-      await logoutService.logoutUser()
-      setUser(null)
-    } catch (error) {
-      return error
-    }
-  }
+  console.log('AuthContext state:', state)
 
   return (
-    <AuthContext.Provider value={{ user, logout, login, setUserDetails }}>
+    <AuthContext.Provider value={{ ...state, dispatch }}>
       {children}
     </AuthContext.Provider>
   )
 }
-
-export const useAuth = () => useContext(AuthContext)

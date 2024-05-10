@@ -2,15 +2,23 @@
 import { Link } from 'react-router-dom'
 import calculateDiscountedPrice from '../helpers/calculateDiscountedPrice'
 import displayUsdCurrency from '../helpers/displayCurrency'
-import { addToCartAction } from '../features/userCartSlice'
-import { useDispatch } from 'react-redux'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import cartService from '../services/cartService'
 
-const ProductCard = ({ product }) => {
-  const dispatch = useDispatch()
+const ProductCard = (/* { product } */) => {
+  /*   const queryClient = useQueryClient()
+  const addToCartMutation = useMutation(cartService.addToCart, {
+    onSuccess: (productId) => {
+      const cart = queryClient.getQueryData('userCart')
+      queryClient.setQueryData('userCart', cart.concat(productId))
+    },
+  })
 
   const handleAddToCart = (productId) => {
-    dispatch(addToCartAction(productId))
+    addToCartMutation.mutate(productId)
   }
+ */
+  const product = false
 
   return (
     <div key={product.id} className='mb-8 mx-auto w-full max-w-[200px]'>

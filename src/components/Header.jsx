@@ -1,6 +1,5 @@
 import { FiSearch } from 'react-icons/fi'
 import { LuShoppingCart } from 'react-icons/lu'
-import { useSelector } from 'react-redux'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import UserImg from './UserImg'
 import { useState } from 'react'
@@ -8,6 +7,8 @@ import ROLE from '../common/role'
 
 import { toast } from 'react-toastify'
 import { useAuth } from '../context/AuthContext'
+import { useQuery } from '@tanstack/react-query'
+import cartService from '../services/cartService'
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false)
@@ -15,13 +16,17 @@ const Header = () => {
   const [searchInput, setSearchInput] = useState(search.split('=')[1])
   const navigate = useNavigate()
   const { pathname } = useLocation()
+  const { user, logout } = useAuth()
 
-  const countCart = useSelector((state) => state.userCart.length)
-
-  const { user } = useAuth()
+  const { data } = useQuery({
+    queryKey: ['countCart'],
+    queryFn: cartService.countCart,
+    staleTime: Infinity,
+  })
 
   const handleLogout = async () => {
     try {
+      await logout()
       navigate('/')
       setShowMenu(false)
       toast.success('Logged out successfully')
@@ -102,7 +107,7 @@ const Header = () => {
                   <LuShoppingCart className='h-8 w-8' />
                 </span>
                 <div className='bg-red-600 w-5 h-5 flex items-center justify-center rounded-full absolute -top-2 -right-2'>
-                  <p className='text-xs text-white'>{countCart}</p>
+                  <p className='text-xs text-white'>{data.data}</p>
                 </div>
               </div>
             </Link>

@@ -11,12 +11,8 @@ const getAllUsers = async () => {
 }
 
 const signUpUser = async (newUser) => {
-  try {
-    const { data } = await axios.post(baseUrl, newUser)
-    return data
-  } catch (error) {
-    return error.response.data
-  }
+  const { data } = await axios.post(baseUrl, newUser)
+  return data
 }
 
 const updateUser = async (userData) => {

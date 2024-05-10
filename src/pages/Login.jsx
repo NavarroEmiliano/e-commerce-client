@@ -2,8 +2,8 @@
 import { useState } from 'react'
 import { FaRegUserCircle, FaEye, FaEyeSlash } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
-import loginService from '../services/loginService'
 import { toast } from 'react-toastify'
+import { useAuth } from '../context/AuthContext'
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false)
@@ -11,6 +11,8 @@ const Login = () => {
     email: '',
     password: '',
   })
+
+  const { login } = useAuth()
 
   const navigate = useNavigate()
 
@@ -30,20 +32,17 @@ const Login = () => {
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-
     try {
+      e.preventDefault()
       const userForLogin = {
         email: data.email,
         password: data.password,
       }
-
-      await loginService.loginUser(userForLogin)
-
+      await login(userForLogin)
       navigate('/')
-      return toast.success('Login successfully')
+      toast.success('Login successfully')
     } catch (error) {
-      return toast.error(error)
+      toast.error(error.response?.data?.data || 'An error occurred')
     }
   }
 

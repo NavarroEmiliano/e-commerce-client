@@ -1,12 +1,12 @@
-import { useSelector } from 'react-redux'
 import UserImg from '../components/UserImg'
 import { LuUserCircle2 } from 'react-icons/lu'
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import ROLE from '../common/role'
+import { useAuth } from '../context/AuthContext'
 
 const AdminPanel = () => {
-  const user = useSelector((state) => state.user)
+  const { user } = useAuth()
   const navigate = useNavigate()
   const { pathname } = useLocation()
 
@@ -31,7 +31,11 @@ const AdminPanel = () => {
         <aside className='min-h-full w-full max-w-48'>
           <div className='flex flex-col h-40 items-center justify-center '>
             <div className='h-20 w-20 text-3xl'>
-              {user ? <UserImg /> : <LuUserCircle2 className='text-5xl' />}
+              {user ? (
+                <UserImg textSize='3xl' userName={user.name} />
+              ) : (
+                <LuUserCircle2 className='text-5xl' />
+              )}
             </div>
             <p className='text-lg font-semibold pt-2'>{user?.name}</p>
             <p className='text-sm'>{user?.role}</p>

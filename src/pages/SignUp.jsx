@@ -41,23 +41,21 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    try {
+      if (data.password !== data.confirmPassword) {
+        return toast.error('Please check password and confirm password')
+      }
 
-    if (data.password !== data.confirmPassword) {
-      return toast.error('Please check password and confirm password')
-    }
-
-    const userForSignUp = {
-      name: data.name,
-      email: data.email,
-      password: data.password,
-    }
-    const response = await usersService.signUpUser(userForSignUp)
-
-    if (response.status === 'OK') {
+      const userForSignUp = {
+        name: data.name,
+        email: data.email,
+        password: data.password,
+      }
+      await usersService.signUpUser(userForSignUp)
       navigate('/login')
       return toast.success('User created successfully')
-    } else {
-      return toast.error(response.data)
+    } catch (error) {
+      return toast.error(error.response.data.data)
     }
   }
 

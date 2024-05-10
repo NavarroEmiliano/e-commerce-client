@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
   const setUserDetails = async () => {
     try {
       const response = await userDetailsService.fetchUserDetail()
-      setUser(response.data)
+      setUser(response?.data)
     } catch (error) {
       setUser(null)
       return error

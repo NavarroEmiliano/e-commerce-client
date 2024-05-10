@@ -79,7 +79,7 @@ const Header = () => {
           >
             {user && (
               <div className='flex text-4xl items-center justify-center h-8 w-8'>
-                <UserImg textSize='sm' userName={user.name} />
+                <UserImg textSize='sm' userName={user?.name} />
               </div>
             )}
 
@@ -107,7 +107,7 @@ const Header = () => {
                   <LuShoppingCart className='h-8 w-8' />
                 </span>
                 <div className='bg-red-600 w-5 h-5 flex items-center justify-center rounded-full absolute -top-2 -right-2'>
-                  <p className='text-xs text-white'>{data.data}</p>
+                  <p className='text-xs text-white'>{data?.data}</p>
                 </div>
               </div>
             </Link>

@@ -30,7 +30,7 @@ const AllProducts = () => {
 
   const filteredProducts =
     !isPending &&
-    data.data.filter(
+    data?.data?.filter(
       (product) =>
         product.title.toLowerCase().includes(searchInput.toLowerCase()) ||
         product.brand.toLowerCase().includes(searchInput.toLowerCase()) ||

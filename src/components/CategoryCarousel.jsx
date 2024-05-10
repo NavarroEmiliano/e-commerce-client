@@ -58,7 +58,7 @@ const CategoryCarousel = () => {
           infinite={true}
           removeArrowOnDeviceType={['tablet', 'mobile']}
         >
-          {data?.data.map((product) => {
+          {data?.data?.map((product) => {
             return (
               <Link
                 to={`product-category/${product?.category}`}

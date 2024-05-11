@@ -21,16 +21,16 @@ export const AuthContextProvider = ({ children }) => {
   console.log('AuthContext state:', state)
 
   useEffect(() => {
-    const setUserLogged = async () => {
+    const setUserLogged = async (token) => {
       try {
-        const { data } = await userDetailsService.fetchUserDetail()
+        const { data } = await userDetailsService.fetchUserDetail(token)
         dispatch({ type: 'LOGIN', payload: data })
       } catch (error) {
         return error
       }
     }
-
-    setUserLogged()
+    const token = window.localStorage.getItem('loggedPulseTechUserToken')
+    if (token) setUserLogged(token)
   }, [])
 
   return (

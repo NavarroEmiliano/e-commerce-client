@@ -10,6 +10,7 @@ export const useLogout = () => {
   const logout = async () => {
     try {
       await logoutService.logoutUser()
+      window.localStorage.removeItem('loggedPulseTechUserToken')
       dispatch({ type: 'LOGOUT' })
       navigate('/')
       toast.success('Logged out successfully')

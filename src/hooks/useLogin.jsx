@@ -15,8 +15,9 @@ export const useLogin = () => {
     setIsLoading(true)
     setError(null)
     try {
-      await loginService.loginUser(credentials)
-      const { data } = await userDetailsService.fetchUserDetail()
+      const { data: token } = await loginService.loginUser(credentials)
+      localStorage.setItem('loggedPulseTechUserToken', token)
+      const { data } = await userDetailsService.fetchUserDetail(token)
       dispatch({ type: 'LOGIN', payload: data })
       setIsLoading(false)
       setError(false)

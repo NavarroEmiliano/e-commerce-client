@@ -16,7 +16,7 @@ export const useSignup = () => {
       setIsLoading(false)
       setError(false)
       navigate('/login')
-      return toast.success('User created successfully')
+      toast.success('User created successfully')
     } catch (error) {
       setIsLoading(false)
       setError(error.data)

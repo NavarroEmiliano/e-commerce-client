@@ -1,5 +1,4 @@
 import { useAuthContext } from './useAuthContext'
-import logoutService from '../services/logoutService'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
@@ -9,7 +8,6 @@ export const useLogout = () => {
 
   const logout = async () => {
     try {
-      await logoutService.logoutUser()
       window.localStorage.removeItem('loggedPulseTechUserToken')
       dispatch({ type: 'LOGOUT' })
       navigate('/')

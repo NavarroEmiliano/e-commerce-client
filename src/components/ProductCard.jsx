@@ -5,7 +5,7 @@ import displayUsdCurrency from '../helpers/displayCurrency'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import cartService from '../services/cartService'
 
-const ProductCard = (/* { product } */) => {
+const ProductCard = ({ product }) => {
   /*   const queryClient = useQueryClient()
   const addToCartMutation = useMutation(cartService.addToCart, {
     onSuccess: (productId) => {
@@ -16,9 +16,7 @@ const ProductCard = (/* { product } */) => {
 
   const handleAddToCart = (productId) => {
     addToCartMutation.mutate(productId)
-  }
- */
-  const product = false
+  } */
 
   return (
     <div key={product.id} className='mb-8 mx-auto w-full max-w-[200px]'>

@@ -19,7 +19,6 @@ const App = () => {
     window.addEventListener('resize', handleResize)
   }, [])
 
-  console.log('holis')
   return (
     <>
       <ToastContainer

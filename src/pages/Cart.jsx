@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import displayUsdCurrency from '../helpers/displayCurrency'
 import {
   deleteCartItemAction,
@@ -8,21 +8,25 @@ import { MdDelete } from 'react-icons/md'
 import Skeleton from 'react-loading-skeleton'
 
 import { CiSquarePlus, CiSquareMinus } from 'react-icons/ci'
-import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import calculateDiscountedPrice from '../helpers/calculateDiscountedPrice'
 import { toast } from 'react-toastify'
 import { useQuery } from '@tanstack/react-query'
 import cartService from '../services/cartService'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 const Cart = () => {
-  /*   const { isPending, data } = useQuery({
+  const { user } = useAuthContext()
+  const { isPending, data } = useQuery({
     queryKey: ['userCart'],
-    queryFn: () => cartService.getUserCart(user.id),
-  }) */
+    queryFn: cartService.getUserCart,
+    enabled: !!user,
+    staleTime: Infinity,
+  })
+
+  const userCart = data?.data
 
   const dispatch = useDispatch()
-  const [loading, setLoading] = useState(true)
 
   const loadingCart = new Array(5).fill(null)
 
@@ -51,14 +55,16 @@ const Cart = () => {
     dispatch(deleteCartItemAction(id))
   }
 
-  const totalQuantity = userCart.reduce((prev, curr) => prev + curr.quantity, 0)
-
-  const totalPrice = userCart.reduce(
+  const totalQuantity = userCart?.reduce(
+    (prev, curr) => prev + curr.quantity,
+    0,
+  )
+  const totalPrice = userCart?.reduce(
     (prev, curr) => prev + curr?.productId?.price * curr.quantity,
     0,
   )
 
-  const totalPriceWithDiscount = userCart.reduce(
+  const totalPriceWithDiscount = userCart?.reduce(
     (prev, curr) =>
       prev +
       calculateDiscountedPrice(
@@ -69,20 +75,12 @@ const Cart = () => {
     0,
   )
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false)
-    }, 200)
-
-    return () => clearTimeout(timer)
-  }, [])
-
   return (
     <div className='container mx-auto py-4'>
       <div className='flex flex-col-reverse lg:flex-row lg:items-start items-center w-full gap-10'>
-        {/* View Product */}
+        {/*  View Product  */}
         <div className='w-full'>
-          {loading
+          {isPending
             ? loadingCart.map((el, index) => (
                 <div key={index} className='h-32 mb-2'>
                   <Skeleton className='h-full' />
@@ -168,7 +166,7 @@ const Cart = () => {
 
         {/* Total product */}
         <div className='mt-5 lg:mt-0 w-full lg:max-w-sm '>
-          {loading ? (
+          {isPending ? (
             <div className='h-36 mb-2'>
               <Skeleton className='h-full' />
             </div>

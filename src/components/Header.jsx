@@ -12,16 +12,17 @@ import { useAuthContext } from '../hooks/useAuthContext'
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false)
+  const { user } = useAuthContext()
   const { search } = useLocation()
   const [searchInput, setSearchInput] = useState(search.split('=')[1])
   const navigate = useNavigate()
   const { pathname } = useLocation()
   const { logout } = useLogout()
-  const { user } = useAuthContext()
 
   const { data } = useQuery({
     queryKey: ['countCart'],
     queryFn: cartService.countCart,
+    enabled: !!user,
     retry: false,
     refetchOnWindowFocus: false,
   })

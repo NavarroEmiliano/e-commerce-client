@@ -5,12 +5,16 @@ import ChangeUserRole from '../components/ChangeUserRole'
 import Loading from '../components/Loading'
 import { useQuery } from '@tanstack/react-query'
 import usersService from '../services/usersService'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 const AllUsers = () => {
+  const { user } = useAuthContext()
+
   const { isPending, data } = useQuery({
     queryKey: ['allUsers'],
     queryFn: usersService.getAllUsers,
     staleTime: Infinity,
+    enabled: !!user,
   })
 
   const [showUpdateRole, setShowUpdateRole] = useState(false)

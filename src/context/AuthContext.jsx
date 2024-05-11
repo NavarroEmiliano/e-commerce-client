@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { createContext, useReducer, useEffect } from 'react'
 import userDetailsService from '../services/userDetailsService'
+import { setToken } from '../helpers/token'
 
 export const AuthContext = createContext()
 
@@ -23,7 +24,8 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     const setUserLogged = async (token) => {
       try {
-        const { data } = await userDetailsService.fetchUserDetail(token)
+        setToken(token)
+        const { data } = await userDetailsService.fetchUserDetail()
         dispatch({ type: 'LOGIN', payload: data })
       } catch (error) {
         return error

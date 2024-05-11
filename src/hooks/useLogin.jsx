@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useAuthContext } from './useAuthContext'
 import userDetailsService from '../services/userDetailsService'
+import { setToken } from '../helpers/token'
 
 export const useLogin = () => {
   const [error, setError] = useState(null)
@@ -17,7 +18,8 @@ export const useLogin = () => {
     try {
       const { data: token } = await loginService.loginUser(credentials)
       localStorage.setItem('loggedPulseTechUserToken', token)
-      const { data } = await userDetailsService.fetchUserDetail(token)
+      setToken(token)
+      const { data } = await userDetailsService.fetchUserDetail()
       dispatch({ type: 'LOGIN', payload: data })
       setIsLoading(false)
       setError(false)

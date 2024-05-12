@@ -53,6 +53,12 @@ const getAllCategories = async () => {
   return data
 }
 
+const deleteProduct = async (id) => {
+    const { data } = await axios.delete(`${baseUrl}/${id}`, getHeaderConfig())
+    return data.data
+
+}
+
 export default {
   getAllProducts,
   updateProduct,
@@ -60,5 +66,6 @@ export default {
   getProductsById,
   getOneProductPerCategory,
   getAllBrands,
-  getAllCategories
+  getAllCategories,
+  deleteProduct
 }

@@ -6,6 +6,7 @@ import displayUsdCurrency from '../helpers/displayCurrency'
 import { useQuery } from '@tanstack/react-query'
 import productsService from '../services/productsService'
 import Loading from '../components/Loading'
+import AdminDeleteProduct from '../components/AdminDeleteProduct'
 
 const AllProducts = () => {
   const { isPending, data: allProducts } = useQuery({
@@ -16,6 +17,7 @@ const AllProducts = () => {
 
   const [showUploadProduct, setShowUploadProduct] = useState(false)
   const [showEditProduct, setShowEditProduct] = useState(false)
+  const [showDeleteProduct, setShowDeleteProduct] = useState(false)
   const [productId, setProductId] = useState('')
   const [searchInput, setSearchInput] = useState('')
 
@@ -25,6 +27,11 @@ const AllProducts = () => {
 
   const handleEditProduct = (id = '') => {
     setShowEditProduct((prev) => !prev)
+    setProductId(id)
+  }
+
+  const handleDeleteProduct = (id = '') => {
+    setShowDeleteProduct((prev) => !prev)
     setProductId(id)
   }
 
@@ -49,6 +56,7 @@ const AllProducts = () => {
       </div>
     )
   }
+  console.log(showDeleteProduct)
 
   return (
     <div className='border rounded-md'>
@@ -108,7 +116,10 @@ const AllProducts = () => {
                       >
                         <MdModeEdit />
                       </button>
-                      <button className='bg-red-200 p-2 text-sm rounded-full hover:bg-red-500'>
+                      <button
+                        onClick={() => handleDeleteProduct(product.id)}
+                        className='bg-red-200 p-2 text-sm rounded-full hover:bg-red-500'
+                      >
                         <MdDelete />
                       </button>
                     </div>
@@ -124,6 +135,12 @@ const AllProducts = () => {
       )}
       {showEditProduct && (
         <AdminEditProduct productId={productId} closeEdit={handleEditProduct} />
+      )}
+      {showDeleteProduct && (
+        <AdminDeleteProduct
+          productId={productId}
+          closeDelete={handleDeleteProduct}
+        />
       )}
     </div>
   )

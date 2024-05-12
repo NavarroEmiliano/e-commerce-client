@@ -2,7 +2,6 @@ import axios from 'axios'
 import { getHeaderConfig } from '../helpers/token'
 const baseUrl = `${import.meta.env.VITE_BASE_URL}/users`
 
-
 const getAllUsers = async () => {
   try {
     const { data } = await axios.get(baseUrl, getHeaderConfig())
@@ -18,12 +17,12 @@ const signUpUser = async (newUser) => {
 }
 
 const updateUser = async (userData) => {
-  try {
-    const { data } = await axios.put(`${baseUrl}/${userData.id}`, userData, getHeaderConfig())
-    return data
-  } catch (error) {
-    return error.response.data
-  }
+  const { data } = await axios.put(
+    `${baseUrl}/${userData.id}`,
+    userData,
+    getHeaderConfig(),
+  )
+  return data
 }
 
 export default { signUpUser, getAllUsers, updateUser }

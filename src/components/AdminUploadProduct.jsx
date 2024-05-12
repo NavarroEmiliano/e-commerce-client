@@ -7,11 +7,13 @@ import { FaCloudUploadAlt } from 'react-icons/fa'
 import uploadImageService from '../services/uploadImageService'
 import DisplayImage from './DisplayImage'
 import { MdDelete } from 'react-icons/md'
-import { useDispatch, useSelector } from 'react-redux'
-import { uploadProductAction } from '../features/productsSlice'
 import CustomSelect from './CustomSelect'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import productsService, { uploadProduct } from '../services/productsService'
 
 const AdminUploadProduct = ({ closeUpload }) => {
+  const queryClient = useQueryClient()
+
   const [product, setProduct] = useState({
     title: '',
     description: '',
@@ -24,15 +26,27 @@ const AdminUploadProduct = ({ closeUpload }) => {
 
   const [showFullImg, setShowFullImg] = useState('')
 
-  const products = useSelector((state) => state.products)
+  const { data: brandsData } = useQuery({
+    queryKey: ['allBrands'],
+    queryFn: productsService.getAllBrands,
+  })
 
-  const brandOptions = [...new Set(products.map((product) => product.brand))]
+  const { data: categoriesData } = useQuery({
+    queryKey: ['allCategories'],
+    queryFn: productsService.getAllCategories,
+  })
 
-  const categoryOptions = [
-    ...new Set(products.map((product) => product.category)),
-  ]
+  const allBrands = brandsData?.data
 
-  const dispatch = useDispatch()
+  const allCategories = categoriesData?.data
+
+  const newProductMutation = useMutation({
+    mutationFn: uploadProduct,
+    onSuccess: ({ data }) => {
+      const products = queryClient.getQueryData(['allProducts'])
+      queryClient.setQueryData(['allProducts'], products.concat(data))
+    },
+  })
 
   const handleOnChange = (e) => {
     setProduct((prev) => {
@@ -69,7 +83,8 @@ const AdminUploadProduct = ({ closeUpload }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(uploadProductAction(product, closeUpload))
+    newProductMutation.mutate(product)
+    closeUpload()
   }
 
   return (
@@ -129,14 +144,14 @@ const AdminUploadProduct = ({ closeUpload }) => {
             <CustomSelect
               label='Brand'
               name='brand'
-              options={brandOptions}
+              options={allBrands}
               handleOnChange={handleOnChange}
               value={product.brand}
             />
             <CustomSelect
               label='Category'
               name='category'
-              options={categoryOptions}
+              options={allCategories}
               handleOnChange={handleOnChange}
               value={product.category}
             />

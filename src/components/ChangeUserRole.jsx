@@ -2,12 +2,20 @@
 import { useState } from 'react'
 import ROLE from '../common/role'
 import { IoCloseOutline } from 'react-icons/io5'
-import { useDispatch } from 'react-redux'
-import { updateUserAction } from '../features/allUsersSlice'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import usersService from '../services/usersService'
 
 const ChangeUserRole = ({ onClose, user }) => {
+  const queryClient = useQueryClient()
+
+  const updateUserMutation = useMutation({
+    mutationFn: usersService.updateUser,
+    onSuccess: () => {
+      queryClient.invalidateQueries('allUsers')
+    },
+  })
+
   const [userRole, setUserRole] = useState(user.role)
-  const dispatch = useDispatch()
 
   const handleRole = (e) => {
     setUserRole(e.target.value)
@@ -16,7 +24,7 @@ const ChangeUserRole = ({ onClose, user }) => {
   const handleUpdate = () => {
     const updatedUser = { ...user, role: userRole }
     onClose()
-    dispatch(updateUserAction(updatedUser))
+    updateUserMutation.mutate(updatedUser)
   }
 
   return (

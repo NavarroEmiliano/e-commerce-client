@@ -8,7 +8,7 @@ import productsService from '../services/productsService'
 import Loading from '../components/Loading'
 
 const AllProducts = () => {
-  const { isPending, data } = useQuery({
+  const { isPending, data: allProducts } = useQuery({
     queryKey: ['allProducts'],
     queryFn: productsService.getAllProducts,
     staleTime: Infinity,
@@ -30,7 +30,7 @@ const AllProducts = () => {
 
   const filteredProducts =
     !isPending &&
-    data?.data?.filter(
+    allProducts?.filter(
       (product) =>
         product.title.toLowerCase().includes(searchInput.toLowerCase()) ||
         product.brand.toLowerCase().includes(searchInput.toLowerCase()) ||

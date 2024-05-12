@@ -1,30 +1,22 @@
 import axios from 'axios'
+import { getHeaderConfig } from '../helpers/token'
 const baseUrl = `${import.meta.env.VITE_BASE_URL}/products`
 
 const getAllProducts = async () => {
     const { data } = await axios.get(baseUrl)
-    return data
+    return data.data
 }
 
-const uploadProduct = async (newProduct) => {
-  try {
-    const { data } = await axios.post(baseUrl, newProduct, {
-      withCredentials: true,
-    })
+export const uploadProduct = async (newProduct) => {
+    const { data } = await axios.post(baseUrl, newProduct, getHeaderConfig())
     return data
-  } catch (error) {
-    return error.response.data
-  }
 }
 
 const updateProduct = async (productData) => {
   try {
     const { data } = await axios.put(
       `${baseUrl}/${productData.id}`,
-      productData,
-      {
-        withCredentials: true,
-      },
+      productData,getHeaderConfig(),
     )
     return data
   } catch (error) {
@@ -51,11 +43,22 @@ const getOneProductPerCategory = async () => {
   return data
 }
 
+const getAllBrands = async () => {
+  const { data } = await axios.get(`${baseUrl}/all-brands`)
+  return data
+}
+
+const getAllCategories = async () => {
+  const { data } = await axios.get(`${baseUrl}/all-categories`)
+  return data
+}
+
 export default {
   getAllProducts,
-  uploadProduct,
   updateProduct,
   getProductsByCategory,
   getProductsById,
   getOneProductPerCategory,
+  getAllBrands,
+  getAllCategories
 }

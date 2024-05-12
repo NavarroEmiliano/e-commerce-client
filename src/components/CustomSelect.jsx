@@ -17,7 +17,7 @@ const CustomSelect = ({ label, name, options, handleOnChange, value }) => {
         required
       >
         <option value=''>Select {name}</option>
-        {options.map((option, index) => (
+        {options?.map((option, index) => (
           <option key={index} value={option}>
             {option}
           </option>

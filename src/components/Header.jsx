@@ -19,7 +19,7 @@ const Header = () => {
   const { pathname } = useLocation()
   const { logout } = useLogout()
 
-  const { data } = useQuery({
+  const { data: countCart } = useQuery({
     queryKey: ['countCart'],
     queryFn: cartService.countCart,
     enabled: !!user,
@@ -103,7 +103,7 @@ const Header = () => {
                   <LuShoppingCart className='h-8 w-8' />
                 </span>
                 <div className='bg-red-600 w-5 h-5 flex items-center justify-center rounded-full absolute -top-2 -right-2'>
-                  <p className='text-xs text-white'>{data?.data}</p>
+                  <p className='text-xs text-white'>{countCart}</p>
                 </div>
               </div>
             </Link>

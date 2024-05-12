@@ -1,9 +1,6 @@
 import { useDispatch } from 'react-redux'
 import displayUsdCurrency from '../helpers/displayCurrency'
-import {
-  deleteCartItemAction,
-  updateQuantityCartItemAction,
-} from '../features/userCartSlice'
+
 import { MdDelete } from 'react-icons/md'
 import Skeleton from 'react-loading-skeleton'
 

@@ -5,7 +5,6 @@ import StarRating from '../components/StarRating'
 import displayUsdCurrency from '../helpers/displayCurrency'
 import calculateDiscountedPrice from '../helpers/calculateDiscountedPrice'
 import { useDispatch } from 'react-redux'
-import { addToCartAction } from '../features/userCartSlice'
 import RecommendedProductCarrousel from '../components/RecommendedProductCarrousel'
 
 const ProductDetails = () => {

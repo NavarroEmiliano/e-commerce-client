@@ -37,7 +37,7 @@ const deleteUserCartItem = async (id) => {
 
 const countCart = async () => {
   const { data } = await axios.get(`${baseUrl}/count-user-cart`, getHeaderConfig())
-  return data
+  return data.data
 }
 
 export default {

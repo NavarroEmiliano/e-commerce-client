@@ -4,19 +4,25 @@ import calculateDiscountedPrice from '../helpers/calculateDiscountedPrice'
 import displayUsdCurrency from '../helpers/displayCurrency'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import cartService from '../services/cartService'
+import { toast } from 'react-toastify'
 
 const ProductCard = ({ product }) => {
-  /*   const queryClient = useQueryClient()
-  const addToCartMutation = useMutation(cartService.addToCart, {
-    onSuccess: (productId) => {
-      const cart = queryClient.getQueryData('userCart')
-      queryClient.setQueryData('userCart', cart.concat(productId))
+  const queryClient = useQueryClient()
+
+  const addToCartMutation = useMutation({
+    mutationFn: cartService.addToCart,
+    onSuccess: () => {
+      toast.success('Product added to cart')
+      queryClient.setQueryData(['countCart'], (oldData) => oldData + 1)
+    },
+    onError: (error) => {
+      toast.error(error.response.data.data)
     },
   })
 
   const handleAddToCart = (productId) => {
     addToCartMutation.mutate(productId)
-  } */
+  }
 
   return (
     <div key={product.id} className='mb-8 mx-auto w-full max-w-[200px]'>

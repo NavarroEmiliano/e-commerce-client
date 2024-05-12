@@ -1,4 +1,3 @@
-import { useDispatch } from 'react-redux'
 import displayUsdCurrency from '../helpers/displayCurrency'
 
 import { MdDelete } from 'react-icons/md'
@@ -8,22 +7,49 @@ import { CiSquarePlus, CiSquareMinus } from 'react-icons/ci'
 import { Link } from 'react-router-dom'
 import calculateDiscountedPrice from '../helpers/calculateDiscountedPrice'
 import { toast } from 'react-toastify'
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import cartService from '../services/cartService'
 import { useAuthContext } from '../hooks/useAuthContext'
 
 const Cart = () => {
   const { user } = useAuthContext()
-  const { isPending, data } = useQuery({
+  const { isPending, data: userCart } = useQuery({
     queryKey: ['userCart'],
     queryFn: cartService.getUserCart,
     enabled: !!user,
-    staleTime: Infinity,
   })
 
-  const userCart = data?.data
+  const queryClient = useQueryClient()
 
-  const dispatch = useDispatch()
+  const deleteUserCartItemMutation = useMutation({
+    mutationFn: cartService.deleteUserCartItem,
+    onSuccess: (data, productId) => {
+      toast.success(data)
+      const userCart = queryClient.getQueryData(['userCart'])
+      queryClient.setQueryData(['countCart'], (oldData) => oldData - 1)
+      queryClient.setQueryData(
+        ['userCart'],
+        userCart.filter((product) => product.id !== productId),
+      )
+    },
+    onError: (error) => {
+      toast.error(error.response.data.data)
+    },
+  })
+
+  const editUserCartItemMutation = useMutation({
+    mutationFn: cartService.updateItemUserCart,
+    onSuccess: (data) => {
+      const userCart = queryClient.getQueryData(['userCart'])
+      queryClient.setQueryData(
+        ['userCart'],
+        userCart.map((prod) => (prod.id !== data.id ? prod : data)),
+      )
+    },
+    onError: (error) => {
+      toast.error(error.response.data.data)
+    },
+  })
 
   const loadingCart = new Array(5).fill(null)
 
@@ -36,7 +62,7 @@ const Cart = () => {
       id,
       quantity: quantity + 1,
     }
-    dispatch(updateQuantityCartItemAction(obj))
+    editUserCartItemMutation.mutate(obj)
   }
 
   const decreaseQuantity = (id, quantity) => {
@@ -44,12 +70,16 @@ const Cart = () => {
       id,
       quantity: quantity - 1,
     }
-    dispatch(updateQuantityCartItemAction(obj))
-    if (obj.quantity <= 0) return toast.success('Product removed from cart.')
+    if (obj.quantity <= 0) {
+      deleteUserCartItemMutation.mutate(obj.id)
+      return toast.success('Product removed from cart.')
+    }
+
+    editUserCartItemMutation.mutate(obj)
   }
 
-  const deleteCartProduct = (id) => {
-    dispatch(deleteCartItemAction(id))
+  const deleteCartProduct = (productId) => {
+    deleteUserCartItemMutation.mutate(productId)
   }
 
   const totalQuantity = userCart?.reduce(

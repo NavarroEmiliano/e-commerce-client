@@ -13,26 +13,19 @@ const addToCart = async (productId) => {
 
 const getUserCart = async () => {
     const { data } = await axios.get(baseUrl, getHeaderConfig())
-    return data
-
+    return data.data
 }
 
 const updateItemUserCart = async (obj) => {
-  try {
     const { data } = await axios.post(`${baseUrl}/update`, obj, getHeaderConfig())
-    return data
-  } catch (error) {
-    return error.response.data
-  }
+    return data.data
+
 }
 
 const deleteUserCartItem = async (id) => {
-  try {
     const { data } = await axios.delete(`${baseUrl}/${id}`, getHeaderConfig())
-    return data
-  } catch (error) {
-    return error.response.data
-  }
+    return data.data
+
 }
 
 const countCart = async () => {

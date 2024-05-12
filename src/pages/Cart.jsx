@@ -71,8 +71,7 @@ const Cart = () => {
       quantity: quantity - 1,
     }
     if (obj.quantity <= 0) {
-      deleteUserCartItemMutation.mutate(obj.id)
-      return toast.success('Product removed from cart.')
+      return deleteUserCartItemMutation.mutate(obj.id)
     }
 
     editUserCartItemMutation.mutate(obj)

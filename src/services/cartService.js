@@ -25,7 +25,6 @@ const updateItemUserCart = async (obj) => {
 const deleteUserCartItem = async (id) => {
     const { data } = await axios.delete(`${baseUrl}/${id}`, getHeaderConfig())
     return data.data
-
 }
 
 const countCart = async () => {

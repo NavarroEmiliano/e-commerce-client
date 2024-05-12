@@ -56,7 +56,6 @@ const AllProducts = () => {
       </div>
     )
   }
-  console.log(showDeleteProduct)
 
   return (
     <div className='border rounded-md'>

@@ -1,42 +1,57 @@
 /* eslint-disable react/prop-types */
 import { IoCloseOutline } from 'react-icons/io5'
 import InputUploadForm from './InputUploadForm'
-import { useDispatch, useSelector } from 'react-redux'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FaCloudUploadAlt } from 'react-icons/fa'
 import { MdDelete } from 'react-icons/md'
 import DisplayImage from './DisplayImage'
 import uploadImageService from '../services/uploadImageService'
-import { updateProductAction } from '../features/productsSlice'
 import CustomSelect from './CustomSelect'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import productsService from '../services/productsService'
+import { toast } from 'react-toastify'
 
 const AdminEditProduct = ({ closeEdit, productId }) => {
-  const product = useSelector((store) =>
-    store.products.find((product) => product.id === productId),
-  )
+  const [productToUpdate, setProductToUpdate] = useState(null)
+  const [showFullImg, setShowFullImg] = useState('')
+  const queryClient = useQueryClient()
 
-  const [productToUpdate, setProductToUpdate] = useState({
-    id: product?.id,
-    title: product?.title,
-    description: product?.description,
-    price: product?.price,
-    stock: product?.stock,
-    brand: product?.brand,
-    category: product?.category,
-    images: product?.images,
+  const {
+    isPending,
+    error,
+    data: product,
+  } = useQuery({
+    queryKey: ['productById'],
+    queryFn: () => productsService.getProductById(productId),
+    enabled: !!productId,
   })
 
-  const [showFullImg, setShowFullImg] = useState('')
+  const { data: allBrands } = useQuery({
+    queryKey: ['allBrands'],
+    queryFn: productsService.getAllBrands,
+    staleTime: Infinity,
+  })
 
-  const products = useSelector((state) => state.products)
+  const { data: allCategories } = useQuery({
+    queryKey: ['allCategories'],
+    queryFn: productsService.getAllCategories,
+    staleTime: Infinity,
+  })
 
-  const brandOptions = [...new Set(products.map((product) => product.brand))]
-
-  const categoryOptions = [
-    ...new Set(products.map((product) => product.category)),
-  ]
-
-  const dispatch = useDispatch()
+  const editProductMutation = useMutation({
+    mutationFn: productsService.updateProduct,
+    onSuccess: ({ data }) => {
+      toast.success('Successfully updated product')
+      const products = queryClient.getQueryData(['allProducts'])
+      queryClient.setQueryData(
+        ['allProducts'],
+        products.map((prod) => (prod.id !== data.id ? prod : data)),
+      )
+    },
+    onError: (error) => {
+      toast.error(error.response.data.data)
+    },
+  })
 
   const handleOnChange = (e) => {
     setProductToUpdate((prev) => {
@@ -73,7 +88,26 @@ const AdminEditProduct = ({ closeEdit, productId }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(updateProductAction(productToUpdate, closeEdit))
+    editProductMutation.mutate(productToUpdate)
+    closeEdit()
+  }
+
+  useEffect(() => {
+    if (product && !isPending)
+      setProductToUpdate({
+        id: product?.id,
+        title: product?.title,
+        description: product?.description,
+        price: product?.price,
+        stock: product?.stock,
+        brand: product?.brand,
+        category: product?.category,
+        images: product?.images,
+      })
+  }, [product])
+
+  if (isPending) {
+    return <div>Cargando....</div>
   }
 
   return (
@@ -94,13 +128,13 @@ const AdminEditProduct = ({ closeEdit, productId }) => {
               name='title'
               placeholder='Enter title here...'
               handleOnChange={handleOnChange}
-              value={productToUpdate.title}
+              value={productToUpdate?.title}
             />
             <div className='flex flex-col'>
               <label htmlFor='description'>Description</label>
               <textarea
                 onChange={handleOnChange}
-                value={productToUpdate.description}
+                value={productToUpdate?.description}
                 name='description'
                 id='description'
                 placeholder='Enter description...'
@@ -118,7 +152,7 @@ const AdminEditProduct = ({ closeEdit, productId }) => {
               min='1'
               placeholder='Enter price here...'
               handleOnChange={handleOnChange}
-              value={productToUpdate.price}
+              value={productToUpdate?.price}
             />
 
             <InputUploadForm
@@ -128,21 +162,21 @@ const AdminEditProduct = ({ closeEdit, productId }) => {
               name='stock'
               placeholder='Enter stock here...'
               handleOnChange={handleOnChange}
-              value={productToUpdate.stock}
+              value={productToUpdate?.stock}
             />
             <CustomSelect
               label='Brand'
               name='brand'
-              options={brandOptions}
+              options={allBrands}
               handleOnChange={handleOnChange}
-              value={productToUpdate.brand}
+              value={productToUpdate?.brand}
             />
             <CustomSelect
               label='Category'
               name='category'
-              options={categoryOptions}
+              options={allCategories}
               handleOnChange={handleOnChange}
-              value={productToUpdate.category}
+              value={productToUpdate?.category}
             />
           </div>
 
@@ -169,8 +203,8 @@ const AdminEditProduct = ({ closeEdit, productId }) => {
               <p className='text-center'>Limit: 5</p>
 
               <div className='flex flex-wrap mt-6 justify-around'>
-                {productToUpdate?.images.length ? (
-                  productToUpdate.images.map((img) => (
+                {productToUpdate?.images?.length ? (
+                  productToUpdate?.images?.map((img) => (
                     <div
                       className='relative mt-2 rounded-lg cursor-pointer group'
                       key={img}

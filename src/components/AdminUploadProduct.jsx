@@ -10,6 +10,7 @@ import { MdDelete } from 'react-icons/md'
 import CustomSelect from './CustomSelect'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import productsService, { uploadProduct } from '../services/productsService'
+import { toast } from 'react-toastify'
 
 const AdminUploadProduct = ({ closeUpload }) => {
   const queryClient = useQueryClient()
@@ -26,25 +27,26 @@ const AdminUploadProduct = ({ closeUpload }) => {
 
   const [showFullImg, setShowFullImg] = useState('')
 
-  const { data: brandsData } = useQuery({
+  const { data: allBrands } = useQuery({
     queryKey: ['allBrands'],
     queryFn: productsService.getAllBrands,
+    staleTime: Infinity,
   })
 
-  const { data: categoriesData } = useQuery({
+  const { data: allCategories } = useQuery({
     queryKey: ['allCategories'],
     queryFn: productsService.getAllCategories,
+    staleTime: Infinity,
   })
-
-  const allBrands = brandsData?.data
-
-  const allCategories = categoriesData?.data
 
   const newProductMutation = useMutation({
     mutationFn: uploadProduct,
     onSuccess: ({ data }) => {
       const products = queryClient.getQueryData(['allProducts'])
       queryClient.setQueryData(['allProducts'], products.concat(data))
+    },
+    onError: (error) => {
+      toast.error(error.response.data.data)
     },
   })
 

@@ -10,6 +10,7 @@ const SearchBar = () => {
   const handleChange = (e) => {
     const { value } = e.target
     setSearchInput(value)
+    if (!value) navigate('/')
   }
 
   const handleSubmit = (e) => {

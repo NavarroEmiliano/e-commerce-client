@@ -9,6 +9,7 @@ const RecommendedProductCarrousel = ({ category, heading }) => {
     queryKey: [category],
     queryFn: () => productsService.getProductsByCategory(category),
     staleTime: Infinity,
+    enabled: !!category,
   })
 
   const responsive = {

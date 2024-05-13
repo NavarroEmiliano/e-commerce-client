@@ -51,6 +51,12 @@ const deleteProduct = async (id) => {
   return data.data
 }
 
+const searchProducts = async (searchValue) => {
+  const { data } = await axios.get(`${baseUrl}/search${searchValue}`)
+  return data.data
+}
+
+
 export default {
   getAllProducts,
   updateProduct,
@@ -60,4 +66,5 @@ export default {
   getAllBrands,
   getAllCategories,
   deleteProduct,
+  searchProducts
 }

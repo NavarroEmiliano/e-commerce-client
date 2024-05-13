@@ -4,100 +4,78 @@ import productsService from '../services/productsService'
 import StarRating from '../components/StarRating'
 import displayUsdCurrency from '../helpers/displayCurrency'
 import calculateDiscountedPrice from '../helpers/calculateDiscountedPrice'
-import { useDispatch } from 'react-redux'
 import RecommendedProductCarrousel from '../components/RecommendedProductCarrousel'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import cartService from '../services/cartService'
+import { toast } from 'react-toastify'
 
 const ProductDetails = () => {
-  const [product, setProduct] = useState({})
-  const [loading, setLoading] = useState(true)
   const [activeImage, setActiveImage] = useState(true)
-  const [zoomImageCoordinate, setZoomImageCoordinate] = useState({
-    x: 0,
-    y: 0,
-  })
-
-  const [zoomImage, setZoomImage] = useState(false)
-
-  const dispatch = useDispatch()
-
   const { productId } = useParams()
+  const queryClient = useQueryClient()
+
+  const {
+    isPending,
+    error,
+    data: product,
+    refetch,
+  } = useQuery({
+    queryKey: ['productById'],
+    queryFn: () => productsService.getProductById(productId),
+    enabled: !!productId,
+    refetchOnWindowFocus: false,
+  })
 
   const productImageListLoading = new Array(4).fill(null)
 
-  useEffect(() => {
-    const getProduct = async () => {
-      const response = await productsService.getProductsById(productId)
-      if (response.status === 'OK') {
-        setProduct(response.data)
-        setActiveImage(response.data.images[0])
-        setLoading(false)
-      }
-    }
-    getProduct()
-  }, [productId])
+  const addToCartMutation = useMutation({
+    mutationFn: cartService.addToCart,
+    onSuccess: () => {
+      toast.success('Product added to cart')
+      queryClient.setQueryData(['countCart'], (oldData) => oldData + 1)
+    },
+    onError: (error) => {
+      toast.error(error.response.data.data)
+    },
+  })
 
   const handleMouseEnterProduct = (imageUrl) => {
     setActiveImage(imageUrl)
   }
 
-  const handleZoomImage = useCallback(
-    (e) => {
-      setZoomImage(true)
-      const { left, top, width, height } = e.target.getBoundingClientRect()
-
-      const x = (e.clientX - left) / width
-      const y = (e.clientY - top) / height
-
-      setZoomImageCoordinate({ x, y })
-    },
-    [zoomImageCoordinate],
-  )
-
-  const handleZoomOutImage = () => {
-    setZoomImage(false)
-  }
-
   const handleAddToCart = (productId) => {
-    dispatch(addToCartAction(productId))
+    addToCartMutation.mutate(productId)
   }
+
+  useEffect(() => {
+    if (!isPending && product) {
+      setActiveImage(product?.images[0])
+    }
+  }, [product])
+
+  useEffect(() => {
+    if (productId) refetch()
+  }, [productId])
 
   return (
     <div className='container mx-auto p-4 '>
       <div className=' min-h-[200px] flex flex-col lg:flex-row gap-4'>
         {/* Product Image */}
         <div className='flex flex-col items-center h-96  lg:flex-row-reverse gap-4'>
-          {loading ? (
+          {isPending ? (
             <div className='h-[300px] rounded-lg w-[300px] lg:h-[400px] lg:w-[400px] bg-slate-200 animate-pulse'></div>
           ) : (
             <div className='h-[300px] rounded-lg w-[300px] lg:h-[400px] lg:w-[400px]  relative'>
               <img
-                onMouseLeave={handleZoomOutImage}
-                onMouseMove={handleZoomImage}
                 src={activeImage}
-                alt={product.title}
+                alt={product?.title}
                 className='h-full w-full object-scale-down  rounded-lg'
               />
-              {/* Zoom img */}
-
-              {zoomImage && (
-                <div className='hidden rounded-lg lg:block absolute w-[300px] h-[300px] overflow-hidden  -right-[320px] top-0 '>
-                  <div
-                    className='w-full h-full min-h-[300px] min-w-[300px] scale-150 '
-                    style={{
-                      backgroundImage: `url(${activeImage})`,
-                      backgroundRepeat: 'no-repeat',
-                      backgroundPosition: `${zoomImageCoordinate.x * 100}% ${
-                        zoomImageCoordinate.y * 100
-                      }%`,
-                    }}
-                  ></div>
-                </div>
-              )}
             </div>
           )}
 
           <div className='h-full'>
-            {loading ? (
+            {isPending ? (
               <div className='flex gap-2 lg:flex-col  h-full '>
                 {productImageListLoading.map((el, index) => {
                   return (
@@ -131,7 +109,7 @@ const ProductDetails = () => {
         </div>
         {/* Product Details */}
 
-        {loading ? (
+        {isPending ? (
           <div className='flex flex-col gap-2 w-[400px]'>
             <p className='bg-slate-200 animate-pulse h-6 w-1/3 rounded-lg capitalize'></p>
             <h2 className='text-2xl bg-slate-200 rounded-lg lg:text-4xl h-10 w-full font-medium animate-pulse'></h2>

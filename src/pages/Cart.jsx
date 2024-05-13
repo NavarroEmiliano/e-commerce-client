@@ -17,6 +17,7 @@ const Cart = () => {
     queryKey: ['userCart'],
     queryFn: cartService.getUserCart,
     enabled: !!user,
+    refetchOnWindowFocus: false,
   })
 
   const queryClient = useQueryClient()

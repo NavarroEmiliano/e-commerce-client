@@ -12,6 +12,10 @@ const SearchProduct = () => {
     enabled: !!search,
   })
 
+  if (isPending) {
+    return <div>Loading...</div>
+  }
+
   return (
     <div className='container fl mx-auto'>
       <div className='flex flex-col justify-center items-center'>

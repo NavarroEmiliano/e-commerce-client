@@ -10,6 +10,7 @@ import { toast } from 'react-toastify'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import cartService from '../services/cartService'
 import { useAuthContext } from '../hooks/useAuthContext'
+import PaypalCheckoutButton from '../components/PaypalCheckoutButton'
 
 const Cart = () => {
   const { user } = useAuthContext()
@@ -219,9 +220,9 @@ const Cart = () => {
                 <p>{displayUsdCurrency(totalPrice - totalPriceWithDiscount)}</p>
               </div>
 
-              <button className='border-2 border-blue-600 py-2 w-[95%] rounded hover:bg-blue-600 hover:text-white'>
-                Payment
-              </button>
+              <div className=''>
+                <PaypalCheckoutButton product={userCart} />
+              </div>
             </div>
           )}
         </div>

@@ -32,7 +32,7 @@ export const AuthContextProvider = ({ children }) => {
       }
     }
     const token = window.localStorage.getItem('loggedPulseTechUserToken')
-    if (token) setUserLogged(token)
+    if (token && !state?.user) setUserLogged(token)
   }, [])
 
   return (

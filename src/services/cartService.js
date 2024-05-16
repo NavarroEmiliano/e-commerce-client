@@ -27,6 +27,11 @@ const deleteUserCartItem = async (id) => {
     return data.data
 }
 
+const deleteUserCart = async () => {
+  const { data } = await axios.delete(`${baseUrl}/delete-user-cart`, getHeaderConfig())
+  return data.data
+}
+
 const countCart = async () => {
   const { data } = await axios.get(`${baseUrl}/count-user-cart`, getHeaderConfig())
   return data.data
@@ -38,4 +43,5 @@ export default {
   updateItemUserCart,
   deleteUserCartItem,
   countCart,
+  deleteUserCart
 }

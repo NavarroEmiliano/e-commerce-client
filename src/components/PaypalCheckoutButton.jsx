@@ -3,6 +3,7 @@ import { PayPalButtons } from '@paypal/react-paypal-js'
 import { useState } from 'react'
 import updateStock from '../services/updateStockService'
 import purchaseService from '../services/purchaseService'
+import cartService from '../services/cartService'
 
 const baseUrl = `${import.meta.env.VITE_BASE_URL}/orders`
 
@@ -75,6 +76,7 @@ const PaypalCheckoutButton = (props) => {
         )
         await updateStock(products)
         await purchaseService.addNewPuchase(transaction, products)
+        await cartService.deleteUserCart()
       }
     } catch (error) {
       console.error(error)

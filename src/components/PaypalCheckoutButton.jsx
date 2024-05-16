@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
 import { PayPalButtons } from '@paypal/react-paypal-js'
 import { useState } from 'react'
+import updateStock from '../services/updateStockService'
 
 const baseUrl = `${import.meta.env.VITE_BASE_URL}/orders`
 
 const PaypalCheckoutButton = (props) => {
-  const { product } = props
+  const { products } = props
   const [message, setMessage] = useState('')
 
   const handleCreateOrder = async () => {
@@ -17,7 +18,7 @@ const PaypalCheckoutButton = (props) => {
         },
 
         body: JSON.stringify({
-          cart: product,
+          cart: products,
         }),
       })
 
@@ -40,6 +41,7 @@ const PaypalCheckoutButton = (props) => {
 
   const handleOnApprove = async (data, actions) => {
     try {
+      console.log(data.orderID)
       const response = await fetch(`${baseUrl}/${data.orderID}/capture`, {
         method: 'POST',
         headers: {
@@ -70,6 +72,7 @@ const PaypalCheckoutButton = (props) => {
           orderData,
           JSON.stringify(orderData, null, 2),
         )
+        await updateStock(products)
       }
     } catch (error) {
       console.error(error)

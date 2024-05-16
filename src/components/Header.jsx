@@ -55,8 +55,15 @@ const Header = () => {
             )}
 
             {showMenu && (
-              <div className='absolute bg-white group-hover:block top-12 h-fit p-2 shadow-lg rounded-md'>
-                <nav>
+              <div className='absolute z-10 bg-white group-hover:block top-12 h-fit p-2 shadow-lg rounded-md'>
+                <nav className='flex flex-col'>
+                  <Link
+                    to='view-purchases'
+                    onClick={handleMenu}
+                    className='whitespace-nowrap hover:bg-slate-100 '
+                  >
+                    View Purchases
+                  </Link>
                   {user?.role === ROLE.ADMIN && (
                     <Link
                       to='admin-panel/all-products'

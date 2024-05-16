@@ -11,6 +11,8 @@ import CategoryProduct from '../pages/CategoryProduct'
 import ProductDetails from '../pages/ProductDetails'
 import Cart from '../pages/Cart'
 import SearchProduct from '../pages/SearchProduct'
+import PurchaseSuccessMessage from '../pages/PurchaseSuccessMessage'
+import ViewPurchases from '../pages/ViewPurchases'
 
 const router = createBrowserRouter([
   {
@@ -44,6 +46,14 @@ const router = createBrowserRouter([
           { path: 'all-users', element: <AllUsers /> },
           { path: 'all-products', element: <AllProducts /> },
         ],
+      },
+      {
+        path: 'purchase-success',
+        element: <PurchaseSuccessMessage />,
+      },
+      {
+        path: 'view-purchases',
+        element: <ViewPurchases />,
       },
     ],
   },

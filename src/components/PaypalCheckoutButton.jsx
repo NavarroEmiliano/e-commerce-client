@@ -4,13 +4,18 @@ import { useState } from 'react'
 import updateStock from '../services/updateStockService'
 import purchaseService from '../services/purchaseService'
 import cartService from '../services/cartService'
+import { useNavigate } from 'react-router-dom'
+import { useQueryClient } from '@tanstack/react-query'
 
 const baseUrl = `${import.meta.env.VITE_BASE_URL}/orders`
 
 const PaypalCheckoutButton = (props) => {
   const [message, setMessage] = useState('')
   const { products } = props
-  console.log(products)
+  const queryClient = useQueryClient()
+  console.log(message)
+
+  const navigate = useNavigate()
 
   const handleCreateOrder = async () => {
     try {
@@ -55,28 +60,20 @@ const PaypalCheckoutButton = (props) => {
       const errorDetail = orderData?.details?.[0]
 
       if (errorDetail?.issue === 'INSTRUMENT_DECLINED') {
-        // (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
-        // recoverable state, per https://developer.paypal.com/docs/checkout/standard/customize/handle-funding-failures/
         return actions.restart()
       } else if (errorDetail) {
-        // (2) Other non-recoverable errors -> Show a failure message
         throw new Error(`${errorDetail.description} (${orderData.debug_id})`)
       } else {
-        // (3) Successful transaction -> Show confirmation or thank you message
-        // Or go to another URL:  actions.redirect('thank_you.html');
         const transaction = orderData.purchase_units[0].payments.captures[0]
         setMessage(
           `Transaction ${transaction.status}: ${transaction.id}. See console for all available details`,
         )
 
-        console.log(
-          'Capture result',
-          orderData,
-          JSON.stringify(orderData, null, 2),
-        )
         await updateStock(products)
         await purchaseService.addNewPuchase(transaction, products)
         await cartService.deleteUserCart()
+        queryClient.invalidateQueries(['countCart'])
+        navigate('/purchase-success')
       }
     } catch (error) {
       console.error(error)

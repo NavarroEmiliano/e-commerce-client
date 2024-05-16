@@ -221,7 +221,10 @@ const Cart = () => {
               </div>
 
               <div className=''>
-                <PaypalCheckoutButton product={userCart} />
+                <PaypalCheckoutButton
+                  product={userCart}
+                  total={totalPriceWithDiscount}
+                />
               </div>
             </div>
           )}

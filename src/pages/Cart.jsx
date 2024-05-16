@@ -219,10 +219,13 @@ const Cart = () => {
                 <p>Savings:</p>
                 <p>{displayUsdCurrency(totalPrice - totalPriceWithDiscount)}</p>
               </div>
-
-              <div className=''>
-                <PaypalCheckoutButton products={userCart} />
-              </div>
+              {userCart.length ? (
+                <div>
+                  <PaypalCheckoutButton products={userCart} />
+                </div>
+              ) : (
+                ''
+              )}
             </div>
           )}
         </div>

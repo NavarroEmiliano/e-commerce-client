@@ -2,12 +2,14 @@
 import { PayPalButtons } from '@paypal/react-paypal-js'
 import { useState } from 'react'
 import updateStock from '../services/updateStockService'
+import purchaseService from '../services/purchaseService'
 
 const baseUrl = `${import.meta.env.VITE_BASE_URL}/orders`
 
 const PaypalCheckoutButton = (props) => {
-  const { products } = props
   const [message, setMessage] = useState('')
+  const { products } = props
+  console.log(products)
 
   const handleCreateOrder = async () => {
     try {
@@ -41,7 +43,6 @@ const PaypalCheckoutButton = (props) => {
 
   const handleOnApprove = async (data, actions) => {
     try {
-      console.log(data.orderID)
       const response = await fetch(`${baseUrl}/${data.orderID}/capture`, {
         method: 'POST',
         headers: {
@@ -73,6 +74,7 @@ const PaypalCheckoutButton = (props) => {
           JSON.stringify(orderData, null, 2),
         )
         await updateStock(products)
+        await purchaseService.addNewPuchase(transaction, products)
       }
     } catch (error) {
       console.error(error)

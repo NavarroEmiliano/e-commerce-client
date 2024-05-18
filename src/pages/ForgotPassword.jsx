@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import forgotPasswordService from '../services/forgotPasswordService'
+import { toast } from 'react-toastify'
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('')
@@ -12,8 +13,13 @@ const ForgotPassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const response = await forgotPasswordService.forgotPassword({ email })
-    console.log(response)
+    try {
+      const response = await forgotPasswordService.forgotPassword({ email })
+      toast.success(response)
+    } catch (error) {
+      console.log(error)
+      toast.error(error.response.data.data)
+    }
   }
 
   return (

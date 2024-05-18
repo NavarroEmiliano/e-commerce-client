@@ -13,6 +13,7 @@ import Cart from '../pages/Cart'
 import SearchProduct from '../pages/SearchProduct'
 import PurchaseSuccessMessage from '../pages/PurchaseSuccessMessage'
 import ViewPurchases from '../pages/ViewPurchases'
+import ResetPassword from '../pages/ResetPassword'
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,7 @@ const router = createBrowserRouter([
       { path: '', element: <Home /> },
       { path: 'login', element: <Login /> },
       { path: 'forgot-password', element: <ForgotPassword /> },
+      { path: 'reset-password/:id/:token', element: <ResetPassword /> },
       { path: 'sign-up', element: <SignUp /> },
       {
         path: 'product-category/:categoryName',

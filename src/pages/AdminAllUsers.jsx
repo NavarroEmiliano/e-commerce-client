@@ -7,7 +7,7 @@ import { useQuery } from '@tanstack/react-query'
 import usersService from '../services/usersService'
 import { useAuthContext } from '../hooks/useAuthContext'
 
-const AllUsers = () => {
+const AdminAllUsers = () => {
   const { user } = useAuthContext()
 
   const { isPending, data } = useQuery({
@@ -75,4 +75,4 @@ const AllUsers = () => {
   )
 }
 
-export default AllUsers
+export default AdminAllUsers

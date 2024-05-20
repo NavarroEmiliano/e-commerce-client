@@ -43,6 +43,12 @@ const Header = () => {
 
         {pathname !== '/admin-panel/all-products' && <SearchBar />}
 
+        <Link to='/all-products'>
+          <div className='text-sm h-8 md:text-xl mr-2 text-center'>
+            All products
+          </div>
+        </Link>
+
         <div className='flex items-center justify-between ml-2 gap-2 sm:gap-6 md:gap-8'>
           <div
             onClick={handleMenu}

@@ -8,7 +8,7 @@ import productsService from '../services/productsService'
 import Loading from '../components/Loading'
 import AdminDeleteProduct from '../components/AdminDeleteProduct'
 
-const AllProducts = () => {
+const AdminAllProducts = () => {
   const { isPending, data: allProducts } = useQuery({
     queryKey: ['allProducts'],
     queryFn: productsService.getAllProducts,
@@ -145,4 +145,4 @@ const AllProducts = () => {
   )
 }
 
-export default AllProducts
+export default AdminAllProducts

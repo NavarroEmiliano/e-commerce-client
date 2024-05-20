@@ -14,6 +14,7 @@ import SearchProduct from '../pages/SearchProduct'
 import PurchaseSuccessMessage from '../pages/PurchaseSuccessMessage'
 import ViewPurchases from '../pages/ViewPurchases'
 import ResetPassword from '../pages/ResetPassword'
+import AllProducts from '../pages/AllProducts'
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       { path: 'forgot-password', element: <ForgotPassword /> },
       { path: 'reset-password/:id/:token', element: <ResetPassword /> },
       { path: 'sign-up', element: <SignUp /> },
+      {
+        path: 'all-products',
+        element: <AllProducts />,
+      },
       {
         path: 'product-category/:categoryName',
         element: <CategoryProduct />,

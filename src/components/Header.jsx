@@ -49,6 +49,10 @@ const Header = () => {
           </div>
         </Link>
 
+        <select name='' id=''>
+          {}
+        </select>
+
         <div className='flex items-center justify-between ml-2 gap-2 sm:gap-6 md:gap-8'>
           <div
             onClick={handleMenu}

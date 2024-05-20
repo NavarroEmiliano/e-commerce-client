@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import ProductCard from '../components/ProductCard'
+import { useQuery } from '@tanstack/react-query'
+import productsService from '../services/productsService'
 
 const CategoryProduct = () => {
-  const products = useSelector((state) => state.products)
   const { categoryName } = useParams()
   const defaultCategory = categoryName || ''
   const [selectCategory, setSelectCategory] = useState({
@@ -17,8 +17,16 @@ const CategoryProduct = () => {
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
-  const categoriesArr = products.map((product) => product.category)
-  const categoriesSet = [...new Set(categoriesArr)]
+  const { data: productsByCategory } = useQuery({
+    queryKey: ['productsByCategory'],
+    queryFn: productsService.getProductsByCategory(categoryName),
+    enabled: !!categoryName,
+  })
+
+  const { data: allCategories } = useQuery({
+    queryKey: ['allCategories'],
+    queryFn: productsService.getAllCategories,
+  })
 
   const handleSelectCategory = (e) => {
     const { value, checked } = e.target
@@ -30,7 +38,9 @@ const CategoryProduct = () => {
     })
   }
 
-  const filteredProducts = [...products]
+  console.log(productsByCategory)
+
+  const filteredProducts = [...productsByCategory]
     .sort((a, b) => {
       if (sortByPrice === 'ASC') {
         return a.price - b.price

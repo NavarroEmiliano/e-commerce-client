@@ -1,5 +1,5 @@
 import { LuShoppingCart } from 'react-icons/lu'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import UserImg from './UserImg'
 import { useState } from 'react'
 import ROLE from '../common/role'
@@ -9,12 +9,14 @@ import cartService from '../services/cartService'
 import { useLogout } from '../hooks/useLogout'
 import { useAuthContext } from '../hooks/useAuthContext'
 import SearchBar from './SearchBar'
+import productsService from '../services/productsService'
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false)
   const { user } = useAuthContext()
   const { pathname } = useLocation()
   const { logout } = useLogout()
+  const navigate = useNavigate()
 
   const { data: countCart } = useQuery({
     queryKey: ['countCart'],
@@ -24,12 +26,21 @@ const Header = () => {
     refetchOnWindowFocus: false,
   })
 
+  const { data: allCategories } = useQuery({
+    queryKey: ['allCategories'],
+    queryFn: productsService.getAllCategories,
+  })
+
   const handleLogout = () => {
     logout()
   }
 
   const handleMenu = () => {
     setShowMenu(!showMenu)
+  }
+
+  const handleChangeSelect = (e) => {
+    navigate(`product-category/${e.target.value}`)
   }
 
   return (
@@ -49,8 +60,13 @@ const Header = () => {
           </div>
         </Link>
 
-        <select name='' id=''>
-          {}
+        <select name='categories' onChange={handleChangeSelect}>
+          <option value='All'>Categories</option>
+          {allCategories?.map((categ) => (
+            <option key={categ} value={categ}>
+              {categ}
+            </option>
+          ))}
         </select>
 
         <div className='flex items-center justify-between ml-2 gap-2 sm:gap-6 md:gap-8'>

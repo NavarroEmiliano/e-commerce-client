@@ -1,12 +1,14 @@
 /* eslint-disable react/no-unescaped-entities */
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { IoCreateOutline } from 'react-icons/io5'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 
 import { toast } from 'react-toastify'
 import { useSignup } from '../hooks/useSignup'
+import { isStrongPassword } from '../utils/isStrongPassword'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false)
@@ -18,6 +20,8 @@ const SignUp = () => {
     confirmPassword: '',
   })
 
+  const navigate = useNavigate()
+  const { user } = useAuthContext()
   const { signup } = useSignup()
 
   const handleShowPassword = () => {
@@ -41,18 +45,34 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (data.password !== data.confirmPassword) {
-      return toast.error('Please check password and confirm password')
-    }
 
-    const userForSignUp = {
-      name: data.name,
-      email: data.email,
-      password: data.password,
-    }
+    try {
+      const passwordStrength = isStrongPassword(data.password)
+      if (passwordStrength !== true) {
+        return toast.error(passwordStrength)
+      }
 
-    await signup(userForSignUp)
+      if (data.password !== data.confirmPassword) {
+        return toast.error('Please check password and confirm password')
+      }
+
+      const userForSignUp = {
+        name: data.name,
+        email: data.email,
+        password: data.password,
+      }
+
+      const response = await signup(userForSignUp)
+
+      toast.success(response)
+    } catch (error) {
+      toast.error(error.response.data.data)
+    }
   }
+
+  useEffect(() => {
+    if (user?.name) navigate('/')
+  }, [user])
 
   return (
     <section

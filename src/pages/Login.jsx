@@ -1,8 +1,9 @@
 /* eslint-disable react/no-unescaped-entities */
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FaRegUserCircle, FaEye, FaEyeSlash } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useLogin } from '../hooks/useLogin'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false)
@@ -12,6 +13,9 @@ const Login = () => {
   })
 
   const { login } = useLogin()
+
+  const navigate = useNavigate()
+  const { user } = useAuthContext()
 
   const handleShowPassword = () => {
     setShowPassword((prev) => !prev)
@@ -36,6 +40,10 @@ const Login = () => {
     }
     await login(credentials)
   }
+
+  useEffect(() => {
+    if (user?.name) navigate('/')
+  }, [user])
 
   return (
     <section id='login' className='flex items-center min-h-[calc(100vh-120px)]'>

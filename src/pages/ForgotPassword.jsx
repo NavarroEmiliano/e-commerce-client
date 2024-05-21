@@ -1,9 +1,15 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import forgotPasswordService from '../services/forgotPasswordService'
 import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('')
+
+  const navigate = useNavigate()
+
+  const { user } = useAuthContext()
 
   const handleOnChange = (e) => {
     const { value } = e.target
@@ -21,6 +27,10 @@ const ForgotPassword = () => {
       toast.error(error.response.data.data)
     }
   }
+
+  useEffect(() => {
+    if (user?.name) navigate('/')
+  }, [user])
 
   return (
     <div>

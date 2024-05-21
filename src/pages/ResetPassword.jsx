@@ -1,8 +1,10 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import forgotPasswordService from '../services/forgotPasswordService'
+import { isStrongPassword } from '../utils/isStrongPassword'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 const ResetPassword = () => {
   const [showPassword, setShowPassword] = useState(false)
@@ -15,6 +17,8 @@ const ResetPassword = () => {
   const { id, token } = useParams()
 
   const navigate = useNavigate()
+
+  const { user } = useAuthContext()
 
   const handleShowPassword = () => {
     setShowPassword((prev) => !prev)
@@ -39,6 +43,10 @@ const ResetPassword = () => {
     e.preventDefault()
 
     try {
+      const passwordStrength = isStrongPassword(data.password)
+      if (passwordStrength !== true) {
+        return toast.error(passwordStrength)
+      }
       if (data.password !== data.confirmPassword) {
         return toast.error('Please check password and confirm password')
       }
@@ -55,6 +63,10 @@ const ResetPassword = () => {
       toast.error(error.response.data.data)
     }
   }
+
+  useEffect(() => {
+    if (user?.name) navigate('/')
+  }, [user])
 
   return (
     <form onSubmit={handleSubmit}>

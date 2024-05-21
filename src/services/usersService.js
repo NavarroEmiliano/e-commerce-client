@@ -13,7 +13,7 @@ const getAllUsers = async () => {
 
 const signUpUser = async (newUser) => {
   const { data } = await axios.post(baseUrl, newUser)
-  return data
+  return data.data
 }
 
 const updateUser = async (userData) => {

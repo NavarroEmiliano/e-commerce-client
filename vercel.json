@@ -1,4 +1,10 @@
 {
+  "build": {
+    "env": {
+      "NODE_ENV": "development"
+    },
+    "force": true
+  },
   "rewrites": [
     { "source": "/(.*)", "destination": "/" }
   ]

@@ -40,6 +40,9 @@ const Header = () => {
   }
 
   const handleChangeSelect = (e) => {
+    if (e.target.value === 'categories') {
+      return navigate('/')
+    }
     navigate(`product-category/${e.target.value}`)
   }
 
@@ -61,7 +64,7 @@ const Header = () => {
         </Link>
 
         <select name='categories' onChange={handleChangeSelect}>
-          <option value='All'>Categories</option>
+          <option value='categories'>Categories</option>
           {allCategories?.map((categ) => (
             <option key={categ} value={categ}>
               {categ}

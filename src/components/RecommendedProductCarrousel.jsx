@@ -43,7 +43,7 @@ const RecommendedProductCarrousel = ({ category, heading }) => {
           responsive={responsive}
           removeArrowOnDeviceType={['tablet', 'mobile']}
         >
-          {data?.data?.map((product) => {
+          {data?.map((product) => {
             return <ProductCard key={product.id} product={product} />
           })}
         </Carousel>

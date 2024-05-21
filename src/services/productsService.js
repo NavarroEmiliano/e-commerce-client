@@ -23,7 +23,7 @@ const updateProduct = async (productData) => {
 
 const getProductsByCategory = async (category) => {
   const { data } = await axios.get(`${baseUrl}/category/${category}`)
-  return data
+  return data.data
 }
 
 const getProductById = async (id) => {

@@ -97,7 +97,7 @@ const SignUp = () => {
 
           <form onSubmit={handleSubmit} className='w-full'>
             <div>
-              <label className='font-medium'>Name </label>
+              <label className='font-medium'>Name</label>
               <div>
                 <input
                   type='text'

@@ -4,6 +4,7 @@ import { FaRegUserCircle, FaEye, FaEyeSlash } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
 import { useLogin } from '../hooks/useLogin'
 import { useAuthContext } from '../hooks/useAuthContext'
+import { IoMdArrowRoundBack } from 'react-icons/io'
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false)
@@ -46,67 +47,70 @@ const Login = () => {
   }, [user])
 
   return (
-    <section id='login' className='flex items-center min-h-[calc(100vh-120px)]'>
-      <div className='mx-auto container p-4'>
-        <div className='bg-white p-5 max-w-md mx-auto'>
-          <div className='flex justify-center text-8xl text-red-600 mx-auto '>
-            <FaRegUserCircle />
+    <section
+      id='login'
+      className='relative flex items-center justify-center h-screen'
+    >
+      <Link
+        to='/'
+        className='absolute text-3xl text-pink-700 pt-2 top-0 right-0'
+      >
+        <IoMdArrowRoundBack />
+      </Link>
+      <div className='w-full max-w-[430px] p-2 mb-16'>
+        <div>
+          <div className='flex gap-2 flex-col items-center justify-center text-5xl text-pink-700 mb-6'>
+            <h3>Login</h3>
+            <div className='text-6xl'>
+              <FaRegUserCircle />
+            </div>
           </div>
 
-          <form onSubmit={handleSubmit} className='flex flex-col gap-3'>
-            <div className='grid'>
-              <label>Email: </label>
-              <div className='bg-slate-100 p-2'>
+          <form onSubmit={handleSubmit} className='w-full'>
+            <div>
+              <label className='font-medium'>Email</label>
+              <div>
                 <input
                   type='email'
                   name='email'
                   value={data.email}
                   onChange={handleOnChange}
-                  placeholder='Enter email'
                   required
-                  className='w-full h-full outline-none bg-transparent'
+                  className='w-full border border-pink-400 h-12 rounded-lg mb-6 pl-2 outline-2 outline-pink-700 font-bold'
                 />
               </div>
             </div>
 
             <div>
-              <label>Password: </label>
-              <div className='flex items-center bg-slate-100 p-2'>
+              <label className='font-medium'>Password</label>
+              <div className='relative'>
                 <input
                   type={showPassword ? 'text' : 'password'}
                   name='password'
                   value={data.password}
                   onChange={handleOnChange}
-                  placeholder='Enter password'
                   required
-                  className='w-full h-full outline-none bg-transparent'
+                  className='w-full border border-pink-400 h-12 rounded-lg mb-2 pl-2 outline-2 outline-pink-700 font-bold'
                 />
-                <div onClick={handleShowPassword} className='cursor-pointer'>
+                <div
+                  onClick={handleShowPassword}
+                  className='absolute right-3 top-4 z-10 text-lg hover:scale-125 duration-100'
+                >
                   <span>{showPassword ? <FaEyeSlash /> : <FaEye />}</span>
                 </div>
               </div>
             </div>
+            <div className='w-full text-end mb-6 hover:text-pink-700'>
+              <Link to={'/forgot-password'}>Forgot password?</Link>
+            </div>
 
-            <Link
-              to={'/forgot-password'}
-              className='block w-fit ml-auto hover:underline hover:text-red-600'
-            >
-              Forgot password?
-            </Link>
-
-            <button className='bg-red-600 text-white px-6 py-2 w-full max-w-[150px] rounded-full hover:bg-red-700 active:scale-95 duration-100 mx-auto mt-4 block'>
+            <button className='w-full p-4 rounded-lg text-white text-xl font-medium bg-pink-700 hover:bg-pink-800 active:scale-95 duration-100'>
               Login
             </button>
           </form>
-          <p className='my-5'>
+          <p className='mt-4'>
             Don't have account?{' '}
-            <Link
-              to={'/sign-up'}
-              className='font-medium 
-            text-red-600
-            hover:text-red-700
-            hover:underline'
-            >
+            <Link to={'/sign-up'} className='font-bold text-pink-700'>
               Sign up
             </Link>
           </p>

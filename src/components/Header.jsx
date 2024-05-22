@@ -47,20 +47,16 @@ const Header = () => {
   }
 
   return (
-    <header className='h-16 shadow-sm bg-white'>
-      <div className='h-full w-[95%] sm:w-[80%] mx-auto flex items-center justify-between'>
+    <header className='flex bg-pink-600'>
+      <div className='flex w-full'>
         <Link to='/'>
-          <div className='text-sm h-8 md:text-xl mr-2 text-center'>
-            Pulse-Tech
-          </div>
+          <div>Pulse-Tech</div>
         </Link>
 
         {pathname !== '/admin-panel/all-products' && <SearchBar />}
 
         <Link to='/all-products'>
-          <div className='text-sm h-8 md:text-xl mr-2 text-center'>
-            All products
-          </div>
+          <div>All products</div>
         </Link>
 
         <select name='categories' onChange={handleChangeSelect}>
@@ -72,33 +68,22 @@ const Header = () => {
           ))}
         </select>
 
-        <div className='flex items-center justify-between ml-2 gap-2 sm:gap-6 md:gap-8'>
-          <div
-            onClick={handleMenu}
-            className='relative flex justify-center cursor-pointer'
-          >
+        <div>
+          <div onClick={handleMenu}>
             {user && (
-              <div className='flex text-4xl items-center justify-center h-8 w-8'>
+              <div>
                 <UserImg textSize='sm' userName={user?.name} />
               </div>
             )}
 
             {showMenu && (
-              <div className='absolute z-10 bg-white group-hover:block top-12 h-fit p-2 shadow-lg rounded-md'>
-                <nav className='flex flex-col'>
-                  <Link
-                    to='view-purchases'
-                    onClick={handleMenu}
-                    className='whitespace-nowrap hover:bg-slate-100 '
-                  >
+              <div>
+                <nav>
+                  <Link to='view-purchases' onClick={handleMenu}>
                     View Purchases
                   </Link>
                   {user?.role === ROLE.ADMIN && (
-                    <Link
-                      to='admin-panel/all-products'
-                      onClick={handleMenu}
-                      className='whitespace-nowrap hover:bg-slate-100 '
-                    >
+                    <Link to='admin-panel/all-products' onClick={handleMenu}>
                       Admin Panel
                     </Link>
                   )}
@@ -109,12 +94,12 @@ const Header = () => {
 
           {user && (
             <Link to='cart'>
-              <div className='text-3xl cursor-pointer relative'>
+              <div>
                 <span>
                   <LuShoppingCart className='h-8 w-8' />
                 </span>
-                <div className='bg-red-600 w-5 h-5 flex items-center justify-center rounded-full absolute -top-2 -right-2'>
-                  <p className='text-xs text-white'>{countCart}</p>
+                <div>
+                  <p>{countCart}</p>
                 </div>
               </div>
             </Link>
@@ -122,19 +107,9 @@ const Header = () => {
 
           <div>
             {user?.name ? (
-              <button
-                onClick={handleLogout}
-                className='flex items-center justify-center px-2 py-1 text-white bg-red-600 rounded-full  hover:bg-red-700'
-              >
-                Logout
-              </button>
+              <button onClick={handleLogout}>Logout</button>
             ) : (
-              <Link
-                to={'login'}
-                className='flex items-center justify-center px-2 py-1 text-white bg-red-600 rounded-full  hover:bg-red-700'
-              >
-                Login
-              </Link>
+              <Link to={'login'}>Login</Link>
             )}
           </div>
         </div>

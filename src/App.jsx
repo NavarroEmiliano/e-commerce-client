@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
 
@@ -10,6 +10,10 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import 'react-multi-carousel/lib/styles.css'
 
 const App = () => {
+  const { pathname } = useLocation()
+
+  console.log(pathname !== '/login' || pathname !== '/sign-up')
+
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
   useEffect(() => {
@@ -26,11 +30,13 @@ const App = () => {
         theme='colored'
         autoClose={3000}
       />
-      <Header />
+      {pathname !== '/login' && pathname !== '/sign-up' ? <Header /> : ''}
+
       <main className='mx-auto min-h-[calc(100vh-120px)] md:w-[90%] w-[95%]'>
         <Outlet />
       </main>
-      <Footer />
+
+      {pathname !== '/login' && pathname !== '/sign-up' ? <Footer /> : ''}
     </>
   )
 }

@@ -9,6 +9,7 @@ import { toast } from 'react-toastify'
 import { useSignup } from '../hooks/useSignup'
 import { isStrongPassword } from '../utils/isStrongPassword'
 import { useAuthContext } from '../hooks/useAuthContext'
+import { IoMdArrowRoundBack } from 'react-icons/io'
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false)
@@ -77,78 +78,83 @@ const SignUp = () => {
   return (
     <section
       id='sign-up'
-      className='flex items-center min-h-[calc(100vh-120px)]'
+      className='flex flex-col items-center justify-between h-screen'
     >
-      <div className='mx-auto container p-4'>
-        <div className='bg-white p-5 max-w-md mx-auto '>
-          <div className='flex justify-center text-8xl text-red-600 mx-auto '>
-            <IoCreateOutline />
+      <Link to='/' className='text-3xl text-pink-700 ml-auto pt-2'>
+        <IoMdArrowRoundBack />
+      </Link>
+      <div className='w-full max-w-[430px] p-2 mb-16'>
+        <div>
+          <div className='flex flex-col items-center justify-center text-5xl text-pink-700 mb-6'>
+            <h3>Sign up</h3>
+            <div className='text-6xl'>
+              <IoCreateOutline />
+            </div>
           </div>
 
-          <form onSubmit={handleSubmit} className='flex flex-col gap-3'>
+          <form onSubmit={handleSubmit} className='w-full'>
             <div>
-              <label>Name: </label>
-              <div className='bg-slate-100 p-2'>
+              <label className='font-medium'>Name </label>
+              <div>
                 <input
                   type='text'
                   name='name'
                   value={data.name}
                   onChange={handleOnChange}
-                  placeholder='Enter name'
                   required
-                  className='w-full h-full outline-none bg-transparent'
+                  className='w-full border border-pink-400 h-12 rounded-lg mb-6 pl-2 outline-2 outline-pink-700 font-bold'
                 />
               </div>
             </div>
 
             <div>
-              <label>Email: </label>
-              <div className='bg-slate-100 p-2'>
+              <label className='font-medium'>Email </label>
+              <div>
                 <input
                   type='email'
                   name='email'
                   value={data.email}
                   onChange={handleOnChange}
-                  placeholder='Enter email'
                   required
-                  className='w-full h-full outline-none bg-transparent'
+                  className='w-full border border-pink-400 h-12 rounded-lg mb-6 pl-2 outline-2 outline-pink-700 font-bold'
                 />
               </div>
             </div>
 
             <div>
-              <label>Password: </label>
-              <div className='flex items-center bg-slate-100 p-2'>
+              <label className='font-medium'>Password </label>
+              <div className='relative'>
                 <input
                   type={showPassword ? 'text' : 'password'}
                   name='password'
                   value={data.password}
                   onChange={handleOnChange}
-                  placeholder='Enter password'
                   required
-                  className='w-full h-full outline-none bg-transparent'
+                  className='w-full border border-pink-400 h-12 rounded-lg mb-6 pl-2 outline-2 outline-pink-700 font-bold'
                 />
-                <div onClick={handleShowPassword} className='cursor-pointer'>
+                <div
+                  onClick={handleShowPassword}
+                  className='absolute right-3 top-4 z-10 text-lg hover:scale-125 duration-100'
+                >
                   <span>{showPassword ? <FaEyeSlash /> : <FaEye />}</span>
                 </div>
               </div>
             </div>
 
             <div>
-              <label>Confirm password: </label>
-              <div className='flex items-center bg-slate-100 p-2'>
+              <label className='font-medium'>Confirm password </label>
+              <div className='relative'>
                 <input
                   type={showConfirmPassword ? 'text' : 'password'}
                   name='confirmPassword'
                   value={data.confirmPassword}
                   onChange={handleOnChange}
-                  placeholder='Enter password'
                   required
-                  className='w-full h-full outline-none bg-transparent'
+                  className='w-full border border-pink-400 h-12 rounded-lg mb-6 pl-2 outline-2 outline-pink-700 font-bold'
                 />
                 <div
                   onClick={handleShowConfirmPassword}
-                  className='cursor-pointer'
+                  className='absolute right-3 top-4 z-10 text-lg hover:scale-125 duration-100'
                 >
                   <span>
                     {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
@@ -157,20 +163,14 @@ const SignUp = () => {
               </div>
             </div>
 
-            <button className='bg-red-600 text-white px-6 py-2 w-full max-w-[150px] rounded-full hover:bg-red-700 active:scale-95 duration-100 mx-auto mt-4 block'>
+            <button className='w-full p-4 rounded-lg text-white text-xl font-medium bg-pink-700 hover:bg-pink-800 active:scale-95 duration-100'>
               Sign up
             </button>
           </form>
-          <p className='my-5'>
+          <p className='mt-4'>
             Already have account?{' '}
-            <Link
-              to={'/login'}
-              className='font-medium 
-                        text-red-600
-                        hover:text-red-700
-                          hover:underline'
-            >
-              Login
+            <Link to={'/login'} className='font-bold text-pink-700'>
+              Login here
             </Link>
           </p>
         </div>

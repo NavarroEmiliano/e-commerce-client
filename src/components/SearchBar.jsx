@@ -25,20 +25,16 @@ const SearchBar = () => {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className='flex border rounded-full h-8 justify-center items-center'
-    >
+    <form onSubmit={handleSubmit}>
       <input
         onChange={handleChange}
         type='text'
         name='searchInput'
         value={searchInput}
         placeholder='Search product here...'
-        className='outline-none rounded-l-full pl-4 text-ellipsis'
       />
 
-      <div className='h-full w-6 flex items-center justify-center text-xl text-slate-500'>
+      <div>
         {searchInput && (
           <button onClick={handleCleanInput}>
             <IoCloseOutline />
@@ -46,8 +42,8 @@ const SearchBar = () => {
         )}
       </div>
 
-      <div className='text-white h-8 px-2 bg-red-600 flex items-center justify-center rounded-r-full border border-red-600'>
-        <button className='flex items-center '>Search</button>
+      <div>
+        <button>Search</button>
       </div>
     </form>
   )

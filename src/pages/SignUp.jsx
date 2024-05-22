@@ -78,9 +78,12 @@ const SignUp = () => {
   return (
     <section
       id='sign-up'
-      className='flex flex-col items-center justify-between h-screen'
+      className='relative flex items-center justify-center h-screen'
     >
-      <Link to='/' className='text-3xl text-pink-700 ml-auto pt-2'>
+      <Link
+        to='/'
+        className='absolute text-3xl text-pink-700 pt-2 top-0 right-0'
+      >
         <IoMdArrowRoundBack />
       </Link>
       <div className='w-full max-w-[430px] p-2 mb-16'>

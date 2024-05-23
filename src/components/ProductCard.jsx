@@ -59,7 +59,7 @@ const ProductCard = ({ product }) => {
             </p>
             <button
               onClick={() => handleAddToCart(product.id)}
-              className='bg-red-600 w-full rounded-xl py-1 text-white hover:bg-red-800'
+              className='bg-pink-600 w-full rounded-xl py-1 text-white hover:bg-pink-800'
             >
               Add to Cart
             </button>

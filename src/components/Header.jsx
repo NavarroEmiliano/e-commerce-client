@@ -63,7 +63,7 @@ const Header = () => {
             <span className='text-xl'>
               <LuShoppingCart />
             </span>
-            <div className='absolute h-4 text-center -top-2 -right-2 bg-pink-600 text-white'>
+            <div className='absolute h-4 text-center -top-2 -right-2 bg-pink-600 text-white text-sm'>
               <p>{countCart > 9 ? '+9' : countCart}</p>
             </div>
           </div>

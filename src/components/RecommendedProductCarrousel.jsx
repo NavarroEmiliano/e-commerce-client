@@ -25,8 +25,8 @@ const RecommendedProductCarrousel = ({ category, heading }) => {
     },
     mobile: {
       breakpoint: { max: 640, min: 0 },
-      items: 1,
-      slidesToSlide: 1,
+      items: 2,
+      slidesToSlide: 2,
     },
   }
 

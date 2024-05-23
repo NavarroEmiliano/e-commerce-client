@@ -34,6 +34,7 @@ const SearchBar = ({ handleClick, showInput }) => {
         value={searchInput}
         placeholder='Search product here...'
         className='rounded-l-full p-1 pl-2 outline-none'
+        autoComplete='off'
       />
 
       <div className='flex w-6 text-xl bg-white'>

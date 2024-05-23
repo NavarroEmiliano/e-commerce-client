@@ -29,7 +29,6 @@ const SearchBar = ({ handleClick, showInput }) => {
     <form onSubmit={handleSubmit} className='flex'>
       <input
         onChange={handleChange}
-        type='search'
         name='searchInput'
         value={searchInput}
         placeholder='Search product here...'
@@ -37,19 +36,17 @@ const SearchBar = ({ handleClick, showInput }) => {
         autoComplete='off'
       />
 
-      <div className='flex w-6 text-xl bg-white'>
+      <div className='flex items-center w-6 text-xl bg-white'>
         {searchInput && (
-          <button onClick={handleCleanInput}>
-            <IoCloseOutline />
-          </button>
+          <div onClick={handleCleanInput}>
+            <IoCloseOutline className='hover:scale-125  duration-75' />
+          </div>
         )}
       </div>
 
-      <div className='flex items-center bg-white rounded-r-full pr-2'>
-        <button type='submit' className='text-xl'>
-          <IoSearchOutline />
-        </button>
-      </div>
+      <button className='flex items-center bg-white rounded-r-full pr-2 '>
+        <IoSearchOutline className='hover:scale-125  duration-75' />
+      </button>
     </form>
   )
 }

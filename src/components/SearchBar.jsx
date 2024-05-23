@@ -29,7 +29,6 @@ const SearchBar = ({ handleClick, showInput }) => {
     <form onSubmit={handleSubmit} className='flex'>
       <input
         onChange={handleChange}
-        type='text'
         name='searchInput'
         value={searchInput}
         placeholder='Search product here...'
@@ -46,8 +45,7 @@ const SearchBar = ({ handleClick, showInput }) => {
       </div>
 
       <div className='flex items-center bg-white rounded-r-full pr-2'>
-        <button className='hidden'>Search</button>
-        <button className='text-xl'>
+        <button type='submit' className='text-xl'>
           <IoSearchOutline />
         </button>
       </div>

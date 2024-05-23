@@ -6,23 +6,12 @@ import sunglassesBanner from '../assets/sunglasses-banner.jpeg'
 import shoesBanner from '../assets/shoes-banner.jpg'
 import fashionBagBanner from '../assets/fashion-bag-banner.jpg'
 
-// Mobile banners
-import womenShoesMobile from '../assets/smartwatch-mobile-banner.webp'
-import smartWatchMobile from '../assets/women-shoes-mobile.jpg'
-import lightingMobileBanner from '../assets/lighting-mobile-banner.jpg'
-
 const BannerProduct = () => {
   const desktopImages = [
     watchBanner,
     sunglassesBanner,
     shoesBanner,
     fashionBagBanner,
-  ]
-
-  const mobileImages = [
-    womenShoesMobile,
-    smartWatchMobile,
-    lightingMobileBanner,
   ]
 
   const responsive = {
@@ -44,7 +33,7 @@ const BannerProduct = () => {
   }
 
   return (
-    <div className='container mx-auto rounded'>
+    <div className='container mx-auto mt-4'>
       <div className='h-72 w-full hidden md:block'>
         {/* Desktop  */}
         <Carousel
@@ -55,7 +44,7 @@ const BannerProduct = () => {
           removeArrowOnDeviceType={['tablet', 'mobile']}
         >
           {desktopImages.map((img, index) => (
-            <div key={index} className='w-full h-72 min-w-full min-h-full'>
+            <div key={index} className='w-full h-72  min-w-full min-h-full'>
               <img
                 src={img}
                 alt={`img${index}`}
@@ -68,8 +57,7 @@ const BannerProduct = () => {
 
       {/* Mobile */}
 
-      <div className='h-72 w-full md:hidden'>
-        {/* Desktop  */}
+      <div className='h-52 w-full md:hidden'>
         <Carousel
           showDots={true}
           responsive={responsive}
@@ -77,12 +65,12 @@ const BannerProduct = () => {
           autoPlay={true}
           removeArrowOnDeviceType={['tablet', 'mobile']}
         >
-          {mobileImages.map((img, index) => (
-            <div key={index} className='w-full h-72 min-w-full min-h-full'>
+          {desktopImages.map((img, index) => (
+            <div key={index} className='w-full h-52 min-w-full min-h-full'>
               <img
                 src={img}
                 alt={`img${index}`}
-                className='w-full h-full object-scale-down'
+                className='w-full h-full object-cover rounded-lg'
               />
             </div>
           ))}

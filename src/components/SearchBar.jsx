@@ -29,6 +29,7 @@ const SearchBar = ({ handleClick, showInput }) => {
     <form onSubmit={handleSubmit} className='flex'>
       <input
         onChange={handleChange}
+        type='search'
         name='searchInput'
         value={searchInput}
         placeholder='Search product here...'

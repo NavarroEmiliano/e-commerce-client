@@ -56,16 +56,21 @@ const Header = () => {
         <IoMenu />
       </div>
       <SearchBar />
-      <Link to='cart'>
-        <div>
-          <span className='text-xl'>
-            <LuShoppingCart />
-          </span>
-          <div>
-            <p>{countCart}</p>
+
+      {user ? (
+        <Link to='cart'>
+          <div className='relative'>
+            <span className='text-xl'>
+              <LuShoppingCart />
+            </span>
+            <div className='absolute h-4 text-center -top-2 -right-2 bg-pink-600 text-white'>
+              <p>{countCart > 9 ? '+9' : countCart}</p>
+            </div>
           </div>
-        </div>
-      </Link>
+        </Link>
+      ) : (
+        <Link to={'login'}>Login</Link>
+      )}
     </header>
 
     /* <header className='flex bg-pink-600'>

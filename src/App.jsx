@@ -12,8 +12,6 @@ import 'react-multi-carousel/lib/styles.css'
 const App = () => {
   const { pathname } = useLocation()
 
-  console.log(pathname !== '/login' || pathname !== '/sign-up')
-
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
   useEffect(() => {

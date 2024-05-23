@@ -53,13 +53,13 @@ const Login = () => {
     >
       <Link
         to='/'
-        className='absolute text-3xl text-pink-700 pt-2 top-0 right-0'
+        className='absolute text-3xl text-pink-600 pt-2 top-0 right-0'
       >
         <IoMdArrowRoundBack />
       </Link>
       <div className='w-full max-w-[430px] p-2 mb-16'>
         <div>
-          <div className='flex gap-2 flex-col items-center justify-center text-5xl text-pink-700 mb-6'>
+          <div className='flex gap-2 flex-col items-center justify-center text-5xl text-pink-600 mb-6'>
             <h3>Login</h3>
             <div className='text-6xl'>
               <FaRegUserCircle />
@@ -100,7 +100,7 @@ const Login = () => {
                 </div>
               </div>
             </div>
-            <div className='w-full text-end mb-6 hover:text-pink-700'>
+            <div className='w-full text-end mb-6 hover:text-pink-600'>
               <Link to={'/forgot-password'}>Forgot password?</Link>
             </div>
 
@@ -110,7 +110,7 @@ const Login = () => {
           </form>
           <p className='mt-4'>
             Don't have account?{' '}
-            <Link to={'/sign-up'} className='font-bold text-pink-700'>
+            <Link to={'/sign-up'} className='font-bold text-pink-600'>
               Sign up
             </Link>
           </p>

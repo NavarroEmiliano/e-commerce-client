@@ -82,13 +82,13 @@ const SignUp = () => {
     >
       <Link
         to='/'
-        className='absolute text-3xl text-pink-700 pt-2 top-0 right-0'
+        className='absolute text-3xl text-pink-600 pt-2 top-0 right-0'
       >
         <IoMdArrowRoundBack />
       </Link>
       <div className='w-full max-w-[430px] p-2 mb-16'>
         <div>
-          <div className='flex flex-col items-center justify-center text-5xl text-pink-700 mb-6'>
+          <div className='flex flex-col items-center justify-center text-5xl text-pink-600 mb-6'>
             <h3>Sign up</h3>
             <div className='text-6xl'>
               <IoCreateOutline />
@@ -172,7 +172,7 @@ const SignUp = () => {
           </form>
           <p className='mt-4'>
             Already have account?{' '}
-            <Link to={'/login'} className='font-bold text-pink-700'>
+            <Link to={'/login'} className='font-bold text-pink-600'>
               Login here
             </Link>
           </p>

@@ -46,9 +46,9 @@ const SearchBar = ({ handleClick, showInput }) => {
 
       <div className='flex items-center bg-white rounded-r-full pr-2'>
         <button className='hidden'>Search</button>
-        <div className='text-xl'>
+        <button className='text-xl'>
           <IoSearchOutline />
-        </div>
+        </button>
       </div>
     </form>
   )

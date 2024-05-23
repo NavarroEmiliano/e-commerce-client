@@ -166,7 +166,7 @@ const SignUp = () => {
               </div>
             </div>
 
-            <button className='w-full p-4 rounded-lg text-white text-xl font-medium bg-pink-700 hover:bg-pink-800 active:scale-95 duration-100'>
+            <button className='w-full p-4 rounded-lg text-white text-xl font-medium bg-pink-600 hover:bg-pink-800 active:scale-95 duration-100'>
               Sign up
             </button>
           </form>

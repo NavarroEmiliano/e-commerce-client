@@ -11,6 +11,8 @@ import { useAuthContext } from '../hooks/useAuthContext'
 import SearchBar from './SearchBar'
 import productsService from '../services/productsService'
 
+import { IoMenu } from 'react-icons/io5'
+
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false)
   const { user } = useAuthContext()
@@ -47,7 +49,26 @@ const Header = () => {
   }
 
   return (
-    <header className='flex bg-pink-600'>
+    /* Mobile */
+
+    <header className='flex items-center h-14 p-4 0 bg-pink-600 justify-between w-full'>
+      <div className='text-xl'>
+        <IoMenu />
+      </div>
+      <SearchBar />
+      <Link to='cart'>
+        <div>
+          <span className='text-xl'>
+            <LuShoppingCart />
+          </span>
+          <div>
+            <p>{countCart}</p>
+          </div>
+        </div>
+      </Link>
+    </header>
+
+    /* <header className='flex bg-pink-600'>
       <div className='flex w-full'>
         <Link to='/'>
           <div>Pulse-Tech</div>
@@ -114,7 +135,7 @@ const Header = () => {
           </div>
         </div>
       </div>
-    </header>
+    </header> */
   )
 }
 

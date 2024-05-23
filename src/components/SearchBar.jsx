@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { IoCloseOutline } from 'react-icons/io5'
+import { IoCloseOutline, IoSearchOutline } from 'react-icons/io5'
 
-const SearchBar = () => {
+const SearchBar = ({ handleClick, showInput }) => {
   const navigate = useNavigate()
 
   const [searchInput, setSearchInput] = useState('')
@@ -25,16 +26,17 @@ const SearchBar = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className='flex'>
       <input
         onChange={handleChange}
         type='text'
         name='searchInput'
         value={searchInput}
         placeholder='Search product here...'
+        className='rounded-l-full p-1 pl-2 outline-none'
       />
 
-      <div>
+      <div className='flex w-6 text-xl bg-white'>
         {searchInput && (
           <button onClick={handleCleanInput}>
             <IoCloseOutline />
@@ -42,8 +44,11 @@ const SearchBar = () => {
         )}
       </div>
 
-      <div>
-        <button>Search</button>
+      <div className='flex items-center bg-white rounded-r-full pr-2'>
+        <button className='hidden'>Search</button>
+        <div className='text-xl'>
+          <IoSearchOutline />
+        </div>
       </div>
     </form>
   )

@@ -143,12 +143,14 @@ const Header = () => {
             </div>
           </div>
 
-          <button
-            className='w-full bg-pink-600 border-2 p-3 rounded-xl text-lg active:scale-95 active:bg-pink-800 duration-100'
-            onClick={handleLogout}
-          >
-            Logout
-          </button>
+          {user && (
+            <button
+              className='w-full bg-pink-600 border-2 p-3 rounded-xl text-lg active:scale-95 active:bg-pink-800 duration-100'
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
+          )}
         </div>
       </div>
 

@@ -15,6 +15,7 @@ import PurchaseSuccessMessage from '../pages/PurchaseSuccessMessage'
 import ViewPurchases from '../pages/ViewPurchases'
 import ResetPassword from '../pages/ResetPassword'
 import AllProducts from '../pages/AllProducts'
+import AdminSoldProducts from '../pages/AdminSoldProducts'
 
 const router = createBrowserRouter([
   {
@@ -52,6 +53,7 @@ const router = createBrowserRouter([
         children: [
           { path: 'all-users', element: <AdminAllUsers /> },
           { path: 'all-products', element: <AdminAllProducts /> },
+          { path: 'sold-products', element: <AdminSoldProducts /> },
         ],
       },
       {

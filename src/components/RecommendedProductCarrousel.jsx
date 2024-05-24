@@ -3,6 +3,7 @@ import productsService from '../services/productsService'
 import Carousel from 'react-multi-carousel'
 import ProductCard from './ProductCard'
 import { useQuery } from '@tanstack/react-query'
+import Skeleton from 'react-loading-skeleton'
 
 const RecommendedProductCarrousel = ({ category, heading }) => {
   const { isPending, data } = useQuery({
@@ -30,24 +31,49 @@ const RecommendedProductCarrousel = ({ category, heading }) => {
     },
   }
 
-  if (isPending) {
-    return <span>Loading...</span>
+  const loadingCart = new Array(2).fill(null)
+  const pending = true
+
+  if (pending) {
+    return (
+      <div>
+        <div className='h-7 w-48 mb-2'>
+          <Skeleton className='h-full' />
+        </div>
+        <div className='flex justify-between'>
+          {loadingCart.map((el, index) => (
+            <div key={index} className='h-80 w-[200px] mb-2'>
+              <Skeleton className='h-full' />
+            </div>
+          ))}
+        </div>
+      </div>
+    )
   }
 
   return (
     <div className='mx-auto py-4 '>
       <h2 className='text-2xl font-semibold pb-4'>{heading}</h2>
-      <div>
-        <Carousel
-          showDots={true}
-          responsive={responsive}
-          removeArrowOnDeviceType={['tablet', 'mobile']}
-        >
-          {data?.map((product) => {
-            return <ProductCard key={product.id} product={product} />
-          })}
-        </Carousel>
-      </div>
+
+      {!isPending && (
+        <div>
+          <Carousel
+            showDots={true}
+            responsive={responsive}
+            removeArrowOnDeviceType={['tablet', 'mobile']}
+          >
+            {data?.map((product) => {
+              return (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  isPending={isPending}
+                />
+              )
+            })}
+          </Carousel>
+        </div>
+      )}
     </div>
   )
 }

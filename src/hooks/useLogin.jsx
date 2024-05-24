@@ -9,6 +9,7 @@ import { setToken } from '../helpers/token'
 export const useLogin = () => {
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(null)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
   const { dispatch } = useAuthContext()
   const navigate = useNavigate()
 
@@ -23,13 +24,17 @@ export const useLogin = () => {
       dispatch({ type: 'LOGIN', payload: data })
       setIsLoading(false)
       setError(false)
-      navigate('/')
+      setIsLoggedIn(true)
       toast.success('Login successfully')
     } catch (error) {
       setIsLoading(false)
       setError(error.data)
       toast.error(error.response.data.data)
     }
+  }
+
+  if (isLoggedIn) {
+    navigate('/')
   }
 
   return { login, isLoading, error }

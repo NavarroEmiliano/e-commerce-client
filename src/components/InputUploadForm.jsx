@@ -17,7 +17,7 @@ const InputUploadForm = ({
         {label}
       </label>
       <input
-        className='p-1 rounded-lg shadow-md border-2'
+        className='p-1 pl-2 rounded-lg shadow outline-2 outline-pink-600'
         id={name}
         type={type}
         name={name}

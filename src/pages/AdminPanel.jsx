@@ -21,7 +21,7 @@ const AdminPanel = () => {
   }, [user, navigate])
 
   return (
-    <div className='flex items-center lg:shadow justify-center min-h-[calc(100vh-113px)]'>
+    <div className='flex items-center lg:shadow justify-center min-h-[calc(100vh-111px)]'>
       <div className='text-lg text-red-600 w-60 lg:hidden'>
         Attention! The admin panel is optimized for viewing on desktop screens.
         We recommend accessing it from a larger device to fully utilize all
@@ -43,12 +43,15 @@ const AdminPanel = () => {
 
           <div>
             <nav className='grid p-4'>
-              <Link to={'all-users'} className='px-2 py-1 hover:bg-slate-200'>
+              <Link
+                to={'all-users'}
+                className='px-2 py-1 hover:bg-pink-600 rounded-xl'
+              >
                 All users
               </Link>
               <Link
                 to={'all-products'}
-                className='px-2 py-1 hover:bg-slate-200'
+                className='px-2 py-1 hover:bg-pink-600 rounded-xl'
               >
                 All products
               </Link>

@@ -29,15 +29,22 @@ const AdminDeleteProduct = ({ productId, closeDelete }) => {
 
   return (
     <div className='fixed w-full h-full top-0 left-0 bottom-0 right-0 flex items-center justify-center bg-black/45'>
-      <div className='bg-white p-2 rounded-lg w-[30%] h-[40%] shadow-lg'>
-        <button className='text-2xl'>
+      <div className='flex flex-col justify-between bg-white p-2 rounded-lg w-[30%] h-[40%] shadow-lg'>
+        <button className='text-3xl ml-auto hover:scale-110 duration-75'>
           <IoCloseOutline onClick={closeDelete} />
         </button>
-        <div className='text-9xl text-red-600'>
+        <div className='text-9xl text-red-600 mx-auto'>
           <CiWarning />
         </div>
-        <p>Are you sure you want to delete this product?</p>
-        <button onClick={handleDeleteProduct}>Delete</button>
+        <strong className='text-center'>
+          Are you sure you want to delete this product?
+        </strong>
+        <button
+          className='w-full bg-red-600 p-3 rounded-lg text-white hover:bg-red-700 active:scale-95 duration-75'
+          onClick={handleDeleteProduct}
+        >
+          Delete
+        </button>
       </div>
     </div>
   )

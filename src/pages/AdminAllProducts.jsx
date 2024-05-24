@@ -71,7 +71,7 @@ const AdminAllProducts = () => {
         />
         <button
           onClick={handleUploadProduct}
-          className='border-2 border-red-600 rounded-full px-2 py-1 hover:bg-red-600 hover:text-white'
+          className='border-2 border-pink-600 rounded-full px-2 py-1 hover:bg-pink-600 hover:text-white'
         >
           Upload Product
         </button>

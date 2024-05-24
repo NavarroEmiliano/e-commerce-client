@@ -59,7 +59,7 @@ const ChangeUserRole = ({ onClose, user }) => {
 
         <button
           onClick={handleUpdate}
-          className='w-fit mx-auto block border p-2 rounded-full mt-4 bg-red-600 text-white hover:bg-red-700'
+          className='w-fit mx-auto block border p-2 rounded-xl mt-4 bg-pink-600 text-white hover:bg-pink-700'
         >
           Change Role
         </button>

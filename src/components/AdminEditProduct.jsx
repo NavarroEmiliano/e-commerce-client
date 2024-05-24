@@ -112,7 +112,7 @@ const AdminEditProduct = ({ closeEdit, productId }) => {
 
   return (
     <div className='fixed w-full h-full top-0 left-0 bottom-0 right-0 flex items-center justify-center bg-black/45'>
-      <div className='bg-slate-100 p-2 rounded-lg w-full max-w-4xl h-full max-h-[80%] shadow-lg'>
+      <div className='bg-slate-100 p-2 rounded-lg w-full max-w-4xl h-full max-h-[80%] shadow'>
         <div className='flex justify-between items-center '>
           <p className='text-1xl font-semibold'>Edit Product</p>
           <button className='text-2xl'>
@@ -120,7 +120,7 @@ const AdminEditProduct = ({ closeEdit, productId }) => {
           </button>
         </div>
         <form onSubmit={handleSubmit} className='flex justify-between h-full'>
-          <div className='grid w-[60%] border shadow-lg p-2 bg-white h-[95%] rounded-lg'>
+          <div className='grid w-[60%] border shadow p-2 bg-white h-[95%] rounded-lg'>
             <h3>General information</h3>
             <InputUploadForm
               label='Title'
@@ -181,9 +181,9 @@ const AdminEditProduct = ({ closeEdit, productId }) => {
           </div>
 
           {/* Product image */}
-          <div className='flex flex-col justify-between border shadow-lg p-2 bg-white w-[39%] h-[95%] rounded-lg'>
+          <div className='flex flex-col justify-between border shadow p-2 bg-white w-[39%] h-[95%] rounded-lg'>
             <div>
-              <label htmlFor='uploadImageInput' className='mt-3  p-2 rounded'>
+              <label htmlFor='uploadImageInput' className='mt-3 p-2 rounded'>
                 <span>Product image</span>
                 <div className='bg-white border rounded h-32 flex justify-center items-center'>
                   <div className='text-slate-500 flex justify-center items-center flex-col gap-2'>
@@ -231,7 +231,7 @@ const AdminEditProduct = ({ closeEdit, productId }) => {
               </div>
             </div>
 
-            <button className='border-2 border-red-600 py-2 rounded-lg hover:text-white  hover:bg-red-600'>
+            <button className='border-2 border-pink-600 py-2 rounded-lg hover:text-white  hover:bg-pink-600'>
               Edit Product
             </button>
           </div>

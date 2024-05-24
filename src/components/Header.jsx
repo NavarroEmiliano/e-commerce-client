@@ -116,6 +116,7 @@ const Header = () => {
                 <Link
                   to='admin-panel/all-products'
                   className='flex items-center gap-2 p-3 hover:bg-pink-600 rounded-xl'
+                  onClick={handleMobileMenu}
                 >
                   <TbLayoutDashboard />
                   Dashboard

@@ -91,7 +91,7 @@ const AdminUploadProduct = ({ closeUpload }) => {
 
   return (
     <div className='fixed w-full h-full top-0 left-0 bottom-0 right-0 flex items-center justify-center bg-black/45'>
-      <div className='bg-slate-100 p-2 rounded-lg w-full max-w-4xl h-full max-h-[80%] shadow-lg'>
+      <div className='bg-pink-100 p-2 rounded-lg w-full max-w-4xl h-full max-h-[80%] shadow-lg'>
         <div className='flex justify-between items-center '>
           <p className='text-1xl font-semibold'>Upload Product</p>
           <button className='text-2xl'>
@@ -119,7 +119,7 @@ const AdminUploadProduct = ({ closeUpload }) => {
                 placeholder='Enter description...'
                 cols='20'
                 rows='2'
-                className='p-1 resize-none rounded-lg border-2'
+                className='p-1 pl-2 resize-none border rounded-lg outline-2 outline-pink-600'
                 required
               ></textarea>
             </div>
@@ -210,7 +210,7 @@ const AdminUploadProduct = ({ closeUpload }) => {
               </div>
             </div>
 
-            <button className='border-2 border-red-600 py-2 rounded-lg hover:text-white  hover:bg-red-600'>
+            <button className='border-2 border-pink-600 py-2 rounded-lg hover:text-white  hover:bg-pink-600'>
               Upload Product
             </button>
           </div>

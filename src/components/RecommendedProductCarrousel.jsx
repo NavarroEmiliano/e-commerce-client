@@ -32,9 +32,8 @@ const RecommendedProductCarrousel = ({ category, heading }) => {
   }
 
   const loadingCart = new Array(2).fill(null)
-  const pending = true
 
-  if (pending) {
+  if (isPending) {
     return (
       <div>
         <div className='h-7 w-48 mb-2'>

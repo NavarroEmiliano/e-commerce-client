@@ -11,7 +11,6 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import cartService from '../services/cartService'
 import { useAuthContext } from '../hooks/useAuthContext'
 import PaypalCheckoutButton from '../components/PaypalCheckoutButton'
-import RecommendedProductCarrousel from '../components/RecommendedProductCarrousel'
 
 const Cart = () => {
   const { user } = useAuthContext()
@@ -211,7 +210,7 @@ const Cart = () => {
                   <p>{totalQuantity}</p>
                 </div>
                 <div className='flex w-full items-center justify-between px-4 gap-2 font-medium text-lg '>
-                  <p>Total Price with Discounts:</p>
+                  <strong>Total Price with Discounts:</strong>
                   <p>{displayUsdCurrency(totalPriceWithDiscount)}</p>
                 </div>
                 <div className='flex text-red-600 w-full items-center justify-between px-4 gap-2 font-medium'>

@@ -1,7 +1,7 @@
 import { LuShoppingCart, LuUser2 } from 'react-icons/lu'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import UserImg from './UserImg'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ROLE from '../common/role'
 import { TbLayoutDashboard } from 'react-icons/tb'
 import { BiPurchaseTagAlt, BiCategoryAlt } from 'react-icons/bi'
@@ -60,6 +60,26 @@ const Header = () => {
 
   const isAdmin = user?.role === ROLE.ADMIN
 
+  useEffect(() => {
+    const disableScroll = () => {
+      document.body.style.overflowY = 'hidden'
+    }
+
+    const enableScroll = () => {
+      document.body.style.overflowY = ''
+    }
+
+    if (showMobileMenu) {
+      disableScroll()
+    } else {
+      enableScroll()
+    }
+
+    return () => {
+      enableScroll()
+    }
+  }, [showMobileMenu])
+
   return (
     /* Mobile */
 
@@ -70,7 +90,7 @@ const Header = () => {
       <SearchBar />
 
       {showMobileMenu && (
-        <div className='fixed z-30 bg-black/65 top-0 right-0 left-0 bottom-0'></div>
+        <div className='fixed z-30 bg-black/65 top-0 right-0 left-0 bottom-0 '></div>
       )}
 
       {/* Menu mobile */}

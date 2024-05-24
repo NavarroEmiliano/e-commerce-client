@@ -75,7 +75,7 @@ const Header = () => {
 
       {/* Menu mobile */}
       <div
-        className={`fixed p-12 top-0 left-0 bottom-0 bg-white rounded-r-xl w-[50%] z-50 transform transition-transform ${showMobileMenu ? 'translate-x-0' : '-translate-x-full'} duration-500`}
+        className={`fixed p-6 top-0 left-0 bottom-0 bg-white rounded-r-xl w-[50%] z-50 transform transition-transform ${showMobileMenu ? 'translate-x-0' : '-translate-x-full'} duration-500`}
       >
         <div
           onClick={handleMobileMenu}

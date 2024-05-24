@@ -220,7 +220,7 @@ const Cart = () => {
                 <p>{displayUsdCurrency(totalPrice - totalPriceWithDiscount)}</p>
               </div>
               {userCart.length ? (
-                <div>
+                <div className='relative z-0'>
                   <PaypalCheckoutButton products={userCart} />
                 </div>
               ) : (

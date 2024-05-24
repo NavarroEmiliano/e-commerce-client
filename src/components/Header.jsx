@@ -1,8 +1,12 @@
-import { LuShoppingCart } from 'react-icons/lu'
+import { LuShoppingCart, LuUser2 } from 'react-icons/lu'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import UserImg from './UserImg'
 import { useState } from 'react'
 import ROLE from '../common/role'
+import { TbLayoutDashboard } from 'react-icons/tb'
+import { BiPurchaseTagAlt, BiCategoryAlt } from 'react-icons/bi'
+import { MdFavoriteBorder } from 'react-icons/md'
+import { IoMdArrowRoundBack } from 'react-icons/io'
 
 import { useQuery } from '@tanstack/react-query'
 import cartService from '../services/cartService'
@@ -15,6 +19,7 @@ import { IoMenu } from 'react-icons/io5'
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false)
+  const [showMobileMenu, setShowMobileMenu] = useState(false)
   const { user } = useAuthContext()
   const { pathname } = useLocation()
   const { logout } = useLogout()
@@ -34,11 +39,16 @@ const Header = () => {
   })
 
   const handleLogout = () => {
+    setShowMobileMenu((prev) => !prev)
     logout()
   }
 
   const handleMenu = () => {
     setShowMenu(!showMenu)
+  }
+
+  const handleMobileMenu = () => {
+    setShowMobileMenu((prev) => !prev)
   }
 
   const handleChangeSelect = (e) => {
@@ -52,10 +62,53 @@ const Header = () => {
     /* Mobile */
 
     <header className='flex items-center h-14 p-4 0 bg-pink-600 justify-between w-full'>
-      <div className='text-xl'>
+      <div onClick={handleMobileMenu} className='text-xl cursor-pointer'>
         <IoMenu />
       </div>
       <SearchBar />
+
+      {showMobileMenu && (
+        <div className='fixed z-10 bg-black/65 top-0 right-0 left-0 bottom-0'></div>
+      )}
+
+      <div
+        className={`fixed p-10 top-0 left-0 bg-pink-600 rounded-r-xl w-[50%] h-full z-20 transform transition-transform ${showMobileMenu ? 'translate-x-0' : '-translate-x-full'} duration-500`}
+      >
+        <div
+          onClick={handleMobileMenu}
+          className='absolute top-2 right-2 text-2xl text-white cursor-pointer'
+        >
+          <IoMdArrowRoundBack />
+        </div>
+        <div className='flex items-center gap-2'>
+          <div className='text-2xl flex items-center justify-center bg-white h-10 w-10 rounded-full'>
+            <LuUser2 />
+          </div>
+          <p className='text-white'>{user?.name}</p>
+        </div>
+        <div className='flex flex-col'>
+          <Link className='flex items-center gap-2 p-1'>
+            <TbLayoutDashboard />
+            Dashboard
+          </Link>
+          <Link className='flex items-center gap-2 p-1'>
+            <BiPurchaseTagAlt />
+            Purchases
+          </Link>
+          <Link className='flex items-center gap-2 p-1'>
+            <MdFavoriteBorder /> Favorites
+          </Link>
+          <Link className='flex items-center gap-2 p-1'>
+            <BiCategoryAlt />
+            Categories
+          </Link>
+          <Link className='flex items-center gap-2 p-1'>
+            <LuUser2 />
+            My account
+          </Link>
+          <button onClick={handleLogout}>Logout</button>
+        </div>
+      </div>
 
       {user ? (
         <Link to='cart'>

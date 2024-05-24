@@ -33,7 +33,7 @@ const getProductById = async (id) => {
 
 const getOneProductPerCategory = async () => {
   const { data } = await axios.get(`${baseUrl}/one-per-category`)
-  return data
+  return data.data
 }
 
 const getAllBrands = async () => {

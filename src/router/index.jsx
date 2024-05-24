@@ -16,6 +16,7 @@ import ViewPurchases from '../pages/ViewPurchases'
 import ResetPassword from '../pages/ResetPassword'
 import AllProducts from '../pages/AllProducts'
 import AdminSoldProducts from '../pages/AdminSoldProducts'
+import Categories from '../pages/Categories'
 
 const router = createBrowserRouter([
   {
@@ -32,7 +33,11 @@ const router = createBrowserRouter([
         element: <AllProducts />,
       },
       {
-        path: 'product-category/:categoryName',
+        path: 'categories',
+        element: <Categories />,
+      },
+      {
+        path: 'categories/:categoryName',
         element: <CategoryProduct />,
       },
       {

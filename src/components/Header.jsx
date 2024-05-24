@@ -55,7 +55,7 @@ const Header = () => {
     if (e.target.value === 'categories') {
       return navigate('/')
     }
-    navigate(`product-category/${e.target.value}`)
+    navigate(`categories/${e.target.value}`)
   }
 
   const isAdmin = user?.role === ROLE.ADMIN
@@ -130,7 +130,11 @@ const Header = () => {
                 </Link>
               )}
 
-              <Link className='flex items-center gap-2 p-3 hover:bg-pink-600 rounded-xl'>
+              <Link
+                onClick={handleMobileMenu}
+                to='categories'
+                className='flex items-center gap-2 p-3 hover:bg-pink-600 rounded-xl'
+              >
                 <BiCategoryAlt />
                 Categories
               </Link>

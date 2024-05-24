@@ -83,7 +83,7 @@ const Header = () => {
   return (
     /* Mobile */
 
-    <header className='flex items-center h-14 p-4 bg-pink-600 justify-between w-full'>
+    <header className='flex items-center h-14 p-4 bg-pink-600 justify-between w-full sm:px-20'>
       <div onClick={handleMobileMenu} className='text-xl cursor-pointer'>
         <IoMenu />
       </div>

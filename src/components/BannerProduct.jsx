@@ -33,40 +33,21 @@ const BannerProduct = () => {
   }
 
   return (
-    <div className='container mx-auto mt-4'>
-      <div className='h-72 w-full hidden md:block'>
-        {/* Desktop  */}
+    <div className='container mx-auto mt-4 '>
+      <div className='h-52 md:h-72 w-full'>
         <Carousel
           showDots={true}
           responsive={responsive}
           infinite={true}
           autoPlay={true}
           removeArrowOnDeviceType={['tablet', 'mobile']}
+          className='relative z-0'
         >
           {desktopImages.map((img, index) => (
-            <div key={index} className='w-full h-72  min-w-full min-h-full'>
-              <img
-                src={img}
-                alt={`img${index}`}
-                className='w-full h-full object-cover'
-              />
-            </div>
-          ))}
-        </Carousel>
-      </div>
-
-      {/* Mobile */}
-
-      <div className='h-52 w-full md:hidden'>
-        <Carousel
-          showDots={true}
-          responsive={responsive}
-          infinite={true}
-          autoPlay={true}
-          removeArrowOnDeviceType={['tablet', 'mobile']}
-        >
-          {desktopImages.map((img, index) => (
-            <div key={index} className='w-full h-52 min-w-full min-h-full'>
+            <div
+              key={index}
+              className='w-full h-52 md:h-72 min-w-full min-h-full'
+            >
               <img
                 src={img}
                 alt={`img${index}`}

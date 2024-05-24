@@ -21,7 +21,7 @@ const AdminPanel = () => {
   }, [user, navigate])
 
   return (
-    <div className='flex items-center lg:shadow justify-center min-h-[calc(100vh-120px)]'>
+    <div className='flex items-center lg:shadow justify-center min-h-[calc(100vh-113px)]'>
       <div className='text-lg text-red-600 w-60 lg:hidden'>
         Attention! The admin panel is optimized for viewing on desktop screens.
         We recommend accessing it from a larger device to fully utilize all

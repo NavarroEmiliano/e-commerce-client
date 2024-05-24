@@ -95,7 +95,7 @@ const Header = () => {
 
       {/* Menu mobile */}
       <div
-        className={`fixed p-6 top-0 left-0 bottom-0 bg-white rounded-r-xl w-[50%] z-50 transform transition-transform ${showMobileMenu ? 'translate-x-0' : '-translate-x-full'} duration-500`}
+        className={`fixed p-6 top-0 left-0 bottom-0 bg-white rounded-r-xl w-full max-w-[300px] z-50 transform transition-transform ${showMobileMenu ? 'translate-x-0' : '-translate-x-full'} duration-500`}
       >
         <div
           onClick={handleMobileMenu}
@@ -113,7 +113,10 @@ const Header = () => {
             </div>
             <div className='flex flex-col mt-4'>
               {isAdmin && (
-                <Link className='flex items-center gap-2 p-3 hover:bg-pink-600 rounded-xl'>
+                <Link
+                  to='admin-panel/all-products'
+                  className='flex items-center gap-2 p-3 hover:bg-pink-600 rounded-xl'
+                >
                   <TbLayoutDashboard />
                   Dashboard
                 </Link>

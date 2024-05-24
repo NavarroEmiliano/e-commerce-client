@@ -58,55 +58,73 @@ const Header = () => {
     navigate(`product-category/${e.target.value}`)
   }
 
+  const isAdmin = user?.role === ROLE.ADMIN
+
   return (
     /* Mobile */
 
-    <header className='flex items-center h-14 p-4 0 bg-pink-600 justify-between w-full'>
+    <header className='flex items-center h-14 p-4 bg-pink-600 justify-between w-full'>
       <div onClick={handleMobileMenu} className='text-xl cursor-pointer'>
         <IoMenu />
       </div>
       <SearchBar />
 
       {showMobileMenu && (
-        <div className='fixed z-10 bg-black/65 top-0 right-0 left-0 bottom-0'></div>
+        <div className='fixed z-30 bg-black/65 top-0 right-0 left-0 bottom-0'></div>
       )}
 
+      {/* Menu mobile */}
       <div
-        className={`fixed p-10 top-0 left-0 bg-pink-600 rounded-r-xl w-[50%] h-full z-20 transform transition-transform ${showMobileMenu ? 'translate-x-0' : '-translate-x-full'} duration-500`}
+        className={`fixed p-12 top-0 left-0 bottom-0 bg-white rounded-r-xl w-[50%] z-50 transform transition-transform ${showMobileMenu ? 'translate-x-0' : '-translate-x-full'} duration-500`}
       >
         <div
           onClick={handleMobileMenu}
-          className='absolute top-2 right-2 text-2xl text-white cursor-pointer'
+          className='absolute top-2 right-2 text-2xl text-pink-600 cursor-pointer'
         >
           <IoMdArrowRoundBack />
         </div>
-        <div className='flex items-center gap-2'>
-          <div className='text-2xl flex items-center justify-center bg-white h-10 w-10 rounded-full'>
-            <LuUser2 />
+        <div className='flex flex-col justify-between h-full'>
+          <div>
+            <div className='flex items-center gap-2'>
+              <div className='text-2xl flex items-center justify-center bg-pink-600 h-10 w-10 rounded-full'>
+                <LuUser2 />
+              </div>
+              <p className='font-bold'>{user?.name}</p>
+            </div>
+            <div className='flex flex-col mt-4'>
+              {isAdmin && (
+                <Link className='flex items-center gap-2 p-3 hover:bg-pink-600 rounded-xl'>
+                  <TbLayoutDashboard />
+                  Dashboard
+                </Link>
+              )}
+
+              {user && (
+                <Link className='flex items-center gap-2 p-3 hover:bg-pink-600 rounded-xl'>
+                  <BiPurchaseTagAlt />
+                  Purchases
+                </Link>
+              )}
+
+              <Link className='flex items-center gap-2 p-3 hover:bg-pink-600 rounded-xl'>
+                <BiCategoryAlt />
+                Categories
+              </Link>
+              {user && (
+                <Link className='flex items-center gap-2 p-3 hover:bg-pink-600 rounded-xl'>
+                  <LuUser2 />
+                  My account
+                </Link>
+              )}
+            </div>
           </div>
-          <p className='text-white'>{user?.name}</p>
-        </div>
-        <div className='flex flex-col'>
-          <Link className='flex items-center gap-2 p-1'>
-            <TbLayoutDashboard />
-            Dashboard
-          </Link>
-          <Link className='flex items-center gap-2 p-1'>
-            <BiPurchaseTagAlt />
-            Purchases
-          </Link>
-          <Link className='flex items-center gap-2 p-1'>
-            <MdFavoriteBorder /> Favorites
-          </Link>
-          <Link className='flex items-center gap-2 p-1'>
-            <BiCategoryAlt />
-            Categories
-          </Link>
-          <Link className='flex items-center gap-2 p-1'>
-            <LuUser2 />
-            My account
-          </Link>
-          <button onClick={handleLogout}>Logout</button>
+
+          <button
+            className='w-full bg-pink-600 border-2 p-3 rounded-xl text-lg active:scale-95 active:bg-pink-800 duration-100'
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
         </div>
       </div>
 
@@ -122,7 +140,12 @@ const Header = () => {
           </div>
         </Link>
       ) : (
-        <Link to={'login'}>Login</Link>
+        <Link
+          className='flex items-center justify-center border-2  px-2 rounded-lg h-8 font-semibold hover:bg-white'
+          to={'login'}
+        >
+          Login
+        </Link>
       )}
     </header>
 

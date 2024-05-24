@@ -11,6 +11,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import cartService from '../services/cartService'
 import { useAuthContext } from '../hooks/useAuthContext'
 import PaypalCheckoutButton from '../components/PaypalCheckoutButton'
+import RecommendedProductCarrousel from '../components/RecommendedProductCarrousel'
 
 const Cart = () => {
   const { user } = useAuthContext()
@@ -104,8 +105,9 @@ const Cart = () => {
   )
 
   return (
-    <div className='container mx-auto py-4'>
-      <div className='flex flex-col-reverse lg:flex-row lg:items-start items-center w-full gap-10'>
+    <div className='container mx-auto py-4 min-h-[calc(100vh-112px)]'>
+      <div className='font-bold text-xl mb-2'>Shopping Cart</div>
+      <div className='flex flex-col lg:flex-row lg:items-start items-center w-full gap-2'>
         {/*  View Product  */}
         <div className='w-full'>
           {isPending
@@ -117,7 +119,7 @@ const Cart = () => {
             : userCart?.map((el) => (
                 <div
                   key={el.id}
-                  className='w-full bg-white h-40 sm:h-32 shadow mb-2 border border-slate-300 rounded-lg grid grid-cols-[128px,1fr] overflow-hidden'
+                  className='w-full h-40 sm:h-32 shadow mb-2 border border-slate-300 rounded-lg grid grid-cols-[128px,1fr] overflow-hidden'
                 >
                   <Link
                     to={`/product/${el.productId.id}`}
@@ -129,39 +131,38 @@ const Cart = () => {
                       alt={el?.productId?.title}
                     />
                   </Link>
-                  <div className='p-2 relative'>
+                  <div className='flex flex-col justify-around p-2 relative'>
                     <div
                       onClick={() => deleteCartProduct(el.id)}
                       className='hover:scale-125 duration-150 cursor-pointer text-3xl absolute right-0 top-0 text-red-600 rounded-full p-1'
                     >
                       <MdDelete />
                     </div>
-                    <h2 className='text-lg lg:text-2xl capitalize text-ellipsis line-clamp-1 '>
+                    <h2 className='text-lg font-bold lg:text-2xl capitalize text-ellipsis line-clamp-1 '>
                       {el?.productId?.title}
                     </h2>
-                    <p className='capitalize'>{el?.productId?.category}</p>
-                    <div className='flex items-center justify-between '>
+                    <div className='flex items-center justify-between'>
                       <div className='flex flex-col sm:flex-row sm:gap-2'>
-                        <p>
+                        <strong>
                           {displayUsdCurrency(
                             calculateDiscountedPrice(
                               el?.productId?.price,
                               el?.productId?.discountPercentage,
                             ),
                           )}
-                        </p>
+                        </strong>
                         <p className='text-gray-500'>Unit price</p>
                       </div>
 
                       <div className='flex flex-col sm:flex-row sm:gap-2'>
-                        <p>
+                        <strong>
                           {displayUsdCurrency(
                             calculateDiscountedPrice(
                               el?.productId?.price,
                               el?.productId?.discountPercentage,
                             ) * el?.quantity,
                           )}
-                        </p>
+                        </strong>
                         <p className='text-gray-500'>Subtotal</p>
                       </div>
                     </div>
@@ -169,22 +170,22 @@ const Cart = () => {
                       <div className='flex items-center gap-3'>
                         <button
                           onClick={() => decreaseQuantity(el.id, el.quantity)}
-                          className='w-6 h-6 text-red-600 hover:scale-110 duration-150'
+                          className='w-8 h-8 text-red-600 hover:scale-110 duration-150'
                         >
                           <CiSquareMinus className='w-full h-full' />
                         </button>
-                        <span>{el.quantity}</span>
+                        <span className='font-bold'>{el.quantity}</span>
                         <button
                           onClick={() =>
                             increaseQuantity(el.id, el.quantity, el.productId)
                           }
-                          className='w-6 h-6 flex text-red-600 hover:scale-110 duration-150'
+                          className='w-8 h-8 flex text-red-600 hover:scale-110 duration-150'
                         >
                           <CiSquarePlus className='w-full h-full ' />
                         </button>
                       </div>
                       <p className='text-gray-500'>
-                        Stock: {el?.productId.stock}
+                        <strong>{el?.productId.stock} </strong>left in stock
                       </p>
                     </div>
                   </div>
@@ -193,42 +194,51 @@ const Cart = () => {
         </div>
 
         {/* Total product */}
-        <div className='mt-5 lg:mt-0 w-full lg:max-w-sm '>
-          {isPending ? (
-            <div className='h-36 mb-2'>
-              <Skeleton className='h-full' />
-            </div>
-          ) : (
-            <div className='bg-white shadow rounded-md border-slate-300 flex flex-col justify-center items-center gap-2 pb-2'>
-              <h2 className='text-white w-full bg-red-600 px-4 py-1 rounded-t-lg'>
-                Summary
-              </h2>
-              <div className='flex w-full items-center justify-between px-4 gap-2 font-medium text-lg '>
-                <p>Quantity</p>
-                <p>{totalQuantity}</p>
+
+        {totalQuantity ? (
+          <div className='mt-5 lg:mt-0 w-full lg:max-w-sm '>
+            {isPending ? (
+              <div className='h-36 mb-2'>
+                <Skeleton className='h-full' />
               </div>
-              <div className='flex w-full items-center justify-between px-4 gap-2 font-medium text-lg '>
-                <p>Total Price with Discounts:</p>
-                <p>{displayUsdCurrency(totalPriceWithDiscount)}</p>
-              </div>
-              <div className='flex text-red-600 w-full items-center justify-between px-4 gap-2 font-medium'>
-                <p>Total Price without Discounts:</p>
-                <p>{displayUsdCurrency(totalPrice)}</p>
-              </div>
-              <div className='flex w-full items-center justify-between px-4 gap-2 font-medium  '>
-                <p>Savings:</p>
-                <p>{displayUsdCurrency(totalPrice - totalPriceWithDiscount)}</p>
-              </div>
-              {userCart.length ? (
-                <div className='relative z-0'>
-                  <PaypalCheckoutButton products={userCart} />
+            ) : (
+              <div className='bg-white shadow rounded-md border-slate-300 flex flex-col justify-center items-center gap-2 pb-2'>
+                <h2 className='text-white w-full bg-pink-600 px-4 py-1 rounded-t-lg'>
+                  Summary
+                </h2>
+                <div className='flex w-full items-center justify-between px-4 gap-2 font-medium text-lg '>
+                  <p>Quantity</p>
+                  <p>{totalQuantity}</p>
                 </div>
-              ) : (
-                ''
-              )}
-            </div>
-          )}
-        </div>
+                <div className='flex w-full items-center justify-between px-4 gap-2 font-medium text-lg '>
+                  <p>Total Price with Discounts:</p>
+                  <p>{displayUsdCurrency(totalPriceWithDiscount)}</p>
+                </div>
+                <div className='flex text-red-600 w-full items-center justify-between px-4 gap-2 font-medium'>
+                  <p>Total Price without Discounts:</p>
+                  <p>{displayUsdCurrency(totalPrice)}</p>
+                </div>
+                <div className='flex w-full items-center justify-between px-4 gap-2 font-medium  '>
+                  <p>Savings:</p>
+                  <p>
+                    {displayUsdCurrency(totalPrice - totalPriceWithDiscount)}
+                  </p>
+                </div>
+                {userCart.length ? (
+                  <div className='relative z-0'>
+                    <PaypalCheckoutButton products={userCart} />
+                  </div>
+                ) : (
+                  ''
+                )}
+              </div>
+            )}
+          </div>
+        ) : (
+          <div>
+            <p>Your shopping cart is empty</p>
+          </div>
+        )}
       </div>
     </div>
   )

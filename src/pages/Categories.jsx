@@ -10,7 +10,7 @@ const Categories = () => {
   })
 
   return (
-    <div className='flex flex-wrap justify-around gap-6 min-h-screen p-4'>
+    <div className='flex flex-wrap justify-around gap-2 min-h-screen p-4'>
       {categories?.map((prod) => (
         <Link to={`/categories/${prod.category}`} key={prod.id}>
           <div className='flex flex-col items-center h-40 w-28 bg-pink-200 rounded-lg '>

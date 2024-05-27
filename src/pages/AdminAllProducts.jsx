@@ -58,9 +58,8 @@ const AdminAllProducts = () => {
   }
 
   return (
-    <div className='border rounded-md'>
-      <div className='flex justify-between items-center py-2 px-4 border-b'>
-        <h2 className='font-bold text-lg'>All products</h2>
+    <div className='rounded-md'>
+      <div className='flex justify-between items-center py-2 px-4'>
         <input
           onChange={handleSearch}
           type='text'
@@ -71,13 +70,64 @@ const AdminAllProducts = () => {
         />
         <button
           onClick={handleUploadProduct}
-          className='border-2 border-pink-600 rounded-full px-2 py-1 hover:bg-pink-600 hover:text-white'
+          className='rounded-xl border-2 border-pink-600 px-2 py-1 bg-pink-600 text-white hover:text-black hover:bg-white'
         >
           Upload Product
         </button>
       </div>
 
-      <div className='overflow-y-auto h-[calc(100vh-190px)]'>
+      {filteredProducts?.map((prod) => (
+        <div
+          key={prod?.id}
+          className='flex h-32 gap-4 p-2 border-2 border-pink-200 rounded-2xl m-4'
+        >
+          <div className='flex items-center justify-center w-full max-h-28 max-w-28'>
+            <img
+              src={prod?.images[0]}
+              alt={prod.description}
+              className='object-center rounded-xl max-w-28 max-h-28'
+            />
+          </div>
+          <div className='flex flex-col justify-between'>
+            <p className='font-semibold text-ellipsis line-clamp-1 '>
+              {prod?.title}
+            </p>
+            <div className='flex gap-2'>
+              <p className='text-xs text-gray-500'>Brand</p>
+              <p className='capitalize text-gray-600 text-xs'>{prod?.brand}</p>
+            </div>
+
+            <div className='flex gap-2'>
+              <p className=' text-gray-500'>Price</p>
+              <p>{displayUsdCurrency(prod?.price)}</p>
+            </div>
+            <div className='flex gap-2'>
+              <p className='text-gray-500'>Stock</p>
+              <p className='font-semibold'>{prod?.stock}</p>
+            </div>
+            <div className='flex gap-2 text-sm'>
+              <p className='text-gray-500'>Category</p>
+              <p className='capitalize text-gray-700'>{prod?.category}</p>
+            </div>
+          </div>
+          <div className='flex flex-col items-center ml-auto gap-4'>
+            <button
+              onClick={() => handleEditProduct(prod.id)}
+              className='bg-green-200 p-2 text-sm rounded-full hover:bg-green-500'
+            >
+              <MdModeEdit />
+            </button>
+            <button
+              onClick={() => handleDeleteProduct(prod.id)}
+              className='bg-red-200 p-2 text-sm rounded-full hover:bg-red-500'
+            >
+              <MdDelete />
+            </button>
+          </div>
+        </div>
+      ))}
+
+      {/* <div className='overflow-y-auto h-[calc(100vh-190px)]'>
         <table className='w-full productTable'>
           <thead>
             <tr>
@@ -128,7 +178,7 @@ const AdminAllProducts = () => {
             })}
           </tbody>
         </table>
-      </div>
+      </div> */}
       {showUploadProduct && (
         <AdminUploadProduct closeUpload={handleUploadProduct} />
       )}

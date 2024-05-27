@@ -137,7 +137,7 @@ const Cart = () => {
                     >
                       <MdDelete />
                     </div>
-                    <h2 className='text-lg font-bold lg:text-2xl capitalize text-ellipsis line-clamp-1 '>
+                    <h2 className='text-lg font-bold lg:text-2xl capitalize text-ellipsis line-clamp-1'>
                       {el?.productId?.title}
                     </h2>
                     <div className='flex items-center justify-between'>

@@ -36,7 +36,10 @@ const AdminAllUsers = () => {
   return (
     <div>
       {data?.data?.map((user) => (
-        <div key={user.id} className='flex gap-4 p-4 border-2 rounded-2xl m-4'>
+        <div
+          key={user.id}
+          className='flex gap-4 p-4 border-2 border-pink-200 rounded-2xl m-4'
+        >
           <div className='flex items-center justify-center h-14 w-14 min-h-14 min-w-14 border-2 rounded-full'>
             Img
           </div>

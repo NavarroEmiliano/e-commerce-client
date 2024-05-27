@@ -88,7 +88,7 @@ const Header = () => {
         <IoMenu />
       </div>
       {pathname.includes('admin-panel') && (
-        <div className='text-white text-lg font-semibold'>Admin panel</div>
+        <div className='text-pink-800 text-lg font-semibold'>Admin panel</div>
       )}
       {pathname === '/' && <SearchBar />}
 

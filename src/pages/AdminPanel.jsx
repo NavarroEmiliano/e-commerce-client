@@ -22,22 +22,22 @@ const AdminPanel = () => {
 
   return (
     <div className='flex lg:shadow justify-center min-h-[calc(100vh-111px)]'>
-      <div className='bg-pink-600 w-full h-10'>
+      <div className='flex px-2 items-center h-8 gap-4 bg-pink-600 w-full'>
         <Link
           to={'all-users'}
-          className={`px-2 py-1 hover:bg-pink-600 rounded-xl ${pathname.includes('all-users') && 'underline'}`}
+          className={`${pathname.includes('all-users') ? 'border-b-2 font-semibold text-white' : 'text-pink-800'}`}
         >
           All users
         </Link>
         <Link
           to={'all-products'}
-          className={`px-2 py-1 hover:bg-pink-600 rounded-xl ${pathname.includes('all-products') && 'underline'}`}
+          className={`${pathname.includes('all-products') ? 'border-b-2 font-semibold text-white' : 'text-pink-800'}`}
         >
           All products
         </Link>
         <Link
           to={'sold-products'}
-          className={`px-2 py-1 hover:bg-pink-600 rounded-xl ${pathname.includes('sold-products') && 'underline'}`}
+          className={`${pathname.includes('sold-products') ? 'border-b-2 font-semibold text-white' : 'text-pink-800'}`}
         >
           Orders
         </Link>

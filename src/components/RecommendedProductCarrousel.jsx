@@ -52,7 +52,7 @@ const RecommendedProductCarrousel = ({ category, heading }) => {
 
   return (
     <div className='mx-auto py-4 '>
-      <h2 className='text-2xl mx-4 font-semibold pb-4'>{heading}</h2>
+      <h2 className='text-2xl font-semibold pb-4'>{heading}</h2>
 
       {!isPending && (
         <div>

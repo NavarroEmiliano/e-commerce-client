@@ -45,7 +45,10 @@ const AdminAllUsers = () => {
               <p className='text-xl font-medium'>{user.name}</p>
               <p className='text-gray-500'>Role: {user.role}</p>
               <p>{user.email}</p>
-              <p>{moment(user?.createdAt).format('LL')}</p>
+              <div className='flex gap-2'>
+                <p className='text-gray-500'>Created date:</p>
+                <p>{moment(user?.createdAt).format('LL')}</p>
+              </div>
             </div>
             <button
               onClick={() => handleShowEdit(user)}
@@ -56,39 +59,6 @@ const AdminAllUsers = () => {
           </div>
         </div>
       ))}
-      {/* <table className='w-full userTable'>
-        <thead className='text-gray-500'>
-          <tr>
-            <th>N</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Created Date</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data?.data?.map((user, index) => {
-            return (
-              <tr key={user?.id}>
-                <td>{index}</td>
-                <td>{user?.name}</td>
-                <td>{user?.email}</td>
-                <td>{user?.role}</td>
-                <td>{moment(user?.createdAt).format('LL')}</td>
-                <td>
-                  <button
-                    onClick={() => handleShowEdit(user)}
-                    className='bg-green-200 p-2 rounded-full hover:bg-green-500'
-                  >
-                    <MdModeEdit />
-                  </button>
-                </td>
-              </tr>
-            )
-          })}
-        </tbody>
-      </table> */}
       {showUpdateRole ? (
         <ChangeUserRole onClose={handleShowEdit} user={updateUserDetails} />
       ) : (

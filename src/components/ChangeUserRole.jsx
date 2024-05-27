@@ -35,7 +35,7 @@ const ChangeUserRole = ({ onClose, user }) => {
         </button>
 
         <div className='flex flex-col gap-4'>
-          <h1 className='pb text-lx font-medium'>Change User Role</h1>
+          <h1 className='pb text-lx font-medium text-xl'>Change User Role</h1>
           <p>Name: {user.name}</p>
           <p>Email: {user.email}</p>
           <div className='flex'>

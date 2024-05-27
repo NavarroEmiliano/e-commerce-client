@@ -21,7 +21,7 @@ const AdminPanel = () => {
   }, [user, navigate])
 
   return (
-    <div className='flex lg:shadow justify-center min-h-[calc(100vh-111px)]'>
+    <div className='flex flex-col justify-start min-h-[calc(100vh-111px)]'>
       <div className='flex px-2 items-center h-8 gap-4 bg-pink-600 w-full'>
         <Link
           to={'all-users'}
@@ -42,6 +42,9 @@ const AdminPanel = () => {
           Orders
         </Link>
       </div>
+      <main className='w-full h-full'>
+        <Outlet />
+      </main>
     </div>
   )
 }

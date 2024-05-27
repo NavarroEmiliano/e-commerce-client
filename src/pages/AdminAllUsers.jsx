@@ -35,10 +35,31 @@ const AdminAllUsers = () => {
 
   return (
     <div>
-      <table className='w-full userTable'>
-        <thead className='bg-gray-500 text-white'>
+      {data?.data?.map((user) => (
+        <div key={user.id} className='flex gap-4 p-4 border-2 rounded-2xl m-4'>
+          <div className='flex items-center justify-center h-14 w-14 min-h-14 min-w-14 border-2 rounded-full'>
+            Img
+          </div>
+          <div className='flex justify-between w-full'>
+            <div>
+              <p className='text-xl font-medium'>{user.name}</p>
+              <p className='text-gray-500'>Role: {user.role}</p>
+              <p>{user.email}</p>
+              <p>{moment(user?.createdAt).format('LL')}</p>
+            </div>
+            <button
+              onClick={() => handleShowEdit(user)}
+              className='bg-green-200 h-8 w-8 p-2 rounded-full hover:bg-green-500'
+            >
+              <MdModeEdit />
+            </button>
+          </div>
+        </div>
+      ))}
+      {/* <table className='w-full userTable'>
+        <thead className='text-gray-500'>
           <tr>
-            <th>Sr.</th>
+            <th>N</th>
             <th>Name</th>
             <th>Email</th>
             <th>Role</th>
@@ -67,9 +88,11 @@ const AdminAllUsers = () => {
             )
           })}
         </tbody>
-      </table>
-      {showUpdateRole && (
+      </table> */}
+      {showUpdateRole ? (
         <ChangeUserRole onClose={handleShowEdit} user={updateUserDetails} />
+      ) : (
+        ''
       )}
     </div>
   )

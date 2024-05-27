@@ -7,6 +7,7 @@ import { TbLayoutDashboard } from 'react-icons/tb'
 import { BiPurchaseTagAlt, BiCategoryAlt } from 'react-icons/bi'
 import { MdFavoriteBorder } from 'react-icons/md'
 import { IoMdArrowRoundBack } from 'react-icons/io'
+import { GrHomeRounded } from 'react-icons/gr'
 
 import { useQuery } from '@tanstack/react-query'
 import cartService from '../services/cartService'
@@ -115,6 +116,14 @@ const Header = () => {
               <p className='font-bold'>{user?.name}</p>
             </div>
             <div className='flex flex-col mt-4'>
+              <Link
+                to='/'
+                className='flex items-center gap-2 p-3 hover:bg-pink-600 rounded-xl'
+                onClick={handleMobileMenu}
+              >
+                <GrHomeRounded />
+                Home
+              </Link>
               {isAdmin && (
                 <Link
                   to='admin-panel/all-products'

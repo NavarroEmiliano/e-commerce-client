@@ -30,7 +30,7 @@ const App = () => {
       />
       {pathname !== '/login' && pathname !== '/sign-up' ? <Header /> : ''}
 
-      <main className='mx-auto min-h-[calc(100vh-120px)] md:w-[90%] w-[95%]'>
+      <main className='mx-auto min-h-[calc(100vh-120px)]'>
         <Outlet />
       </main>
 

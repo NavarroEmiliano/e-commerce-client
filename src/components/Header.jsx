@@ -87,7 +87,10 @@ const Header = () => {
       <div onClick={handleMobileMenu} className='text-xl cursor-pointer'>
         <IoMenu />
       </div>
-      <SearchBar />
+      {pathname.includes('admin-panel') && (
+        <div className='text-white text-lg font-semibold'>Admin panel</div>
+      )}
+      {pathname === '/' && <SearchBar />}
 
       {showMobileMenu && (
         <div className='fixed z-30 bg-black/65 top-0 right-0 left-0 bottom-0 '></div>

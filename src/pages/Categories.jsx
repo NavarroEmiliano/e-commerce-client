@@ -10,10 +10,10 @@ const Categories = () => {
   })
 
   return (
-    <div className='w-full mx-auto grid grid-cols-3 gap-4 min-h-screen p-4 bg-pink-50'>
+    <div className='w-full mx-auto grid grid-cols-3 gap-4 min-h-screen p-4'>
       {categories?.map((prod) => (
         <Link to={`/categories/${prod.category}`} key={prod.id}>
-          <div className='flex bg-white mx-auto flex-col items-center h-full max-h-44 w-full max-w-28 rounded-lg shadow-lg'>
+          <div className='flex mx-auto flex-col items-center h-full max-h-44 w-full max-w-28 rounded-lg shadow'>
             <div className='h-28 w-28'>
               <img
                 src={prod.images[0]}

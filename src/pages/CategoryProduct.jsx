@@ -32,14 +32,10 @@ const CategoryProduct = () => {
   } */
 
   return (
-    <div className='flex mx-auto my-8 px-4 relative'>
-      <div className='flex w-full '>
-        <div className='flex w-full flex-wrap justify-around gap-6'>
-          {data?.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-      </div>
+    <div className='grid grid-cols-2 my-8'>
+      {data?.map((product) => (
+        <ProductCard key={product.id} product={product} />
+      ))}
     </div>
   )
 }

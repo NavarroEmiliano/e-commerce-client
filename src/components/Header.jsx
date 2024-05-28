@@ -94,6 +94,12 @@ const Header = () => {
       {pathname === '/all-products' && (
         <div className='text-pink-800 text-lg font-semibold'>All Products</div>
       )}
+
+      {pathname.includes('categories') && (
+        <div className='text-pink-800 text-lg font-semibold capitalize'>
+          {pathname.split('/')[2]}
+        </div>
+      )}
       {pathname === '/' && <SearchBar />}
 
       {showMobileMenu && (
@@ -133,7 +139,7 @@ const Header = () => {
                 onClick={handleMobileMenu}
               >
                 <LuBoxes />
-                Products
+                All Products
               </Link>
               {isAdmin && (
                 <Link

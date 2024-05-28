@@ -33,10 +33,21 @@ const ForgotPassword = () => {
   }, [user])
 
   return (
-    <div>
+    <div className='flex flex-col w-full items-center justify-center min-h-[calc(100vh-112px)]'>
+      <div className='max-w-[300px] mb-6'>
+        "Forgot your password? Enter your email below and we'll send you a link
+        to reset your password. Thank you!"
+      </div>
       <form onSubmit={handleSubmit}>
-        <input type='email' name='email' onChange={handleOnChange} />
-        <button>Submit</button>
+        <input
+          type='email'
+          name='email'
+          onChange={handleOnChange}
+          className='w-full max-w-[430px] border border-pink-400 h-12 rounded-lg mb-6 pl-2 outline-2 outline-pink-700 font-bold'
+        />
+        <button className='w-full p-4 rounded-lg text-white text-xl font-medium bg-pink-600 hover:bg-pink-800 active:scale-95 duration-100'>
+          Submit
+        </button>
       </form>
     </div>
   )

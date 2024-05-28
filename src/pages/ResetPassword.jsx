@@ -69,44 +69,56 @@ const ResetPassword = () => {
   }, [user])
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Password</label>
-        <div className='flex items-center bg-slate-100 p-2'>
-          <input
-            type={showPassword ? 'text' : 'password'}
-            name='password'
-            value={data.password}
-            onChange={handleOnChange}
-            placeholder='Enter password'
-            required
-            className='w-full h-full outline-none bg-transparent'
-          />
-          <div onClick={handleShowPassword} className='cursor-pointer'>
-            <span>{showPassword ? <FaEyeSlash /> : <FaEye />}</span>
+    <div className='relative flex flex-col items-center justify-center min-h-[calc(100vh-112px)]'>
+      <div className='w-full max-w-[430px] mb-6'>
+        "Reset Password Enter your new password below. Make sure it's strong and
+        unique to keep your account secure. Thank you!"
+      </div>
+      <form onSubmit={handleSubmit} className='w-full max-w-[430px] p-2 mb-16'>
+        <div>
+          <label className='font-medium'>Password</label>
+          <div className='relative'>
+            <input
+              type={showPassword ? 'text' : 'password'}
+              name='password'
+              value={data.password}
+              onChange={handleOnChange}
+              required
+              className='w-full border border-pink-400 h-12 rounded-lg mb-6 pl-2 outline-2 outline-pink-700 font-bold'
+            />
+            <div
+              onClick={handleShowPassword}
+              className='absolute right-3 top-4 z-10 text-lg hover:scale-125 duration-100'
+            >
+              <span>{showPassword ? <FaEyeSlash /> : <FaEye />}</span>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div>
-        <label>Confirm password</label>
-        <div className='flex items-center bg-slate-100 p-2'>
-          <input
-            type={showConfirmPassword ? 'text' : 'password'}
-            name='confirmPassword'
-            value={data.confirmPassword}
-            onChange={handleOnChange}
-            placeholder='Enter password'
-            required
-            className='w-full h-full outline-none bg-transparent'
-          />
-          <div onClick={handleShowConfirmPassword} className='cursor-pointer'>
-            <span>{showConfirmPassword ? <FaEyeSlash /> : <FaEye />}</span>
+        <div>
+          <label className='font-medium'>Confirm password</label>
+          <div className='relative'>
+            <input
+              type={showConfirmPassword ? 'text' : 'password'}
+              name='confirmPassword'
+              value={data.confirmPassword}
+              onChange={handleOnChange}
+              required
+              className='w-full border border-pink-400 h-12 rounded-lg mb-6 pl-2 outline-2 outline-pink-700 font-bold'
+            />
+            <div
+              onClick={handleShowConfirmPassword}
+              className='absolute right-3 top-4 z-10 text-lg hover:scale-125 duration-100'
+            >
+              <span>{showConfirmPassword ? <FaEyeSlash /> : <FaEye />}</span>
+            </div>
           </div>
         </div>
-      </div>
-      <button>Update password</button>
-    </form>
+        <button className='w-full p-4 rounded-lg text-white text-xl font-medium bg-pink-600 hover:bg-pink-800 active:scale-95 duration-100'>
+          Update password
+        </button>
+      </form>
+    </div>
   )
 }
 

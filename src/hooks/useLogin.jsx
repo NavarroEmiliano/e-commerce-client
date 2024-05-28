@@ -24,7 +24,6 @@ export const useLogin = () => {
       setIsLoading(false)
       setError(false)
       navigate('/')
-      toast.success('Login successfully')
     } catch (error) {
       setIsLoading(false)
       setError(error.data)

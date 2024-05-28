@@ -91,6 +91,9 @@ const Header = () => {
       {pathname.includes('admin-panel') && (
         <div className='text-pink-800 text-lg font-semibold'>Admin panel</div>
       )}
+      {pathname === '/all-products' && (
+        <div className='text-pink-800 text-lg font-semibold'>All Products</div>
+      )}
       {pathname === '/' && <SearchBar />}
 
       {showMobileMenu && (

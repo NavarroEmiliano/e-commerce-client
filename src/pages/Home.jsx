@@ -3,7 +3,7 @@ import RecommendedProductCarrousel from '../components/RecommendedProductCarrous
 
 const Home = () => {
   return (
-    <div>
+    <div className='px-2'>
       <BannerProduct />
       <RecommendedProductCarrousel
         category={'smartphones'}

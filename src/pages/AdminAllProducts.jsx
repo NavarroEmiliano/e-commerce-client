@@ -20,6 +20,8 @@ const AdminAllProducts = () => {
   const [showDeleteProduct, setShowDeleteProduct] = useState(false)
   const [productId, setProductId] = useState('')
   const [searchInput, setSearchInput] = useState('')
+  const [sortBy, setSortBy] = useState('')
+  const [sortOrder, setSortOrder] = useState('asc')
 
   const handleUploadProduct = () => {
     setShowUploadProduct((prev) => !prev)
@@ -35,19 +37,38 @@ const AdminAllProducts = () => {
     setProductId(id)
   }
 
-  const filteredProducts =
-    !isPending &&
-    allProducts?.filter(
-      (product) =>
-        product.title.toLowerCase().includes(searchInput.toLowerCase()) ||
-        product.brand.toLowerCase().includes(searchInput.toLowerCase()) ||
-        product.category.toLowerCase().includes(searchInput.toLowerCase()),
-    )
-
   const handleSearch = (e) => {
     const { value } = e.target
     setSearchInput(value)
   }
+
+  const handleSort = (field) => {
+    if (sortBy === field) {
+      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')
+    } else {
+      setSortBy(field)
+      setSortOrder('asc')
+    }
+  }
+
+  let sortedProducts = [...(allProducts || [])]
+
+  if (sortBy === 'price') {
+    sortedProducts = sortedProducts.sort((a, b) =>
+      sortOrder === 'asc' ? a.price - b.price : b.price - a.price,
+    )
+  } else if (sortBy === 'stock') {
+    sortedProducts = sortedProducts.sort((a, b) =>
+      sortOrder === 'asc' ? a.stock - b.stock : b.stock - a.stock,
+    )
+  }
+
+  const filteredProducts = sortedProducts?.filter(
+    (product) =>
+      product.title.toLowerCase().includes(searchInput.toLowerCase()) ||
+      product.brand.toLowerCase().includes(searchInput.toLowerCase()) ||
+      product.category.toLowerCase().includes(searchInput.toLowerCase()),
+  )
 
   if (isPending) {
     return (
@@ -75,7 +96,26 @@ const AdminAllProducts = () => {
           Upload Product
         </button>
       </div>
-
+      <div className='flex justify-between px-4 text-gray-500'>
+        <div>
+          <button
+            onClick={() => handleSort('price')}
+            className='font-semibold mr-2'
+          >
+            Price
+          </button>
+          {sortBy === 'price' && <span>{sortOrder === 'asc' ? '▲' : '▼'}</span>}
+        </div>
+        <div>
+          <button
+            onClick={() => handleSort('stock')}
+            className='font-semibold mr-2'
+          >
+            Stock
+          </button>
+          {sortBy === 'stock' && <span>{sortOrder === 'asc' ? '▲' : '▼'}</span>}
+        </div>
+      </div>
       {filteredProducts?.map((prod) => (
         <div
           key={prod?.id}
@@ -126,59 +166,6 @@ const AdminAllProducts = () => {
           </div>
         </div>
       ))}
-
-      {/* <div className='overflow-y-auto h-[calc(100vh-190px)]'>
-        <table className='w-full productTable'>
-          <thead>
-            <tr>
-              <th>Image</th>
-              <th>Title</th>
-              <th>Price</th>
-              <th>Stock</th>
-              <th>Category</th>
-              <th>Brand</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredProducts?.map((product) => {
-              return (
-                <tr key={product?.id}>
-                  <td className='flex items-center justify-center'>
-                    <img
-                      src={product?.images[0]}
-                      alt={product.description}
-                      width={70}
-                      height={70}
-                    />
-                  </td>
-                  <td>{product?.title}</td>
-                  <td>{displayUsdCurrency(product?.price)}</td>
-                  <td>{product?.stock}</td>
-                  <td>{product?.category}</td>
-                  <td>{product?.brand}</td>
-                  <td>
-                    <div className='flex items-center justify-center gap-1 p-1'>
-                      <button
-                        onClick={() => handleEditProduct(product.id)}
-                        className='bg-green-200 p-2 text-sm rounded-full hover:bg-green-500'
-                      >
-                        <MdModeEdit />
-                      </button>
-                      <button
-                        onClick={() => handleDeleteProduct(product.id)}
-                        className='bg-red-200 p-2 text-sm rounded-full hover:bg-red-500'
-                      >
-                        <MdDelete />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
-      </div> */}
       {showUploadProduct && (
         <AdminUploadProduct closeUpload={handleUploadProduct} />
       )}

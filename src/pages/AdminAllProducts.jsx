@@ -89,7 +89,7 @@ const AdminAllProducts = () => {
             />
           </div>
           <div className='flex flex-col justify-between'>
-            <p className='font-semibold text-ellipsis line-clamp-1 '>
+            <p className='font-semibold text-ellipsis line-clamp-1'>
               {prod?.title}
             </p>
             <div className='flex gap-2'>

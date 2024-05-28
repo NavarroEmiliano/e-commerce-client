@@ -3,18 +3,20 @@ import displayUsdCurrency from '../helpers/displayCurrency'
 import { useQuery } from '@tanstack/react-query'
 import productsService from '../services/productsService'
 import Loading from '../components/Loading'
+import purchaseService from '../services/purchaseService'
+import moment from 'moment'
 
 const AdminSoldProducts = () => {
-  const { isPending, data: allProducts } = useQuery({
-    queryKey: ['allProducts'],
-    queryFn: productsService.getAllProducts,
+  const { isPending, data: allPurchases } = useQuery({
+    queryKey: ['allPurchases'],
+    queryFn: purchaseService.getAllPurchases,
     staleTime: Infinity,
   })
 
-  const [productId, setProductId] = useState('')
-  const [searchInput, setSearchInput] = useState('')
+  /*   const [productId, setProductId] = useState('')
+  const [searchInput, setSearchInput] = useState('') */
 
-  const filteredProducts =
+  /*   const filteredProducts =
     !isPending &&
     allProducts?.filter(
       (product) =>
@@ -22,11 +24,11 @@ const AdminSoldProducts = () => {
         product.brand.toLowerCase().includes(searchInput.toLowerCase()) ||
         product.category.toLowerCase().includes(searchInput.toLowerCase()),
     )
-
-  const handleSearch = (e) => {
+ */
+  /*   const handleSearch = (e) => {
     const { value } = e.target
     setSearchInput(value)
-  }
+  } */
 
   if (isPending) {
     return (
@@ -36,55 +38,47 @@ const AdminSoldProducts = () => {
     )
   }
 
-  return (
-    <div className='border rounded-md'>
-      <div className='flex justify-between items-center py-2 px-4 border-b'>
-        <h2 className='font-bold text-lg'>Sold products</h2>
-        <input
-          onChange={handleSearch}
-          type='text'
-          name='searchInput'
-          value={searchInput}
-          placeholder='Search product here...'
-          className='outline-none rounded-full pl-2 p-1 text-ellipsis border'
-        />
-      </div>
+  console.log(allPurchases)
 
-      <div className='overflow-y-auto h-[calc(100vh-190px)]'>
-        <table className='w-full productTable'>
-          <thead>
-            <tr>
-              <th>Image</th>
-              <th>Title</th>
-              <th>Price</th>
-              <th>Stock</th>
-              <th>Category</th>
-              <th>Brand</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredProducts?.map((product) => {
-              return (
-                <tr key={product?.id}>
-                  <td className='flex items-center justify-center'>
-                    <img
-                      src={product?.images[0]}
-                      alt={product.description}
-                      width={70}
-                      height={70}
-                    />
-                  </td>
-                  <td>{product?.title}</td>
-                  <td>{displayUsdCurrency(product?.price)}</td>
-                  <td>{product?.stock}</td>
-                  <td>{product?.category}</td>
-                  <td>{product?.brand}</td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
-      </div>
+  return (
+    <div>
+      {allPurchases?.map((purch) => (
+        <div
+          key={purch.id}
+          className='flex flex-col p-4 border-2 border-pink-200 rounded-2xl m-4'
+        >
+          <div className='flex items-center gap-2 text-gray-500 text-xs'>
+            <p>Product Id:</p>
+            <p>{purch.id}</p>
+          </div>
+          <div className='flex gap-2'>
+            <p className='text-gray-500'>Status:</p>
+            <p className='text-orange-600 font-bold'>{purch.status}</p>
+          </div>
+          <div className='flex gap-2'>
+            <p className='text-gray-500'>Date:</p>
+            <p>{moment(purch?.createdAt).format('LL')}</p>
+          </div>
+          <div className='flex gap-2'>
+            <p className='text-gray-500'>Customer:</p>
+            <p>{purch?.userId?.name}</p>
+          </div>
+          <div className='flex gap-2'>
+            <p className='text-gray-500'>Email:</p>
+            <p className='line-clamp-1'>{purch?.userId?.email}</p>
+          </div>
+          <div className='flex gap-2'>
+            <p className='text-gray-500'>Items:</p>
+            <p className='line-clamp-1'>{purch?.items.length}</p>
+          </div>
+          <div className='flex gap-2'>
+            <p className='text-gray-500'>Total:</p>
+            <p className='line-clamp-1'>
+              {displayUsdCurrency(purch?.totalPrice)}
+            </p>
+          </div>
+        </div>
+      ))}
     </div>
   )
 }

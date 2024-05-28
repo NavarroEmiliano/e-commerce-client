@@ -17,7 +17,7 @@ const addNewPuchase = async (transaction, products) => {
       return {
         productId: prod.productId.id,
         quantity: prod.quantity,
-        unitPrice
+        unitPrice,
       }
     }),
   }
@@ -27,8 +27,19 @@ const addNewPuchase = async (transaction, products) => {
 }
 
 const getUserPurchases = async () => {
-  const { data } = await axios.get(`${baseUrl}/user-purchases`, getHeaderConfig())
+  const { data } = await axios.get(
+    `${baseUrl}/user-purchases`,
+    getHeaderConfig(),
+  )
   return data.data
 }
 
-export default { addNewPuchase, getUserPurchases }
+const getAllPurchases = async () => {
+  const { data } = await axios.get(
+    `${baseUrl}/all-purchases`,
+    getHeaderConfig(),
+  )
+  return data.data
+}
+
+export default { addNewPuchase, getUserPurchases, getAllPurchases }

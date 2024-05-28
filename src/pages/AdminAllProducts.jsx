@@ -79,7 +79,7 @@ const AdminAllProducts = () => {
       {filteredProducts?.map((prod) => (
         <div
           key={prod?.id}
-          className='flex h-32 gap-4 p-2 border-2 border-pink-200 rounded-2xl m-4'
+          className='flex gap-4 p-2 border-2 border-pink-200 rounded-2xl m-4'
         >
           <div className='flex items-center justify-center w-full max-h-28 max-w-28'>
             <img

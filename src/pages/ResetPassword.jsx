@@ -74,7 +74,7 @@ const ResetPassword = () => {
         "Reset Password Enter your new password below. Make sure it's strong and
         unique to keep your account secure. Thank you!"
       </div>
-      <form onSubmit={handleSubmit} className='w-full max-w-[430px] p-2 mb-16'>
+      <form onSubmit={handleSubmit} className='w-full max-w-[430px]'>
         <div>
           <label className='font-medium'>Password</label>
           <div className='relative'>

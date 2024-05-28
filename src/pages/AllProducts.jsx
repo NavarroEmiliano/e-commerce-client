@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import productsService from '../services/productsService'
 import ProductCard from '../components/ProductCard'
+import Loading from '../components/Loading'
 
 const AllProducts = () => {
   const { isPending, data: allProducts } = useQuery({
@@ -9,11 +10,14 @@ const AllProducts = () => {
   })
 
   if (isPending) {
-    return <div>Loading...</div>
+    return (
+      <div className='flex items-center justify-center min-h-[calc(100vh-140px)]'>
+        <Loading />
+      </div>
+    )
   }
-
   return (
-    <div>
+    <div className='grid grid-cols-2 py-4'>
       {allProducts.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}

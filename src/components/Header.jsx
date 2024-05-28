@@ -1,4 +1,4 @@
-import { LuShoppingCart, LuUser2 } from 'react-icons/lu'
+import { LuShoppingCart, LuUser2, LuBoxes } from 'react-icons/lu'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import UserImg from './UserImg'
 import { useEffect, useState } from 'react'
@@ -123,6 +123,14 @@ const Header = () => {
               >
                 <GrHomeRounded />
                 Home
+              </Link>
+              <Link
+                to='/all-products'
+                className='flex items-center gap-2 p-3 hover:bg-pink-600 rounded-xl'
+                onClick={handleMobileMenu}
+              >
+                <LuBoxes />
+                Products
               </Link>
               {isAdmin && (
                 <Link

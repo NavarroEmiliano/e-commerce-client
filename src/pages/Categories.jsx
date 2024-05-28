@@ -10,10 +10,10 @@ const Categories = () => {
   })
 
   return (
-    <div className='flex flex-wrap justify-around gap-2 min-h-screen p-4'>
+    <div className='w-full mx-auto grid grid-cols-3 gap-4 min-h-screen p-4 bg-pink-50'>
       {categories?.map((prod) => (
         <Link to={`/categories/${prod.category}`} key={prod.id}>
-          <div className='flex flex-col items-center h-40 w-28 bg-pink-200 rounded-lg '>
+          <div className='flex bg-white mx-auto flex-col items-center h-full max-h-44 w-full max-w-28 rounded-lg shadow-lg'>
             <div className='h-28 w-28'>
               <img
                 src={prod.images[0]}
@@ -21,7 +21,7 @@ const Categories = () => {
                 className='object-container h-full w-full rounded-lg'
               />
             </div>
-            <div className='flex items-center justify-center capitalize text-center'>
+            <div className='flex items-center justify-center capitalize text-center p-1'>
               {prod.category}
             </div>
           </div>

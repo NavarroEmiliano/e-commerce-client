@@ -69,7 +69,7 @@ const ResetPassword = () => {
   }, [user])
 
   return (
-    <div className='relative p-2 flex flex-col items-center justify-center min-h-[calc(100vh-112px)]'>
+    <div className='relative p-2 flex flex-col items-center justify-center  '>
       <div className='w-full max-w-[430px] mb-6'>
         "Reset Password Enter your new password below. Make sure it's strong and
         unique to keep your account secure. Thank you!"

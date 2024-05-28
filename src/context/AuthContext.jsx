@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { createContext, useReducer, useEffect } from 'react'
+import { createContext, useReducer, useEffect, useState } from 'react'
 import userDetailsService from '../services/userDetailsService'
 import { setToken } from '../helpers/token'
 
@@ -18,6 +18,7 @@ export const authReducer = (state, action) => {
 
 export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, { user: null })
+  const [isLoading, setIsLoading] = useState(true)
 
   console.log('AuthContext state:', state)
 
@@ -29,14 +30,20 @@ export const AuthContextProvider = ({ children }) => {
         dispatch({ type: 'LOGIN', payload: data })
       } catch (error) {
         return error
+      } finally {
+        setIsLoading(false)
       }
     }
     const token = window.localStorage.getItem('loggedPulseTechUserToken')
-    if (token && !state?.user) setUserLogged(token)
+    if (token && !state?.user) {
+      setUserLogged(token)
+    } else {
+      setIsLoading(false)
+    }
   }, [])
 
   return (
-    <AuthContext.Provider value={{ ...state, dispatch }}>
+    <AuthContext.Provider value={{ ...state, dispatch, isLoading }}>
       {children}
     </AuthContext.Provider>
   )

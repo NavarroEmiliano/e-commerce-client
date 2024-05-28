@@ -97,23 +97,32 @@ const AdminAllProducts = () => {
         </button>
       </div>
       <div className='flex justify-between px-4 text-gray-500'>
-        <div>
+        <div className='flex'>
           <button
             onClick={() => handleSort('price')}
             className='font-semibold mr-2'
           >
             Price
           </button>
-          {sortBy === 'price' && <span>{sortOrder === 'asc' ? '▲' : '▼'}</span>}
+          <div className='h-4 w-4'>
+            {sortBy === 'price' && (
+              <span>{sortOrder === 'asc' ? '▲' : '▼'}</span>
+            )}
+          </div>
         </div>
-        <div>
+        <div className='font-semibold text-gray-400'>Sort By</div>
+        <div className='flex'>
+          <div className='h-4 w-4'>
+            {sortBy === 'stock' && (
+              <span>{sortOrder === 'asc' ? '▲' : '▼'}</span>
+            )}
+          </div>
           <button
             onClick={() => handleSort('stock')}
             className='font-semibold mr-2'
           >
             Stock
           </button>
-          {sortBy === 'stock' && <span>{sortOrder === 'asc' ? '▲' : '▼'}</span>}
         </div>
       </div>
       {filteredProducts?.map((prod) => (

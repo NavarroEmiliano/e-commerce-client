@@ -33,12 +33,15 @@ const ForgotPassword = () => {
   }, [user])
 
   return (
-    <div className='flex flex-col w-full items-center justify-center min-h-[calc(100vh-112px)]'>
-      <div className='max-w-[300px] mb-6'>
+    <div className='flex flex-col p-2 w-full items-center justify-center min-h-[calc(100vh-112px)]'>
+      <div className='w-full max-w-[430px] mb-6'>
         "Forgot your password? Enter your email below and we'll send you a link
         to reset your password. Thank you!"
       </div>
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={handleSubmit}
+        className='flex flex-col items-center justify-center w-full max-w-[430px]'
+      >
         <input
           type='email'
           name='email'

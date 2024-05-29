@@ -14,7 +14,7 @@ const SearchBar = () => {
     const { value } = e.target
     setSearchInput(value)
     if (!value) {
-      queryClient.removeQueries(['foundProducts'])
+      queryClient.removeQueries({ queryKey: ['foundProducts'] })
       navigate('/')
     }
   }
@@ -27,7 +27,7 @@ const SearchBar = () => {
   const handleCleanInput = (e) => {
     e.preventDefault()
     setSearchInput('')
-    queryClient.removeQueries(['foundProducts'])
+    queryClient.removeQueries({ queryKey: ['foundProducts'] })
     navigate('/')
   }
 

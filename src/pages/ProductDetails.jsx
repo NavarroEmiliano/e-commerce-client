@@ -56,7 +56,7 @@ const ProductDetails = () => {
     if (productId) refetch()
 
     return () => {
-      queryClient.removeQueries(['productById'])
+      queryClient.removeQueries({ queryKey: ['productById'] })
     }
   }, [productId, queryClient])
 

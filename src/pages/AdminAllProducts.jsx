@@ -76,11 +76,6 @@ const AdminAllProducts = () => {
 
   useBlockScroll(blockScroll)
 
-  useEffect(() => {
-    console.log(showEditProduct)
-    if (!showEditProduct) queryClient.removeQueries(['productById'])
-  }, [showEditProduct])
-
   if (isPending) {
     return (
       <div className='flex items-center justify-center min-h-[calc(100vh-140px)]'>

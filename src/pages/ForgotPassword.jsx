@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useEffect, useState } from 'react'
 import forgotPasswordService from '../services/forgotPasswordService'
 import { toast } from 'react-toastify'

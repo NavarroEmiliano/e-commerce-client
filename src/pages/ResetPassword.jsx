@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useEffect, useState } from 'react'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 import { useNavigate, useParams } from 'react-router-dom'

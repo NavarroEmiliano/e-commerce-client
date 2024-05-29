@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import productsService from '../services/productsService'
 import StarRating from '../components/StarRating'
@@ -16,7 +16,6 @@ const ProductDetails = () => {
 
   const {
     isPending,
-    error,
     data: product,
     refetch,
   } = useQuery({

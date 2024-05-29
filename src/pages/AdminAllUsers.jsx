@@ -6,6 +6,7 @@ import Loading from '../components/Loading'
 import { useQuery } from '@tanstack/react-query'
 import usersService from '../services/usersService'
 import { useAuthContext } from '../hooks/useAuthContext'
+import useBlockScroll from '../hooks/useBlockScroll'
 
 const AdminAllUsers = () => {
   const { user } = useAuthContext()
@@ -19,6 +20,8 @@ const AdminAllUsers = () => {
 
   const [showUpdateRole, setShowUpdateRole] = useState(false)
   const [updateUserDetails, setUpdateUserDetails] = useState({})
+
+  useBlockScroll(showUpdateRole)
 
   const handleShowEdit = (user) => {
     setShowUpdateRole((prev) => !prev)

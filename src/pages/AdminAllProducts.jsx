@@ -7,6 +7,7 @@ import { useQuery } from '@tanstack/react-query'
 import productsService from '../services/productsService'
 import Loading from '../components/Loading'
 import AdminDeleteProduct from '../components/AdminDeleteProduct'
+import useBlockScroll from '../hooks/useBlockScroll'
 
 const AdminAllProducts = () => {
   const { isPending, data: allProducts } = useQuery({
@@ -69,6 +70,10 @@ const AdminAllProducts = () => {
       product.brand.toLowerCase().includes(searchInput.toLowerCase()) ||
       product.category.toLowerCase().includes(searchInput.toLowerCase()),
   )
+
+  const blockScroll = showUploadProduct || showEditProduct || showDeleteProduct
+
+  useBlockScroll(blockScroll)
 
   if (isPending) {
     return (

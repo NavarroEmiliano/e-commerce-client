@@ -17,6 +17,7 @@ import SearchBar from './SearchBar'
 import productsService from '../services/productsService'
 
 import { IoMenu } from 'react-icons/io5'
+import useBlockScroll from '../hooks/useBlockScroll'
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false)
@@ -25,6 +26,8 @@ const Header = () => {
   const { pathname } = useLocation()
   const { logout } = useLogout()
   const navigate = useNavigate()
+
+  useBlockScroll(showMobileMenu)
 
   const { data: countCart } = useQuery({
     queryKey: ['countCart'],
@@ -60,26 +63,6 @@ const Header = () => {
   }
 
   const isAdmin = user?.role === ROLE.ADMIN
-
-  useEffect(() => {
-    const disableScroll = () => {
-      document.body.style.overflowY = 'hidden'
-    }
-
-    const enableScroll = () => {
-      document.body.style.overflowY = ''
-    }
-
-    if (showMobileMenu) {
-      disableScroll()
-    } else {
-      enableScroll()
-    }
-
-    return () => {
-      enableScroll()
-    }
-  }, [showMobileMenu])
 
   return (
     /* Mobile */

@@ -206,7 +206,7 @@ const AdminEditProduct = ({ closeEdit, productId }) => {
                     src={img}
                     alt={img}
                     onClick={() => handleFullImg(img)}
-                    className='h-24 w-24 object-cover object-center rounded border-2 border-slate-200'
+                    className='h-16 w-16 object-cover object-center rounded border-2 border-slate-200'
                   />
                   <div
                     className='absolute bg-red-600 text-white rounded-full p-1 text-xl bottom-0 right-0 hidden group-hover:block'

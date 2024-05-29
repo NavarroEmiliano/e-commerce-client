@@ -9,7 +9,7 @@ const CustomSelect = ({ label, name, options, handleOnChange, value }) => {
     <div className='flex flex-col'>
       <label htmlFor={name}>{label}</label>
       <select
-        className='p-1 rounded-lg shadow outline-2 outline-pink-600'
+        className='p-1 rounded-lg shadow outline-2 outline-pink-600 capitalize'
         id={name}
         name={name}
         onChange={handleSelectChange}
@@ -18,7 +18,7 @@ const CustomSelect = ({ label, name, options, handleOnChange, value }) => {
       >
         <option value=''>Select {name}</option>
         {options?.map((option, index) => (
-          <option key={index} value={option} className='capitalize'>
+          <option key={index} value={option}>
             {option}
           </option>
         ))}

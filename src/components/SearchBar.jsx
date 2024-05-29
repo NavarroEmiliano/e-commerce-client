@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { IoCloseOutline, IoSearchOutline } from 'react-icons/io5'
 import { useQueryClient } from '@tanstack/react-query'
 
-const SearchBar = ({ handleClick, showInput }) => {
+const SearchBar = () => {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
 

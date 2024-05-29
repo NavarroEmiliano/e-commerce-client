@@ -18,7 +18,7 @@ const CustomSelect = ({ label, name, options, handleOnChange, value }) => {
       >
         <option value=''>Select {name}</option>
         {options?.map((option, index) => (
-          <option key={index} value={option}>
+          <option key={index} value={option} className='capitalize'>
             {option}
           </option>
         ))}

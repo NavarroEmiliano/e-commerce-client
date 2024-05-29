@@ -31,7 +31,7 @@ const ProductCard = ({ product }) => {
   }
 
   return (
-    <div className='mb-8 mx-auto w-full max-w-[200px]'>
+    <div className='mb-8 mx-auto w-full max-w-[180px]'>
       <div className='h-80 rounded-xl p-2 border shadow flex flex-col justify-between'>
         <div className='flex items-center justify-center h-44 min-h-44  overflow-hidden rounded-lg'>
           <Link to={`/product/${product.id}`}>

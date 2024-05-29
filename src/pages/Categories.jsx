@@ -8,6 +8,7 @@ const Categories = () => {
     queryKey: ['oneProductPerCategory'],
     queryFn: productsService.getOneProductPerCategory,
     refetchOnWindowFocus: false,
+    staleTime: Infinity,
   })
 
   const categorieSkeletons = new Array(12).fill(null)

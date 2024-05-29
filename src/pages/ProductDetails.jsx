@@ -54,7 +54,11 @@ const ProductDetails = () => {
 
   useEffect(() => {
     if (productId) refetch()
-  }, [productId])
+
+    return () => {
+      queryClient.removeQueries(['productById'])
+    }
+  }, [productId, queryClient])
 
   return (
     <div className='container mx-auto p-4 '>

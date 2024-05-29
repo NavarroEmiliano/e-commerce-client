@@ -37,6 +37,7 @@ const AdminUploadProduct = ({ closeUpload }) => {
     queryKey: ['allCategories'],
     queryFn: productsService.getAllCategories,
     staleTime: Infinity,
+    refetchOnWindowFocus: false,
   })
 
   const newProductMutation = useMutation({

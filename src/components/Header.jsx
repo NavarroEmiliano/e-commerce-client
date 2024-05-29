@@ -100,7 +100,7 @@ const Header = () => {
           {pathname.split('/')[2]}
         </div>
       )}
-      {pathname === '/' && <SearchBar />}
+      {pathname === '/' || pathname.includes('search') ? <SearchBar /> : ''}
 
       {showMobileMenu && (
         <div className='fixed z-30 bg-black/65 top-0 right-0 left-0 bottom-0 '></div>

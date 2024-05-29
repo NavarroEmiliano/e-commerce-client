@@ -2,16 +2,21 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { IoCloseOutline, IoSearchOutline } from 'react-icons/io5'
+import { useQueryClient } from '@tanstack/react-query'
 
 const SearchBar = ({ handleClick, showInput }) => {
   const navigate = useNavigate()
+  const queryClient = useQueryClient()
 
   const [searchInput, setSearchInput] = useState('')
 
   const handleChange = (e) => {
     const { value } = e.target
     setSearchInput(value)
-    if (!value) navigate('/')
+    if (!value) {
+      queryClient.removeQueries(['foundProducts'])
+      navigate('/')
+    }
   }
 
   const handleSubmit = (e) => {
@@ -22,6 +27,7 @@ const SearchBar = ({ handleClick, showInput }) => {
   const handleCleanInput = (e) => {
     e.preventDefault()
     setSearchInput('')
+    queryClient.removeQueries(['foundProducts'])
     navigate('/')
   }
 

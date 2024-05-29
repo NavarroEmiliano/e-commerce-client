@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import displayUsdCurrency from '../helpers/displayCurrency'
 import { useQuery } from '@tanstack/react-query'
-import productsService from '../services/productsService'
 import Loading from '../components/Loading'
 import purchaseService from '../services/purchaseService'
 import moment from 'moment'

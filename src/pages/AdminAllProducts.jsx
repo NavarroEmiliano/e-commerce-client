@@ -1,15 +1,16 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { MdDelete, MdModeEdit } from 'react-icons/md'
 import AdminEditProduct from '../components/AdminEditProduct'
 import AdminUploadProduct from '../components/AdminUploadProduct'
 import displayUsdCurrency from '../helpers/displayCurrency'
-import { useQuery } from '@tanstack/react-query'
+import { QueryClient, useQuery, useQueryClient } from '@tanstack/react-query'
 import productsService from '../services/productsService'
 import Loading from '../components/Loading'
 import AdminDeleteProduct from '../components/AdminDeleteProduct'
 import useBlockScroll from '../hooks/useBlockScroll'
 
 const AdminAllProducts = () => {
+  const queryClient = useQueryClient()
   const { isPending, data: allProducts } = useQuery({
     queryKey: ['allProducts'],
     queryFn: productsService.getAllProducts,
@@ -74,6 +75,10 @@ const AdminAllProducts = () => {
   const blockScroll = showUploadProduct || showEditProduct || showDeleteProduct
 
   useBlockScroll(blockScroll)
+
+  useEffect(() => {
+    if (!showEditProduct) queryClient.removeQueries(['productById'])
+  }, [showEditProduct])
 
   if (isPending) {
     return (

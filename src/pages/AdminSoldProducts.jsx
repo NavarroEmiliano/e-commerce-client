@@ -13,22 +13,7 @@ const AdminSoldProducts = () => {
     staleTime: Infinity,
   })
 
-  /*   const [productId, setProductId] = useState('')
-  const [searchInput, setSearchInput] = useState('') */
-
-  /*   const filteredProducts =
-    !isPending &&
-    allProducts?.filter(
-      (product) =>
-        product.title.toLowerCase().includes(searchInput.toLowerCase()) ||
-        product.brand.toLowerCase().includes(searchInput.toLowerCase()) ||
-        product.category.toLowerCase().includes(searchInput.toLowerCase()),
-    )
- */
-  /*   const handleSearch = (e) => {
-    const { value } = e.target
-    setSearchInput(value)
-  } */
+  const [sortOrder, setSortOrder] = useState('asc') // Estado para el orden de las ventas
 
   if (isPending) {
     return (
@@ -38,11 +23,32 @@ const AdminSoldProducts = () => {
     )
   }
 
-  console.log(allPurchases)
+  const handleSortOrderChange = () => {
+    if (sortOrder === 'asc') {
+      setSortOrder('desc')
+    } else {
+      setSortOrder('asc')
+    }
+  }
+
+  const sortedPurchases = [...allPurchases].sort((a, b) => {
+    const dateA = new Date(a.createdAt)
+    const dateB = new Date(b.createdAt)
+    return sortOrder === 'asc' ? dateA - dateB : dateB - dateA
+  })
 
   return (
     <div>
-      {allPurchases?.map((purch) => (
+      <div className='flex px-4 text-gray-500 mt-4'>
+        <button onClick={handleSortOrderChange} className='font-semibold mr-2'>
+          Date
+        </button>
+        <div className='h-4 w-4'>
+          <span>{sortOrder === 'asc' ? '▲' : '▼'}</span>
+        </div>
+      </div>
+
+      {sortedPurchases?.map((purch) => (
         <div
           key={purch.id}
           className='flex flex-col p-4 border-2 border-pink-200 rounded-2xl m-4'

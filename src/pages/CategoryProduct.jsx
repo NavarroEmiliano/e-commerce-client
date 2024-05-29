@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import ProductCard from '../components/ProductCard'
 import { useQuery } from '@tanstack/react-query'
 import productsService from '../services/productsService'

@@ -77,6 +77,7 @@ const AdminAllProducts = () => {
   useBlockScroll(blockScroll)
 
   useEffect(() => {
+    console.log(showEditProduct)
     if (!showEditProduct) queryClient.removeQueries(['productById'])
   }, [showEditProduct])
 

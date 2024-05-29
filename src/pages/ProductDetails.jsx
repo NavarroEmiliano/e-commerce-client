@@ -155,9 +155,6 @@ const ProductDetails = () => {
               </p>
             </div>
             <div className='flex items-center gap-3 '>
-              <button className='border-2 border-red-600 rounded px-3 py-1 min-w-[120px] text-red-600 font-medium hover:bg-red-600 hover:text-white'>
-                Buy
-              </button>
               <button
                 onClick={() => handleAddToCart(product.id)}
                 className='border-2 border-red-600 rounded px-3 py-1 min-w-[120px]  bg-red-600 font-medium text-white hover:text-red-600 hover:bg-white'

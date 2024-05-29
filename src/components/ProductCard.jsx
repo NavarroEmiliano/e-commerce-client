@@ -5,9 +5,11 @@ import displayUsdCurrency from '../helpers/displayCurrency'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import cartService from '../services/cartService'
 import { toast } from 'react-toastify'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 const ProductCard = ({ product }) => {
   const queryClient = useQueryClient()
+  const { user } = useAuthContext()
 
   const addToCartMutation = useMutation({
     mutationFn: cartService.addToCart,
@@ -21,6 +23,10 @@ const ProductCard = ({ product }) => {
   })
 
   const handleAddToCart = (productId) => {
+    if (!user)
+      return toast.error(
+        'To add products to your cart, please log in or create an account',
+      )
     addToCartMutation.mutate(productId)
   }
 

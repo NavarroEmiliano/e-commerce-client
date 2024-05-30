@@ -62,7 +62,7 @@ const ProductDetails = () => {
 
   return (
     <div className='container mx-auto p-4 '>
-      <div className=' min-h-[200px] flex flex-col lg:flex-row gap-4'>
+      <div className='min-h-[200px] flex flex-col lg:flex-row gap-4'>
         {/* Product Image */}
         <div className='flex flex-col items-center h-96  lg:flex-row-reverse gap-4'>
           {isPending ? (

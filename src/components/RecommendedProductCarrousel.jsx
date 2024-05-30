@@ -21,7 +21,7 @@ const RecommendedProductCarrousel = ({ category, heading }) => {
     },
     tablet: {
       breakpoint: { max: 1024, min: 640 },
-      items: 2,
+      items: 3,
       slidesToSlide: 2,
     },
     mobile: {
@@ -36,7 +36,7 @@ const RecommendedProductCarrousel = ({ category, heading }) => {
   if (isPending) {
     return (
       <div>
-        <div className='h-7 w-48 mb-2'>
+        <div className='h-7 w-48 mb-2 sm:px-14 lg:px-16'>
           <Skeleton className='h-full' />
         </div>
         <div className='flex justify-between'>
@@ -51,7 +51,7 @@ const RecommendedProductCarrousel = ({ category, heading }) => {
   }
 
   return (
-    <div className='mx-auto py-4 '>
+    <div className='mx-auto py-4 sm:px-14 lg:px-16'>
       <h2 className='text-2xl font-semibold pb-4'>{heading}</h2>
 
       {!isPending && (

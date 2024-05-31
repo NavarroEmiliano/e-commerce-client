@@ -48,7 +48,7 @@ const Header = () => {
   return (
     /* Mobile */
 
-    <header className='flex items-center h-14 py-4 bg-pink-600 justify-between w-full sm:px-20 lg:px-32'>
+    <header className='flex items-center h-14 py-4 px-2 bg-pink-600 justify-between w-full sm:px-20 lg:px-32'>
       <div onClick={handleMobileMenu} className='text-xl cursor-pointer'>
         <IoMenu />
       </div>
@@ -152,7 +152,7 @@ const Header = () => {
       </div>
 
       {user ? (
-        <Link to='cart'>
+        <Link to='cart' className='pr-2'>
           <div className='relative'>
             <span className='text-xl'>
               <LuShoppingCart />

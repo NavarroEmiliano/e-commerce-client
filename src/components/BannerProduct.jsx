@@ -33,7 +33,7 @@ const BannerProduct = () => {
   }
 
   return (
-    <div className='container mx-auto mt-4 sm:px-14 lg:px-16'>
+    <div className='container mx-auto mt-4 sm:px-14 lg:px-28'>
       <div className='h-52 md:h-72 w-full'>
         <Carousel
           showDots={true}

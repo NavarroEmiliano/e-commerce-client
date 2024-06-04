@@ -1,16 +1,15 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { MdDelete, MdModeEdit } from 'react-icons/md'
 import AdminEditProduct from '../components/AdminEditProduct'
 import AdminUploadProduct from '../components/AdminUploadProduct'
 import displayUsdCurrency from '../helpers/displayCurrency'
-import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import productsService from '../services/productsService'
 import Loading from '../components/Loading'
 import AdminDeleteProduct from '../components/AdminDeleteProduct'
 import useBlockScroll from '../hooks/useBlockScroll'
 
 const AdminAllProducts = () => {
-  const queryClient = useQueryClient()
   const { isPending, data: allProducts } = useQuery({
     queryKey: ['allProducts'],
     queryFn: productsService.getAllProducts,
@@ -85,8 +84,8 @@ const AdminAllProducts = () => {
   }
 
   return (
-    <div className='rounded-md'>
-      <div className='flex justify-between items-center py-2 px-4'>
+    <div className='mx-4 sm:mx-0 md:mx-12'>
+      <div className='flex justify-between items-center py-2'>
         <input
           onChange={handleSearch}
           type='text'
@@ -102,7 +101,7 @@ const AdminAllProducts = () => {
           Upload Product
         </button>
       </div>
-      <div className='flex justify-between px-4 text-gray-500'>
+      <div className='flex justify-between text-gray-500'>
         <div className='flex'>
           <button
             onClick={() => handleSort('price')}
@@ -134,7 +133,7 @@ const AdminAllProducts = () => {
       {filteredProducts?.map((prod) => (
         <div
           key={prod?.id}
-          className='flex gap-4 p-2 border-2 border-pink-200 rounded-2xl m-4'
+          className='flex gap-4 p-2 border-2 border-pink-200 rounded-2xl mb-4'
         >
           <div className='flex items-center justify-center w-full max-h-28 max-w-28'>
             <img

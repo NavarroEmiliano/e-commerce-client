@@ -1,7 +1,5 @@
-import UserImg from '../components/UserImg'
-import { LuUserCircle2 } from 'react-icons/lu'
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import ROLE from '../common/role'
 import { useAuthContext } from '../hooks/useAuthContext'
 

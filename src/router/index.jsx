@@ -12,11 +12,11 @@ import ProductDetails from '../pages/ProductDetails'
 import Cart from '../pages/Cart'
 import SearchProduct from '../pages/SearchProduct'
 import PurchaseSuccessMessage from '../pages/PurchaseSuccessMessage'
-import ViewPurchases from '../pages/ViewPurchases'
 import ResetPassword from '../pages/ResetPassword'
 import AllProducts from '../pages/AllProducts'
 import AdminSoldProducts from '../pages/AdminSoldProducts'
 import Categories from '../pages/Categories'
+import UserPurchases from '../pages/UserPurchases'
 
 const router = createBrowserRouter([
   {
@@ -66,8 +66,8 @@ const router = createBrowserRouter([
         element: <PurchaseSuccessMessage />,
       },
       {
-        path: 'view-purchases',
-        element: <ViewPurchases />,
+        path: 'my-purchases',
+        element: <UserPurchases />,
       },
     ],
   },

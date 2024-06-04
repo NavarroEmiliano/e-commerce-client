@@ -117,9 +117,12 @@ const Header = () => {
               )}
 
               {user && (
-                <Link className='flex items-center gap-2 p-3 hover:bg-pink-600 rounded-xl'>
+                <Link
+                  to='my-purchases'
+                  className='flex items-center gap-2 p-3 hover:bg-pink-600 rounded-xl'
+                >
                   <BiPurchaseTagAlt />
-                  Purchases
+                  My Purchases
                 </Link>
               )}
 

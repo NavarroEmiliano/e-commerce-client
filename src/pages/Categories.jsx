@@ -14,7 +14,7 @@ const Categories = () => {
   const categorieSkeletons = new Array(12).fill(null)
 
   return (
-    <div className='w-full mx-auto grid grid-cols-3 gap-4 min-h-screen p-4'>
+    <div className='w-full mx-auto grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 min-h-screen p-4'>
       {isPending
         ? categorieSkeletons.map((_el, index) => {
             return (

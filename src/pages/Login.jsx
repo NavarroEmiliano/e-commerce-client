@@ -65,7 +65,11 @@ const Login = () => {
               <FaRegUserCircle />
             </div>
           </div>
-
+          <div className='border rounded-2xl p-2 my-4'>
+            <p>user: admin@gmail.com</p>
+            <p>password: admin</p>
+            <p>or create your account</p>
+          </div>
           <form onSubmit={handleSubmit} className='w-full'>
             <div>
               <label className='font-medium'>Email</label>

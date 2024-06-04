@@ -46,7 +46,7 @@ const AdminAllUsers = () => {
           <div className='flex items-center justify-center h-14 w-14 min-h-14 min-w-14 border-2 rounded-full'>
             Img
           </div>
-          <div className='flex flex-wrap justify-between w-full overflow-hidden'>
+          <div className='flex justify-between w-full overflow-hidden'>
             <div className='overflow-hidden'>
               <p className='text-xl font-medium'>{user.name}</p>
               <p className='text-gray-500'>Role: {user.role}</p>

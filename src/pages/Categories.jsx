@@ -14,7 +14,7 @@ const Categories = () => {
   const categorieSkeletons = new Array(12).fill(null)
 
   return (
-    <div className='w-full mx-auto grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 min-h-screen p-4'>
+    <div className='w-full place-items-center sm:px-16 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 min-h-screen p-4'>
       {isPending
         ? categorieSkeletons.map((_el, index) => {
             return (
@@ -28,7 +28,7 @@ const Categories = () => {
           })
         : categories?.map((prod) => (
             <Link to={`/categories/${prod.category}`} key={prod.id}>
-              <div className='flex mx-auto flex-col items-center h-full max-h-44 w-full max-w-28 rounded-lg shadow'>
+              <div className='flex flex-col items-center h-full max-h-44 w-full max-w-28 rounded-lg shadow'>
                 <div className='h-28 w-28'>
                   <img
                     src={prod.images[0]}

@@ -37,20 +37,20 @@ const AdminAllUsers = () => {
   }
 
   return (
-    <div>
+    <div className='flex flex-col gap-4 m-4 sm:mx-0 md:mx-12'>
       {data?.data?.map((user) => (
         <div
           key={user.id}
-          className='flex gap-4 p-4 border-2 border-pink-200 rounded-2xl m-4'
+          className='flex gap-4 p-4 border-2 border-pink-200 rounded-2xl'
         >
           <div className='flex items-center justify-center h-14 w-14 min-h-14 min-w-14 border-2 rounded-full'>
             Img
           </div>
-          <div className='flex justify-between w-full'>
-            <div>
+          <div className='flex flex-wrap justify-between w-full overflow-hidden'>
+            <div className='overflow-hidden'>
               <p className='text-xl font-medium'>{user.name}</p>
               <p className='text-gray-500'>Role: {user.role}</p>
-              <p>{user.email}</p>
+              <p className='text-ellipsis overflow-hidden'>{user.email}</p>
               <div className='flex gap-2'>
                 <p className='text-gray-500'>Created date:</p>
                 <p>{moment(user?.createdAt).format('LL')}</p>

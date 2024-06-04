@@ -24,7 +24,7 @@ const AdminPanel = () => {
 
   return (
     <div className='flex flex-col justify-start min-h-[calc(100vh-111px)]'>
-      <div className='flex px-4 items-center h-8 gap-4 bg-pink-600 w-full'>
+      <div className='flex px-4 sm:px-20 lg:px-32 items-center h-8 gap-4 bg-pink-600 w-full'>
         <Link
           to={'all-users'}
           className={`${pathname.includes('all-users') ? 'border-b-2 font-semibold text-white' : 'text-pink-800'}`}
@@ -44,7 +44,7 @@ const AdminPanel = () => {
           Orders
         </Link>
       </div>
-      <main className='w-full h-full'>
+      <main className='w-full h-full sm:px-20'>
         <Outlet />
       </main>
     </div>

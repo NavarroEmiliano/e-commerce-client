@@ -37,8 +37,8 @@ const AdminSoldProducts = () => {
   })
 
   return (
-    <div>
-      <div className='flex px-4 text-gray-500 mt-4'>
+    <div className='mx-4 sm:mx-0 lg:mx-12'>
+      <div className='flex text-gray-500 mt-4'>
         <button onClick={handleSortOrderChange} className='font-semibold mr-2'>
           Date
         </button>
@@ -50,7 +50,7 @@ const AdminSoldProducts = () => {
       {sortedPurchases?.map((purch) => (
         <div
           key={purch.id}
-          className='flex flex-col p-4 border-2 border-pink-200 rounded-2xl m-4'
+          className='flex flex-col p-4 border-2 border-pink-200 rounded-2xl mb-4'
         >
           <div className='flex items-center gap-2 text-gray-500 text-xs'>
             <p>Product Id:</p>

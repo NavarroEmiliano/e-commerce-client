@@ -10,7 +10,7 @@ import cartService from '../services/cartService'
 import { toast } from 'react-toastify'
 
 const ProductDetails = () => {
-  const [activeImage, setActiveImage] = useState(true)
+  const [activeImage, setActiveImage] = useState('')
   const { productId } = useParams()
   const queryClient = useQueryClient()
 
@@ -61,25 +61,25 @@ const ProductDetails = () => {
   }, [productId, queryClient])
 
   return (
-    <div className='container mx-auto p-4 '>
-      <div className='min-h-[200px] flex flex-col lg:flex-row gap-4'>
+    <div className='container mx-auto p-4'>
+      <div className='min-h-[200px] sm:px-20 lg:px-28 flex flex-col md:flex-row gap-4'>
         {/* Product Image */}
-        <div className='flex flex-col items-center h-96  lg:flex-row-reverse gap-4'>
+        <div className='flex flex-col items-center h-[400px] lg:flex-row-reverse gap-4'>
           {isPending ? (
             <div className='h-[300px] rounded-lg w-[300px] lg:h-[400px] lg:w-[400px] bg-slate-200 animate-pulse'></div>
           ) : (
-            <div className='h-[300px] rounded-lg w-[300px] lg:h-[400px] lg:w-[400px]  relative'>
+            <div className='min-h-[300px] rounded-lg w-[300px] lg:h-[400px] lg:w-[400px] relative '>
               <img
                 src={activeImage}
                 alt={product?.title}
-                className='h-full w-full object-scale-down  rounded-lg'
+                className='h-full w-full object-scale-down  object-bottom rounded-lg'
               />
             </div>
           )}
 
-          <div className='h-full'>
+          <div>
             {isPending ? (
-              <div className='flex gap-2 lg:flex-col  h-full '>
+              <div className='flex gap-2 lg:flex-col h-full '>
                 {productImageListLoading.map((el, index) => {
                   return (
                     <div
@@ -90,7 +90,7 @@ const ProductDetails = () => {
                 })}
               </div>
             ) : (
-              <div className='flex  gap-2 lg:flex-col  h-full'>
+              <div className='flex justify-between w-[300px] lg:w-auto gap-2 lg:flex-col h-full'>
                 {product?.images?.map((imgUrl) => {
                   return (
                     <div

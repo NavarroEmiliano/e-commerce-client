@@ -104,7 +104,7 @@ const Cart = () => {
   )
 
   return (
-    <div className='container mx-auto p-4  '>
+    <div className='container mx-auto p-4 sm:px-14 md:px-20 lg:px-32'>
       <div className='font-bold text-xl mb-2'>Shopping Cart</div>
       <div className='flex flex-col lg:flex-row lg:items-start items-center w-full gap-2'>
         {/*  View Product  */}

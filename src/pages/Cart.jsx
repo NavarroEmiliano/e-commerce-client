@@ -106,6 +106,10 @@ const Cart = () => {
   return (
     <div className='container mx-auto p-4 sm:px-14 md:px-20 lg:px-32'>
       <div className='font-bold text-xl mb-2'>Shopping Cart</div>
+
+      {!totalQuantity && (
+        <div className='w-full text-center'>Your shopping cart is empty</div>
+      )}
       <div className='flex flex-col lg:flex-row lg:items-start items-center w-full gap-2'>
         {/*  View Product  */}
         <div className='w-full'>
@@ -195,7 +199,7 @@ const Cart = () => {
         {/* Total product */}
 
         {totalQuantity ? (
-          <div className='mt-5 lg:mt-0 w-full lg:max-w-sm '>
+          <div className='mt-5 lg:mt-0 w-full lg:max-w-sm'>
             {isPending ? (
               <div className='h-36 mb-2'>
                 <Skeleton className='h-full' />
@@ -234,9 +238,7 @@ const Cart = () => {
             )}
           </div>
         ) : (
-          <div>
-            <p>Your shopping cart is empty</p>
-          </div>
+          ''
         )}
       </div>
     </div>

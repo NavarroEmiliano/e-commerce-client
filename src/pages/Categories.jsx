@@ -27,16 +27,20 @@ const Categories = () => {
             )
           })
         : categories?.map((prod) => (
-            <Link to={`/categories/${prod.category}`} key={prod.id}>
-              <div className='flex flex-col items-center h-full max-h-44 w-full max-w-28 rounded-lg shadow'>
-                <div className='h-28 w-28'>
+            <Link
+              to={`/categories/${prod.category}`}
+              key={prod.id}
+              className='h-[168px] w-28'
+            >
+              <div className='flex flex-col items-center h-full w-full rounded-lg shadow'>
+                <div className='min-h-28 w-28'>
                   <img
                     src={prod.images[0]}
                     alt={prod.title}
-                    className='object-container h-full w-full rounded-lg'
+                    className='object-cover h-full w-full rounded-lg'
                   />
                 </div>
-                <div className='flex items-center justify-center capitalize text-center p-1'>
+                <div className='flex w-full h-full items-center justify-center capitalize text-center p-1'>
                   {prod.category}
                 </div>
               </div>

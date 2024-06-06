@@ -59,7 +59,15 @@ const Header = () => {
         <div className='text-pink-800 text-lg font-semibold'>All Products</div>
       )}
 
-      {pathname.includes('categories') && (
+      {pathname === '/my-purchases' && (
+        <div className='text-pink-800 text-lg font-semibold'>My Purchases</div>
+      )}
+
+      {pathname === '/categories' && (
+        <div className='text-pink-800 text-lg font-semibold'>Categories</div>
+      )}
+
+      {pathname.includes('categories/') && (
         <div className='text-pink-800 text-lg font-semibold capitalize'>
           {pathname.split('/')[2]}
         </div>

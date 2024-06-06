@@ -120,6 +120,7 @@ const Header = () => {
                 <Link
                   to='my-purchases'
                   className='flex items-center gap-2 p-3 hover:bg-pink-600 rounded-xl'
+                  onClick={handleMobileMenu}
                 >
                   <BiPurchaseTagAlt />
                   My Purchases
@@ -135,7 +136,10 @@ const Header = () => {
                 Categories
               </Link>
               {user && (
-                <Link className='flex items-center gap-2 p-3 hover:bg-pink-600 rounded-xl'>
+                <Link
+                  className='flex items-center gap-2 p-3 hover:bg-pink-600 rounded-xl'
+                  onClick={handleMobileMenu}
+                >
                   <LuUser2 />
                   My account
                 </Link>

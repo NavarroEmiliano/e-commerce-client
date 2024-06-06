@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const PurchaseSuccessMessage = () => {
-  const [seconds, setSeconds] = useState(8)
+  const [seconds, setSeconds] = useState(5)
   const navigate = useNavigate()
 
   useEffect(() => {

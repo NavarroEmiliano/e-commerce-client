@@ -11,6 +11,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import cartService from '../services/cartService'
 import { useAuthContext } from '../hooks/useAuthContext'
 import PaypalCheckoutButton from '../components/PaypalCheckoutButton'
+import { useEffect } from 'react'
 
 const Cart = () => {
   const { user } = useAuthContext()
@@ -103,13 +104,21 @@ const Cart = () => {
     0,
   )
 
+  const cartIsEmpty = userCart !== undefined && userCart.length === 0
+
+  useEffect(() => {
+    return () => {
+      queryClient.removeQueries({ queryKey: ['userCart'] })
+    }
+  }, [])
+
   return (
     <div className='container mx-auto p-4 sm:px-14 md:px-20 lg:px-32'>
       <div className='font-bold text-xl mb-2'>Shopping Cart</div>
-
-      {!totalQuantity && (
+      {cartIsEmpty && (
         <div className='w-full text-center'>Your shopping cart is empty</div>
       )}
+
       <div className='flex flex-col lg:flex-row lg:items-start items-center w-full gap-2'>
         {/*  View Product  */}
         <div className='w-full'>
@@ -230,6 +239,10 @@ const Cart = () => {
                 {userCart.length ? (
                   <div className='relative z-0'>
                     <PaypalCheckoutButton products={userCart} />
+                    <div>
+                      <p>Test account: pulse-tech-user@personal.example.com</p>
+                      <p>Password: PaypalUser1</p>
+                    </div>
                   </div>
                 ) : (
                   ''

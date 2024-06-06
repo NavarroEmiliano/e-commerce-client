@@ -66,13 +66,13 @@ const ProductDetails = () => {
         {/* Product Image */}
         <div className='flex flex-col items-center h-[400px] lg:flex-row-reverse gap-4'>
           {isPending ? (
-            <div className='h-[300px] rounded-lg w-[300px] lg:h-[400px] lg:w-[400px] bg-slate-200 animate-pulse'></div>
+            <div className='h-[300px] w-[300px] lg:h-[400px] lg:w-[400px] bg-slate-200 animate-pulse'></div>
           ) : (
-            <div className='min-h-[300px] rounded-lg w-[300px] lg:h-[400px] lg:w-[400px] relative '>
+            <div className='min-h-[300px] w-[300px] lg:h-[400px] lg:w-[400px] relative'>
               <img
                 src={activeImage}
                 alt={product?.title}
-                className='h-full w-full object-scale-down  object-bottom rounded-lg'
+                className='h-full w-full object-scale-down'
               />
             </div>
           )}

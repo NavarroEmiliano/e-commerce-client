@@ -49,9 +49,9 @@ const Header = () => {
     /* Mobile */
 
     <header className='flex items-center h-14 py-4 px-2 bg-pink-600 justify-between w-full sm:px-20 lg:px-32'>
-      <div className='flex justify-end items-center gap-2 text-xl'>
+      <div className='relative flex justify-end items-center gap-2 text-xl'>
         <IoMenu onClick={handleMobileMenu} className='cursor-pointer' />
-        <Link to='/' className='text-pink-100 hidden sm:block'>
+        <Link to='/' className='text-pink-100 hidden md:block absolute sm:-right-28'>
           Pulse-Tech
         </Link>
       </div>

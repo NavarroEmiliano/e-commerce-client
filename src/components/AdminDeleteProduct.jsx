@@ -29,7 +29,7 @@ const AdminDeleteProduct = ({ productId, closeDelete }) => {
 
   return (
     <div className='fixed w-full h-full top-0 left-0 bottom-0 right-0 flex items-center justify-center bg-black/65'>
-      <div className='flex flex-col gap-6 justify-between bg-white p-2 rounded-lg w-full max-w-sm'>
+      <div className='flex flex-col gap-6 justify-between bg-white p-2 rounded-lg w-full max-w-sm mx-4'>
         <button className='text-3xl ml-auto hover:scale-110 duration-75'>
           <IoCloseOutline onClick={closeDelete} />
         </button>

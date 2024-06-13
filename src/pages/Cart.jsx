@@ -196,7 +196,7 @@ const Cart = () => {
                           <CiSquarePlus className='w-full h-full ' />
                         </button>
                       </div>
-                      <p className='text-gray-500'>
+                      <p className='text-gray-500 text-end'>
                         <strong>{el?.productId.stock} </strong>left in stock
                       </p>
                     </div>

@@ -4,11 +4,12 @@ import purchaseService from '../services/purchaseService'
 import { useAuthContext } from '../hooks/useAuthContext'
 import moment from 'moment/moment'
 import displayUsdCurrency from '../helpers/displayCurrency'
+import Loading from '../components/Loading'
 
 const UserPurchases = () => {
   const { user } = useAuthContext()
 
-  const { data: userPurchases } = useQuery({
+  const { isLoading, data: userPurchases } = useQuery({
     queryKey: ['userPurchases'],
     queryFn: purchaseService.getUserPurchases,
     enabled: !!user,
@@ -16,7 +17,14 @@ const UserPurchases = () => {
     refetchOnWindowFocus: false,
   })
 
-  console.log(userPurchases)
+  if (isLoading) {
+    return (
+      <div className='grid place-items-center w-full min-h-[calc(100vh-112px)]'>
+        <Loading />
+      </div>
+    )
+  }
+
   return (
     <div
       className='m-4 sm:mx-20

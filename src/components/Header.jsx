@@ -49,8 +49,9 @@ const Header = () => {
     /* Mobile */
 
     <header className='flex items-center h-14 py-4 px-2 bg-pink-600 justify-between w-full sm:px-20 lg:px-32'>
-      <div onClick={handleMobileMenu} className='text-xl cursor-pointer'>
-        <IoMenu />
+      <div className='flex justify-end items-center gap-2 text-xl'>
+        <IoMenu onClick={handleMobileMenu}  className='cursor-pointer'/>
+        <Link to='/' className='text-pink-100 hidden sm:block'>Pulse-Tech</Link>
       </div>
       {pathname.includes('admin-panel') && (
         <div className='text-pink-800 text-lg font-semibold'>Admin panel</div>
@@ -143,7 +144,7 @@ const Header = () => {
                 <BiCategoryAlt />
                 Categories
               </Link>
-              {user && (
+              {/*               {user && (
                 <Link
                   className='flex items-center gap-2 p-3 hover:bg-pink-600 rounded-xl'
                   onClick={handleMobileMenu}
@@ -151,7 +152,7 @@ const Header = () => {
                   <LuUser2 />
                   My account
                 </Link>
-              )}
+              )} */}
             </div>
           </div>
 

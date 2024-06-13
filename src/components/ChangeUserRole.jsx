@@ -28,8 +28,8 @@ const ChangeUserRole = ({ onClose, user }) => {
   }
 
   return (
-    <div className='fixed top-0 bottom-0 left-0 right-0 w-full h-full z-10 flex justify-between items-center bg-black bg-opacity-45'>
-      <div className='mx-auto bg-white shadow-md p-4 w-full max-w-sm rounded-lg'>
+    <div className='fixed top-0 bottom-0 left-0 right-0 w-full h-full z-10 flex justify-center items-center bg-black bg-opacity-45'>
+      <div className='bg-white shadow-md p-4 w-full max-w-sm rounded-lg mx-4'>
         <button onClick={onClose} className='block ml-auto text-2xl'>
           <IoCloseOutline />
         </button>

@@ -92,7 +92,7 @@ const AdminUploadProduct = ({ closeUpload }) => {
 
   return (
     <div className='fixed w-full h-full top-0 left-0 bottom-0 right-0 flex items-center justify-center bg-black/65'>
-      <div className='bg-white p-2 rounded-lg w-full '>
+      <div className='bg-white p-2 rounded-lg w-full max-w-xl'>
         <div className='flex justify-between items-center'>
           <p className='text-1xl font-semibold'>Edit Product</p>
           <button className='text-2xl'>

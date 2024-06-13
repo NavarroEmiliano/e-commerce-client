@@ -50,8 +50,10 @@ const Header = () => {
 
     <header className='flex items-center h-14 py-4 px-2 bg-pink-600 justify-between w-full sm:px-20 lg:px-32'>
       <div className='flex justify-end items-center gap-2 text-xl'>
-        <IoMenu onClick={handleMobileMenu}  className='cursor-pointer'/>
-        <Link to='/' className='text-pink-100 hidden sm:block'>Pulse-Tech</Link>
+        <IoMenu onClick={handleMobileMenu} className='cursor-pointer' />
+        <Link to='/' className='text-pink-100 hidden sm:block'>
+          Pulse-Tech
+        </Link>
       </div>
       {pathname.includes('admin-panel') && (
         <div className='text-pink-800 text-lg font-semibold'>Admin panel</div>
@@ -66,6 +68,10 @@ const Header = () => {
 
       {pathname === '/categories' && (
         <div className='text-pink-800 text-lg font-semibold'>Categories</div>
+      )}
+
+      {pathname === '/cart' && (
+        <div className='text-pink-800 text-lg font-semibold'>Cart</div>
       )}
 
       {pathname.includes('categories/') && (

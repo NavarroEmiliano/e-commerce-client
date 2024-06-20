@@ -23,7 +23,7 @@ const CategoryProduct = () => {
       {isPending
         ? categorieSkeletons.map((_el, index) => {
             return (
-              <div key={index} className='h-80 w-full max-w-[180px] rounded-lg'>
+              <div key={index} className='h-72 w-full max-w-[180px] rounded-lg'>
                 <Skeleton className='h-full w-full' />
               </div>
             )

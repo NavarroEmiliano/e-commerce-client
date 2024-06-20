@@ -24,12 +24,12 @@ const SearchProduct = () => {
 
   return (
     <div className='container mx-auto'>
-      <div className='flex flex-col justify-center items-center'>
+      <div className='flex sm:px-16 lg:px-24 xl:px-32 flex-col justify-center items-center w-full'>
         <div className='flex gap-2 items-center w-full my-2 px-6'>
           <p>{productsFound?.length}</p>
           <p>Products found</p>
         </div>
-        <div className='flex w-full flex-wrap justify-between md:justify-start items-center'>
+        <div className='flex flex-wrap  gap-8 min-h-[calc(100vh-160px)] items-center justify-center'>
           {productsFound?.map((product) => (
             <ProductCard key={product?.id} product={product} />
           ))}

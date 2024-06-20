@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import productsService from '../services/productsService'
 import ProductCard from '../components/ProductCard'
-import Loading from '../components/Loading'
+import Skeleton from 'react-loading-skeleton'
 
 const AllProducts = () => {
   const { isPending, data: allProducts } = useQuery({
@@ -9,18 +9,22 @@ const AllProducts = () => {
     queryFn: productsService.getAllProducts,
   })
 
-  if (isPending) {
-    return (
-      <div className='flex items-center justify-center min-h-[calc(100vh-140px)]'>
-        <Loading />
-      </div>
-    )
-  }
+  const categorieSkeletons = new Array(8).fill(null)
+
+
   return (
-    <div className='grid grid-cols-2  md:grid-cols-3 md:px-12 lg:grid-cols-4 py-4'>
-      {allProducts.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
+    <div className='grid grid-cols-2 md:grid-cols-3 md:px-12 lg:grid-cols-4 py-4 place-items-center min-h-[calc(100vh-112px)]'>
+      {isPending
+        ? categorieSkeletons.map((_el, index) => {
+            return (
+              <div key={index} className='h-72 w-full max-w-[180px] rounded-lg'>
+                <Skeleton className='h-full w-full' />
+              </div>  
+            )
+          })
+        : allProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
     </div>
   )
 }

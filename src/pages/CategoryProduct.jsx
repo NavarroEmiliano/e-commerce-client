@@ -14,9 +14,12 @@ const CategoryProduct = () => {
   })
 
   const categorieSkeletons = new Array(4).fill(null)
+  const onlyOneProduct = data?.length === 1
 
   return (
-    <div className='grid py-4 grid-cols-2 w-full place-items-center min-h-[calc(100vh-112px)]'>
+    <div
+      className={`grid py-4 md:px-16 lg:px-10 ${onlyOneProduct ? 'grid-cols-1' : 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4'} w-full place-items-center min-h-[calc(100vh-112px)]`}
+    >
       {isPending
         ? categorieSkeletons.map((_el, index) => {
             return (

@@ -2,10 +2,9 @@
 const Footer = () => {
   return (
     <footer className='bg-pink-600'>
-      <div className='contain mx-auto p-4'>
-        <p className='text-center text-pink-900'>
-          Developed by Emiliano Navarro
-        </p>
+      <div className='flex justify-center contain mx-auto p-4 text-pink-900 font-semibold'>
+        <p>Developed by Emiliano Navarro &copy; 2024 Pulse-Tech. All rights reserved.</p>
+
       </div>
     </footer>
   )

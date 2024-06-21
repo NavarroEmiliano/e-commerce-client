@@ -109,7 +109,7 @@ const Header = () => {
                 className='flex items-center gap-2 p-3 hover:bg-pink-600 rounded-xl'
                 onClick={handleMobileMenu}
               >
-                <GrHomeRounded />
+                <GrHomeRounded className='mb-1'/>
                 Home
               </Link>
               <Link

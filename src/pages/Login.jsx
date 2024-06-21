@@ -1,120 +1,118 @@
 /* eslint-disable react/no-unescaped-entities */
-import { useEffect, useState } from 'react'
-import { FaRegUserCircle, FaEye, FaEyeSlash } from 'react-icons/fa'
+import { useState } from 'react'
+import { FaRegUserCircle,FaEye,FaEyeSlash } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
-import { useLogin } from '../hooks/useLogin'
-import { useAuthContext } from '../hooks/useAuthContext'
-import { IoMdArrowRoundBack } from 'react-icons/io'
+
+import loginService from '../services/loginService'
+import { toast } from 'react-toastify'
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [data, setData] = useState({
     email: '',
-    password: '',
+    password: ''
   })
 
-  const { login } = useLogin()
-
   const navigate = useNavigate()
-  const { user } = useAuthContext()
 
   const handleShowPassword = () => {
-    setShowPassword((prev) => !prev)
+    setShowPassword(prev => !prev)
   }
 
-  const handleOnChange = (e) => {
+  const handleOnChange = e => {
     const { name, value } = e.target
 
-    setData((prev) => {
+    setData(prev => {
       return {
         ...prev,
-        [name]: value,
+        [name]: value
       }
     })
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault()
-    const credentials = {
+
+    const userForLogin = {
       email: data.email,
-      password: data.password,
+      password: data.password
     }
-    await login(credentials)
+
+    const response = await loginService.loginUser(userForLogin)
+    if (response.status === 'OK') {
+      navigate('/')
+      return toast.success('Login successfully')
+    } else {
+      return toast.error(response.data)
+    }
   }
 
-  useEffect(() => {
-    if (user?.name) navigate('/')
-  }, [user])
-
   return (
-    <section
-      id='login'
-      className='relative flex items-center justify-center h-screen'
-    >
-      <Link
-        to='/'
-        className='absolute text-3xl text-pink-600 pt-2 top-0 right-0'
-      >
-        <IoMdArrowRoundBack />
-      </Link>
-      <div className='w-full max-w-[430px] p-2 mb-16'>
-        <div>
-          <div className='flex gap-2 flex-col items-center justify-center text-5xl text-pink-600 mb-6'>
-            <h3>Login</h3>
-            <div className='text-6xl'>
-              <FaRegUserCircle />
-            </div>
+    <section id='login' className='flex items-center min-h-[calc(100vh-120px)]'>
+      <div className='mx-auto container p-4'>
+        <div className='bg-white p-5 max-w-md mx-auto '>
+          <div className='flex justify-center text-8xl text-red-600 mx-auto '>
+            <FaRegUserCircle />
           </div>
-          <div className='border rounded-2xl p-2 my-4'>
-            <p>user: admin@gmail.com</p>
-            <p>password: admin</p>
-            <p>or create your account</p>
-          </div>
-          <form onSubmit={handleSubmit} className='w-full'>
-            <div>
-              <label className='font-medium'>Email</label>
-              <div>
+
+          <form onSubmit={handleSubmit} className='flex flex-col gap-3'>
+            <div className='grid'>
+              <label>Email: </label>
+              <div className='bg-slate-100 p-2'>
                 <input
                   type='email'
                   name='email'
                   value={data.email}
                   onChange={handleOnChange}
+                  placeholder='Enter email'
                   required
-                  className='w-full border border-pink-400 h-12 rounded-lg mb-6 pl-2 outline-2 outline-pink-700 font-bold'
+                  className='w-full h-full outline-none bg-transparent'
                 />
               </div>
             </div>
 
             <div>
-              <label className='font-medium'>Password</label>
-              <div className='relative'>
+              <label>Password: </label>
+              <div className='flex items-center bg-slate-100 p-2'>
                 <input
                   type={showPassword ? 'text' : 'password'}
                   name='password'
                   value={data.password}
                   onChange={handleOnChange}
+                  placeholder='Enter password'
                   required
-                  className='w-full border border-pink-400 h-12 rounded-lg mb-2 pl-2 outline-2 outline-pink-700 font-bold'
+                  className='w-full h-full outline-none bg-transparent'
                 />
                 <div
-                  onClick={handleShowPassword}
-                  className='absolute right-3 top-4 z-10 text-lg hover:scale-125 duration-100'
+                  onMouseDown={handleShowPassword}
+                  onMouseUp={handleShowPassword}
+                  className='cursor-pointer'
                 >
                   <span>{showPassword ? <FaEyeSlash /> : <FaEye />}</span>
                 </div>
               </div>
             </div>
-            <div className='w-full text-end mb-6 hover:text-pink-600'>
-              <Link to={'/forgot-password'}>Forgot password?</Link>
-            </div>
 
-            <button className='w-full p-4 rounded-lg text-white text-xl font-medium bg-pink-600 hover:bg-pink-800 active:scale-95 duration-100'>
+            <Link
+              to={'/forgot-password'}
+              className='block w-fit ml-auto hover:underline hover:text-red-600'
+            >
+              Forgot password?
+            </Link>
+
+            <button className='bg-red-600 text-white px-6 py-2 w-full max-w-[150px] rounded-full hover:bg-red-700 active:scale-95 duration-100 mx-auto mt-4 block'>
               Login
             </button>
           </form>
-          <p className='mt-4'>
+          <p className='my-5'>
             Don't have account?{' '}
-            <Link to={'/sign-up'} className='font-bold text-pink-600'>
+            <Link
+              to={'/sign-up'}
+              className='font-medium 
+            text-red-600
+            hover:text-red-700
+            hover:underline'
+            >
               Sign up
             </Link>
           </p>

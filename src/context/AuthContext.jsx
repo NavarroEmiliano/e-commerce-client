@@ -20,8 +20,6 @@ export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, { user: null })
   const [isLoading, setIsLoading] = useState(true)
 
-  console.log('AuthContext state:', state)
-
   useEffect(() => {
     const setUserLogged = async (token) => {
       try {

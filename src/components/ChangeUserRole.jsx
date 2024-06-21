@@ -4,6 +4,8 @@ import ROLE from '../common/role'
 import { IoCloseOutline } from 'react-icons/io5'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import usersService from '../services/usersService'
+import { toast } from 'react-toastify'
+
 
 const ChangeUserRole = ({ onClose, user }) => {
   const queryClient = useQueryClient()
@@ -13,6 +15,9 @@ const ChangeUserRole = ({ onClose, user }) => {
     onSuccess: () => {
       queryClient.invalidateQueries('allUsers')
     },
+    onError:(error) => {
+      toast.error(error.response.data.data)
+    }
   })
 
   const [userRole, setUserRole] = useState(user.role)

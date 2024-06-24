@@ -1,12 +1,11 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useState } from 'react'
 import { FaRegUserCircle} from 'react-icons/fa'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link} from 'react-router-dom'
 
-import loginService from '../services/loginService'
-import { toast } from 'react-toastify'
 import { IoMdArrowRoundBack } from 'react-icons/io'
 import InputUserForm from '../components/InputUserForm'
+import { useLogin } from '../hooks/useLogin'
 
 const Login = () => {
   const [data, setData] = useState({
@@ -14,7 +13,7 @@ const Login = () => {
     password: '',
   })
 
-  const navigate = useNavigate()
+  const { login} =useLogin()
 
 
   const handleOnChange = (e) => {
@@ -36,13 +35,7 @@ const Login = () => {
       password: data.password,
     }
 
-    const response = await loginService.loginUser(userForLogin)
-    if (response.status === 'OK') {
-      navigate('/')
-      return toast.success('Login successfully')
-    } else {
-      return toast.error(response.data)
-    }
+    await login(userForLogin)
   }
 
   return (

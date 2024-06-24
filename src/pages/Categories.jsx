@@ -11,6 +11,7 @@ const Categories = () => {
     staleTime: Infinity,
   })
 
+
   const categorieSkeletons = new Array(12).fill(null)
 
   return (
@@ -35,7 +36,7 @@ const Categories = () => {
               <div className='flex flex-col items-center h-full w-full rounded-lg shadow'>
                 <div className='min-h-28 w-28'>
                   <img
-                    src={prod.images[0]}
+                    src={prod.thumbnail}
                     alt={prod.title}
                     className='object-cover h-full w-full rounded-lg'
                   />

@@ -37,7 +37,7 @@ const ProductCard = ({ product }) => {
           <Link to={`/product/${product.id}`}>
             <div className='w-full max-h-44'>
               <img
-                src={product?.images[0]}
+                src={product?.thumbnail}
                 alt={product?.title}
                 className='w-full h-auto object-scale-down max-h-36 hover:scale-110 duration-75'
               />

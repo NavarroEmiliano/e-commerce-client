@@ -17,13 +17,15 @@ export const useLogin = () => {
     setError(null)
     try {
       const { data: token } = await loginService.loginUser(credentials)
+      console.log(token)
       localStorage.setItem('loggedPulseTechUserToken', token)
       setToken(token)
       const { data } = await userDetailsService.fetchUserDetail()
       dispatch({ type: 'LOGIN', payload: data })
       setIsLoading(false)
       setError(false)
-      navigate('/')
+      navigate('/')     
+      return toast.success('Login successfully')
     } catch (error) {
       setIsLoading(false)
       setError(error.data)

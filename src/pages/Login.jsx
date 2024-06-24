@@ -1,41 +1,39 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useState } from 'react'
-import { FaRegUserCircle,FaEye,FaEyeSlash } from 'react-icons/fa'
+import { FaRegUserCircle} from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
 
 import loginService from '../services/loginService'
 import { toast } from 'react-toastify'
+import { IoMdArrowRoundBack } from 'react-icons/io'
+import InputUserForm from '../components/InputUserForm'
 
 const Login = () => {
-  const [showPassword, setShowPassword] = useState(false)
   const [data, setData] = useState({
     email: '',
-    password: ''
+    password: '',
   })
 
   const navigate = useNavigate()
 
-  const handleShowPassword = () => {
-    setShowPassword(prev => !prev)
-  }
 
-  const handleOnChange = e => {
+  const handleOnChange = (e) => {
     const { name, value } = e.target
 
-    setData(prev => {
+    setData((prev) => {
       return {
         ...prev,
-        [name]: value
+        [name]: value,
       }
     })
   }
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     const userForLogin = {
       email: data.email,
-      password: data.password
+      password: data.password,
     }
 
     const response = await loginService.loginUser(userForLogin)
@@ -48,50 +46,43 @@ const Login = () => {
   }
 
   return (
-    <section id='login' className='flex items-center min-h-[calc(100vh-120px)]'>
-      <div className='mx-auto container p-4'>
-        <div className='bg-white p-5 max-w-md mx-auto '>
-          <div className='flex justify-center text-8xl text-red-600 mx-auto '>
-            <FaRegUserCircle />
+    <section
+      id='login'
+      className='relative flex items-center justify-center h-screen'
+    >
+      <Link
+        to='/'
+        className='absolute text-3xl text-pink-600 pt-2 top-0 right-0'
+      >
+        <IoMdArrowRoundBack />
+      </Link>
+
+      <div className='w-full max-w-[430px] p-2'>
+          <div className='flex flex-col items-center justify-center text-5xl text-pink-600 mb-6'>
+            <h3>Login</h3>
+            <div className='text-6xl mt-2'>
+              <FaRegUserCircle />
+            </div>
           </div>
 
           <form onSubmit={handleSubmit} className='flex flex-col gap-3'>
-            <div className='grid'>
-              <label>Email: </label>
-              <div className='bg-slate-100 p-2'>
-                <input
-                  type='email'
-                  name='email'
-                  value={data.email}
-                  onChange={handleOnChange}
-                  placeholder='Enter email'
-                  required
-                  className='w-full h-full outline-none bg-transparent'
-                />
-              </div>
-            </div>
+            <InputUserForm
+              label='Email'
+              type='email'
+              name='email'
+              value={data.email}
+              onChange={handleOnChange}
+              required={true}
+            />
 
-            <div>
-              <label>Password: </label>
-              <div className='flex items-center bg-slate-100 p-2'>
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  name='password'
-                  value={data.password}
-                  onChange={handleOnChange}
-                  placeholder='Enter password'
-                  required
-                  className='w-full h-full outline-none bg-transparent'
-                />
-                <div
-                  onMouseDown={handleShowPassword}
-                  onMouseUp={handleShowPassword}
-                  className='cursor-pointer'
-                >
-                  <span>{showPassword ? <FaEyeSlash /> : <FaEye />}</span>
-                </div>
-              </div>
-            </div>
+            <InputUserForm
+              label='Password'
+              type='password'
+              name='password'
+              value={data.password}
+              onChange={handleOnChange}
+              required={true}
+            />
 
             <Link
               to={'/forgot-password'}
@@ -100,24 +91,17 @@ const Login = () => {
               Forgot password?
             </Link>
 
-            <button className='bg-red-600 text-white px-6 py-2 w-full max-w-[150px] rounded-full hover:bg-red-700 active:scale-95 duration-100 mx-auto mt-4 block'>
+            <button className='w-full p-4 rounded-lg text-white text-xl font-medium bg-pink-600 hover:bg-pink-800 active:scale-95 duration-100'>
               Login
             </button>
           </form>
-          <p className='my-5'>
+          <p className='mt-4'>
             Don't have account?{' '}
-            <Link
-              to={'/sign-up'}
-              className='font-medium 
-            text-red-600
-            hover:text-red-700
-            hover:underline'
-            >
-              Sign up
+            <Link to={'/sign-up'} className='font-bold text-pink-600'>
+              Sign Up
             </Link>
           </p>
         </div>
-      </div>
     </section>
   )
 }

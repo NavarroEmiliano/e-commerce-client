@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useState } from 'react'
-import { FaRegUserCircle} from 'react-icons/fa'
-import { Link} from 'react-router-dom'
+import { FaRegUserCircle } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
 
 import { IoMdArrowRoundBack } from 'react-icons/io'
 import InputUserForm from '../components/InputUserForm'
@@ -13,8 +13,7 @@ const Login = () => {
     password: '',
   })
 
-  const { login} =useLogin()
-
+  const { login } = useLogin()
 
   const handleOnChange = (e) => {
     const { name, value } = e.target
@@ -51,50 +50,58 @@ const Login = () => {
       </Link>
 
       <div className='w-full max-w-[430px] p-2'>
-          <div className='flex flex-col items-center justify-center text-5xl text-pink-600 mb-6'>
-            <h3>Login</h3>
-            <div className='text-6xl mt-2'>
-              <FaRegUserCircle />
-            </div>
+        <div className='flex flex-col items-center justify-center text-5xl text-pink-600 mb-6'>
+          <h3>Login</h3>
+          <div className='text-6xl mt-2'>
+            <FaRegUserCircle />
           </div>
-
-          <form onSubmit={handleSubmit} className='flex flex-col gap-3'>
-            <InputUserForm
-              label='Email'
-              type='email'
-              name='email'
-              value={data.email}
-              onChange={handleOnChange}
-              required={true}
-            />
-
-            <InputUserForm
-              label='Password'
-              type='password'
-              name='password'
-              value={data.password}
-              onChange={handleOnChange}
-              required={true}
-            />
-
-            <Link
-              to={'/forgot-password'}
-              className='block w-fit ml-auto hover:underline hover:text-red-600'
-            >
-              Forgot password?
-            </Link>
-
-            <button className='w-full p-4 rounded-lg text-white text-xl font-medium bg-pink-600 hover:bg-pink-800 active:scale-95 duration-100'>
-              Login
-            </button>
-          </form>
-          <p className='mt-4'>
-            Don't have account?{' '}
-            <Link to={'/sign-up'} className='font-bold text-pink-600'>
-              Sign Up
-            </Link>
-          </p>
         </div>
+        <div className='border-2 border-pink-200 rounded-2xl p-2 my-2'>
+          <p>
+            Email: <strong>admin@gmail.com</strong>
+          </p>
+          <p>
+            Password: <strong>admin</strong>
+          </p>
+          <p>or create your own general user account.</p>
+        </div>
+        <form onSubmit={handleSubmit} className='flex flex-col gap-3'>
+          <InputUserForm
+            label='Email'
+            type='email'
+            name='email'
+            value={data.email}
+            onChange={handleOnChange}
+            required={true}
+          />
+
+          <InputUserForm
+            label='Password'
+            type='password'
+            name='password'
+            value={data.password}
+            onChange={handleOnChange}
+            required={true}
+          />
+
+          <Link
+            to={'/forgot-password'}
+            className='block w-fit ml-auto hover:underline hover:text-red-600'
+          >
+            Forgot password?
+          </Link>
+
+          <button className='w-full p-4 rounded-lg text-white text-xl font-medium bg-pink-600 hover:bg-pink-800 active:scale-95 duration-100'>
+            Login
+          </button>
+        </form>
+        <p className='mt-4'>
+          Don't have account?{' '}
+          <Link to={'/sign-up'} className='font-bold text-pink-600'>
+            Sign Up
+          </Link>
+        </p>
+      </div>
     </section>
   )
 }

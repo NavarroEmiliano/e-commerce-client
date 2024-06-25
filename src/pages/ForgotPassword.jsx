@@ -24,7 +24,6 @@ const ForgotPassword = () => {
       const response = await forgotPasswordService.forgotPassword({ email })
       toast.success(response)
     } catch (error) {
-      console.log(error)
       toast.error(error.response.data.data)
     }
   }

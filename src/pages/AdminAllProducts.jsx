@@ -101,7 +101,8 @@ const AdminAllProducts = () => {
           Upload Product
         </button>
       </div>
-      <div className='flex justify-between text-gray-500'>
+      <div className='flex gap-4 text-gray-500 border-2 border-pink-200 mb-2 rounded-2xl p-2'>
+          <div className='font-semibold text-gray-400'>Sort By</div>
         <div className='flex'>
           <button
             onClick={() => handleSort('price')}
@@ -115,19 +116,19 @@ const AdminAllProducts = () => {
             )}
           </div>
         </div>
-        <div className='font-semibold text-gray-400'>Sort By</div>
         <div className='flex'>
-          <div className='h-4 w-4'>
-            {sortBy === 'stock' && (
-              <span>{sortOrder === 'asc' ? '▲' : '▼'}</span>
-            )}
-          </div>
+ 
           <button
             onClick={() => handleSort('stock')}
             className='font-semibold mr-2'
           >
             Stock
           </button>
+          <div className='h-4 w-4'>
+            {sortBy === 'stock' && (
+              <span>{sortOrder === 'asc' ? '▲' : '▼'}</span>
+            )}
+          </div>
         </div>
       </div>
       {filteredProducts?.map((prod) => (
@@ -137,7 +138,7 @@ const AdminAllProducts = () => {
         >
           <div className='flex items-center justify-center w-full max-h-28 max-w-28'>
             <img
-              src={prod?.images[0]}
+              src={prod?.thumbnail}
               alt={prod.description}
               className='object-center rounded-xl max-w-28 max-h-28'
             />

@@ -43,9 +43,9 @@ const AdminUploadProduct = ({ closeUpload }) => {
   const newProductMutation = useMutation({
     mutationFn: uploadProduct,
     onSuccess: ({ data }) => {
+      toast.success('Product uploaded correctly')
       const products = queryClient.getQueryData(['allProducts'])
       queryClient.setQueryData(['allProducts'], products.concat(data))
-      toast.success('Product uploaded correctly')
     },
     onError: (error) => {
       toast.error(error.response.data.data)

@@ -18,7 +18,7 @@ const CategoryProduct = () => {
 
   return (
     <div
-      className={`grid py-4 md:px-16 lg:px-10 ${onlyOneProduct ? 'grid-cols-1' : 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4'} w-full place-items-center min-h-[calc(100vh-112px)]`}
+      className={`grid py-4 md:px-16 lg:px-24 ${onlyOneProduct ? 'grid-cols-1' : 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'} w-full place-items-center min-h-[calc(100vh-109px)]`}
     >
       {isPending
         ? categorieSkeletons.map((_el, index) => {

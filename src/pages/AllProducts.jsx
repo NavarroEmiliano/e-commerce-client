@@ -13,7 +13,7 @@ const AllProducts = () => {
 
 
   return (
-    <div className='grid grid-cols-2 md:grid-cols-3 md:px-12 lg:grid-cols-4 py-4 place-items-center min-h-[calc(100vh-112px)]'>
+    <div className='grid grid-cols-2 md:grid-cols-3 md:px-12 lg:grid-cols-4 py-4 place-items-center min-h-[calc(100vh-109px)]'>
       {isPending
         ? categorieSkeletons.map((_el, index) => {
             return (

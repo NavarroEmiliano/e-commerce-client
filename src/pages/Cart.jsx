@@ -71,14 +71,14 @@ const Cart = () => {
         {/* Total product */}
 
         {totalQuantity ? (
-          <div className='mt-5 lg:mt-0 w-full lg:max-w-sm'>
+          <div className='sticky top-0 mt-5 lg:mt-0 w-full lg:max-w-sm'>
             {isPending ? (
               <div className='h-36 mb-2'>
                 <Skeleton className='h-full' />
               </div>
             ) : (
-              <div className='bg-white shadow rounded-md border-slate-300 flex flex-col justify-center items-center gap-2 pb-2'>
-                <h2 className='text-white w-full bg-pink-600 px-4 py-1 rounded-t-lg'>
+              <div className='overflow-hidden bg-white border-2 rounded-2xl border-pink-200  flex flex-col justify-center items-center gap-2 pb-2'>
+                <h2 className='text-white w-full bg-pink-600 px-4 py-1'>
                   Summary
                 </h2>
                 <div className='flex w-full items-center justify-between px-4 gap-2 font-medium text-lg '>
@@ -102,7 +102,7 @@ const Cart = () => {
                 {userCart.length ? (
                   <div className='relative z-0'>
                     <PaypalCheckoutButton products={userCart} />
-                    <div>
+                    <div className='border-2 border-pink-200 rounded-2xl p-2 text-sm'>
                       <p>Test account: pulse-tech-user@personal.example.com</p>
                       <p>Password: PaypalUser1</p>
                     </div>

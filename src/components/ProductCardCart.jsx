@@ -72,7 +72,7 @@ const ProductCardCart = ({ product }) => {
   return (
     <div
       key={product.id}
-      className='w-full h-40 sm:h-32 shadow mb-2 border border-slate-300 rounded-lg grid grid-cols-[128px,1fr] overflow-hidden'
+      className='w-full h-40 sm:h-32 mb-2 border-2 border-pink-200 rounded-2xl grid grid-cols-[128px,1fr] overflow-hidden'
     >
       <Link
         to={`/product/${product?.productId?.id}`}

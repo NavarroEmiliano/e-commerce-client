@@ -23,7 +23,10 @@ const AdminUploadProduct = ({ closeUpload }) => {
     brand: '',
     category: '',
     images: [],
+    thumbnail: '',
   })
+
+  console.log(product.images)
 
   const [showFullImg, setShowFullImg] = useState('')
 
@@ -60,13 +63,28 @@ const AdminUploadProduct = ({ closeUpload }) => {
   const handleUploadProductImg = async (e) => {
     const file = e.target.files[0]
 
-    if (product.images.length < 5) {
+    if (product.images.length < 10) {
       const { status, data } = await uploadImageService.uploadImage(file)
       if (status === 'OK') {
         setProduct((prev) => {
           return {
             ...prev,
             images: [...prev.images, data],
+          }
+        })
+      }
+    }
+  }
+  const handleUploadThumbnailImg = async (e) => {
+    const file = e.target.files[0]
+
+    if (!product.thumbnail) {
+      const { status, data } = await uploadImageService.uploadImage(file)
+      if (status === 'OK') {
+        setProduct((prev) => {
+          return {
+            ...prev,
+            thumbnail: data,
           }
         })
       }
@@ -92,7 +110,7 @@ const AdminUploadProduct = ({ closeUpload }) => {
 
   return (
     <div className='fixed w-full h-full top-0 left-0 bottom-0 right-0 flex items-center justify-center bg-black/65'>
-      <div className='bg-white p-2 rounded-lg w-full max-w-xl mx-4'>
+      <div className='bg-white p-2 sm:p-4 rounded-lg w-full max-w-3xl mx-4'>
         <div className='flex justify-between items-center'>
           <p className='text-1xl font-semibold'>Edit Product</p>
           <button className='text-2xl'>
@@ -101,7 +119,7 @@ const AdminUploadProduct = ({ closeUpload }) => {
         </div>
         <form
           onSubmit={handleSubmit}
-          className='flex flex-col gap-2 justify-between w-full'
+          className='flex flex-col gap-1 justify-between w-full'
         >
           <InputUploadForm
             label='Title'
@@ -161,49 +179,94 @@ const AdminUploadProduct = ({ closeUpload }) => {
           />
 
           {/* Product image */}
-          <label htmlFor='uploadImageInput' className='mt-3 p-2 rounded'>
-            <div className='bg-white border rounded flex justify-center items-center'>
-              <div className='text-slate-500 flex justify-center items-center flex-col gap-2'>
-                <span className='text-4xl'>
-                  <FaCloudUploadAlt />
-                </span>
-                <p className='text-sm'>Upload Product Image</p>
-              </div>
-              <input
-                type='file'
-                id='uploadImageInput'
-                className='hidden'
-                onChange={handleUploadProductImg}
-              />
-            </div>
-          </label>
-          <p className='text-center'>Limit: 5</p>
-
-          <div className='flex flex-wrap justify-around'>
-            {product?.images?.length ? (
-              product?.images?.map((img) => (
-                <div
-                  className='relative rounded-lg cursor-pointer group'
-                  key={img}
-                >
-                  <img
-                    src={img}
-                    alt={img}
-                    onClick={() => handleFullImg(img)}
-                    className='h-16 w-16 object-cover object-center rounded border-2 border-slate-200'
-                  />
-                  <div
-                    className='absolute bg-red-600 text-white rounded-full p-1 text-xl bottom-0 right-0 hidden group-hover:block'
-                    onClick={() => handleDeleteProductImg(img)}
-                  >
-                    <MdDelete />
-                  </div>
+          <div className='flex justify-between mb-1'>
+            <label
+              htmlFor='uploadImageInput'
+              className='w-fit mt-3 rounded cursor-pointer'
+            >
+              <div className='bg-white border-2 rounded-2xl px-2 flex justify-center items-center'>
+                <div className='text-slate-500 flex justify-center items-center flex-col gap-2'>
+                  
+                  
+                  <span className='hidden text-2xl'>
+                    <FaCloudUploadAlt />
+                  </span>
+                  <p className='text-sm'>Upload Product Image</p>
                 </div>
-              ))
+                <input
+                  type='file'
+                  id='uploadImageInput'
+                  className='hidden'
+                  onChange={handleUploadProductImg}
+                />
+              </div>
+            </label>
+            <label
+              htmlFor='uploadThumbnailInput'
+              className='w-fit mt-3 rounded cursor-pointer'
+            >
+              <div className='bg-white border-2 rounded-2xl px-2 flex justify-center items-center'>
+                <div className='text-slate-500 flex justify-center items-center flex-col gap-2'>
+                  <span className=' hidden text-2xl'>
+                    <FaCloudUploadAlt />
+                  </span>
+                  <p className='text-sm'>Upload Thumbnail Image</p>
+                </div>
+                <input
+                  type='file'
+                  id='uploadThumbnailInput'
+                  className='hidden'
+                  onChange={handleUploadThumbnailImg}
+                />
+              </div>
+            </label>
+          </div>
+
+          <div className='flex flex-wrap justify-between'>
+            {product?.images?.length ? (
+              <div className='w-full' >
+                <div className='flex flex-wrap w-full items-center justify-between gap-2'>
+                  {product?.images?.map((img) => (
+                    <div className='relative cursor-pointer group' key={img}>
+                      <img
+                        src={img}
+                        alt={img}
+                        onClick={() => handleFullImg(img)}
+                        className={`h-14 w-14 sm:h-16 sm:w-16 object-cover object-center rounded-2xl border-2 border-blue-600`}
+                      />
+                      <div
+                        className='absolute bg-red-600 text-white rounded-full p-1 text-xl bottom-0 right-0 hidden group-hover:block'
+                        onClick={() => handleDeleteProductImg(img)}
+                      >
+                        <MdDelete />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             ) : (
               <p className='text-red-600 text-xs'>
                 *Please upload product image
               </p>
+            )}
+            {product.thumbnail && (
+              <div className='text-sm mt-1 flex flex-col items-center justify-center w-fit'>
+                <div className='relative rounded-lg cursor-pointer group'>
+                  <img
+                    src={product.thumbnail}
+                    alt={product.thumbnail}
+                    onClick={() => handleFullImg(product.thumbnail)}
+                    className={`h-14 w-14 sm:h-16 sm:w-16 object-cover object-center rounded-2xl border-2 border-pink-600`}
+
+                  />
+                  <div
+                    className='absolute bg-red-600 text-white rounded-full p-1 text-xl bottom-0 right-0 hidden group-hover:block'
+                    /* onClick={() => handleDeleteProductImg(img)} */
+                  >
+                    <MdDelete />
+                  </div>
+                </div>
+              </div>
             )}
           </div>
 

@@ -87,11 +87,11 @@ const ProductCardCart = ({ product }) => {
       <div className='flex flex-col justify-around p-2 relative'>
         <div
           onClick={() => deleteCartProduct(product.id)}
-          className='hover:scale-125 duration-150 cursor-pointer text-3xl absolute right-0 top-0 text-red-600 rounded-full p-1'
+          className='hover:scale-125 duration-150 cursor-pointer text-3xl absolute -right-1 top-0 text-red-600 rounded-full p-1'
         >
           <MdDelete />
         </div>
-        <h2 className='text-lg font-bold lg:text-2xl capitalize text-ellipsis line-clamp-1'>
+        <h2 className='text-lg pr-4 font-bold lg:text-2xl capitalize text-ellipsis line-clamp-1'>
           {product?.productId?.title}
         </h2>
         <div className='flex items-center justify-between'>

@@ -170,6 +170,7 @@ const AdminEditProduct = ({ closeEdit, productId }) => {
               label='Price'
               type='number'
               name='price'
+              step='0.01'
               min='1'
               placeholder='Enter price here...'
               handleOnChange={handleOnChange}

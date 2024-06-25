@@ -151,6 +151,7 @@ const AdminUploadProduct = ({ closeUpload }) => {
           <InputUploadForm
             label='Price'
             type='number'
+            step='0.01'
             name='price'
             min='1'
             placeholder='Enter price here...'

@@ -45,6 +45,7 @@ const AdminUploadProduct = ({ closeUpload }) => {
     onSuccess: ({ data }) => {
       const products = queryClient.getQueryData(['allProducts'])
       queryClient.setQueryData(['allProducts'], products.concat(data))
+      toast.success('Product uploaded correctly')
     },
     onError: (error) => {
       toast.error(error.response.data.data)

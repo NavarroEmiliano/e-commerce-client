@@ -2,7 +2,6 @@ import axios from 'axios'
 
 const cloudinaryCloudName = import.meta.env.VITE_CLOUD_NAME_CLOUDINARY
 const baseUrl = `https://api.cloudinary.com/v1_1/${cloudinaryCloudName}/image/upload`
-console.log(cloudinaryCloudName)
 
 const uploadImage = async (image) => {
   const formData = new FormData()

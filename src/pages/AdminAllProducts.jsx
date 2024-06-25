@@ -65,9 +65,9 @@ const AdminAllProducts = () => {
 
   const filteredProducts = sortedProducts?.filter(
     (product) =>
-      product.title.toLowerCase().includes(searchInput.toLowerCase()) ||
-      product.brand.toLowerCase().includes(searchInput.toLowerCase()) ||
-      product.category.toLowerCase().includes(searchInput.toLowerCase()),
+      product?.title?.toLowerCase().includes(searchInput?.toLowerCase()) ||
+      product?.brand?.toLowerCase().includes(searchInput?.toLowerCase()) ||
+      product?.category?.toLowerCase().includes(searchInput?.toLowerCase()),
   )
 
   const blockScroll = showUploadProduct || showEditProduct || showDeleteProduct

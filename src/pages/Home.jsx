@@ -6,8 +6,8 @@ const Home = () => {
     <div className='px-2'>
       <BannerProduct />
       <RecommendedProductCarrousel
-        category={'smartphones'}
-        heading={`Top's Smartphones`}
+        category={'mobile-accessories'}
+        heading={`Top's Mobile-Accessories`}
       />
       <RecommendedProductCarrousel
         category={'motorcycle'}

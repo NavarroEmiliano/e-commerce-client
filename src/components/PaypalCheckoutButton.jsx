@@ -13,7 +13,6 @@ const PaypalCheckoutButton = (props) => {
   const [message, setMessage] = useState('')
   const { products } = props
   const queryClient = useQueryClient()
-  console.log(message)
 
   const navigate = useNavigate()
 

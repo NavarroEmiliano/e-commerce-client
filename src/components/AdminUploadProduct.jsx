@@ -25,9 +25,6 @@ const AdminUploadProduct = ({ closeUpload }) => {
     thumbnail: '',
   })
 
-  console.log(product.images)
-  console.log(product.thumbnail)
-
   const [showFullImg, setShowFullImg] = useState('')
 
   const { data: allBrands } = useQuery({

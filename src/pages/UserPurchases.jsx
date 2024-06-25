@@ -27,7 +27,7 @@ const UserPurchases = () => {
       {isLoading
         ? loadingPurchases.map((el, index) => (
             <div key={index} className='h-32 mb-2'>
-              <Skeleton className='h-full' />
+              <Skeleton className='h-full' style={{borderRadius:'12px'}}/>
             </div>
           ))
         : userPurchases?.map((purchase) => (

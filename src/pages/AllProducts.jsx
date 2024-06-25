@@ -17,8 +17,8 @@ const AllProducts = () => {
       {isPending
         ? categorieSkeletons.map((_el, index) => {
             return (
-              <div key={index} className='h-80 mb-8 w-full max-w-[180px] '>
-                <Skeleton className='h-full w-full rounded-xl' />
+              <div key={index} className='h-80 mb-8 w-full max-w-[180px]'>
+                <Skeleton className='h-full w-full' style={{borderRadius:'12px'}}/>
               </div>  
             )
           })

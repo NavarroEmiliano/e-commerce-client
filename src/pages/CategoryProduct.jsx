@@ -24,7 +24,7 @@ const CategoryProduct = () => {
         ? categorieSkeletons.map((_el, index) => {
             return (
               <div key={index} className='h-72 w-full max-w-[180px] rounded-lg'>
-                <Skeleton className='h-full w-full' />
+                <Skeleton className='h-full w-full' style={{borderRadius:'12px'}}/>
               </div>
             )
           })

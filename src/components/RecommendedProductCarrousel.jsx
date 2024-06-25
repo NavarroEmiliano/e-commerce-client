@@ -38,12 +38,12 @@ const RecommendedProductCarrousel = ({ category, heading }) => {
     return (
       <div>
         <div className='h-7 w-48 mb-2 sm:px-14 lg:px-16'>
-          <Skeleton className='h-full' />
+          <Skeleton className='h-full' style={{borderRadius:'12px'}}/>
         </div>
         <div className='flex justify-between'>
           {loadingCart.map((el, index) => (
             <div key={index} className='h-80 w-[200px] mb-2'>
-              <Skeleton className='h-full' />
+              <Skeleton className='h-full' style={{borderRadius:'12px'}} />
             </div>
           ))}
         </div>

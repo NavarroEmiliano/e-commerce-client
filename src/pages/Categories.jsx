@@ -23,7 +23,7 @@ const Categories = () => {
                 key={index}
                 className='h-full max-h-44 w-full max-w-28 rounded-lg'
               >
-                <Skeleton className='h-full' />
+                <Skeleton className='h-full' style={{borderRadius:'12px'}}/>
               </div>
             )
           })

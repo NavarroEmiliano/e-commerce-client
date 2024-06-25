@@ -62,7 +62,7 @@ const Cart = () => {
           {isPending
             ? loadingCart.map((el, index) => (
                 <div key={index} className='h-32 mb-2'>
-                  <Skeleton className='h-full' />
+                  <Skeleton className='h-full' style={{borderRadius:'12px'}}/>
                 </div>
               ))
             : userCart?.map((el) => <ProductCardCart key={el?.id} product={el}/>)}
@@ -74,7 +74,7 @@ const Cart = () => {
           <div className='sticky top-0 mt-5 lg:mt-0 w-full lg:max-w-sm'>
             {isPending ? (
               <div className='h-36 mb-2'>
-                <Skeleton className='h-full' />
+                <Skeleton className='h-full' style={{borderRadius:'12px'}}/>
               </div>
             ) : (
               <div className='overflow-hidden bg-white border-2 rounded-2xl border-pink-200  flex flex-col justify-center items-center gap-2 pb-2'>

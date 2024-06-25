@@ -22,7 +22,7 @@ const UserPurchases = () => {
 
   return (
     <div
-      className='py-4 sm:mx-20
+      className='py-4 px-2 sm:mx-20
     lg:mx-32 min-h-[calc(100vh-109px)]'
     >
       {isLoading

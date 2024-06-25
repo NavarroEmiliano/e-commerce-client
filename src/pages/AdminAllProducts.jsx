@@ -1,13 +1,12 @@
 import { useState } from 'react'
-import { MdDelete, MdModeEdit } from 'react-icons/md'
 import AdminEditProduct from '../components/AdminEditProduct'
 import AdminUploadProduct from '../components/AdminUploadProduct'
-import displayUsdCurrency from '../helpers/displayCurrency'
 import { useQuery } from '@tanstack/react-query'
 import productsService from '../services/productsService'
 import Loading from '../components/Loading'
 import AdminDeleteProduct from '../components/AdminDeleteProduct'
 import useBlockScroll from '../hooks/useBlockScroll'
+import ProductCardAdmin from '../components/ProductCardAdmin'
 
 const AdminAllProducts = () => {
   const { isPending, data: allProducts } = useQuery({
@@ -102,7 +101,7 @@ const AdminAllProducts = () => {
         </button>
       </div>
       <div className='flex gap-4 text-gray-500 border-2 border-pink-200 mb-2 rounded-2xl p-2'>
-          <div className='font-semibold text-gray-400'>Sort By</div>
+        <div className='font-semibold text-gray-400'>Sort By</div>
         <div className='flex'>
           <button
             onClick={() => handleSort('price')}
@@ -117,7 +116,6 @@ const AdminAllProducts = () => {
           </div>
         </div>
         <div className='flex'>
- 
           <button
             onClick={() => handleSort('stock')}
             className='font-semibold mr-2'
@@ -132,54 +130,12 @@ const AdminAllProducts = () => {
         </div>
       </div>
       {filteredProducts?.map((prod) => (
-        <div
-          key={prod?.id}
-          className='flex gap-4 p-2 border-2 border-pink-200 rounded-2xl mb-4'
-        >
-          <div className='flex items-center justify-center w-full max-h-28 max-w-28'>
-            <img
-              src={prod?.thumbnail}
-              alt={prod.description}
-              className='object-center rounded-xl max-w-28 max-h-28'
-            />
-          </div>
-          <div className='flex flex-col justify-between'>
-            <p className='font-semibold text-ellipsis line-clamp-1'>
-              {prod?.title}
-            </p>
-            <div className='flex gap-2'>
-              <p className='text-xs text-gray-500'>Brand</p>
-              <p className='capitalize text-gray-600 text-xs'>{prod?.brand}</p>
-            </div>
-
-            <div className='flex gap-2'>
-              <p className=' text-gray-500'>Price</p>
-              <p>{displayUsdCurrency(prod?.price)}</p>
-            </div>
-            <div className='flex gap-2'>
-              <p className='text-gray-500'>Stock</p>
-              <p className='font-semibold'>{prod?.stock}</p>
-            </div>
-            <div className='flex gap-2 text-sm'>
-              <p className='text-gray-500'>Category</p>
-              <p className='capitalize text-gray-700'>{prod?.category}</p>
-            </div>
-          </div>
-          <div className='flex flex-col items-center ml-auto gap-4'>
-            <button
-              onClick={() => handleEditProduct(prod.id)}
-              className='bg-green-200 p-2 text-sm rounded-full hover:bg-green-500'
-            >
-              <MdModeEdit />
-            </button>
-            <button
-              onClick={() => handleDeleteProduct(prod.id)}
-              className='bg-red-200 p-2 text-sm rounded-full hover:bg-red-500'
-            >
-              <MdDelete />
-            </button>
-          </div>
-        </div>
+        <ProductCardAdmin
+          key={prod.id}
+          product={prod}
+          onEdit={handleEditProduct}
+          onDelete={handleDeleteProduct}
+        />
       ))}
       {showUploadProduct && (
         <AdminUploadProduct closeUpload={handleUploadProduct} />

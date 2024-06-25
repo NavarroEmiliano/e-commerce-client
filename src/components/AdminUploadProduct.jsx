@@ -6,7 +6,6 @@ import { FaCloudUploadAlt } from 'react-icons/fa'
 
 import uploadImageService from '../services/uploadImageService'
 import DisplayImage from './DisplayImage'
-import { MdDelete } from 'react-icons/md'
 import CustomSelect from './CustomSelect'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import productsService, { uploadProduct } from '../services/productsService'
@@ -27,6 +26,7 @@ const AdminUploadProduct = ({ closeUpload }) => {
   })
 
   console.log(product.images)
+  console.log(product.thumbnail)
 
   const [showFullImg, setShowFullImg] = useState('')
 
@@ -63,7 +63,7 @@ const AdminUploadProduct = ({ closeUpload }) => {
   const handleUploadProductImg = async (e) => {
     const file = e.target.files[0]
 
-    if (product.images.length < 10) {
+    if (product.images.length < 8) {
       const { status, data } = await uploadImageService.uploadImage(file)
       if (status === 'OK') {
         setProduct((prev) => {
@@ -93,7 +93,11 @@ const AdminUploadProduct = ({ closeUpload }) => {
 
   const handleDeleteProductImg = async (img) => {
     setProduct((prev) => {
-      return { ...prev, images: prev.images.filter((el) => el !== img) }
+      return {
+        ...prev,
+        images: prev.images.filter((el) => el !== img),
+        thumbnail: prev.thumbnail === img ? '' : prev.thumbnail,
+      }
     })
   }
 
@@ -184,10 +188,8 @@ const AdminUploadProduct = ({ closeUpload }) => {
               htmlFor='uploadImageInput'
               className='w-fit mt-3 rounded cursor-pointer'
             >
-              <div className='bg-white border-2 rounded-2xl px-2 flex justify-center items-center'>
+              <div className='bg-white border-2 border-blue-600 rounded-2xl px-2 flex justify-center items-center'>
                 <div className='text-slate-500 flex justify-center items-center flex-col gap-2'>
-                  
-                  
                   <span className='hidden sm:block text-2xl'>
                     <FaCloudUploadAlt />
                   </span>
@@ -205,7 +207,7 @@ const AdminUploadProduct = ({ closeUpload }) => {
               htmlFor='uploadThumbnailInput'
               className='w-fit mt-3 rounded cursor-pointer'
             >
-              <div className='bg-white border-2 rounded-2xl px-2 flex justify-center items-center'>
+              <div className='bg-white border-2 border-pink-600 rounded-2xl px-2 flex justify-center items-center'>
                 <div className='text-slate-500 flex justify-center items-center flex-col gap-2'>
                   <span className=' hidden sm:block text-2xl'>
                     <FaCloudUploadAlt />
@@ -224,8 +226,8 @@ const AdminUploadProduct = ({ closeUpload }) => {
 
           <div className='flex flex-wrap justify-between'>
             {product?.images?.length ? (
-              <div className='w-full' >
-                <div className='flex flex-wrap w-full items-center justify-between gap-2'>
+              <div className='w-full'>
+                <div className='flex flex-wrap w-full items-center justify-start gap-2'>
                   {product?.images?.map((img) => (
                     <div className='relative cursor-pointer group' key={img}>
                       <img
@@ -234,12 +236,6 @@ const AdminUploadProduct = ({ closeUpload }) => {
                         onClick={() => handleFullImg(img)}
                         className={`h-14 w-14 sm:h-16 sm:w-16 object-cover object-center rounded-2xl border-2 border-blue-600`}
                       />
-                      <div
-                        className='absolute bg-red-600 text-white rounded-full p-1 text-xl bottom-0 right-0 hidden group-hover:block'
-                        onClick={() => handleDeleteProductImg(img)}
-                      >
-                        <MdDelete />
-                      </div>
                     </div>
                   ))}
                 </div>
@@ -257,14 +253,7 @@ const AdminUploadProduct = ({ closeUpload }) => {
                     alt={product.thumbnail}
                     onClick={() => handleFullImg(product.thumbnail)}
                     className={`h-14 w-14 sm:h-16 sm:w-16 object-cover object-center rounded-2xl border-2 border-pink-600`}
-
                   />
-                  <div
-                    className='absolute bg-red-600 text-white rounded-full p-1 text-xl bottom-0 right-0 hidden group-hover:block'
-                    /* onClick={() => handleDeleteProductImg(img)} */
-                  >
-                    <MdDelete />
-                  </div>
                 </div>
               </div>
             )}
@@ -276,7 +265,11 @@ const AdminUploadProduct = ({ closeUpload }) => {
         </form>
       </div>
       {showFullImg && (
-        <DisplayImage imgUrl={showFullImg} onClose={handleFullImg} />
+        <DisplayImage
+          imgUrl={showFullImg}
+          onClose={handleFullImg}
+          handleDeleteImg={handleDeleteProductImg}
+        />
       )}
     </div>
   )

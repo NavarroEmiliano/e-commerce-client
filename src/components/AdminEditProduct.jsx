@@ -3,7 +3,6 @@ import { IoCloseOutline } from 'react-icons/io5'
 import InputUploadForm from './InputUploadForm'
 import { useEffect, useState } from 'react'
 import { FaCloudUploadAlt } from 'react-icons/fa'
-import { MdDelete } from 'react-icons/md'
 import DisplayImage from './DisplayImage'
 import uploadImageService from '../services/uploadImageService'
 import CustomSelect from './CustomSelect'
@@ -59,13 +58,29 @@ const AdminEditProduct = ({ closeEdit, productId }) => {
   const handleUploadProductImg = async (e) => {
     const file = e.target.files[0]
 
-    if (product.images.length < 5) {
+    if (productToUpdate.images.length < 8) {
       const { status, data } = await uploadImageService.uploadImage(file)
       if (status === 'OK') {
         setProductToUpdate((prev) => {
           return {
             ...prev,
             images: [...prev.images, data],
+          }
+        })
+      }
+    }
+  }
+
+  const handleUploadThumbnailImg = async (e) => {
+    const file = e.target.files[0]
+
+    if (!product.thumbnail) {
+      const { status, data } = await uploadImageService.uploadImage(file)
+      if (status === 'OK') {
+        setProductToUpdate((prev) => {
+          return {
+            ...prev,
+            thumbnail: data,
           }
         })
       }
@@ -100,6 +115,7 @@ const AdminEditProduct = ({ closeEdit, productId }) => {
         brand: product?.brand,
         category: product?.category,
         images: product?.images,
+        thumbnail: product?.thumbnail,
       })
   }, [product])
 
@@ -185,49 +201,76 @@ const AdminEditProduct = ({ closeEdit, productId }) => {
             />
 
             {/* Product image */}
-            <label htmlFor='uploadImageInput' className='mt-3 p-2 rounded'>
-              <div className='bg-white border rounded flex justify-center items-center'>
-                <div className='text-slate-500 flex justify-center items-center flex-col gap-2'>
-                  <span className='text-4xl'>
-                    <FaCloudUploadAlt />
-                  </span>
-                  <p className='text-sm'>Upload Product Image</p>
-                </div>
-                <input
-                  type='file'
-                  id='uploadImageInput'
-                  className='hidden'
-                  onChange={handleUploadProductImg}
-                />
-              </div>
-            </label>
-            <p className='text-center'>Limit: 5</p>
 
-            <div className='flex flex-wrap justify-around'>
-              {productToUpdate?.images?.length ? (
-                productToUpdate?.images?.map((img) => (
-                  <div
-                    className='relative rounded-lg cursor-pointer group'
-                    key={img}
-                  >
-                    <img
-                      src={img}
-                      alt={img}
-                      onClick={() => handleFullImg(img)}
-                      className='h-16 w-16 object-cover object-center rounded border-2 border-slate-200'
-                    />
-                    <div
-                      className='absolute bg-red-600 text-white rounded-full p-1 text-xl bottom-0 right-0 hidden group-hover:block'
-                      onClick={() => handleDeleteProductImg(img)}
-                    >
-                      <MdDelete />
-                    </div>
+            <div className='flex justify-between mb-1'>
+              <label
+                htmlFor='uploadImageInput'
+                className='w-fit mt-3 rounded cursor-pointer'
+              >
+                <div className='bg-white border-2 border-blue-600 rounded-2xl px-2 flex justify-center items-center'>
+                  <div className='text-slate-500 flex justify-center items-center flex-col gap-2'>
+                    <span className='hidden sm:block text-2xl'>
+                      <FaCloudUploadAlt />
+                    </span>
+                    <p className='text-sm'>Upload Product Image</p>
                   </div>
-                ))
+                  <input
+                    type='file'
+                    id='uploadImageInput'
+                    className='hidden'
+                    onChange={handleUploadProductImg}
+                  />
+                </div>
+              </label>
+              <label
+                htmlFor='uploadThumbnailInput'
+                className='w-fit mt-3 rounded cursor-pointer'
+              >
+                <div className='bg-white border-2 border-pink-600 rounded-2xl px-2 flex justify-center items-center'>
+                  <div className='text-slate-500 flex justify-center items-center flex-col gap-2'>
+                    <span className=' hidden sm:block text-2xl'>
+                      <FaCloudUploadAlt />
+                    </span>
+                    <p className='text-sm'>Upload Thumbnail Image</p>
+                  </div>
+                  <input
+                    type='file'
+                    id='uploadThumbnailInput'
+                    className='hidden'
+                    onChange={handleUploadThumbnailImg}
+                  />
+                </div>
+              </label>
+            </div>
+
+            <div className='flex w-full'>
+              {productToUpdate?.images?.length ? (
+                <div className='flex flex-wrap items-center justify-start gap-2'>
+                  {productToUpdate?.images?.map((img) => (
+                    <div className='cursor-pointer group' key={img}>
+                      <img
+                        src={img}
+                        alt={img}
+                        onClick={() => handleFullImg(img)}
+                        className={`h-14 w-14 min-w-8 p-1 sm:h-16 sm:w-16 object-cover object-center rounded-2xl border-2 border-blue-600`}
+                      />
+                    </div>
+                  ))}
+                </div>
               ) : (
                 <p className='text-red-600 text-xs'>
                   *Please upload product image
                 </p>
+              )}
+              {productToUpdate?.thumbnail && (
+                <div className='ml-2 flex-wrap cursor-pointer group'>
+                  <img
+                    src={productToUpdate?.thumbnail}
+                    alt={productToUpdate?.thumbnail}
+                    onClick={() => handleFullImg(productToUpdate?.thumbnail)}
+                    className={`h-14 w-14 min-w-14 sm:h-16 sm:w-16 object-cover object-center rounded-2xl border-2 border-pink-600`}
+                  />
+                </div>
               )}
             </div>
 
@@ -238,7 +281,11 @@ const AdminEditProduct = ({ closeEdit, productId }) => {
         )}
       </div>
       {showFullImg && (
-        <DisplayImage imgUrl={showFullImg} onClose={handleFullImg} />
+        <DisplayImage
+          imgUrl={showFullImg}
+          onClose={handleFullImg}
+          handleDeleteImg={handleDeleteProductImg}
+        />
       )}
     </div>
   )

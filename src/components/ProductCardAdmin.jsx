@@ -42,7 +42,7 @@ const ProductCardAdmin = ({product,onEdit,onDelete}) => {
         onClick={() => onEdit(product.id)}
         className='bg-green-200 p-2 text-sm rounded-full hover:bg-green-500'
       >
-        <MdModeEdit t />
+        <MdModeEdit />
       </button>
       <button
         onClick={() => onDelete(product.id)}

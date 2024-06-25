@@ -38,7 +38,8 @@ const AdminSoldProducts = () => {
 
   return (
     <div className='mx-4 sm:mx-0 lg:mx-12'>
-      <div className='flex text-gray-500 mt-4'>
+      <div className='flex gap-2 text-gray-500 mt-4'>
+      <div className='font-semibold text-gray-400'>Sort By</div>
         <button onClick={handleSortOrderChange} className='font-semibold mr-2'>
           Date
         </button>

@@ -4,7 +4,6 @@ import purchaseService from '../services/purchaseService'
 import { useAuthContext } from '../hooks/useAuthContext'
 import moment from 'moment/moment'
 import displayUsdCurrency from '../helpers/displayCurrency'
-import Loading from '../components/Loading'
 import Skeleton from 'react-loading-skeleton'
 
 const UserPurchases = () => {

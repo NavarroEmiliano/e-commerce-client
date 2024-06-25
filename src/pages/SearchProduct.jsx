@@ -23,18 +23,16 @@ const SearchProduct = () => {
   }
 
   return (
-    <div className='container mx-auto'>
-      <div className='flex sm:px-16 lg:px-24 xl:px-32 flex-col justify-center items-center w-full'>
-        <div className='flex gap-2 items-center w-full my-2 px-6'>
-          <p>{productsFound?.length}</p>
+    <div className='w-full mx-auto md:px-20'>
+        <div className='relative top-2 flex mx-auto w-fit border-2 rounded-2xl gap-2 items-center justify-center px-6 py-1'>
+          <p >{productsFound?.length}</p>
           <p>Products found</p>
         </div>
-        <div className='flex flex-wrap  gap-8 min-h-[calc(100vh-160px)] items-center justify-center'>
+        <div className='grid p-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-5 place-items-center flex-wrap gap-8 min-h-[calc(100vh-144px)]'>
           {productsFound?.map((product) => (
             <ProductCard key={product?.id} product={product} />
           ))}
         </div>
-      </div>
     </div>
   )
 }

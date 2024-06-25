@@ -188,7 +188,7 @@ const AdminUploadProduct = ({ closeUpload }) => {
                 <div className='text-slate-500 flex justify-center items-center flex-col gap-2'>
                   
                   
-                  <span className='hidden text-2xl'>
+                  <span className='hidden sm:block text-2xl'>
                     <FaCloudUploadAlt />
                   </span>
                   <p className='text-sm'>Upload Product Image</p>
@@ -207,7 +207,7 @@ const AdminUploadProduct = ({ closeUpload }) => {
             >
               <div className='bg-white border-2 rounded-2xl px-2 flex justify-center items-center'>
                 <div className='text-slate-500 flex justify-center items-center flex-col gap-2'>
-                  <span className=' hidden text-2xl'>
+                  <span className=' hidden sm:block text-2xl'>
                     <FaCloudUploadAlt />
                   </span>
                   <p className='text-sm'>Upload Thumbnail Image</p>
